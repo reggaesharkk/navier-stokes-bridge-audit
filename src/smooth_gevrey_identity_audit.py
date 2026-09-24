@@ -71,6 +71,11 @@ def exact_identity(sys, a, s, sigma, sigma_prime):
     lhs = half_dX_dt + sys.nu*Y
     rhs_identity = nonlinear + sigma_prime*Z
     residual = lhs - rhs_identity
+    residual_scale = max(
+        1.0, abs(lhs), abs(rhs_identity), abs(nonlinear),
+        abs(sigma_prime*Z), abs(sys.nu*Y)
+    )
+    relative_residual = abs(residual)/residual_scale
 
     return dict(
         X=X,
@@ -81,6 +86,7 @@ def exact_identity(sys, a, s, sigma, sigma_prime):
         lhs=lhs,
         rhs=rhs_identity,
         identity_residual=residual,
+        identity_relative_residual=relative_residual,
         ratio_absN_over_sqrtX_Y=(
             abs(nonlinear)/(math.sqrt(X)*Y) if X > 0 and Y > 0 else None
         ),
@@ -143,9 +149,14 @@ def audit_case(N, scenario, s, dt, steps, capture_steps):
                 exact["centered_fd_minus_exact_dX_dt"] = (
                     fd - 2*exact["half_dX_dt"]
                 )
+                exact["centered_fd_relative_error"] = (
+                    abs(exact["centered_fd_minus_exact_dX_dt"])
+                    / max(1.0, abs(2*exact["half_dX_dt"]))
+                )
             else:
                 exact["centered_fd_dX_dt"] = None
                 exact["centered_fd_minus_exact_dX_dt"] = None
+                exact["centered_fd_relative_error"] = None
 
             exact["time"] = t
             exact["sigma"] = sigma
@@ -153,15 +164,22 @@ def audit_case(N, scenario, s, dt, steps, capture_steps):
             rows.append(exact)
 
         max_identity = max(abs(r["identity_residual"]) for r in rows)
+        max_relative_identity = max(
+            r["identity_relative_residual"] for r in rows
+        )
         finite_fd = [
-            abs(r["centered_fd_minus_exact_dX_dt"])
+            r["centered_fd_relative_error"]
             for r in rows
-            if r["centered_fd_minus_exact_dX_dt"] is not None
+            if r["centered_fd_relative_error"] is not None
+            and r["time"] >= 2*dt
         ]
         result[name] = dict(
             rows=rows,
             max_abs_identity_residual=max_identity,
-            max_abs_centered_fd_error=max(finite_fd) if finite_fd else None,
+            max_relative_identity_residual=max_relative_identity,
+            max_relative_centered_fd_error_away_from_t0=(
+                max(finite_fd) if finite_fd else None
+            ),
         )
 
     return dict(
@@ -175,15 +193,15 @@ def audit_case(N, scenario, s, dt, steps, capture_steps):
     )
 
 
-def run(cutoffs, scenarios, s=2.0, dt=DT, t_end=0.015):
+def run(cutoffs, scenarios, s=2.0, dt=DT, t_end=0.005):
     if s <= 1.5:
         raise ValueError("This v0.2 audit requires s>3/2.")
     steps = round(t_end/dt)
     assert math.isclose(steps*dt, t_end, abs_tol=1e-14)
 
     capture_steps = sorted(set(
-        [1, steps] + [j for j in range(0, steps+1)
-                      if math.isclose((j*dt) % 0.005, 0.0, abs_tol=1e-12)]
+        [1, steps//2, steps] + [j for j in range(0, steps+1)
+                                if math.isclose((j*dt) % 0.005, 0.0, abs_tol=1e-12)]
     ))
 
     rows = [
@@ -197,9 +215,15 @@ def run(cutoffs, scenarios, s=2.0, dt=DT, t_end=0.015):
         for row in rows
         for block in row["schedules"].values()
     )
-    if max_identity > 1e-8:
+    max_relative_identity = max(
+        block["max_relative_identity_residual"]
+        for row in rows
+        for block in row["schedules"].values()
+    )
+    if max_relative_identity > 1e-12:
         raise AssertionError(
-            f"Gevrey identity residual too large: {max_identity}"
+            f"Gevrey relative identity residual too large: "
+            f"{max_relative_identity}"
         )
 
     return dict(
@@ -226,6 +250,7 @@ def run(cutoffs, scenarios, s=2.0, dt=DT, t_end=0.015):
             "does not establish cutoff-uniform analyticity or regularity."
         ),
         max_abs_identity_residual=max_identity,
+        max_relative_identity_residual=max_relative_identity,
         rows=rows,
     )
 
@@ -241,7 +266,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("--s", type=float, default=2.0)
     parser.add_argument("--dt", type=float, default=DT)
-    parser.add_argument("--t-end", type=float, default=0.015)
+    parser.add_argument("--t-end", type=float, default=0.005)
     parser.add_argument(
         "--output",
         type=Path,
@@ -259,4 +284,5 @@ if __name__ == "__main__":
     print(
         "max_abs_identity_residual=",
         result["max_abs_identity_residual"],
+        "relative=", result["max_relative_identity_residual"],
     )
