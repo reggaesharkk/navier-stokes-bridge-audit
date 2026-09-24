@@ -67,9 +67,6 @@ def local_direction_proxy(sys, a, grid=GRID, offsets=OFFSETS):
             radius=step*spacing,
             angular_ratio=(angular/raw if raw else 0.0),
             determinant_ratio=(determinant/raw if raw else 0.0),
-            raw_weight=raw,
-            angular_weight=angular,
-            determinant_weight=determinant,
         ))
 
     strain = (grad + np.swapaxes(grad, -1, -2))/2
