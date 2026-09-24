@@ -41,7 +41,7 @@ Selected **endpoint** contributions to $T_N'$ (same derivative units; rounded):
 
 At $t=0$, the same reference field has a projection contribution of approximately −9,097 at $N=4$, −106 at $N=5$, and zero at $N=6,7$ because the initial nonlinear frequencies do not extend past those last cutoffs. Nonlinear evolution populates previously empty modes; the endpoint contribution is no longer zero. The initial combined field likewise has zero residual at $N=7$, but its endpoint projection term is approximately −382,166.
 
-For these 24 sampled endpoints the projection contribution happens to be negative. It is positive in five of the 24 initial snapshots. Neither sign is universal, nor do the finite-cutoff values establish monotone decay or a continuum limit. Comparing the projection and viscous *contributions to $T_N'$* is dimensionally appropriate; comparing a raw residual norm to the enstrophy dissipation $\nu D_N$ would mix different observables.
+For these 24 sampled endpoints the projection contribution is negative. At the initial snapshots 16 contributions are negative and eight are zero within $10^{-8}$; tiny positive floating-point values in five nominally zero cases (about $10^{-26}$–$10^{-28}$) are **not** evidence of positive contributions. The sampled signs do not establish a general sign theorem, monotone cutoff decay, or a continuum limit. Comparing the projection and viscous *contributions to $T_N'$* is dimensionally appropriate; comparing a raw residual norm to the enstrophy dissipation $\nu D_N$ would mix different observables.
 
 ## Proof boundary
 
