@@ -128,6 +128,9 @@ The [direction-scaling obstruction gate](notes/DIRECTION_SCALING_OBSTRUCTION_202
 
 The [high-vorticity sampled coherence-radius gate](notes/HIGH_VORTICITY_COHERENCE_RADIUS_2026_09_24.md) restricts the vorticity-direction analysis to pairs satisfying the diagnostic threshold \(|\omega|\ge2\sqrt G\) at both endpoints. Its [script](src/high_vorticity_coherence_radius_gate.py) and [verified summary](src/high_vorticity_coherence_radius_verified_summary.json) show that the strongly perturbed \(N=7\) trajectory develops the smallest sampled absolute coherence radius and the largest high-vorticity pair population by \(t=0.015\). The moving threshold and finite grid make this a diagnostic proxy only, not the Constantin-Fefferman theorem or a continuum radius.
 
+
+The [scale-competition gate](notes/SCALE_COMPETITION_GATE_2026_09_25.md) compares the sampled high-vorticity coherence-radius upper bound with the exact vorticity-gradient length \(\ell_\omega=\sqrt{G/D}\) on the tracked \(N=4\) and \(N=7\) trajectories. Its [script](src/scale_competition_gate.py) and [results](src/scale_competition_results.json) show that the perturbed \(N=7\) case closes most rapidly from \(\mathcal R_{\rm sample}\approx2.96\) to \(1.62\) while \(T/(\nu D)\) rises to about \(5.49\). The gate explicitly rejects interpreting this as a regularity margin: \(\rho_{\rm upper}^{\rm sample}\) is one-sided and \(\ell_\omega\) is not an analyticity radius.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
