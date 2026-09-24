@@ -89,6 +89,8 @@ for this source snapshot are in `MANIFEST_v0_2.sha256`.
 
 [The cutoff space-time gate](notes/CUTOFF_SPACETIME_GATE_2026_09_24.md) extends the aligned two-scale trajectory to `N=4,5,6,7`, with independent RK4 step refinement and signed total stretching integrals. Its [script](src/cutoff_spacetime_gate.py) and [recorded output](src/cutoff_spacetime_results.json) are work after the frozen v0.2 release and Zenodo archive. The observed short-time stabilization for this field is not a cutoff-uniform estimate or an arbitrary-data regularity proof.
 
+The [adversarial cutoff gate](notes/ADVERSARIAL_CUTOFF_GATE_2026_09_24.md) further varies amplitude, triad phase, and initial high-frequency enstrophy across the same short-time finite Galerkin cutoffs. Its [script](src/adversarial_cutoff_gate.py) and [results for N=4–6](src/adversarial_cutoff_results.json) and [selected N=7 cases](src/adversarial_cutoff_N7_results.json) are also post-v0.2 exploratory work. A strongly perturbed field exhibits larger cutoff gaps than the reference field; no continuum bound follows.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
