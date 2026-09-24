@@ -116,6 +116,9 @@ The [triadic coherence gate](notes/TRIADIC_COHERENCE_GATE_2026_09_24.md) decompo
 
 The [triadic envelope growth gate](notes/TRIADIC_ENVELOPE_GROWTH_GATE_2026_09_24.md) normalizes deterministic dense divergence-free fields to G=1 and measures A_N/G^(3/2), T_N/G^(3/2), and chi_N across N=2,...,7. Its [script](src/triadic_envelope_growth_gate.py) and [results](src/triadic_envelope_growth_results.json) show rising sampled absolute-envelope ratios together with strong random-phase cancellation. This finite seeded pattern is an obstruction diagnostic only; it proves neither asymptotic envelope growth nor a cancellation theorem.
 
+
+The [triadic cancellation hierarchy gate](notes/TRIADIC_CANCELLATION_HIERARCHY_2026_09_24.md) inserts a mode-grouped envelope (B_N) between the raw ordered-triad envelope (A_N) and the signed transfer (T_N), giving the exact hierarchy (|T_N|\le B_N\le A_N). Its [script](src/triadic_cancellation_hierarchy_gate.py) and [results](src/triadic_cancellation_hierarchy_results.json) show that most sampled cancellation in dense (G=1) fields occurs among convolution pairs feeding the same output mode. The apparent finite-cutoff stability of (B_N/G^{3/2}) is not universal: since (B_N\ge|T_N|), the existing fixed-energy concentration obstruction still rules out an energy-only cutoff-uniform (B_N\lesssim G^{3/2}) bound.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
