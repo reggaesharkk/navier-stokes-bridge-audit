@@ -6,7 +6,7 @@ This project is maintained as an independent exploratory mathematical audit with
 
 ---
 
-Prince Upadhyay, Independent Research · version 0.1 · 24 September 2026
+Prince Upadhyay, Independent Research · version 0.2 · 24 September 2026
 
 This repository accompanies [REPORT.md](REPORT.md), a scoped audit of
 ten finite Fourier Galerkin work packages for the **unforced, periodic**
@@ -15,11 +15,18 @@ claim is the explicit, conservative **small-data** estimate in
 [WP3_PROOF.md](WP3_PROOF.md). It is a version of a standard argument,
 with no claim of priority or a proof for arbitrary initial data.
 
-The dynamic diagnostics evolve one fixed `N=4`, 257-mode Galerkin ODE
+The original WP1–10 dynamic diagnostics evolve one fixed `N=4`, 257-mode Galerkin ODE
 to `t=0.1` with viscosity `ν=0.1`. These finite-mode results do not
 show infinite-resolution convergence, persistent cascades, blow-up,
 or global regularity of arbitrary smooth data. Fourier shell labels
 describe frequency support, not shapes in physical space.
+
+Version 0.2 also includes [the Master Record supplement](MASTER_RECORD_SUPPLEMENT_2026_09_24.md),
+with a separate aligned two-scale initial field evolved through `t=0.02`
+at `N=4` and `N=5`. The supplementary phase, smooth-filter, strain,
+and space-time commutator scripts and JSON outputs are in `src/`.
+They verify finite-dimensional identities and expose an open proof gate;
+they do not establish a cutoff-uniform regularity estimate.
 
 ## Files
 
@@ -27,10 +34,11 @@ describe frequency support, not shapes in physical space.
 | --- | --- |
 | `REPORT.md` | Audited findings, numbers, exclusions, and limitations. |
 | `WP3_PROOF.md` | Self-contained small-data estimate and proof audit. |
-| `src/` | Python for WP1–10. |
+| `src/` | Python for WP1–10 and four supplemental diagnostics and JSON outputs. |
 | `results/` | Output JSON recorded for the seeded calculations. |
 | `notes/` | Individual package scope and derivations; WP8 correction included. |
-| `CITATION.cff` | How to cite the archived v0.1 release. |
+| `MASTER_RECORD_SUPPLEMENT_2026_09_24.md` | Supplementary evidence register and open proof gate. |
+| `CITATION.cff` | Software citation metadata for the v0.2 snapshot. |
 | `LICENSE.md` | Reuse terms for code and research text. |
 
 The released WP8 code uses `np.rint(np.fft.fftfreq(M)*M).astype(int)` to
@@ -63,6 +71,20 @@ result filenames are described in `notes/`. Tiny floating-point
 variations across hardware or NumPy builds are possible; compare the
 reported identity errors and observables, not only raw JSON bytes.
 
+Run the v0.2 companion diagnostics from the repository root after
+installing the same requirements:
+
+```bash
+python src/phase_cascade_trajectory.py
+python src/smooth_commutator_gate.py
+python src/strain_alignment_trajectory.py
+python src/spacetime_strain_commutator_gate.py
+```
+
+They write their corresponding `src/*results.json` files. The root
+`MANIFEST.sha256` records an earlier release candidate; the checksums
+for this source snapshot are in `MANIFEST_v0_2.sha256`.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
@@ -73,7 +95,11 @@ neither certifies its mathematics. The Python code is licensed under
 [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode).
 See [LICENSE.md](LICENSE.md) for the file-level scope and attribution.
 
-## Cite version 0.1
+## Cite the archived version
+
+For the v0.2 files, cite the v0.2 Zenodo version DOI once Zenodo
+processes the new GitHub release. The v0.1 DOI below identifies only
+the earlier snapshot.
 
 Upadhyay, Prince (2026). *Navier–Stokes Bridge Audit: Finite Fourier
 Diagnostics* (version 0.1) [software]. Zenodo.
