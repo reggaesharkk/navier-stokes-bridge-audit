@@ -99,6 +99,8 @@ The [zero-helicity phase gate](notes/HELICITY_PHASE_GATE_2026_09_24.md) gives an
 
 The [local strain majorant gate](notes/LOCAL_STRAIN_MAJORANT_GATE_2026_09_24.md) reconstructs selected finite Galerkin fields and tests the exact pointwise eigenvalue envelope of vorticity stretching. Its [script](src/local_strain_majorant_gate.py) and [outputs](src/local_strain_majorant_results.json) are post-v0.2 diagnostics; the needed time-integrated coefficient remains unproved.
 
+The [short-time signed alignment gate](notes/ALIGNMENT_DYNAMICS_GATE_2026_09_24.md) reconciles the local strain envelope with dense log-enstrophy traces at N=4–7. Its [script](src/alignment_dynamics_gate.py) and [results](src/alignment_dynamics_results.json) show increasing sampled T/M over the tested early interval; this finite-cutoff observation establishes no long-time or uniform bound. This is post-v0.2 work.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
