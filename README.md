@@ -131,6 +131,9 @@ The [high-vorticity sampled coherence-radius gate](notes/HIGH_VORTICITY_COHERENC
 
 The [scale-competition gate](notes/SCALE_COMPETITION_GATE_2026_09_25.md) compares the sampled high-vorticity coherence-radius upper bound with the exact vorticity-gradient length \(\ell_\omega=\sqrt{G/D}\) on the tracked \(N=4\) and \(N=7\) trajectories. Its [script](src/scale_competition_gate.py) and [results](src/scale_competition_results.json) show that the perturbed \(N=7\) case closes most rapidly from \(\mathcal R_{\rm sample}\approx2.96\) to \(1.62\) while \(T/(\nu D)\) rises to about \(5.49\). The gate explicitly rejects interpreting this as a regularity margin: \(\rho_{\rm upper}^{\rm sample}\) is one-sided and \(\ell_\omega\) is not an analyticity radius.
 
+
+The [Gevrey lower-bound gate v0.2](notes/GEVREY_LOWER_BOUND_GATE_2026_09_25.md) standardizes the weighted Fourier identity, separates persistence and positive-time smoothing schedules, and requires every eventual nonlinear majorant to be cutoff-uniform. Its [exact audit](src/smooth_gevrey_identity_audit.py) verifies the finite-Galerkin identity directly from the repository ODE, with [executed summary](src/smooth_gevrey_identity_verified_summary.json). The worst relative identity residual is \(4.14\times10^{-15}\). Descriptive \(N=4/N=7\) nonlinear-ratio separation is recorded but is not treated as a continuum estimate or analyticity lower bound.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
