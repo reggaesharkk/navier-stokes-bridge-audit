@@ -122,6 +122,9 @@ The [triadic cancellation hierarchy gate](notes/TRIADIC_CANCELLATION_HIERARCHY_2
 
 The [local vorticity-direction depletion gate](notes/DIRECTION_DEPLETION_GATE_2026_09_24.md) adds Constantin-Fefferman-inspired physical-space diagnostics to the same N=4/N=7 tracked trajectories used by the triadic audit. Its [script](src/direction_depletion_gate.py) and [results](src/direction_depletion_results.json) measure vorticity-weighted local direction misalignment and the separation-direction determinant at three grid scales. The strongly perturbed N=7 trajectory develops the largest sampled small-scale direction defect, but these are finite-grid local proxies rather than the full Biot-Savart kernel or a regularity criterion.
 
+
+The [direction-scaling obstruction gate](notes/DIRECTION_SCALING_OBSTRUCTION_2026_09_24.md) applies the fixed-energy concentration map to a normalized direction-slope candidate \(Q_{\rm dir}=L_{\rm dir}/\sqrt G\). Its [script](src/direction_scaling_obstruction_gate.py) and [results](src/direction_scaling_obstruction_results.json) show the exact scaling mismatch: \(Q_{\rm dir}\) is concentration-invariant while \(T/G^{3/2}\) grows like \(\lambda^{3/2}\). Therefore a \(G^{3/2}\) closure whose coefficient depends only on this normalized geometry is analytically obstructed. This does not contradict Constantin-Fefferman, whose hypothesis retains an absolute spatial coherence scale.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
