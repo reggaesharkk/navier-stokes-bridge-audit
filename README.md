@@ -103,6 +103,8 @@ The [short-time signed alignment gate](notes/ALIGNMENT_DYNAMICS_GATE_2026_09_24.
 
 The [Riesz strain localization gate](notes/RIESZ_STRETCHING_GATE_2026_09_24.md) reconstructs strain from vorticity Fourier multipliers and measures where positive and negative stretching arise in selected early Galerkin snapshots. Its [script](src/riesz_stretching_gate.py) and [results](src/riesz_stretching_results.json) show concentration in a moving high-vorticity region, with measurable grid sensitivity. No time-integrated or continuum bound follows. This is post-v0.2 work.
 
+The [pressure-Hessian gate](notes/PRESSURE_HESSIAN_GATE_2026_09_24.md) reconstructs the exact pressure Hessian for selected finite trigonometric snapshots, validates its Poisson source independently, and measures signed isotropic/deviatoric contributions to the instantaneous vortex-stretching response. Its [script](src/pressure_hessian_gate.py) and [results](src/pressure_hessian_results.json) show that pressure is not a universally negative contribution in these fields. The actual Galerkin local evolution has a projection residual; no regularity estimate follows. This is post-v0.2 work.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
