@@ -95,6 +95,8 @@ The [time-resolved inequality gate](notes/CANDIDATE_INEQUALITY_GATE_2026_09_24.m
 
 The [monomial majorant gate](notes/MONOMIAL_MAJORANT_GATE_2026_09_24.md) classifies energy-only enstrophy powers by fixed-energy concentration and time-integrability, and [screens the stored traces](src/monomial_majorant_gate.py). It identifies an obstruction for that specified family, not a regularity result. This is post-v0.2 work.
 
+The [zero-helicity phase gate](notes/HELICITY_PHASE_GATE_2026_09_24.md) gives an exact six-mode witness with zero signed helicity in every occupied mode but phase-dependent enstrophy transfer. Its [script](src/helicity_phase_gate.py) and [outputs](src/helicity_phase_results.json) are post-v0.2 exploratory work and do not imply a long-time regularity mechanism.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
