@@ -101,6 +101,8 @@ The [local strain majorant gate](notes/LOCAL_STRAIN_MAJORANT_GATE_2026_09_24.md)
 
 The [short-time signed alignment gate](notes/ALIGNMENT_DYNAMICS_GATE_2026_09_24.md) reconciles the local strain envelope with dense log-enstrophy traces at N=4–7. Its [script](src/alignment_dynamics_gate.py) and [results](src/alignment_dynamics_results.json) show increasing sampled T/M over the tested early interval; this finite-cutoff observation establishes no long-time or uniform bound. This is post-v0.2 work.
 
+The [Riesz strain localization gate](notes/RIESZ_STRETCHING_GATE_2026_09_24.md) reconstructs strain from vorticity Fourier multipliers and measures where positive and negative stretching arise in selected early Galerkin snapshots. Its [script](src/riesz_stretching_gate.py) and [results](src/riesz_stretching_results.json) show concentration in a moving high-vorticity region, with measurable grid sensitivity. No time-integrated or continuum bound follows. This is post-v0.2 work.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
