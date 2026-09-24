@@ -93,6 +93,8 @@ The [adversarial cutoff gate](notes/ADVERSARIAL_CUTOFF_GATE_2026_09_24.md) furth
 
 The [time-resolved inequality gate](notes/CANDIDATE_INEQUALITY_GATE_2026_09_24.md) records every sampled step of the existing stress cases and analytically rejects one proposed energy-only majorant by fixed-energy spatial concentration. Its [screening code](src/candidate_inequality_gate.py) and [N=4–6](src/candidate_inequality_results.json) and [selected N=7](src/candidate_inequality_N7_results.json) traces are post-v0.2 work. Rejecting this trial inequality does not settle the regularity question.
 
+The [monomial majorant gate](notes/MONOMIAL_MAJORANT_GATE_2026_09_24.md) classifies energy-only enstrophy powers by fixed-energy concentration and time-integrability, and [screens the stored traces](src/monomial_majorant_gate.py). It identifies an obstruction for that specified family, not a regularity result. This is post-v0.2 work.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
