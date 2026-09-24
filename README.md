@@ -85,6 +85,10 @@ They write their corresponding `src/*results.json` files. The root
 `MANIFEST.sha256` records an earlier release candidate; the checksums
 for this source snapshot are in `MANIFEST_v0_2.sha256`.
 
+## Subsequent exploratory work
+
+[The cutoff space-time gate](notes/CUTOFF_SPACETIME_GATE_2026_09_24.md) extends the aligned two-scale trajectory to `N=4,5,6,7`, with independent RK4 step refinement and signed total stretching integrals. Its [script](src/cutoff_spacetime_gate.py) and [recorded output](src/cutoff_spacetime_results.json) are work after the frozen v0.2 release and Zenodo archive. The observed short-time stabilization for this field is not a cutoff-uniform estimate or an arbitrary-data regularity proof.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
