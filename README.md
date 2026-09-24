@@ -97,9 +97,13 @@ See [LICENSE.md](LICENSE.md) for the file-level scope and attribution.
 
 ## Cite the archived version
 
-For the v0.2 files, cite the v0.2 Zenodo version DOI once Zenodo
-processes the new GitHub release. The v0.1 DOI below identifies only
-the earlier snapshot.
+For the v0.2 files, cite the version-specific Zenodo DOI:
+
+Upadhyay, Prince (2026). *Navier–Stokes Bridge Audit: Finite Fourier
+Diagnostics* (version 0.2) [software]. Zenodo.
+[https://doi.org/10.5281/zenodo.22939984](https://doi.org/10.5281/zenodo.22939984).
+
+The v0.1 DOI below identifies only the earlier snapshot.
 
 Upadhyay, Prince (2026). *Navier–Stokes Bridge Audit: Finite Fourier
 Diagnostics* (version 0.1) [software]. Zenodo.
