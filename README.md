@@ -119,6 +119,9 @@ The [triadic envelope growth gate](notes/TRIADIC_ENVELOPE_GROWTH_GATE_2026_09_24
 
 The [triadic cancellation hierarchy gate](notes/TRIADIC_CANCELLATION_HIERARCHY_2026_09_24.md) inserts a mode-grouped envelope (B_N) between the raw ordered-triad envelope (A_N) and the signed transfer (T_N), giving the exact hierarchy (|T_N|\le B_N\le A_N). Its [script](src/triadic_cancellation_hierarchy_gate.py) and [results](src/triadic_cancellation_hierarchy_results.json) show that most sampled cancellation in dense (G=1) fields occurs among convolution pairs feeding the same output mode. The apparent finite-cutoff stability of (B_N/G^{3/2}) is not universal: since (B_N\ge|T_N|), the existing fixed-energy concentration obstruction still rules out an energy-only cutoff-uniform (B_N\lesssim G^{3/2}) bound.
 
+
+The [local vorticity-direction depletion gate](notes/DIRECTION_DEPLETION_GATE_2026_09_24.md) adds Constantin-Fefferman-inspired physical-space diagnostics to the same N=4/N=7 tracked trajectories used by the triadic audit. Its [script](src/direction_depletion_gate.py) and [results](src/direction_depletion_results.json) measure vorticity-weighted local direction misalignment and the separation-direction determinant at three grid scales. The strongly perturbed N=7 trajectory develops the largest sampled small-scale direction defect, but these are finite-grid local proxies rather than the full Biot-Savart kernel or a regularity criterion.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
