@@ -1,5 +1,11 @@
 # Navier–Stokes bridge audit: finite Fourier diagnostics
 
+## 24 September 2026 scope note
+
+This project is maintained as an independent exploratory mathematical audit within the wider Reggae Shark Universe. Its finite-mode checks, counterexamples, and small-data estimate do not constitute an arbitrary-data global-regularity proof for the three-dimensional incompressible Navier–Stokes equations.
+
+---
+
 Prince Upadhyay, Independent Research · version 0.1 · 24 September 2026
 
 This repository accompanies [REPORT.md](REPORT.md), a scoped audit of
