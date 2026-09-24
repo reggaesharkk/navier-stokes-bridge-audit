@@ -87,11 +87,6 @@ def local_direction_proxy(sys, a, grid=GRID, offsets=OFFSETS):
         G=G,
         T=T,
         scales=scale_rows,
-        numerical_checks=dict(
-            Fourier_minus_grid_T=fourier_T-T,
-            Fourier_minus_grid_G=fourier_G-G,
-            max_imaginary_field_error=imaginary,
-        ),
     )
 
 
