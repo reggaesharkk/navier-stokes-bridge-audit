@@ -97,6 +97,8 @@ The [monomial majorant gate](notes/MONOMIAL_MAJORANT_GATE_2026_09_24.md) classif
 
 The [zero-helicity phase gate](notes/HELICITY_PHASE_GATE_2026_09_24.md) gives an exact six-mode witness with zero signed helicity in every occupied mode but phase-dependent enstrophy transfer. Its [script](src/helicity_phase_gate.py) and [outputs](src/helicity_phase_results.json) are post-v0.2 exploratory work and do not imply a long-time regularity mechanism.
 
+The [local strain majorant gate](notes/LOCAL_STRAIN_MAJORANT_GATE_2026_09_24.md) reconstructs selected finite Galerkin fields and tests the exact pointwise eigenvalue envelope of vorticity stretching. Its [script](src/local_strain_majorant_gate.py) and [outputs](src/local_strain_majorant_results.json) are post-v0.2 diagnostics; the needed time-integrated coefficient remains unproved.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
