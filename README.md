@@ -1,6 +1,6 @@
 # Navier–Stokes bridge audit: finite Fourier diagnostics
 
-Prince Upadhyay, Independent Research · release candidate 0.1 · 24 September 2026
+Prince Upadhyay, Independent Research · version 0.1 · 24 September 2026
 
 This repository accompanies [REPORT.md](REPORT.md), a scoped audit of
 ten finite Fourier Galerkin work packages for the **unforced, periodic**
@@ -24,7 +24,7 @@ describe frequency support, not shapes in physical space.
 | `src/` | Python for WP1–10. |
 | `results/` | Output JSON recorded for the seeded calculations. |
 | `notes/` | Individual package scope and derivations; WP8 correction included. |
-| `CITATION.cff` | How to cite this release candidate; DOI can be added after deposit. |
+| `CITATION.cff` | How to cite the archived v0.1 release. |
 | `LICENSE.md` | Reuse terms for code and research text. |
 
 The released WP8 code uses `np.rint(np.fft.fftfreq(M)*M).astype(int)` to
@@ -66,3 +66,14 @@ neither certifies its mathematics. The Python code is licensed under
 [MIT](LICENSES/MIT.txt); the research text is licensed under
 [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode).
 See [LICENSE.md](LICENSE.md) for the file-level scope and attribution.
+
+## Cite version 0.1
+
+Upadhyay, Prince (2026). *Navier–Stokes Bridge Audit: Finite Fourier
+Diagnostics* (version 0.1) [software]. Zenodo.
+[https://doi.org/10.5281/zenodo.22932635](https://doi.org/10.5281/zenodo.22932635).
+
+The [v0.1 GitHub release](https://github.com/reggaesharkk/navier-stokes-bridge-audit/releases/tag/v0.1)
+points to commit `f891356fb99c85ded244dd566d35438e52571792`. The Zenodo
+record archives that 45-file snapshot. Later edits to `main` are not part
+of the v0.1 archive.

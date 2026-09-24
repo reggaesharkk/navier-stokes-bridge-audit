@@ -7,4 +7,7 @@ authors:
     affiliation: Independent Research
 title: "Navier–Stokes Bridge Audit: Finite Fourier Diagnostics"
 version: "0.1"
+date-released: 2026-09-24
+doi: 10.5281/zenodo.22932635
+url: https://github.com/reggaesharkk/navier-stokes-bridge-audit/releases/tag/v0.1
 abstract: "Code and finite Fourier Galerkin diagnostics for unforced periodic three-dimensional Navier–Stokes, including a classical explicit small-data estimate. No arbitrary-data regularity claim."
