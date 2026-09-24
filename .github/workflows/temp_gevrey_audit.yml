@@ -1,0 +1,29 @@
+name: Temporary Gevrey identity audit
+
+on:
+  push:
+    paths:
+      - ".github/workflows/temp_gevrey_audit.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gevrey-identity-gate-20260925
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy
+      - name: Run Gevrey audit
+        run: python src/smooth_gevrey_identity_audit.py
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: smooth_gevrey_identity_results
+          path: src/smooth_gevrey_identity_results.json
+          if-no-files-found: error
