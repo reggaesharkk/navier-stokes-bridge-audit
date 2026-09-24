@@ -109,6 +109,8 @@ The [projection residual gate](notes/PROJECTION_RESIDUAL_GATE_2026_09_24.md) der
 
 The [projection shell gate](notes/PROJECTION_SHELL_GATE_2026_09_24.md) decomposes the exact omitted-mode stretching-rate residual into unit radial bands for all 24 stored cases and samples four selected cases at five early times. Its [script](src/projection_shell_gate.py) and [results](src/projection_shell_results.json) locate the sampled negative residual near the cutoff. This gate also documents the correction that apparent positive initial residuals were roundoff-scale zeros. No sign theorem or cutoff-uniform estimate follows. This is post-v0.2 work.
 
+The [retained-shell capacity gate](notes/BOUNDARY_CAPACITY_GATE_2026_09_24.md) compares upper retained-shell enstrophy with the omitted nonlinear response along four early trajectories and gives an exact initial-time counterexample to any predictor based only on the last two shell fields. Its [script](src/boundary_capacity_gate.py) and [results](src/boundary_capacity_results.json) are post-v0.2 exploratory work; lower-shell inputs can still carry essential information, and no continuum closure is inferred.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
