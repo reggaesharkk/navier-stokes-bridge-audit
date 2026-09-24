@@ -25,6 +25,7 @@ describe frequency support, not shapes in physical space.
 | `results/` | Output JSON recorded for the seeded calculations. |
 | `notes/` | Individual package scope and derivations; WP8 correction included. |
 | `CITATION.cff` | How to cite this release candidate; DOI can be added after deposit. |
+| `LICENSE.md` | Reuse terms for code and research text. |
 
 The released WP8 code uses `np.rint(np.fft.fftfreq(M)*M).astype(int)` to
 avoid an integer-cast frequency indexing error on the 96³ grid.
@@ -61,5 +62,7 @@ reported identity errors and observables, not only raw JSON bytes.
 The source code and computations were checked for internal consistency;
 the research has not been externally peer reviewed or accepted as a
 novel PDE theorem. A public repository and a DOI identify a version;
-neither certifies its mathematics. No reuse license has yet been chosen
-for this release candidate. Set one deliberately before publication.
+neither certifies its mathematics. The Python code is licensed under
+[MIT](LICENSES/MIT.txt); the research text is licensed under
+[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode).
+See [LICENSE.md](LICENSE.md) for the file-level scope and attribution.
