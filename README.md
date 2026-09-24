@@ -91,6 +91,8 @@ for this source snapshot are in `MANIFEST_v0_2.sha256`.
 
 The [adversarial cutoff gate](notes/ADVERSARIAL_CUTOFF_GATE_2026_09_24.md) further varies amplitude, triad phase, and initial high-frequency enstrophy across the same short-time finite Galerkin cutoffs. Its [script](src/adversarial_cutoff_gate.py) and [results for N=4–6](src/adversarial_cutoff_results.json) and [selected N=7 cases](src/adversarial_cutoff_N7_results.json) are also post-v0.2 exploratory work. A strongly perturbed field exhibits larger cutoff gaps than the reference field; no continuum bound follows.
 
+The [time-resolved inequality gate](notes/CANDIDATE_INEQUALITY_GATE_2026_09_24.md) records every sampled step of the existing stress cases and analytically rejects one proposed energy-only majorant by fixed-energy spatial concentration. Its [screening code](src/candidate_inequality_gate.py) and [N=4–6](src/candidate_inequality_results.json) and [selected N=7](src/candidate_inequality_N7_results.json) traces are post-v0.2 work. Rejecting this trial inequality does not settle the regularity question.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
