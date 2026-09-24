@@ -107,6 +107,8 @@ The [pressure-Hessian gate](notes/PRESSURE_HESSIAN_GATE_2026_09_24.md) reconstru
 
 The [projection residual gate](notes/PROJECTION_RESIDUAL_GATE_2026_09_24.md) derives an exact four-term Galerkin stretching-rate budget, including omitted solenoidal nonlinear frequencies. Its [script](src/projection_residual_gate.py) and [results](src/projection_residual_results.json) audit all 24 stored scenario-cutoff cases at initial and endpoint states. The projection term vanishes in the first global enstrophy derivative but can be large in the stretching-rate derivative; no sign or cutoff-uniform bound is inferred. This is post-v0.2 work.
 
+The [projection shell gate](notes/PROJECTION_SHELL_GATE_2026_09_24.md) decomposes the exact omitted-mode stretching-rate residual into unit radial bands for all 24 stored cases and samples four selected cases at five early times. Its [script](src/projection_shell_gate.py) and [results](src/projection_shell_results.json) locate the sampled negative residual near the cutoff. This gate also documents the correction that apparent positive initial residuals were roundoff-scale zeros. No sign theorem or cutoff-uniform estimate follows. This is post-v0.2 work.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
