@@ -111,6 +111,11 @@ The [projection shell gate](notes/PROJECTION_SHELL_GATE_2026_09_24.md) decompose
 
 The [retained-shell capacity gate](notes/BOUNDARY_CAPACITY_GATE_2026_09_24.md) compares upper retained-shell enstrophy with the omitted nonlinear response along four early trajectories and gives an exact initial-time counterexample to any predictor based only on the last two shell fields. Its [script](src/boundary_capacity_gate.py) and [results](src/boundary_capacity_results.json) are post-v0.2 exploratory work; lower-shell inputs can still carry essential information, and no continuum closure is inferred.
 
+
+The [triadic coherence gate](notes/TRIADIC_COHERENCE_GATE_2026_09_24.md) decomposes the exact H1/enstrophy transfer into ordered Fourier-triad contributions, defining the absolute cubic envelope A_N and signed coherence chi_N=T_N/A_N. Its [sparse-triad script](src/triadic_coherence_gate.py), [24-case suite](src/triadic_coherence_suite.py), and recorded outputs are post-v0.2 diagnostics. The phase-sensitive coordinate passes the exact algebraic and finite-suite checks, but A_N itself remains an uncontrolled cubic quantity and no regularity estimate follows.
+
+The [triadic envelope growth gate](notes/TRIADIC_ENVELOPE_GROWTH_GATE_2026_09_24.md) normalizes deterministic dense divergence-free fields to G=1 and measures A_N/G^(3/2), T_N/G^(3/2), and chi_N across N=2,...,7. Its [script](src/triadic_envelope_growth_gate.py) and [results](src/triadic_envelope_growth_results.json) show rising sampled absolute-envelope ratios together with strong random-phase cancellation. This finite seeded pattern is an obstruction diagnostic only; it proves neither asymptotic envelope growth nor a cancellation theorem.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
