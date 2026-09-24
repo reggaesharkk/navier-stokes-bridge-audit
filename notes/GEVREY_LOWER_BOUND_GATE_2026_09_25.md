@@ -170,3 +170,44 @@ A genuine lower radius requires a cutoff-uniform Gevrey estimate that survives \
 The next gate after this identity audit is therefore analytical:
 
 > derive or reject a concrete cutoff-uniform nonlinear majorant in the weighted norm.
+
+
+## 7. Executed v0.2 audit
+
+The companion audit was executed for \(s=2\), \(\nu=0.1\), \(\Delta t=0.0005\), \(N\in\{4,7\}\), and the reference plus combined double/quarter-phase/high-frequency scenarios through \(t=0.005\).
+
+The exact weighted identity passed with worst relative residual
+
+\[
+4.14\times10^{-15}.
+\]
+
+The centered finite-difference derivative was used only as a secondary check. The first positive smoothing step is not treated as a convergence benchmark because \(\sigma'(t)\sim t^{-1/2}\) is singular at \(t=0\). At the interior checkpoint \(t=0.0025\), the hardest combined \(N=7\) smoothing case had relative finite-difference error about
+
+\[
+1.58\times10^{-3}.
+\]
+
+For the descriptive cubic ratio
+
+\[
+R_{\rm desc}
+=
+\frac{|\mathcal N_{\sigma,s}|}{\sqrt{X_{\sigma,s}}\,Y_{\sigma,s}},
+\]
+
+the \(t=0.005\) combined perturbed case gave
+
+\[
+R_{\rm desc}(N=4)\approx2.23\times10^{-4},
+\qquad
+R_{\rm desc}(N=7)\approx4.54\times10^{-3}
+\]
+
+under the persistence weight, a sampled \(N=7/N=4\) factor of about \(20.3\).
+
+Under the smoothing weight the same sampled factor was about \(10.3\).
+
+These ratios are descriptive only. The finite separation does not establish divergence with \(N\) and is not a registered nonlinear majorant.
+
+The next proof gate must derive a specific cutoff-uniform Gevrey convolution estimate analytically before using further numerical screening.
