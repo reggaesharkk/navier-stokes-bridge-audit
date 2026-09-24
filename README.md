@@ -125,6 +125,9 @@ The [local vorticity-direction depletion gate](notes/DIRECTION_DEPLETION_GATE_20
 
 The [direction-scaling obstruction gate](notes/DIRECTION_SCALING_OBSTRUCTION_2026_09_24.md) applies the fixed-energy concentration map to a normalized direction-slope candidate \(Q_{\rm dir}=L_{\rm dir}/\sqrt G\). Its [script](src/direction_scaling_obstruction_gate.py) and [results](src/direction_scaling_obstruction_results.json) show the exact scaling mismatch: \(Q_{\rm dir}\) is concentration-invariant while \(T/G^{3/2}\) grows like \(\lambda^{3/2}\). Therefore a \(G^{3/2}\) closure whose coefficient depends only on this normalized geometry is analytically obstructed. This does not contradict Constantin-Fefferman, whose hypothesis retains an absolute spatial coherence scale.
 
+
+The [high-vorticity sampled coherence-radius gate](notes/HIGH_VORTICITY_COHERENCE_RADIUS_2026_09_24.md) restricts the vorticity-direction analysis to pairs satisfying the diagnostic threshold \(|\omega|\ge2\sqrt G\) at both endpoints. Its [script](src/high_vorticity_coherence_radius_gate.py) and [verified summary](src/high_vorticity_coherence_radius_verified_summary.json) show that the strongly perturbed \(N=7\) trajectory develops the smallest sampled absolute coherence radius and the largest high-vorticity pair population by \(t=0.015\). The moving threshold and finite grid make this a diagnostic proxy only, not the Constantin-Fefferman theorem or a continuum radius.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
