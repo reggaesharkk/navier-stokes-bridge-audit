@@ -158,8 +158,8 @@ checks use **different** matched N=4/7 fields and the shorter interval
 |---|---|---|
 | [PR #22](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/22), merged | Exact finite-Galerkin identity `(1/2)X' + νY = N_{σ,s} + σ'Z`, checked on the stored states. | An identity alone gives no all-time bound. |
 | [PR #23](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/23), merged | For zero-mean periodic fields and s>3/2, `|N_{σ,s}| ≤ C_s^G X sqrt(Y) ≤ C_s^G sqrt(X)Y`; `C_s^G=2c_s(Σ_{m≠0}|m|^{-2s})^(1/2)` is independent of cutoff N and radius σ. | The resulting viscosity absorption is conditional on small `sqrt(X)`. A larger sampled quotient at N=7 does **not** disprove this uniform bound. |
-| [PR #24](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/24), draft | Finite-Galerkin scalar-triad phase tracker and a specified sufficient space-time target. Worst relative nonlinear reconstruction error `5.37e-15`. | No automatic phase-muting or all-data integrated bound is derived. |
-| [PR #25](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/25), draft | Exact Gevrey transport commutator and square-partition shell identity; worst relative reconstructed nonlinear error `4.74e-15`. | Neither a favorable sign nor a cutoff-uniform time-integrated upper bound follows. |
+| [PR #24](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/24), merged at `cc1920dae3d0f6fa3e048b22fb2ca3ca8757e9cd` | Finite-Galerkin scalar-triad phase tracker and a specified sufficient space-time target. Worst relative nonlinear reconstruction error `5.37e-15`. | No automatic phase-muting or all-data integrated bound is derived. |
+| [PR #25](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/25), merged at `98e8e8107a652900343f0bcff7dd01be11156db7` | Exact Gevrey transport commutator and square-partition shell identity; worst relative reconstructed nonlinear error `4.74e-15`. | Neither a favorable sign nor a cutoff-uniform time-integrated upper bound follows. |
 
 Here `X=Σ_{k≠0} exp(2σ|k|)|k|^{2s}|a_k|²`,
 `Y=Σ_{k≠0} exp(2σ|k|)|k|^{2s+2}|a_k|²`, and
