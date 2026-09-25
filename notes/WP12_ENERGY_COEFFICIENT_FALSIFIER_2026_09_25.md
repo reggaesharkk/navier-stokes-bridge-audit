@@ -258,3 +258,137 @@ A growing or arbitrarily large \(Q_{\rm energy}\) on an explicit smooth family w
 If the energy-level candidate fails, the remaining route must use information beyond \(\mathcal E\) and \(G\): signed geometry, frequency localization, phase structure, or another independently controlled quantity.
 
 No arbitrary-data Navier–Stokes regularity result is claimed in this gate.
+
+
+## 7. Exact H2 concentration obstruction to the energy-level candidate
+
+For the repository sparse triad with
+
+\[
+P=(1,0,0),\quad Q=(0,1,1),\quad R=(1,1,1),
+\]
+
+the polarizations in src/helicity_phase_gate.py, amplitude \(A=1\), and
+phase \(\theta=\pi/2\), direct Fourier convolution gives
+
+\[
+N_{s=1}=4,
+\qquad
+N_{s=2}=24>0.
+\]
+
+Thus the periodic finite triad has strictly positive \(H^2\) nonlinear
+transfer.
+
+Use the same localization construction already recorded in
+notes/CANDIDATE_INEQUALITY_GATE_2026_09_24.md: write the periodic field as
+the curl of a periodic vector potential, multiply that potential by a smooth
+large-scale cutoff, and take the curl. For sufficiently large localization
+radius the leading volume contribution retains the positive \(H^2\) transfer;
+terms in which derivatives hit the cutoff lose one power of the localization
+radius. Fix one resulting smooth compactly supported divergence-free field
+\(v\) with \(N_2(v)>0\).
+
+Embed its support inside one torus cell and define
+
+\[
+u_\lambda(x)
+=
+\lambda^{3/2}v(\lambda(x-x_0)).
+\]
+
+The \(L^2\) norm is fixed. For \(s=2\),
+
+\[
+X_2(u_\lambda)=\lambda^4X_2(v),
+\]
+
+\[
+Y_2(u_\lambda)=\lambda^6Y_2(v),
+\]
+
+\[
+G(u_\lambda)=\lambda^2G(v),
+\]
+
+and the cubic \(H^2\) transfer satisfies
+
+\[
+N_2(u_\lambda)=\lambda^{13/2}N_2(v).
+\]
+
+Fix \(K\). The proved WP11 low-advector estimate gives
+
+\[
+|N_2^{\le K}(u_\lambda)|
+\le
+C_2(K)\|v\|_2X_2(v)\lambda^4.
+\]
+
+Hence
+
+\[
+N_2^{>K}(u_\lambda)
+=
+N_2(u_\lambda)-N_2^{\le K}(u_\lambda)
+\ge
+c\lambda^{13/2}-C_K\lambda^4
+\]
+
+for some \(c>0\), and is positive for all sufficiently large \(\lambda\).
+
+Now suppose there were fixed \(0<\theta<1\) and finite \(C\) such that
+
+\[
+N_2^{>K}
+\le
+\theta\nu Y_2
++
+C\sqrt G\,X_2
+\]
+
+for every smooth datum in this family. The right side scales at most as
+
+\[
+\theta\nu\,O(\lambda^6)
++
+C\,O(\lambda^5),
+\]
+
+whereas the left side has positive leading order
+\(O(\lambda^{13/2})\). This is impossible as \(\lambda\to\infty\).
+
+Therefore
+
+\[
+\boxed{
+N_2^{>K}
+\le
+\theta\nu Y_2
++
+C\sqrt G\,X_2
+}
+\]
+
+is **false as an all-smooth-data, fixed-K uniform estimate**.
+
+As in the earlier concentration gate, sufficiently large finite Fourier
+projections converge in the relevant smooth norms and preserve the
+inequality violation after a small normalization if needed. The argument is
+therefore not an artifact of an infinite Fourier representation.
+
+This rejection concerns the specific energy-level coefficient
+\(C\sqrt G\). It does not refute WP11 L2-L3 with a coefficient using stronger
+or genuinely signed/geometric information.
+
+## 8. Consequence for the search
+
+The energy identity does provide an attractive time-integrable quantity
+\(\sqrt G\), but physical concentration outruns both its contribution
+\(\sqrt G\,X_2\) and a fixed viscous reserve \(\theta\nu Y_2\).
+
+The next surviving coefficient must therefore encode information beyond
+\(\mathcal E\) and \(G\). The finite falsifier and Colab notebook are retained
+to compare future noncircular geometric/frequency candidates against the
+exact target \(b_{\rm req}\); they are no longer being used to decide whether
+the pure \(C\sqrt G\) theorem is true.
