@@ -196,3 +196,81 @@ If the candidate survives numerical stress, the next step is to seek either:
 2. an explicit phase/spectral family making \(C_{\rm req}^{\rm stretch}\) unbounded.
 
 No arbitrary-data global-regularity result is claimed.
+
+
+## 7. Executed nonlinear-dominant static stress test
+
+The first (A=4) random-field run was not informative because the viscous
+reserve dominated every sampled cubic transfer. The same deterministic fields
+were therefore rerun at amplitude (A=1024), which isolates the
+nonlinear-dominant static quotient without changing its large-amplitude
+geometric limit.
+
+The run used:
+
+- full-ball and outer-half-shell random divergence-free fields;
+- (N=3,ldots,7);
+- ten deterministic seeds per family/cutoff;
+- (K=2), (s=2), (	heta=0.25).
+
+The largest sampled required constants were:
+
+| family | N | max (C_{m req}^{m stretch}) |
+| --- | ---: | ---: |
+| outer half | 3 | 0.168837 |
+| full ball | 3 | 0.146289 |
+| full ball | 4 | 0.115567 |
+| outer half | 4 | 0.101578 |
+| full ball | 6 | 0.060236 |
+| outer half | 6 | 0.046709 |
+| full ball | 7 | 0.044081 |
+| outer half | 5 | 0.034917 |
+| full ball | 5 | 0.012502 |
+| outer half | 7 | 0.000000 |
+
+No monotone growth with cutoff appears in this finite random family.
+
+By contrast, the structured WP14 combined (N=7), amplitude-4,
+(	heta=0.25) trajectory reached
+
+[
+C_{m req}^{m stretch}approx1.023889.
+]
+
+Thus the registered structured phase-cascade trajectory is substantially more
+demanding for this candidate than the tested random-phase fields.
+
+This does not prove a universal finite constant. It suggests that any
+counterexample or proof mechanism is likely to depend on structured phase and
+geometry rather than generic spectral occupancy alone.
+
+The workflow artifact for the nonlinear-dominant random stress test has
+SHA-256 digest
+
+    sha256:fcc5a67d704e394c75de136d96e4debcc8f826db3c58f75033b7b36bbd9e3df7
+
+## 8. Current decision
+
+The pointwise candidate
+
+[
+N_2^{>K}
+le
+	heta
+u Y_2
++
+C,b_{m stretch}X_2
+]
+
+survives the present finite stress suite for some (C>1.023889), but no
+cutoff-independent analytical constant has been proved.
+
+The L3 time-integral requirement is also completely open.
+
+The next gate should therefore target one of two failure modes directly:
+
+1. a structured phase family with unbounded
+   (C_{m req}^{m stretch}); or
+2. an obstruction to independently controlling
+   (int b_{m stretch},dt).
+
