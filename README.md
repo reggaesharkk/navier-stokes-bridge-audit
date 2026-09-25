@@ -137,6 +137,9 @@ The [Gevrey lower-bound gate v0.2](notes/GEVREY_LOWER_BOUND_GATE_2026_09_25.md) 
 
 The [Gevrey uniform majorant gate](notes/GEVREY_UNIFORM_MAJORANT_GATE_2026_09_25.md) proves, for zero-mean periodic fields with \(s>3/2\), the cutoff-independent estimate \(|\mathcal N_{\sigma,s}|\le C_s^G X_{\sigma,s}Y_{\sigma,s}^{1/2}\le C_s^G X_{\sigma,s}^{1/2}Y_{\sigma,s}\), with \(C_s^G=2c_sK_s\) independent of \(N\) and \(\sigma\). Its [verifier](src/gevrey_uniform_majorant_gate.py) and [executed summary](src/gevrey_uniform_majorant_verified_summary.json) confirm the repository trajectories satisfy the zero-mean/divergence/reality assumptions and remain far below the diagnostic lattice-constant reference. The gate also records the real obstruction: the resulting weighted energy inequality only gives immediate viscous absorption in a smallness regime \(C_s^G\sqrt X<\nu\), so cutoff-uniformity alone does not solve arbitrary-data regularity.
 
+
+The [WP12 energy-level coefficient falsifier](notes/WP12_ENERGY_COEFFICIENT_FALSIFIER_2026_09_25.md) identifies \(\sqrt G\) as the unique monomial of the energy-level norms \(\mathcal E=\|u\|_2^2\) and \(G=\|\nabla u\|_2^2\) with the amplitude degree and Navier-Stokes scaling required of an L2-L3 coefficient. It then rejects the universal \(C\sqrt G\) high-advector coefficient analytically at \(s=2\) using the repository's positive-transfer triad, localization, and fixed-energy physical concentration. Its [finite falsifier](src/wp12_energy_coefficient_falsifier.py), [verified summary](src/wp12_energy_coefficient_verified_summary.json), and [Colab notebook](notebooks/WP12_energy_coefficient_colab.ipynb) retain the circular required coefficient only as a target for future noncircular geometric/frequency candidates.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
