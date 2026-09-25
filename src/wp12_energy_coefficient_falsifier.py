@@ -8,7 +8,8 @@ and compares it with the unique energy/enstrophy monomial having the required
 amplitude and Navier-Stokes scaling, sqrt(G).
 
 The audit is diagnostic. b_req is circular and cannot be used as a proof
-coefficient.
+coefficient. Each trajectory is evolved once and reused for all reserve
+fractions.
 """
 
 import argparse
@@ -26,7 +27,7 @@ from wp11_scaling_audit import dilated_system, discrepancy
 HERE = Path(__file__).resolve().parent
 
 
-def observables(system, a, s, K, theta):
+def base_observables(system, a, s, K):
     weights = system.square.astype(float)**s
     X = float(np.sum(weights[:, None] * abs(a)**2))
     Y = float(np.sum((weights*system.square)[:, None] * abs(a)**2))
@@ -40,71 +41,95 @@ def observables(system, a, s, K, theta):
         'ij,ij->i', np.conj(a[out]), a[right])
     high_transfer = float(np.real(np.sum(z)))
 
-    residual = max(high_transfer - theta*system.nu*Y, 0.0)
-    b_req = residual/X if X > 0 else 0.0
-    sqrt_G = math.sqrt(G)
-    ratio = b_req/sqrt_G if sqrt_G > 0 else 0.0
-
     return dict(
         X=X,
         Y=Y,
         G=G,
         high_transfer=high_transfer,
+        sqrt_G=math.sqrt(G),
+    )
+
+
+def with_reserve(base, theta, nu):
+    X = base["X"]
+    Y = base["Y"]
+    residual = max(base["high_transfer"] - theta*nu*Y, 0.0)
+    b_req = residual/X if X > 0 else 0.0
+    sqrt_G = base["sqrt_G"]
+    ratio = b_req/sqrt_G if sqrt_G > 0 else 0.0
+    return dict(
+        **base,
         reserve_fraction=theta,
-        reserve=theta*system.nu*Y,
+        reserve=theta*nu*Y,
         positive_residual=residual,
         b_required=b_req,
-        sqrt_G=sqrt_G,
         Q_energy=ratio,
     )
 
 
-def evolve_trace(N, scenario, amplitude_multiplier, s, K, theta, dt, t_end):
+def evolve_family(
+    N, scenario, amplitude_multiplier, s, K, thetas, dt, t_end
+):
     system = System(N=N, nu=NU)
     a = amplitude_multiplier*make_initial(
         system, *SCENARIOS[scenario]
     )
     steps = round(t_end/dt)
-    rows = []
+    rows_by_theta = {theta: [] for theta in thetas}
 
     for step in range(steps+1):
-        row = observables(system, a, s, K, theta)
-        row["time"] = step*dt
-        rows.append(row)
+        base = base_observables(system, a, s, K)
+        for theta in thetas:
+            row = with_reserve(base, theta, system.nu)
+            row["time"] = step*dt
+            rows_by_theta[theta].append(row)
         if step < steps:
             a = system.rk4(a, dt)
 
-    b_integral = float(np.trapezoid(
-        [r["b_required"] for r in rows], dx=dt
-    ))
-    sqrt_G_integral = float(np.trapezoid(
-        [r["sqrt_G"] for r in rows], dx=dt
-    ))
-
-    return dict(
-        cutoff=N,
-        scenario=scenario,
-        amplitude_multiplier=amplitude_multiplier,
-        K=K,
-        theta=theta,
-        s=s,
-        dt=dt,
-        t_end=t_end,
-        integral_b_required=b_integral,
-        integral_sqrt_G=sqrt_G_integral,
-        max_Q_energy=max(r["Q_energy"] for r in rows),
-        rows=rows,
-    )
+    traces = []
+    for theta in thetas:
+        rows = rows_by_theta[theta]
+        b_integral = float(np.trapezoid(
+            [r["b_required"] for r in rows], dx=dt
+        ))
+        sqrt_G_integral = float(np.trapezoid(
+            [r["sqrt_G"] for r in rows], dx=dt
+        ))
+        traces.append(dict(
+            cutoff=N,
+            scenario=scenario,
+            amplitude_multiplier=amplitude_multiplier,
+            K=K,
+            theta=theta,
+            s=s,
+            dt=dt,
+            t_end=t_end,
+            integral_b_required=b_integral,
+            integral_sqrt_G=sqrt_G_integral,
+            max_Q_energy=max(r["Q_energy"] for r in rows),
+            rows=rows,
+        ))
+    return traces
 
 
 def dilation_check(N, scenario, amplitude_multiplier, s, K, theta, lam=2):
-    base = System(N=N, nu=NU)
-    scaled = dilated_system(base, lam)
-    a = amplitude_multiplier*make_initial(base, *SCENARIOS[scenario])
+    base_system = System(N=N, nu=NU)
+    scaled_system = dilated_system(base_system, lam)
+    a = amplitude_multiplier*make_initial(
+        base_system, *SCENARIOS[scenario]
+    )
     b = lam*a.copy()
 
-    x = observables(base, a, s, K, theta)
-    y = observables(scaled, b, s, lam*K, theta)
+    x = with_reserve(
+        base_observables(base_system, a, s, K),
+        theta,
+        base_system.nu,
+    )
+    y = with_reserve(
+        base_observables(scaled_system, b, s, lam*K),
+        theta,
+        scaled_system.nu,
+    )
 
     errors = dict(
         X=discrepancy(y["X"], lam**(2*s+2)*x["X"]),
@@ -127,6 +152,8 @@ def dilation_check(N, scenario, amplitude_multiplier, s, K, theta, lam=2):
         K=K,
         scaled_K=lam*K,
         lambda_factor=lam,
+        scenario=scenario,
+        theta=theta,
         base=x,
         scaled=y,
         relative_errors=errors,
@@ -149,10 +176,9 @@ def run(
     for scenario in scenarios:
         for N in cutoffs:
             for amplitude in amplitudes:
-                for theta in thetas:
-                    traces.append(evolve_trace(
-                        N, scenario, amplitude, s, K, theta, dt, t_end
-                    ))
+                traces.extend(evolve_family(
+                    N, scenario, amplitude, s, K, thetas, dt, t_end
+                ))
 
     dilation = []
     for scenario in scenarios:
