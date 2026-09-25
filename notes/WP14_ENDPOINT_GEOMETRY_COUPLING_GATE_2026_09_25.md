@@ -223,3 +223,76 @@ In particular:
 - \(\chi_{2,\rm high}\) measures cancellation inside a cubic envelope that is itself not controlled.
 
 A later proof gate must derive a noncircular inequality before any of these quantities can contribute to L2–L3.
+
+
+## 6. Executed finite diagnostic
+
+The matched-state audit completed successfully on the registered short-window
+families.
+
+For the pooled active samples, the descriptive Pearson correlations with
+(Gamma_{m req}^{m grid}) were
+
+[
+r(g_{m dir})approx 0.7994,
+qquad
+r(g_{m stretch})approx 0.7426,
+qquad
+r(chi_{2,m high})approx -0.7355.
+]
+
+Pooling mixes different trajectories, amplitudes, and reserve fractions, so
+these numbers are descriptive only.
+
+On the aggressive combined (N=7) family considered separately, the
+correlations were substantially sharper:
+
+[
+r(g_{m dir})approx0.9725,
+]
+
+[
+r(g_{m stretch})approx0.9875,
+]
+
+[
+r(chi_{2,m high})approx-0.7738.
+]
+
+The negative coherence correlation means that the signed high-tail coherence
+factor by itself moves in the opposite direction to the required endpoint
+burden over this sampled family. It therefore does not behave as a standalone
+positive depletion factor here.
+
+For the combined (N=7), amplitude-4, (	heta=0.25) trajectory, the largest
+sampled endpoint target was approximately
+
+[
+Gamma_{m req}^{m grid}=0.0428798.
+]
+
+At that same stage the endpoint-normalized positive-stretching factor was of
+comparable magnitude, approximately (0.04215) near the target peak.
+
+This numerical proximity is not an inequality. It identifies the algebraic
+candidate
+
+[
+|omega|_infty g_{m stretch}
+=
+rac{langle(omegacdot Somega)_+angle}{G}.
+]
+
+The next analytical gate should test the noncircular candidate
+
+[
+b_{m stretch}
+=
+rac{langle(omegacdot Somega)_+angle}{G}
+]
+
+against the exact signed (H^2) high-advector remainder, and separately test
+whether any all-prefix time integral of (b_{m stretch}) follows from
+independently controlled quantities.
+
+The present data do not establish either statement.
