@@ -1,4 +1,5 @@
 name: Temporary WP12 Colab bundle
+# rerun with sparse H2 anchor
 
 on:
   push:
