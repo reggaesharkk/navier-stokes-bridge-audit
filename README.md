@@ -152,6 +152,9 @@ The [WP15 positive-stretching coefficient gate](notes/WP15_POSITIVE_STRETCHING_C
 
 The [WP16 structured phase-adversary gate](notes/WP16_STRUCTURED_PHASE_ADVERSARY_GATE_2026_09_25.md) stress-tests the WP15 coefficient by preserving the full evolved modal spectrum and varying only conjugacy-preserving Fourier phases. On the registered \(A=4,\ t=0.0035\) cascade state, the [verified summary](src/wp16_structured_phase_adversary_verified_summary.json) records a rise in the large-amplitude quotient \(C_\infty^{\rm stretch}=[N_2^{>K}]_+/(b_{\rm stretch}X_2)\) from about \(1.0381\) to \(1.0779\) at \(N=7\), while the corresponding \(N=4\) search remains below \(0.069\). This raises the finite tested lower benchmark for any universal pointwise constant but does not establish boundedness, cutoff convergence, or L2–L3.
 
+
+The [WP17 sparse multiscale ladder gate](notes/WP17_SPARSE_MULTISCALE_LADDER_GATE_2026_09_25.md) allows relative amplitudes and phases to vary across scaled copies of the exact sparse triad. Its [verified summary](src/wp17_sparse_multiscale_ladder_verified_summary.json) raises the refined finite adversarial benchmark for the WP15 coefficient to \(C_\infty^{\rm stretch}\approx5.113\) at \(96^3\), but finds no growth with ladder length \(L=2,\dots,6\). The optimizers instead saturate the second-scale amplitude bound, pointing toward a dominant scale-2 sparse-triad limit. No universal constant or L2–L3 theorem is established.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
