@@ -176,6 +176,10 @@ The raw N=10/N=11 result and N=11 checkpoint were checked for hash identity/prov
 
 The [WP16 phase-structure reverse-engineering gate](notes/WP16_PHASE_STRUCTURE_REVERSE_ENGINEERING_2026_09_25.md) asks whether the rising N=10/N=11 phase-only optimizers admit a simple mode-phase law. The [diagnostic](src/wp16_phase_structure_reverse_engineering.py) and [verified summary](src/wp16_phase_structure_verified_summary.json) find almost uniform one-point mode phases and almost uniform *unweighted* triad-relative phases, while the 2,084 inherited N=10 phases remain strongly stable into N=11 modulo the spatial-translation gauge: about 79% move by less than 0.25 radians and about 95% by less than 0.5 radians. The optimization history separates new-shell transfer recovery from full-torus denominator depletion. This redirects the analytical search toward coefficient-weighted, gauge-invariant triad phases and a recursive extension/relaxation mechanism rather than a low-degree radial phase formula.
 
+
+
+The [executed coefficient-weighted triad-phase result](notes/WP16_WEIGHTED_TRIAD_PHASE_RESULT_2026_09_25.md) rejects a simple outer-shell-transfer explanation for the growing phase-only quotient. At N=11, triads touching the newly opened shell carry about 10.51% of the absolute H2 envelope but only 8.45% of signed transfer, while the new shell acting as advector carries only about 0.55% of the envelope and 0.21% of signed transfer. Shell 4 alone carries about 69.78% of the signed transfer, and shells 4+5 together about 91.10%. The optimized global triadic coherence fraction also falls relative to the unrotated evolved base state. The [verified summary](src/wp16_weighted_triad_phase_verified_summary.json) therefore redirects the mechanism search toward depletion of the physical-space positive-stretching denominator rather than increasing global numerator alignment.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
