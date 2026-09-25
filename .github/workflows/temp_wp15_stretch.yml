@@ -1,0 +1,28 @@
+name: Temporary WP15 positive stretching audit
+
+on:
+  push:
+    paths:
+      - ".github/workflows/temp_wp15_stretch.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: wp15-positive-stretching-coefficient-20260925
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy
+      - name: Run WP15
+        run: python3 src/wp15_positive_stretching_gate.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp15_positive_stretching_results
+          path: src/wp15_positive_stretching_results.json
+          if-no-files-found: error
