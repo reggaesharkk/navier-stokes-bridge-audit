@@ -2,13 +2,13 @@
 
 **Prince Upadhyay, Independent Research — 25 September 2026**
 
-**Status:** phase-only adversarial search against the WP15 positive-stretching coefficient.  
+**Status:** finite phase-only adversarial search against the WP15 positive-stretching coefficient.  
 **Scope:** unforced periodic 3D Navier–Stokes Galerkin states, zero mean, \(s=2\), fixed high-advector split \(K=2\).  
 **Open theorem:** WP11 L2–L3 remains unproved.
 
 ## 1. Why phase-only search
 
-WP15 showed that generic nonlinear-dominant random Fourier fields were less demanding than the registered structured phase-cascade trajectory for the candidate
+WP15 showed that generic nonlinear-dominant random Fourier fields were less demanding than the registered structured phase-cascade trajectory for
 
 \[
 b_{\rm stretch}
@@ -16,9 +16,9 @@ b_{\rm stretch}
 \frac{\langle(\omega\cdot S\omega)_+\rangle}{G}.
 \]
 
-This suggests that hard cases may depend more on structured phase geometry than on spectral occupancy alone.
+That makes structured phase geometry a natural adversarial variable.
 
-For a fixed Fourier shape multiplied by amplitude \(A\),
+For a fixed Fourier shape multiplied by a global amplitude \(A\),
 
 \[
 N_2^{>K}\sim A^3,
@@ -28,41 +28,33 @@ b_{\rm stretch}X_2\sim A^3,
 \nu Y_2\sim A^2.
 \]
 
-Therefore the large-amplitude pointwise quotient is
+Therefore the large-amplitude geometric quotient is
 
 \[
 \boxed{
 C_\infty^{\rm stretch}
 =
-\frac{[N_2^{>K}]_+}
-{b_{\rm stretch}X_2}
+\frac{[N_2^{>K}]_+}{b_{\rm stretch}X_2}
 }
 \]
 
 whenever \(b_{\rm stretch}X_2>0\).
 
-This quotient removes the arbitrary amplitude choice and tests the geometric candidate directly.
+This removes the arbitrary global amplitude from the pointwise phase test.
 
 ## 2. Phase-preserving adversarial family
 
-Start from the registered structured initial state named combined_double_quarter_high.
-
-For each canonical nonzero Fourier pair \(\pm k\) in its support, apply
+For every active canonical nonzero Fourier pair \(\pm k\), apply
 
 \[
-a_k \mapsto e^{i\phi_k}a_k,
+a_k\mapsto e^{i\phi_k}a_k,
 \qquad
 a_{-k}\mapsto e^{-i\phi_k}a_{-k}.
 \]
 
-This preserves:
+This preserves reality, divergence freedom, every modal magnitude, polarization direction, and therefore \(E,G,X_2,Y_2,D\).
 
-- reality of the physical velocity field;
-- divergence freedom;
-- every modal magnitude \(|a_k|\);
-- therefore \(E,G,X_2,Y_2,D\).
-
-It changes only multi-mode phase geometry and hence the signed cubic transfers and physical-space stretching pattern.
+Only multimode phase geometry, signed cubic transfer, and physical-space stretching geometry change.
 
 ## 3. Search objective
 
@@ -71,213 +63,73 @@ The primary objective is
 \[
 C_\infty^{\rm stretch}
 =
-\frac{[N_2^{>K}]_+}
-{b_{\rm stretch}X_2}.
+\frac{[N_2^{>K}]_+}{b_{\rm stretch}X_2}.
 \]
 
-Secondary diagnostics record
+The secondary exact finite-Galerkin phase diagnostic is
 
 \[
 \chi_{2,\rm high}
 =
-\frac{N_2^{>K}}{\sum |Z^{(2)}_{kpq}|}.
+\frac{N_2^{>K}}
+{\sum_{|p|>K}|Z_{k,p,q}^{(2)}|}.
 \]
 
-A phase state with larger \(C_\infty^{\rm stretch}\) is more demanding for the WP15 candidate.
+Larger \(C_\infty^{\rm stretch}\) means a more demanding phase state for the WP15 coefficient.
 
-## 4. Deterministic search design
+## 4. Wolfram amplitude-exponent check
 
-The companion module uses:
-
-1. the exact structured support from the registered combined state;
-2. deterministic random phase draws;
-3. local coordinate perturbations around the best draw;
-4. matched runs at \(N=4\) and \(N=7\);
-5. fixed grid quadrature satisfying the repository aliasing checks.
-
-No optimizer output is treated as globally optimal.
-
-## 5. Falsification logic
-
-If the search finds phase states with strongly increasing
+A stateless Wolfram Language check with the amplitude exponents explicitly assigned gives
 
 \[
-C_\infty^{\rm stretch},
-\]
-
-the WP15 coefficient becomes less plausible and may motivate an explicit analytical counterexample family.
-
-If the quotient remains bounded over this finite adversarial search, the candidate survives another screen but remains unproved.
-
-A finite optimization cannot establish a cutoff-independent universal constant.
-
-## 6. Interpretation barrier
-
-The search is over a finite-dimensional phase torus tied to one registered modal support. It does not cover all smooth fields.
-
-The result may falsify proposed constants on the tested family or identify dangerous phase configurations. It cannot prove WP11 L2–L3 or global regularity.
-
-
-## 7. Executed searches
-
-### 7.1 Initial-support pilot
-
-A fast phase-only search on the unevolved registered combined state reached
-
-[
-C_infty^{m stretch}approx0.06070.
-]
-
-The (N=4) and (N=7) values were identical to numerical precision because
-the initial occupied support is the same inside both cutoffs and the static
-(H^2) transfer pairs against occupied output modes.
-
-This pilot therefore cannot reproduce the dangerous evolved WP14 state. It
-shows that the cascade-generated support, not merely the initial eight
-conjugate pairs, matters.
-
-### 7.2 Evolved cascade-support adversary
-
-The search was upgraded to the exact registered structured anchor
-
-[
-4	imes	ext{combined_double_quarter_high}
-]
-
-evolved by RK4 with (Delta t=0.0005) to
-
-[
-t=0.0035.
-]
-
-All canonical Fourier pairs with coefficient norm above (10^{-8}) were
-eligible for phase rotation. Every modal magnitude and polarization was held
-fixed.
-
-For (N=7), the evolved anchor contained 709 active conjugate pairs. The
-baseline large-amplitude quotient was
-
-[
-C_infty^{m stretch}=1.0381140504.
-]
-
-The best deterministic coordinate-search result was
-
-[
-oxed{
-C_infty^{m stretch}=1.0778997042
-}
-]
-
-for seed 20260925, a factor
-
-[
-1.0383249352
-]
-
-above the baseline.
-
-A second seed reached
-
-[
-1.0722309805.
-]
-
-For (N=4), the evolved anchor contained 128 active conjugate pairs. Its
-baseline quotient was zero; the two searches reached approximately
-
-[
-0.0687953
-quad	ext{and}quad
-0.0524743.
-]
-
-The best (N=7) state had
-
-[
-chi_{2,m high}approx0.26711
-]
-
-and
-
-[
-b_{m stretch}approx26.6581
-]
-
-in repository normalization.
-
-The workflow artifact digest for the evolved-support search is
-
-    sha256:4237705d4c3aa8a78b727142e557fdf16e30b344f28fd165d916bd17825ff69a
-
-## 8. Consequence for the WP15 candidate
-
-The evolved-support phase search demonstrates that phase geometry can make the
-registered (N=7) spectrum measurably more demanding without changing its
-modal magnitudes.
-
-Because the viscous reserve is quadratic in a subsequent global amplitude
-rescaling while both (N_2^{>K}) and (b_{m stretch}X_2) are cubic, any
-all-smooth-data pointwise inequality of the WP15 form must accommodate the
-large-amplitude limit of these finite states. Consequently the present search
-raises the tested finite lower benchmark for a universal coefficient to at
-least approximately
-
-[
-Cge1.07790
-]
-
-on this particular adversarial family.
-
-This is **not** evidence that a finite universal (C) exists. The optimizer is
-local, the support family is finite dimensional, the positive-stretching
-functional is evaluated on a finite spatial grid, and only (N=4,7) are
-compared.
-
-No unbounded phase family was found.
-
-The next unresolved question is therefore sharper: either construct a
-support-expanding structured family for which
-(C_infty^{m stretch}) grows without bound, or attack the independent
-all-prefix time-integrability of (b_{m stretch}).
-
-
-## 7. Wolfram amplitude-exponent verification
-
-A stateless Wolfram Language check with explicit exponents gives
-
-\[
-b_{\rm stretch}\sim A^1,
-\qquad
+b_{\rm stretch}\sim A,
+\quad
 b_{\rm stretch}X_2\sim A^3,
-\qquad
+\quad
 N_2^{>K}\sim A^3,
-\qquad
+\quad
 \nu Y_2\sim A^2.
 \]
 
-Therefore
+Thus
 
 \[
-C_\infty^{\rm stretch}
-=
-\frac{[N_2^{>K}]_+}{b_{\rm stretch}X_2}
+C_\infty^{\rm stretch}\sim A^0,
 \]
 
-has amplitude exponent zero, while the viscous reserve is lower by one power
-of amplitude. This is an algebraic scaling check only.
+while the viscous reserve is lower by one amplitude power. This is an algebraic scaling check only.
 
-## 8. Executed evolved-support phase search
+## 5. Initial-support pilot
 
-The decisive registered run used the evolved anchor
+The first fast search varied phases only on the unevolved registered combined-double-quarter-high support.
+
+That support contains eight active canonical conjugate pairs. The best value found was approximately
 
 \[
-4\,u_{\rm combined}(t=0.0035)
+C_\infty^{\rm stretch}=0.0607045.
 \]
 
-generated by the repository RK4 integrator with \(\Delta t=0.0005\).
+The \(N=4\) and \(N=7\) values were identical to numerical precision because the occupied initial support is the same inside both cutoffs.
 
-The active support sizes were:
+Therefore the initial-support pilot is not a cutoff-growth test. It only checks phase variation inside the shared eight-pair support.
+
+## 6. Evolved cascade-support search
+
+The decisive registered search used
+
+\[
+4\,u_{\rm combined}(t=0.0035),
+\]
+
+generated by the repository RK4 integrator with
+
+\[
+\Delta t=0.0005.
+\]
+
+All canonical Fourier pairs with coefficient norm above \(10^{-8}\) were eligible for phase rotation.
+
+The evolved active support sizes were
 
 \[
 N=4:\quad 128\text{ conjugate pairs},
@@ -287,74 +139,92 @@ N=4:\quad 128\text{ conjugate pairs},
 N=7:\quad 709\text{ conjugate pairs}.
 \]
 
-For seed 20260925:
+For seed 20260925, the \(N=4\) search moved from zero to
 
 \[
-C_\infty^{\rm stretch}(N=4)
-:
-0
-\longrightarrow
-0.0687953,
+0.0687952862.
 \]
 
-while
+For the same seed, the \(N=7\) search moved from
 
 \[
-C_\infty^{\rm stretch}(N=7)
-:
-1.0381141
-\longrightarrow
-1.0778997.
+1.0381140504
+\]
+
+to
+
+\[
+\boxed{1.0778997042}.
+\]
+
+The corresponding improvement factor was
+
+\[
+1.0383249352.
 \]
 
 For seed 20260926, the \(N=7\) best value was
 
 \[
-1.0722310.
+1.0722309805,
 \]
 
-Thus a conjugacy-preserving phase-only perturbation can make the evolved
-structured \(N=7\) state more demanding while leaving all modal magnitudes,
-polarizations, and quadratic Fourier norms fixed.
-
-The strongest observed improvement factor relative to the evolved \(N=7\)
-baseline was approximately
+while the \(N=4\) best value was
 
 \[
-1.038325.
+0.0524742528.
 \]
 
-The best observed \(N=7\) state had
+The best observed \(N=7\) phase state had
 
 \[
-\chi_{2,\rm high}\approx0.26711,
-\qquad
-b_{\rm stretch}\approx26.6581.
+\chi_{2,\rm high}\approx0.26711014
 \]
 
-The workflow artifact digest was
+and
 
-    sha256:4237705d4c3aa8a78b727142e557fdf16e30b344f28fd165d916bd17825ff69a
+\[
+b_{\rm stretch}\approx26.658052.
+\]
 
-## 9. What the result does and does not show
+The evolved-support workflow artifact digest is
 
-The evolved-support result is more demanding than the earlier eight-pair
-initial-support search because the \(N=7\) trajectory has populated hundreds
-of additional active mode pairs.
+sha256:4237705d4c3aa8a78b727142e557fdf16e30b344f28fd165d916bd17825ff69a
 
-However, the optimization remains sparse relative to the 709-dimensional
-phase torus. The approximately 3.8% improvement does not establish a global
-maximum, cutoff growth, or an unbounded phase family.
+## 7. What is actually established
 
-The result supports only the following finite statement:
+The finite computation establishes:
 
-> On the registered evolved \(N=7\) support, phase geometry alone can increase
-> the large-amplitude positive-stretching quotient while preserving the
-> complete quadratic spectrum.
+> On the registered evolved \(N=7\) support, conjugacy-preserving phase changes can increase the large-amplitude positive-stretching quotient while preserving the complete modal magnitude spectrum and polarizations.
 
-The next numerical step should therefore use a larger phase search in Colab,
-preferably including random global draws, block-coordinate proposals, and
-multiple evolved anchor times. Any apparent cutoff trend must then be checked
-on additional \(N\) values before being interpreted.
+Thus phase geometry matters even after all quadratic Fourier information is frozen.
 
-No cutoff-independent pointwise bound and no WP11 L2-L3 estimate is proved.
+The best tested finite lower benchmark for any universal coefficient in this family is currently
+
+\[
+C\ge 1.0778997042.
+\]
+
+That is only a lower benchmark from the tested states. It is not evidence that any finite universal \(C\) exists.
+
+## 8. What is not established
+
+The search does not establish a global optimum on the phase torus, monotone growth with cutoff, an unbounded phase family, a cutoff-independent pointwise constant, the independently controlled time integral required by WP11 L3, or arbitrary-data 3D Navier–Stokes regularity.
+
+The \(N=7\) phase torus has 709 active phase variables, while the registered local search samples only a tiny part of that space.
+
+## 9. Next numerical target
+
+The next numerical stage should use Google Colab for a substantially broader search including global random phase draws, block-coordinate proposals, multiple evolved anchor times, multiple deterministic seeds, and additional cutoffs before interpreting any trend in \(N\).
+
+If such a search produces sustained growth of
+
+\[
+C_\infty^{\rm stretch},
+\]
+
+the optimized states should be reduced to an explicit structured analytical family.
+
+If the quotient remains numerically stable, that still does not prove a universal bound; it only raises the priority of an analytical inequality attempt.
+
+No WP11 L2–L3 theorem is claimed.
