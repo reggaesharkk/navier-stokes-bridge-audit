@@ -84,3 +84,13 @@ For time-varying \(\sigma\), the extra \(\int\sigma'Z\,dt\) must also be control
 ## 5. Proof gate after measurement
 
 The mechanism would require a *stated theorem candidate*: for example, a bound on the positive nonlinear injection integrated over a time interval, with its exact dependence on `X`, `Y`, `ν`, initial data and interval length. Prove every constant independent of `N` and close the resulting energy estimate for arbitrary smooth data before drawing a global-regularity conclusion. If the proposed inequality only holds when a smallness or coherence assumption is imposed, state that restriction. Numerical phase drift, even when reproduced, supplies a diagnostic and cannot supply the universal bound.
+
+## 6. Executed finite-Galerkin tracker
+
+Run `python3 src/gevrey_phase_drift_tracker.py` from the repository root; the concise executed record is `src/gevrey_phase_drift_verified_summary.json`. The script uses s=2, ν=0.1, dt=0.0005, t in [0,0.005], the reference and combined perturbed fields, both N=4/N=7, and the two PR #22 weight schedules. Each weight evaluates the same evolved state within a case.
+
+The worst relative reconstruction error for the signed weighted nonlinear transfer was 5.37e-15. A centered complex-triad derivative check at N=7 improved from 1.19e-8 to 2.97e-9 in the reference case and from 3.76e-7 to 9.40e-8 in the perturbed case when its test step was halved from 1e-5 to 5e-6. Translation invariance and sign reversal were checked to approximately 7.1e-14 and zero, respectively.
+
+At t=0.005, the perturbed persistence-weight cancellation ratio Q was approximately 0.0704 (N=4) and 0.4083 (N=7); the corresponding parabolic-weight values were 0.0715 and 0.2743. The signed transfer integrals over [0,0.005] were positive in all four perturbed cases, with magnitudes recorded in the JSON. These are trajectory-dependent weighted diagnostics. They do not show that phase drift forces cancellation as cutoff grows; in this comparison Q is *larger* at N=7. Nor is a positive integral on a short track evidence of singularity.
+
+The relative phase-rate floor controls only which individual angular rates are displayed. All ordered triads, including those below the display floor, contribute to the reconstructed transfer, absolute envelope, Q, and time integral.
