@@ -1,4 +1,5 @@
 name: Temporary WP17 sparse ladder audit
+# rerun with registered 96^3 refinement
 
 on:
   push:
