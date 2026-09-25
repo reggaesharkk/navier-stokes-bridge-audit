@@ -146,6 +146,9 @@ The [WP13 endpoint-vorticity gate](notes/WP13_ENDPOINT_VORTICITY_GATE_2026_09_25
 
 The [WP14 endpoint-geometry coupling gate](notes/WP14_ENDPOINT_GEOMETRY_COUPLING_GATE_2026_09_25.md) matches the circular endpoint target \(\Gamma_{\rm req}=b_{\rm req}/\|\omega\|_{\infty,\mathrm{grid}}\) to dimensionless geometry on the same Galerkin states. It tests \(g_{\rm dir}=\ell_\omega L_{\max}\), endpoint-normalized positive stretching \(g_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/(\|\omega\|_{\infty,\mathrm{grid}}G)\), and exact high-advector \(H^2\) triadic coherence \(\chi_{2,\rm high}\). The [verified summary](src/wp14_endpoint_geometry_verified_summary.json) records strong descriptive co-movement of \(\Gamma_{\rm req}\) with \(g_{\rm dir}\) and \(g_{\rm stretch}\) on the aggressive \(N=7\) family, while explicitly not promoting correlation into an a priori estimate. The gate exposes the next noncircular candidate \(b_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/G\), whose domination and independent time-integral properties remain open.
 
+
+The [WP15 positive-stretching coefficient gate](notes/WP15_POSITIVE_STRETCHING_COEFFICIENT_GATE_2026_09_25.md) tests the noncircular coefficient \(b_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/G\), which has exactly the concentration scaling required to multiply \(X_2\) in the signed \(H^2\) high-advector target. The [finite stress test](src/wp15_positive_stretching_gate.py) and [verified summary](src/wp15_positive_stretching_verified_summary.json) show that generic nonlinear-dominant random Fourier fields are less demanding than the registered structured phase-cascade trajectory: the random suite reached \(C_{\rm req}^{\rm stretch}\approx0.169\), while the structured \(N=7\) trajectory reached about \(1.024\). No cutoff-independent constant or independent time-integral estimate is proved.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
