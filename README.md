@@ -196,6 +196,10 @@ The [N=11 old-core shell-compression result](notes/WP16_OLD_CORE_SHELL_COMPRESSI
 
 The [shell-7/shell-4 internal compression result](notes/WP16_ORBIT_COMPRESSION_RESULT_2026_09_25.md) finds a strong coordinate-magnitude orbit basis. The leading orbit ([0,3,6]) uses 12 phase pairs and recovers about 55% of the full shell-7/4 quotient gain. The first six ranked absolute-coordinate orbits use only 84 of 314 target pairs and recover about 99.66% of the quotient gain. However, that compact subset recovers only about 71.7% of the full positive-stretching depletion, so quotient compression is stronger than denominator-mechanism compression. The [verified summary](src/wp16_orbit_compression_verified_summary.json) motivates a cross-cutoff orbit-response/rank audit as the next LRSC-style structural test.
 
+
+
+The [two-step cross-cutoff orbit/rank result](notes/WP16_TWO_STEP_ORBIT_RANK_RESULT_2026_09_25.md) confirms persistence of the six N11-dominant absolute-coordinate orbit families across N9→N10 and N10→N11, with ([0,3,6]) the strongest persistent orbit. It also corrects the original SVD interpretation: because (d\log C=d\log N+(-d\log P_+)) at each cutoff, the six-column response matrix has two exact algebraic dependencies and maximum rank 4. The observed rank 4 therefore does not demonstrate low-rank collapse. The [verified summary](src/wp16_two_step_orbit_rank_verified_summary.json) redirects the rank test to a corrected three-step independent-response matrix.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
