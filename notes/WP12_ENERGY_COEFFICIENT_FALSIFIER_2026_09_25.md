@@ -392,3 +392,29 @@ The next surviving coefficient must therefore encode information beyond
 to compare future noncircular geometric/frequency candidates against the
 exact target \(b_{\rm req}\); they are no longer being used to decide whether
 the pure \(C\sqrt G\) theorem is true.
+
+
+## 9. Executed finite-cutoff sweep
+
+The repository audit was executed on N=4 and N=7 for the reference and
+combined perturbed scenarios, amplitude multipliers 0.5, 1, 2, 4, reserve
+fractions theta=0.25,0.5,0.75, dt=0.0005, and t in [0,0.005].
+
+The exact image-sublattice dilation checks recorded zero relative scaling
+error for X, Y, G, signed high transfer, b_required, sqrt(G), and Q_energy.
+This checks the indexed finite-dimensional scaling map only.
+
+The largest sampled Q_energy was
+
+    0.13075951615326528
+
+for the combined perturbed N=7 trajectory with amplitude multiplier 4 and
+theta=0.25. At amplitude multiplier 1 and theta=0.25, the combined N=4 run
+had Q_energy=0 throughout the sampled window, while N=7 reached about
+0.05237054. For the reference field at amplitude 4 and theta=0.25, the
+sampled maxima were about 0.00748086 (N=4) and 0.03884155 (N=7).
+
+These finite differences are not used to prove the analytical rejection of
+C*sqrt(G). That rejection is the concentration argument in Section 7.
+The sweep is retained as a regression target for future candidate
+coefficients that use additional signed/geometric information.
