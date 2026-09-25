@@ -17,6 +17,8 @@
         "centered_step": 1e-05,
         "translation_max_abs_error": 1.764402461857846e-14,
         "sign_reversal_max_abs_error": 0.0,
+        "viscous_product_max_abs_error": 5.979812823045123e-15,
+        "viscous_phase_rate_max_abs_on_active_triads": 2.5162339719883777e-16,
         "max_abs_zdot": 881.5528429931155
       },
       "signed_transfer_integrals": {
@@ -57,6 +59,8 @@
         "centered_step": 1e-05,
         "translation_max_abs_error": 1.764402461857846e-14,
         "sign_reversal_max_abs_error": 0.0,
+        "viscous_product_max_abs_error": 5.979812823045123e-15,
+        "viscous_phase_rate_max_abs_on_active_triads": 2.5162339719883777e-16,
         "max_abs_zdot": 881.5528429931155
       },
       "signed_transfer_integrals": {
@@ -97,6 +101,8 @@
         "centered_step": 1e-05,
         "translation_max_abs_error": 7.090185760565034e-14,
         "sign_reversal_max_abs_error": 0.0,
+        "viscous_product_max_abs_error": 3.44401564761504e-14,
+        "viscous_phase_rate_max_abs_on_active_triads": 2.663007301983177e-16,
         "max_abs_zdot": 26939.077964460703
       },
       "signed_transfer_integrals": {
@@ -137,6 +143,8 @@
         "centered_step": 1e-05,
         "translation_max_abs_error": 7.090185760565034e-14,
         "sign_reversal_max_abs_error": 0.0,
+        "viscous_product_max_abs_error": 3.44401564761504e-14,
+        "viscous_phase_rate_max_abs_on_active_triads": 2.663007301983177e-16,
         "max_abs_zdot": 26939.077964460703
       },
       "signed_transfer_integrals": {
@@ -180,5 +188,5 @@
       "h_5e-6": 9.403525828222519e-08
     }
   },
-  "interpretation": "The perturbed N7 cancellation ratio is larger than N4 at t=.005; this sample does not establish automatic phase muting or a cutoff-uniform time-integrated bound."
+  "interpretation": "The perturbed N7 cancellation ratio is larger than N4 at t=.005; this sample does not establish automatic phase muting or a cutoff-uniform time-integrated bound. The direct viscous contribution to nonzero triad phase rate vanishes (verified by the product rule); viscosity still changes amplitudes and thereby later nonlinear phase dynamics."
 }
