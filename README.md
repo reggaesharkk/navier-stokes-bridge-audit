@@ -140,6 +140,9 @@ The [Gevrey uniform majorant gate](notes/GEVREY_UNIFORM_MAJORANT_GATE_2026_09_25
 
 The [WP12 energy-level coefficient falsifier](notes/WP12_ENERGY_COEFFICIENT_FALSIFIER_2026_09_25.md) identifies \(\sqrt G\) as the unique monomial of the energy-level norms \(\mathcal E=\|u\|_2^2\) and \(G=\|\nabla u\|_2^2\) with the amplitude degree and Navier-Stokes scaling required of an L2-L3 coefficient. It then rejects the universal \(C\sqrt G\) high-advector coefficient analytically at \(s=2\) using the repository's positive-transfer triad, localization, and fixed-energy physical concentration. Its [finite falsifier](src/wp12_energy_coefficient_falsifier.py), [verified summary](src/wp12_energy_coefficient_verified_summary.json), and [Colab notebook](notebooks/WP12_energy_coefficient_colab.ipynb) retain the circular required coefficient only as a target for future noncircular geometric/frequency candidates.
 
+
+The [WP13 endpoint-vorticity gate](notes/WP13_ENDPOINT_VORTICITY_GATE_2026_09_25.md) sharpens the WP12 concentration obstruction: for the fixed-energy family \(u_\lambda(x)=\lambda^{3/2}v(\lambda x)\), the required L2 coefficient scales like \(\lambda^{5/2}\), whereas \(\|\omega\|_{L^p}\sim\lambda^{5/2-3/p}\). Hence every finite-\(p\) magnitude-only coefficient \(C\|\omega\|_{L^p}\) is too weak on that family; the endpoint \(p=\infty\) is the first magnitude scale not rejected by this argument. The [finite endpoint diagnostic](src/wp13_endpoint_vorticity_gate.py) and [verified summary](src/wp13_endpoint_vorticity_verified_summary.json) compare the circular required coefficient with sampled \(L^4,L^8,L^\infty\) vorticity norms and a rigorous finite-Fourier endpoint envelope, while explicitly leaving the independent endpoint time-integral problem open.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
