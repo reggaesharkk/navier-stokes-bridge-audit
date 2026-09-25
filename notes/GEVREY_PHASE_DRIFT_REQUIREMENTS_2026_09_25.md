@@ -58,6 +58,29 @@ Set `Q_N` undefined when the denominator vanishes. Do not call a small `Q_N` a u
 5. Compare matched `N=4` and `N=7` initial data and both prescribed radius schedules, recording whether high-frequency perturbations differ. Do not infer an `N→∞` limit from two cutoffs.
 6. Show time series of signed transfer and the interval integral of that transfer. A histogram of rapid phase rates alone cannot establish cancellation of the signed integral, since amplitudes and weights evolve too.
 
-## 4. Proof gate after measurement
+
+## 4. Scaling and the sufficient space-time target
+
+The 3D Navier–Stokes equation (with the same viscosity) has the scaling
+
+\[
+u_\lambda(x,t)=\lambda u(\lambda x,\lambda^2t).
+\]
+
+Here \(u_\lambda\) denotes a rescaled velocity; it is not the viscosity \(\nu\). For integer \(\lambda\), periodicity is retained on the same torus. The suggested \(\lambda^{3/2}v(\lambda x)\) is an \(L^2\)-preserving spatial rescaling on \(\mathbb R^3\), not the Navier–Stokes scaling, and on the torus the integer dilation repeats the field rather than changing the domain volume. Under the integer torus scaling at \(t=0\), \(X_{\sigma/\lambda,s}(u_\lambda)=\lambda^{2s+2}X_{\sigma,s}(u)\), \(Y_{\sigma/\lambda,s}(u_\lambda)=\lambda^{2s+4}Y_{\sigma,s}(u)\), and the weighted nonlinear injection scales as \(\lambda^{2s+4}\mathcal N_{\sigma,s}(u)\). A proposed inequality must respect these powers (and its time integral scales with an additional \(\lambda^{-2}\) under \(t\mapsto\lambda^2t\)).
+
+A statement merely asserting \(\int_0^{T_*}\mathcal N(t)\,dt<\infty\) is automatic for every finite Galerkin trajectory on a finite interval and is not a useful proof target. One **sufficient template to investigate**, for a fixed radius \(\sigma=0\), is the following estimate for each finite \(T\) and all Galerkin cutoffs:
+
+\[
+\int_0^T\mathcal N_{0,s}(t)\,dt
+\le \theta\nu\int_0^T Y_{0,s}(t)\,dt
++F_s(T,\nu,u_0),\qquad 0\le\theta<1.
+\]
+
+Here \(F_s\) must be finite for every finite \(T\), computable from specified initial norms and parameters, and independent of \(N\) and any unknown solution norm on \([0,T]\). The weighted identity would then give \(X_{0,s}(T)/2+(1-\theta)\nu\int_0^T Y_{0,s}\le X_{0,s}(0)/2+F_s\). With \(s>3/2\), a genuinely proved version of this bound for arbitrary smooth data would yield a uniform high-norm bound on every finite interval and enable standard continuation. This is a research target, not a result of phase tracking; it may be as hard as the original problem.
+
+For time-varying \(\sigma\), the extra \(\int\sigma'Z\,dt\) must also be controlled without a cutoff-dependent or circular bound. A measured small phase-cancellation ratio or large angular velocity does not establish either required inequality.
+
+## 5. Proof gate after measurement
 
 The mechanism would require a *stated theorem candidate*: for example, a bound on the positive nonlinear injection integrated over a time interval, with its exact dependence on `X`, `Y`, `ν`, initial data and interval length. Prove every constant independent of `N` and close the resulting energy estimate for arbitrary smooth data before drawing a global-regularity conclusion. If the proposed inequality only holds when a smallness or coherence assumption is imposed, state that restriction. Numerical phase drift, even when reproduced, supplies a diagnostic and cannot supply the universal bound.
