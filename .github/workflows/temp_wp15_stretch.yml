@@ -1,4 +1,5 @@
 name: Temporary WP15 positive stretching audit
+# nonlinear-dominant static stress run
 
 on:
   push:
@@ -20,7 +21,7 @@ jobs:
           python-version: "3.11"
       - run: pip install numpy
       - name: Run WP15
-        run: python3 src/wp15_positive_stretching_gate.py
+        run: python3 src/wp15_positive_stretching_gate.py --amplitude 1024
       - uses: actions/upload-artifact@v4
         with:
           name: wp15_positive_stretching_results
