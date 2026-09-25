@@ -200,6 +200,10 @@ The [shell-7/shell-4 internal compression result](notes/WP16_ORBIT_COMPRESSION_R
 
 The [two-step cross-cutoff orbit/rank result](notes/WP16_TWO_STEP_ORBIT_RANK_RESULT_2026_09_25.md) confirms persistence of the six N11-dominant absolute-coordinate orbit families across N9→N10 and N10→N11, with ([0,3,6]) the strongest persistent orbit. It also corrects the original SVD interpretation: because (d\log C=d\log N+(-d\log P_+)) at each cutoff, the six-column response matrix has two exact algebraic dependencies and maximum rank 4. The observed rank 4 therefore does not demonstrate low-rank collapse. The [verified summary](src/wp16_two_step_orbit_rank_verified_summary.json) redirects the rank test to a corrected three-step independent-response matrix.
 
+
+
+The [targeted [0,3,m] orbit-family result](notes/WP16_TARGETED_ORBIT_FAMILY_RESULT_2026_09_25.md) finds that ([0,3,6]) is the exceptional persistent orbit across all three tested recursive steps: (d\log C=0.01215) for N8→N9, (0.00920) for N9→N10, and (0.04516) for N10→N11. The prospectively tested ([0,3,9]) response is positive at first availability but extremely weak ((d\log C\approx3.02\times10^{-6}), endpoint (C)-gain ≈0.00145%). The broader ([0,3,m]) sequence is not uniformly sign-stable, so a smooth arithmetic family law is not supported. The [verified summary](src/wp16_targeted_orbit_family_verified_summary.json) redirects the next structural test toward explaining the exceptional [0,3,6] response.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
