@@ -65,3 +65,42 @@ four commands pass on the PR head. Once these are met, merge the package as
 package a proof of L2–L3, phase muting, global analyticity, or arbitrary-data
 regularity. The short N=4/N=7 plots establish no universal ranking between
 phase, covariance, and activation terms.
+
+
+## Independent rerun on PR head before merge
+
+A fresh GitHub Actions rerun was executed on the PR #27 branch head on
+25 September 2026 (workflow run 36111456456) after the regularized
+energy/scaling gate was added. The following commands all completed
+successfully on the branch itself:
+
+    python3 src/wp11_review_audit.py
+    python3 src/wp11_phase_rate_audit.py --output /tmp/wp11_phase.json
+    python3 src/wp11_scaling_audit.py --output /tmp/wp11_scaling.json
+    python3 src/wp11_regularized_phase_audit.py
+    python3 src/wp11_regularized_energy_scaling_audit.py --output /tmp/wp11_energy_scaling.json
+
+The archived workflow artifact digest was
+
+    sha256:af543eda3cc8aa3f7bf22523258db70498038995c3574861090fcfadcdd9ee11
+
+The regularized energy/scaling audit reproduced maximum normalized errors
+3.43e-16 for the N=4 -> 8 image-sublattice run and 3.23e-15 for
+N=7 -> 14. The ordinary WP11 scaling audit again had zero recorded
+relative residuals under the exact invariant image-lattice map.
+
+This rerun is a regression and dimensional-consistency check only. It does
+not prove L2-L3, a cutoff-independent signed high-tail time bound, or
+arbitrary-data Navier-Stokes regularity.
+
+## Independent mathematical review conclusion
+
+The displayed low-advector estimate L1 is consistent with the stated
+mean-value and shifted Cauchy-Schwarz proof for fixed K, s>3/2, and
+zero mean. The absolute high-tail estimate H1 is likewise a valid
+conditional bound, while the heat-flow construction correctly blocks
+control of its coefficient from only the fixed L2/H1 energy-level norms.
+The threshold-free identity R1 is an exact algebraic decomposition but
+supplies no favorable sign. Consequently the package is mergeable only as
+**finite-band lemma plus diagnostic/proof-design infrastructure**, with
+L2-L3 remaining explicitly open.
