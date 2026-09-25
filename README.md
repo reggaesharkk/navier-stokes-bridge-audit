@@ -155,6 +155,9 @@ The [WP16 structured phase-adversary gate](notes/WP16_STRUCTURED_PHASE_ADVERSARY
 
 The [WP17 sparse multiscale ladder gate](notes/WP17_SPARSE_MULTISCALE_LADDER_GATE_2026_09_25.md) allows relative amplitudes and phases to vary across scaled copies of the exact sparse triad. Its [verified summary](src/wp17_sparse_multiscale_ladder_verified_summary.json) raises the refined finite adversarial benchmark for the WP15 coefficient to \(C_\infty^{\rm stretch}\approx5.113\) at \(96^3\), but finds no growth with ladder length \(L=2,\dots,6\). The optimizers instead saturate the second-scale amplitude bound, pointing toward a dominant scale-2 sparse-triad limit. No universal constant or L2–L3 theorem is established.
 
+
+The [WP18 isolated triad limit gate](notes/WP18_ISOLATED_TRIAD_LIMIT_GATE_2026_09_25.md) reduces the dominant scale-2 sparse-triad limit to the exact formula \(N_2^{>2}=-512A^3\sin\theta\), \(G=112A^2\), \(X_2=1024A^2\), and a two-angle positive-stretching quadrature. Its [verified summary](src/wp18_isolated_triad_limit_verified_summary.json) gives \(C_\infty\approx5.059699\) at the sampled optimum \(\theta=-\pi/2\) after \(4096^2\) quadrature refinement. This remains below WP17’s refined ladder value \(\approx5.112933\), confirming a finite satellite-scale interaction correction.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
