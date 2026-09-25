@@ -134,6 +134,9 @@ The [scale-competition gate](notes/SCALE_COMPETITION_GATE_2026_09_25.md) compare
 
 The [Gevrey lower-bound gate v0.2](notes/GEVREY_LOWER_BOUND_GATE_2026_09_25.md) standardizes the weighted Fourier identity, separates persistence and positive-time smoothing schedules, and requires every eventual nonlinear majorant to be cutoff-uniform. Its [exact audit](src/smooth_gevrey_identity_audit.py) verifies the finite-Galerkin identity directly from the repository ODE, with [executed summary](src/smooth_gevrey_identity_verified_summary.json). The worst relative identity residual is \(4.14\times10^{-15}\). Descriptive \(N=4/N=7\) nonlinear-ratio separation is recorded but is not treated as a continuum estimate or analyticity lower bound.
 
+
+The [Gevrey uniform majorant gate](notes/GEVREY_UNIFORM_MAJORANT_GATE_2026_09_25.md) proves, for zero-mean periodic fields with \(s>3/2\), the cutoff-independent estimate \(|\mathcal N_{\sigma,s}|\le C_s^G X_{\sigma,s}Y_{\sigma,s}^{1/2}\le C_s^G X_{\sigma,s}^{1/2}Y_{\sigma,s}\), with \(C_s^G=2c_sK_s\) independent of \(N\) and \(\sigma\). Its [verifier](src/gevrey_uniform_majorant_gate.py) and [executed summary](src/gevrey_uniform_majorant_verified_summary.json) confirm the repository trajectories satisfy the zero-mean/divergence/reality assumptions and remain far below the diagnostic lattice-constant reference. The gate also records the real obstruction: the resulting weighted energy inequality only gives immediate viscous absorption in a smallness regime \(C_s^G\sqrt X<\nu\), so cutoff-uniformity alone does not solve arbitrary-data regularity.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
