@@ -188,6 +188,10 @@ The [executed positive-stretching depletion result](notes/WP16_POSITIVE_STRETCHI
 
 The [N=11 phase-path block decomposition](notes/WP16_FACTORIZED_RECURSIVE_MECHANISM_2026_09_25.md) separates the recursive step into 2,084 inherited-core phase corrections and 703 newly opened-shell phases. At (96^3), old-core corrections alone raise the quotient by about 8.68% mainly through a 5.92% reduction of positive stretching, while new-shell phases alone raise it by about 8.83% mainly through a 7.98% increase in signed high-frequency transfer. The combined gain is about 18.38%, with only about 0.089% multiplicative interaction beyond the product of the two block gains. The [verified summary](src/wp16_factorized_recursive_mechanism_verified_summary.json) therefore identifies a near-factorized finite recursive mechanism: new modes build numerator, small inherited-core corrections deplete the denominator.
 
+
+
+The [N=11 old-core shell-compression result](notes/WP16_OLD_CORE_SHELL_COMPRESSION_RESULT_2026_09_25.md) shows moderate radial compression of the inherited-core denominator-relaxation step. Shell 7 is the strongest isolated block, raising the quotient by about 3.42% with 247 phase pairs. The ranked five-shell set ({7,4,8,5,6}) uses 993 of 2,084 inherited pairs and recovers about 89% of the full old-core quotient gain and about 85.5% of the positive-stretching depletion. The [verified summary](src/wp16_old_core_shell_compression_verified_summary.json) therefore narrows the next target to internal compression of the dominant shell blocks rather than another radial decomposition.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
