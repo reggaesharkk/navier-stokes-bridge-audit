@@ -1,5 +1,5 @@
 name: Temporary WP12 Colab bundle
-# rerun with sparse H2 anchor
+# fast packaging run with sparse H2 smoke test
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
           cp src/wp12_energy_coefficient_falsifier.py bundle/src/
           cp src/wp12_energy_coefficient_verified_summary.json bundle/src/
           cp notes/WP12_ENERGY_COEFFICIENT_FALSIFIER_2026_09_25.md bundle/notes/
-          python3 src/wp12_energy_coefficient_falsifier.py --output bundle/src/wp12_energy_coefficient_results.json
+          python3 src/wp12_energy_coefficient_falsifier.py --t-end 0 --output bundle/src/wp12_smoke_results.json
           cat > bundle/README.txt <<'EOF'
           WP12 Energy-Level Coefficient Falsifier — Colab Bundle
           Repository: reggaesharkk/navier-stokes-bridge-audit
