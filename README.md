@@ -184,6 +184,10 @@ The [executed coefficient-weighted triad-phase result](notes/WP16_WEIGHTED_TRIAD
 
 The [executed positive-stretching depletion result](notes/WP16_POSITIVE_STRETCHING_DEPLETION_RESULT_2026_09_25.md) compares the inherited N=10 phase map embedded in N=11 against the final optimized N=11 phase map at fixed modal magnitudes. On the refined (96^3) grid, (P_+) falls by about 6.25% while the positive-set volume shrinks by only about 1.84%. The top 1/5/10% contribution fractions remain nearly unchanged, and inherited positive-quantile bins show the strongest suppression in the 90–99% band rather than in the top 1% alone. The [verified summary](src/wp16_positive_stretching_depletion_verified_summary.json) therefore identifies broad spatial redistribution/depression of positive stretching, not simple clipping of a tiny extreme hot set.
 
+
+
+The [N=11 phase-path block decomposition](notes/WP16_FACTORIZED_RECURSIVE_MECHANISM_2026_09_25.md) separates the recursive step into 2,084 inherited-core phase corrections and 703 newly opened-shell phases. At (96^3), old-core corrections alone raise the quotient by about 8.68% mainly through a 5.92% reduction of positive stretching, while new-shell phases alone raise it by about 8.83% mainly through a 7.98% increase in signed high-frequency transfer. The combined gain is about 18.38%, with only about 0.089% multiplicative interaction beyond the product of the two block gains. The [verified summary](src/wp16_factorized_recursive_mechanism_verified_summary.json) therefore identifies a near-factorized finite recursive mechanism: new modes build numerator, small inherited-core corrections deplete the denominator.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
