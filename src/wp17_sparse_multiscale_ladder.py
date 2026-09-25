@@ -191,7 +191,7 @@ def search_L(
         amp_step *= 0.5
 
     refine = {}
-    for g in (48, 64):
+    for g in (48, 64, 96):
         refine[str(g)] = evaluate(best_logs, best_phases, grid=g)
 
     return dict(
@@ -271,17 +271,17 @@ if __name__ == "__main__":
     print("Wrote", a.output)
     for row in sorted(
         result["rows"],
-        key=lambda x: x["refined"]["64"]["C_infinity_stretch"],
+        key=lambda x: x["refined"]["96"]["C_infinity_stretch"],
         reverse=True,
     ):
         b = row["best_search_grid"]
-        r64 = row["refined"]["64"]
+        r96 = row["refined"]["96"]
         print(
             "L=", row["L"],
             "searchC=", b["C_infinity_stretch"],
-            "C64=", r64["C_infinity_stretch"],
+            "C96=", r96["C_infinity_stretch"],
             "amps=", np.round(b["amplitudes"], 5),
             "phases=", np.round(b["phases"], 5),
-            "signedH1=", r64["H1_signed_stretching"],
-            "N2high=", r64["H2_high_transfer"],
+            "signedH1=", r96["H1_signed_stretching"],
+            "N2high=", r96["H2_high_transfer"],
         )
