@@ -135,3 +135,96 @@ A finite optimizer can only raise the tested lower benchmark for any universal c
 The ladder is a specific sparse family, not all smooth fields. Search maxima are not global maxima. Positive stretching contains a pointwise positive part and therefore requires grid refinement.
 
 No cutoff-independent constant, time-integral estimate, or global regularity result is claimed.
+
+
+## 7. Executed search and grid refinement
+
+The deterministic search completed for ladder lengths (L=2,ldots,6).
+Every best state was reevaluated at (48^3), (64^3), and (96^3).
+
+The refined (96^3) values were:
+
+| (L) | (C_infty^{m stretch}) |
+| ---: | ---: |
+| 2 | 5.0584507 |
+| 3 | 5.0574121 |
+| 4 | 5.0825132 |
+| 5 | 5.0817697 |
+| 6 | **5.1129326** |
+
+The best (L=6) state had
+
+[
+N_2^{>K}approx4.1485	imes10^6,
+]
+
+[
+langle(omegacdot Somega)_+angleapprox8.8327	imes10^4,
+]
+
+while the **signed** (H^1) stretching was strongly negative,
+
+[
+langleomegacdot Somegaangleapprox-2.5930	imes10^5.
+]
+
+Its matched high-tail triadic coherence was
+
+[
+chi_{2,m high}approx0.7993.
+]
+
+This gives a concrete derivative-level sign separation: negative global signed
+(H^1) stretching can coexist with a large positive signed (H^2)
+high-advector transfer.
+
+The coarse (32^3) search value for this state was about 5.23166. Refinement
+reduced it monotonically:
+
+[
+5.23166;(32^3),
+quad
+5.14904;(48^3),
+quad
+5.12994;(64^3),
+quad
+5.11293;(96^3).
+]
+
+Thus the effect survives refinement, while the coarse search grid
+overestimates its magnitude.
+
+The workflow artifact digest is
+
+    sha256:187fa4f160b5faca78c710a83ef24b7d423a074ebf2872cf3050a51ca01dedee
+
+## 8. Structural interpretation
+
+The search does **not** show growth with ladder length.
+
+Instead, every optimized ladder drove the second-scale amplitude to the
+registered logarithmic search boundary,
+
+[
+A_2=e^3approx20.0855,
+]
+
+while most additional scales became comparatively small.
+
+The best states therefore approach a dominant scale-2 sparse-triad geometry
+rather than an expanding multiscale cascade.
+
+This raises the current finite adversarial benchmark for the WP15 coefficient
+from approximately 1.078 (WP16) to approximately
+
+[
+oxed{5.113}
+]
+
+on the refined registered ladder family.
+
+It does not show that the required constant is unbounded.
+
+The next analytical target is correspondingly simpler: characterize the
+dominant scale-2 triad / singular amplitude-ratio limit and determine whether
+its (C_infty^{m stretch}) has a finite exact supremum.
