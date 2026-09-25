@@ -152,6 +152,9 @@ The [WP15 positive-stretching coefficient gate](notes/WP15_POSITIVE_STRETCHING_C
 
 The [WP16 structured phase-adversary gate](notes/WP16_STRUCTURED_PHASE_ADVERSARY_GATE_2026_09_25.md) stress-tests the WP15 coefficient by preserving the full evolved modal spectrum and varying only conjugacy-preserving Fourier phases. On the registered \(A=4,\ t=0.0035\) cascade state, the [verified summary](src/wp16_structured_phase_adversary_verified_summary.json) records a rise in the large-amplitude quotient \(C_\infty^{\rm stretch}=[N_2^{>K}]_+/(b_{\rm stretch}X_2)\) from about \(1.0381\) to \(1.0779\) at \(N=7\), while the corresponding \(N=4\) search remains below \(0.069\). This raises the finite tested lower benchmark for any universal pointwise constant but does not establish boundedness, cutoff convergence, or L2–L3.
 
+
+The [WP16 structured phase-adversary gate](notes/WP16_STRUCTURED_PHASE_ADVERSARY_GATE_2026_09_25.md) preserves modal magnitudes and polarizations while optimizing conjugacy-preserving phases against the large-amplitude quotient \(C_\infty^{\rm stretch}=[N_2^{>K}]_+/(b_{\rm stretch}X_2)\). On the evolved \(t=0.0035\) combined support, the \(N=7\) state has 709 active conjugate pairs, a baseline quotient \(1.038114\), and a best locally optimized value \(1.077900\); \(N=4\) has 128 active pairs and remains far smaller. The [verified summary](src/wp16_structured_phase_adversary_verified_summary.json) records that phase geometry alone can worsen the structured \(N=7\) state without changing the quadratic spectrum, but no global optimum, cutoff-growth law, or universal bound is established.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
