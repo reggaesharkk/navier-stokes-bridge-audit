@@ -1,0 +1,28 @@
+name: Temporary WP17 sparse ladder audit
+
+on:
+  push:
+    paths:
+      - ".github/workflows/temp_wp17_ladder.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: wp17-sparse-multiscale-ladder-20260925
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy
+      - name: Run WP17
+        run: python3 src/wp17_sparse_multiscale_ladder.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp17_sparse_multiscale_ladder_results
+          path: src/wp17_sparse_multiscale_ladder_results.json
+          if-no-files-found: error
