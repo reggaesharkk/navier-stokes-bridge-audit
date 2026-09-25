@@ -170,3 +170,71 @@ Neither outcome proves a universal WP15 constant.
 This gate reduces one explicit family. It does not establish the global
 supremum of (C_infty^{m stretch}) over all smooth fields and does not
 address the independent time-integral requirement for (b_{m stretch}).
+
+
+## 7. Executed phase scan and refinement
+
+The exact sparse checks reproduced
+
+[
+N_2^{>2}(	heta)=-512A^3sin	heta,
+qquad
+G=112A^2,
+qquad
+X_2=1024A^2.
+]
+
+A 361-point scan over (	hetain[-pi,0]) selected
+
+[
+	heta=-rac{pi}{2}
+]
+
+as the largest sampled value of (C_infty(	heta)).
+
+At that phase, the deterministic positive-part quadrature converged as follows:
+
+| angular grid (n	imes n) | (P_+) | (C_infty) |
+| ---: | ---: | ---: |
+| 256 | 1.3833366307 | 5.0602289021 |
+| 512 | 1.3834447907 | 5.0598332852 |
+| 1024 | 1.3834731176 | 5.0597296839 |
+| 2048 | 1.3834798172 | 5.0597051818 |
+| 4096 | 1.3834814931 | **5.0596990525** |
+
+The signed average simultaneously remained
+
+[
+langle F_{-pi/2}angle=-4
+]
+
+to floating-point quadrature precision.
+
+The workflow artifact digest is
+
+    sha256:a32b85b4eef025f28852ee2cf1bdb8a1f67b1873eea5ea694d2e375dce1b0680
+
+## 8. Comparison with WP17
+
+The isolated triad value
+
+[
+C_infty^{m isolated}approx5.0596991
+]
+
+is below the refined WP17 ladder value
+
+[
+C_infty^{m ladder}approx5.1129326.
+]
+
+The relative excess is approximately one percent.
+
+Therefore the small satellite scales retained by the optimized WP17 ladder
+produce a genuine finite interaction correction; the WP17 value is not
+explained solely by convergence to the pure scale-2 triad.
+
+This suggests the next useful analytical object is a perturbation of the
+dominant scale-2 triad by small satellite modes, with the first variation of
+both the signed (H^2) high transfer and the positive-stretching denominator
+tracked explicitly.
