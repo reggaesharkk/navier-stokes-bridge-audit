@@ -172,6 +172,10 @@ C_{11}approx8.03489.
 
 The raw N=10/N=11 result and N=11 checkpoint were checked for hash identity/provenance and exact agreement of the N=11 optimized phases, best search-grid observables, and 212 accepted-improvement records. The finite sequence now rises across five consecutively tested cutoffs, but this remains optimizer-dependent finite Galerkin evidence: it does not prove asymptotic divergence, failure of every cutoff-independent closure, singularity formation, or global regularity.
 
+
+
+The [WP16 phase-structure reverse-engineering gate](notes/WP16_PHASE_STRUCTURE_REVERSE_ENGINEERING_2026_09_25.md) asks whether the rising N=10/N=11 phase-only optimizers admit a simple mode-phase law. The [diagnostic](src/wp16_phase_structure_reverse_engineering.py) and [verified summary](src/wp16_phase_structure_verified_summary.json) find almost uniform one-point mode phases and almost uniform *unweighted* triad-relative phases, while the 2,084 inherited N=10 phases remain strongly stable into N=11 modulo the spatial-translation gauge: about 79% move by less than 0.25 radians and about 95% by less than 0.5 radians. The optimization history separates new-shell transfer recovery from full-torus denominator depletion. This redirects the analytical search toward coefficient-weighted, gauge-invariant triad phases and a recursive extension/relaxation mechanism rather than a low-degree radial phase formula.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
