@@ -1,0 +1,42 @@
+name: Temporary PR27 merge-gate audit
+
+on:
+  push:
+    paths:
+      - ".github/workflows/temp_pr27_merge_gate.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: wp11-one-sided-cross-frequency-20260925
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy
+      - name: Run WP11 review audit
+        run: python3 src/wp11_review_audit.py
+      - name: Run WP11 phase-rate audit
+        run: python3 src/wp11_phase_rate_audit.py --output /tmp/wp11_phase.json
+      - name: Run WP11 scaling audit
+        run: python3 src/wp11_scaling_audit.py --output /tmp/wp11_scaling.json
+      - name: Run threshold-free regularized phase audit
+        run: python3 src/wp11_regularized_phase_audit.py
+      - name: Run regularized energy scaling audit
+        run: python3 src/wp11_regularized_energy_scaling_audit.py --output /tmp/wp11_energy_scaling.json
+      - name: Package audit outputs
+        run: |
+          mkdir -p pr27_audit
+          cp /tmp/wp11_phase.json pr27_audit/
+          cp /tmp/wp11_scaling.json pr27_audit/
+          cp /tmp/wp11_energy_scaling.json pr27_audit/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr27_merge_gate_outputs
+          path: pr27_audit/
+          if-no-files-found: error
