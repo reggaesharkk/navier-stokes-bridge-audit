@@ -2,7 +2,7 @@
 
 **Prince Upadhyay, Independent Research — 25 September 2026**
 
-This is a review procedure for the three open drafts. Passing it would
+This procedure was used for PRs #24 and #25 and remains the review gate for draft PR #26. Passing it would
 support merging finite-Galerkin diagnostics and precise scope notes. It
 would **not** certify a new Navier–Stokes regularity theorem, an
 independent peer review, or an analyticity radius for arbitrary data.
@@ -10,7 +10,7 @@ independent peer review, or an analyticity radius for arbitrary data.
 ## 1. Baseline and merge order
 
 Confirm `main` contains merged PR #23 and its Gevrey uniform majorant.
-Review and merge [PR #24](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/24)
+PR #24 merged at `cc1920dae3d0f6fa3e048b22fb2ca3ca8757e9cd`. PR #25 merged at `98e8e8107a652900343f0bcff7dd01be11156db7` in that order. The procedure was: review and merge [PR #24](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/24)
 before [PR #25](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/25),
 then review and merge [PR #26](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/26).
 The code in #25 does not import #24, but its note interprets the #24
@@ -19,10 +19,8 @@ check the remaining branches against the new `main` and resolve any
 conflict without rewriting recorded numerical values. Do not treat
 GitHub's `mergeable` flag as code review.
 
-Before merging #26, update its PR-status table to say which of #24 and
-#25 are merged and record their actual merge commits, or explicitly mark
-the table as a historical status snapshot. The current table calls them
-drafts and would become stale if read as live status.
+Before merging #26, verify its status table records the two actual merge
+commits above. The table has been refreshed on the #26 branch.
 
 ## 2. Reproduce the finite identities
 
@@ -87,6 +85,6 @@ Merge only after the code executes from the documented checkout, the
 math symbols and signs pass the checks above, and the prose retains
 the stated scope. If a check fails, leave the affected PR in draft and
 record the failed command, exact discrepancy, and the corrective
-commit. Once #24 and #25 merge, refresh #26's status references before
-its merge. Preserve the original v0.1 Master Record numbers and its
+commit. The status references in #26 have been refreshed with the two merge
+commits. Recheck them against GitHub immediately before its merge. Preserve the original v0.1 Master Record numbers and its
 historical WP1–10 scope.
