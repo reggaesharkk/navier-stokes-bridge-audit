@@ -116,3 +116,127 @@ A finite optimization cannot establish a cutoff-independent universal constant.
 The search is over a finite-dimensional phase torus tied to one registered modal support. It does not cover all smooth fields.
 
 The result may falsify proposed constants on the tested family or identify dangerous phase configurations. It cannot prove WP11 L2–L3 or global regularity.
+
+
+## 7. Executed searches
+
+### 7.1 Initial-support pilot
+
+A fast phase-only search on the unevolved registered combined state reached
+
+[
+C_infty^{m stretch}approx0.06070.
+]
+
+The (N=4) and (N=7) values were identical to numerical precision because
+the initial occupied support is the same inside both cutoffs and the static
+(H^2) transfer pairs against occupied output modes.
+
+This pilot therefore cannot reproduce the dangerous evolved WP14 state. It
+shows that the cascade-generated support, not merely the initial eight
+conjugate pairs, matters.
+
+### 7.2 Evolved cascade-support adversary
+
+The search was upgraded to the exact registered structured anchor
+
+[
+4	imes	ext{combined_double_quarter_high}
+]
+
+evolved by RK4 with (Delta t=0.0005) to
+
+[
+t=0.0035.
+]
+
+All canonical Fourier pairs with coefficient norm above (10^{-8}) were
+eligible for phase rotation. Every modal magnitude and polarization was held
+fixed.
+
+For (N=7), the evolved anchor contained 709 active conjugate pairs. The
+baseline large-amplitude quotient was
+
+[
+C_infty^{m stretch}=1.0381140504.
+]
+
+The best deterministic coordinate-search result was
+
+[
+oxed{
+C_infty^{m stretch}=1.0778997042
+}
+]
+
+for seed 20260925, a factor
+
+[
+1.0383249352
+]
+
+above the baseline.
+
+A second seed reached
+
+[
+1.0722309805.
+]
+
+For (N=4), the evolved anchor contained 128 active conjugate pairs. Its
+baseline quotient was zero; the two searches reached approximately
+
+[
+0.0687953
+quad	ext{and}quad
+0.0524743.
+]
+
+The best (N=7) state had
+
+[
+chi_{2,m high}approx0.26711
+]
+
+and
+
+[
+b_{m stretch}approx26.6581
+]
+
+in repository normalization.
+
+The workflow artifact digest for the evolved-support search is
+
+    sha256:4237705d4c3aa8a78b727142e557fdf16e30b344f28fd165d916bd17825ff69a
+
+## 8. Consequence for the WP15 candidate
+
+The evolved-support phase search demonstrates that phase geometry can make the
+registered (N=7) spectrum measurably more demanding without changing its
+modal magnitudes.
+
+Because the viscous reserve is quadratic in a subsequent global amplitude
+rescaling while both (N_2^{>K}) and (b_{m stretch}X_2) are cubic, any
+all-smooth-data pointwise inequality of the WP15 form must accommodate the
+large-amplitude limit of these finite states. Consequently the present search
+raises the tested finite lower benchmark for a universal coefficient to at
+least approximately
+
+[
+Cge1.07790
+]
+
+on this particular adversarial family.
+
+This is **not** evidence that a finite universal (C) exists. The optimizer is
+local, the support family is finite dimensional, the positive-stretching
+functional is evaluated on a finite spatial grid, and only (N=4,7) are
+compared.
+
+No unbounded phase family was found.
+
+The next unresolved question is therefore sharper: either construct a
+support-expanding structured family for which
+(C_infty^{m stretch}) grows without bound, or attack the independent
+all-prefix time-integrability of (b_{m stretch}).
