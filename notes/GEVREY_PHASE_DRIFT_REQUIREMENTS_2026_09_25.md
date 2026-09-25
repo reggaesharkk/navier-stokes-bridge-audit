@@ -94,3 +94,26 @@ The worst relative reconstruction error for the signed weighted nonlinear transf
 At t=0.005, the perturbed persistence-weight cancellation ratio Q was approximately 0.0704 (N=4) and 0.4083 (N=7); the corresponding parabolic-weight values were 0.0715 and 0.2743. The signed transfer integrals over [0,0.005] were positive in all four perturbed cases, with magnitudes recorded in the JSON. These are trajectory-dependent weighted diagnostics. They do not show that phase drift forces cancellation as cutoff grows; in this comparison Q is *larger* at N=7. Nor is a positive integral on a short track evidence of singularity.
 
 The relative phase-rate floor controls only which individual angular rates are displayed. All ordered triads, including those below the display floor, contribute to the reconstructed transfer, absolute envelope, Q, and time integral.
+
+## 7. Phase law, viscous contribution, and commutator boundary
+
+For a nonzero scalar component c_k in a *fixed* transverse frame, the Galerkin equation gives
+
+\[
+\frac{d}{dt}\arg c_k
+=\operatorname{Im}\frac{\dot c_k}{c_k}
+=-\operatorname{Im}\frac{B_k^{\rm component}}{c_k}.
+\]
+
+The term \(-\nu|k|^2c_k\) has a real multiplier and contributes **zero** to this instantaneous angular rate. For a full complex vector coefficient, the scalar \(\operatorname{Im}(\widehat u_k^*\cdot\dot{\widehat u}_k/|\widehat u_k|^2)\) tracks a particular common complex phase; it does not encode both transverse polarizations or vorticity–strain orientation. The phase of the actual scalar interaction \(z_{kpq}\) in Section 2 avoids substituting this common phase for the interaction geometry. In general its angle is *not* simply \(\theta_k-\theta_p-\theta_q\): the contractions \(q\cdot\widehat u_p\) and \(\widehat u_k^*\cdot P_k\widehat u_q\) also have phases and can vanish.
+
+The product rule gives the exact **direct viscous** contribution
+\[
+\dot z_{kpq}\big|_{\rm visc}
+=-\nu(|k|^2+|p|^2+|q|^2)z_{kpq}.
+\]
+Consequently \(\operatorname{Im}(\overline z\,\dot z|_{\rm visc})/|z|^2=0\) wherever \(z\ne0\). The updated executable checks this identity on the stored initial fields: the maximum absolute product-rule residual is below \(3.5\times10^{-14}\), and the largest computed direct viscous phase rate on active triads is below \(2.7\times10^{-16}\). **This does not remove viscosity from the full phase dynamics:** viscous amplitude changes alter later nonlinear interactions.
+
+The observed \(Q_N\) change \(0.4083-0.0704\approx0.3379\) is about **33.8 percentage points**. \(Q_N\) is an absolute-ordered-triad normalization of weighted \(H^s\) transfer. At \(s=2\), it is neither a measured efficiency of local vortex stretching nor a geometric alignment angle. The matched \(N=4/N=7\) simulations share initial modes but evolve under different Galerkin systems, so the discrepancy alone does not identify a causal high-mode population mechanism.
+
+The repository's space-time strain commutator decomposes unweighted enstrophy stretching into shell terms. Its remainder \(\mathcal R_{j,N}\) is not identical to the Gevrey \(H^s\) transfer \(\mathcal N_{\sigma,s}\). A proposed bridge must first write a correct weighted identity with explicit shell multipliers, projection and boundary terms, then prove an inequality such as the cutoff-uniform template in Section 4. A covariance between phase rate and stretching is descriptive: without a sign, integration-by-parts estimate, or equivalent uniform bound, it cannot close that inequality.
