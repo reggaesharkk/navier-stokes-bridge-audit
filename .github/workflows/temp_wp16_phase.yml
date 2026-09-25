@@ -1,4 +1,5 @@
 name: Temporary WP16 phase adversary
+# fast exact-constraint adversarial pass
 
 on:
   push:
@@ -20,7 +21,7 @@ jobs:
           python-version: "3.11"
       - run: pip install numpy
       - name: Run WP16 phase adversary
-        run: python3 src/wp16_structured_phase_adversary.py
+        run: python3 src/wp16_structured_phase_adversary.py --random-draws 48 --local-rounds 3 --local-trials 24
       - uses: actions/upload-artifact@v4
         with:
           name: wp16_structured_phase_adversary_results
