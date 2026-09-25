@@ -192,6 +192,10 @@ The [N=11 phase-path block decomposition](notes/WP16_FACTORIZED_RECURSIVE_MECHAN
 
 The [N=11 old-core shell-compression result](notes/WP16_OLD_CORE_SHELL_COMPRESSION_RESULT_2026_09_25.md) shows moderate radial compression of the inherited-core denominator-relaxation step. Shell 7 is the strongest isolated block, raising the quotient by about 3.42% with 247 phase pairs. The ranked five-shell set ({7,4,8,5,6}) uses 993 of 2,084 inherited pairs and recovers about 89% of the full old-core quotient gain and about 85.5% of the positive-stretching depletion. The [verified summary](src/wp16_old_core_shell_compression_verified_summary.json) therefore narrows the next target to internal compression of the dominant shell blocks rather than another radial decomposition.
 
+
+
+The [shell-7/shell-4 internal compression result](notes/WP16_ORBIT_COMPRESSION_RESULT_2026_09_25.md) finds a strong coordinate-magnitude orbit basis. The leading orbit ([0,3,6]) uses 12 phase pairs and recovers about 55% of the full shell-7/4 quotient gain. The first six ranked absolute-coordinate orbits use only 84 of 314 target pairs and recover about 99.66% of the quotient gain. However, that compact subset recovers only about 71.7% of the full positive-stretching depletion, so quotient compression is stronger than denominator-mechanism compression. The [verified summary](src/wp16_orbit_compression_verified_summary.json) motivates a cross-cutoff orbit-response/rank audit as the next LRSC-style structural test.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
