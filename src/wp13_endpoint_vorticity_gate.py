@@ -4,7 +4,8 @@ Finite-p vorticity coefficients are rejected analytically by concentration.
 This script compares the circular required L2 coefficient with finite-grid
 vorticity norms and a rigorous finite-Fourier l1 envelope for ||omega||_inf.
 
-Finite data are diagnostic only.
+Finite data are diagnostic only. Spatial vorticity is evaluated once per
+state and reused for all reserve fractions.
 """
 
 import argparse
@@ -33,14 +34,12 @@ def high_transfer(system, a, s, K):
     return float(np.real(np.sum(z)))
 
 
-def snapshot(system, a, s, K, theta, grid):
+def state_observables(system, a, s, K, grid):
     weights = system.square.astype(float)**s
     X = float(np.sum(weights[:, None]*abs(a)**2))
     Y = float(np.sum((weights*system.square)[:, None]*abs(a)**2))
     G = float(np.sum(system.square[:, None]*abs(a)**2))
     N_high = high_transfer(system, a, s, K)
-    residual = max(N_high-theta*system.nu*Y, 0.0)
-    b_req = residual/X if X > 0 else 0.0
 
     _, omega, _, imag = spatial_fields(system, a, grid)
     if imag > 1e-10:
@@ -52,7 +51,6 @@ def snapshot(system, a, s, K, theta, grid):
     L8_grid = float(np.mean(mag**8))**0.125
     Linf_grid = float(np.max(mag))
 
-    # Since a_k is transverse, |k x a_k|=|k||a_k|.
     omega_l1_envelope = float(np.sum(
         np.sqrt(system.square)*np.linalg.norm(a, axis=1)
     ))
@@ -60,26 +58,37 @@ def snapshot(system, a, s, K, theta, grid):
     if abs(L2_grid-math.sqrt(G)) > 5e-8*max(1.0, math.sqrt(G)):
         raise AssertionError("grid/Fourier L2 vorticity mismatch")
 
-    def ratio(v):
-        return b_req/v if v > 0 else 0.0
-
     return dict(
         X=X,
         Y=Y,
         G=G,
         high_transfer=N_high,
-        reserve_fraction=theta,
-        b_required=b_req,
         omega_L2=math.sqrt(G),
         omega_L4_grid=L4_grid,
         omega_L8_grid=L8_grid,
         omega_Linf_grid=Linf_grid,
         omega_L1_fourier_envelope=omega_l1_envelope,
-        ratio_b_over_L2=ratio(math.sqrt(G)),
-        ratio_b_over_L4=ratio(L4_grid),
-        ratio_b_over_L8=ratio(L8_grid),
-        ratio_b_over_Linf_grid=ratio(Linf_grid),
-        ratio_b_over_L1_envelope=ratio(omega_l1_envelope),
+    )
+
+
+def with_reserve(base, theta, nu):
+    residual = max(base["high_transfer"]-theta*nu*base["Y"], 0.0)
+    b_req = residual/base["X"] if base["X"] > 0 else 0.0
+
+    def ratio(v):
+        return b_req/v if v > 0 else 0.0
+
+    return dict(
+        **base,
+        reserve_fraction=theta,
+        b_required=b_req,
+        ratio_b_over_L2=ratio(base["omega_L2"]),
+        ratio_b_over_L4=ratio(base["omega_L4_grid"]),
+        ratio_b_over_L8=ratio(base["omega_L8_grid"]),
+        ratio_b_over_Linf_grid=ratio(base["omega_Linf_grid"]),
+        ratio_b_over_L1_envelope=ratio(
+            base["omega_L1_fourier_envelope"]
+        ),
     )
 
 
@@ -106,9 +115,11 @@ def run(
             for amplitude in amplitudes:
                 a = amplitude*make_initial(system, *SCENARIOS[scenario])
                 rows_by_theta = {theta: [] for theta in thetas}
+
                 for step in range(steps+1):
+                    base = state_observables(system, a, s, K, grid)
                     for theta in thetas:
-                        row = snapshot(system, a, s, K, theta, grid)
+                        row = with_reserve(base, theta, system.nu)
                         row["time"] = step*dt
                         rows_by_theta[theta].append(row)
                     if step < steps:
