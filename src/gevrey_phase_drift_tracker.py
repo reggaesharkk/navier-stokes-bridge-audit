@@ -97,13 +97,30 @@ def algebra_checks(sys, a, dt=1e-5):
     translation_error = float(np.max(np.abs(z_shift-z)))
     z_neg = triads(sys, -a)
     reversal_error = float(np.max(np.abs(z_neg+z)))
+    viscous_adot = -sys.nu * sys.square[:, None] * a
+    _, viscous_zdot = triads(sys, a, viscous_adot)
+    predicted_viscous_zdot = -sys.nu * (
+        sys.square[sys.out] + sys.square[sys.left]
+        + sys.square[sys.right]
+    ) * z
+    viscous_product_error = float(np.max(np.abs(
+        viscous_zdot - predicted_viscous_zdot)))
+    active = np.abs(z) > 1e-12 * max(1., float(np.max(np.abs(z))))
+    viscous_phase_rate_max = float(np.max(np.abs(
+        np.imag(np.conj(z[active]) * viscous_zdot[active])
+        / np.abs(z[active])**2
+    ))) if np.any(active) else None
     if translation_error > 1e-10 or reversal_error > 1e-10:
         raise AssertionError('Triad transformation identity failed')
+    if viscous_product_error > 1e-9:
+        raise AssertionError('Viscous triad derivative identity failed')
     return dict(
         centered_complex_zdot_relative_error=error,
         centered_step=dt,
         translation_max_abs_error=translation_error,
         sign_reversal_max_abs_error=reversal_error,
+        viscous_product_max_abs_error=viscous_product_error,
+        viscous_phase_rate_max_abs_on_active_triads=viscous_phase_rate_max,
         max_abs_zdot=float(np.max(np.abs(zdot))),
     )
 
