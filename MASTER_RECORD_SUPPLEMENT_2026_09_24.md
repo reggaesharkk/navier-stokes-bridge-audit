@@ -1,7 +1,7 @@
 # Master Record supplement: phase, shells, and strain diagnostics
 
 **Author:** Prince Upadhyay, Independent Research  
-**Version:** 0.1, 24 September 2026  
+**Version:** 0.2, 25 September 2026 (addendum to the 24 September record)\
 **Target:** unforced, periodic, incompressible Navier–Stokes on \(\mathbb T^3\) with arbitrary smooth data  
 **Status:** exact identities, finite-dimensional diagnostics, and conditional proof targets. **No arbitrary-data global regularity or singularity result.**
 
@@ -145,3 +145,92 @@ an automatic universal bound.
 record is suitable for external scrutiny as a set of diagnostics and
 explicit open proof obligations; it is not an externally peer-reviewed
 Navier–Stokes solution.
+
+---
+
+## 25 September addendum: Gevrey proof boundary
+
+The earlier N=4/5, t=0.02 strain ledger above is unchanged. The following
+checks use **different** matched N=4/7 fields and the shorter interval
+[0,0.005]; their numerical values must not be combined as one trajectory.
+
+| Gate | Established and independently reviewable claim | Remaining obligation |
+|---|---|---|
+| [PR #22](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/22), merged | Exact finite-Galerkin identity `(1/2)X' + νY = N_{σ,s} + σ'Z`, checked on the stored states. | An identity alone gives no all-time bound. |
+| [PR #23](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/23), merged | For zero-mean periodic fields and s>3/2, `|N_{σ,s}| ≤ C_s^G X sqrt(Y) ≤ C_s^G sqrt(X)Y`; `C_s^G=2c_s(Σ_{m≠0}|m|^{-2s})^(1/2)` is independent of cutoff N and radius σ. | The resulting viscosity absorption is conditional on small `sqrt(X)`. A larger sampled quotient at N=7 does **not** disprove this uniform bound. |
+| [PR #24](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/24), merged at `cc1920dae3d0f6fa3e048b22fb2ca3ca8757e9cd` | Finite-Galerkin scalar-triad phase tracker and a specified sufficient space-time target. Worst relative nonlinear reconstruction error `5.37e-15`. | No automatic phase-muting or all-data integrated bound is derived. |
+| [PR #25](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/25), merged at `98e8e8107a652900343f0bcff7dd01be11156db7` | Exact Gevrey transport commutator and square-partition shell identity; worst relative reconstructed nonlinear error `4.74e-15`. | Neither a favorable sign nor a cutoff-uniform time-integrated upper bound follows. |
+
+Here `X=Σ_{k≠0} exp(2σ|k|)|k|^{2s}|a_k|²`,
+`Y=Σ_{k≠0} exp(2σ|k|)|k|^{2s+2}|a_k|²`, and
+`Z=Σ_{k≠0} exp(2σ|k|)|k|^{2s+1}|a_k|²`. The multiplier
+itself is `m(k)=exp(σ|k|)|k|^s`; its **square** appears in X and Y.
+Do not put `2s` inside the multiplier used in the commutator.
+
+For the full symbol, PR #25 derives exactly
+
+    N_{σ,s} = −Re <Au,[A,u·∇]u>,
+    ([A,u·∇]u)^∧_k
+      = i Σ_{p+q=k}(q·a_p)[m(k)−m(q)]a_q.
+
+The difference `m(k)−m(q)` has polynomial and exponential contributions.
+For square-partition symbols `m_j=ψ_j m`, the exact shell summands use
+`m_j(k)−m_j(q)` and add to N. This is **not** an already established
+decomposition into independent “intra-band stretching,” “Sobolev
+remainder,” and “Gevrey remainder” mechanisms. One can split the symbol
+difference algebraically in several ways, but each term needs its own
+definition and validation before numerical ratios or physical labels
+are assigned. The unweighted strain commutator in the earlier record
+is a different identity and cannot replace this Gevrey H^s expression.
+
+The phase tracker reports the instantaneous ratio
+`Q=|Σ w_k Im(z_{kpq})|/Σ w_k|z_{kpq}|`, with the same ordered triads
+in both sums. In the combined perturbed persistence-weight example at
+t=0.005, Q is approximately 0.0704 (N=4) and 0.4083 (N=7), a difference
+of **33.8 percentage points**. This is a normalized global signed
+transfer diagnostic at s=2. It is not local vortex-stretching efficiency,
+an explanation of the N-dependence, or a trend as N approaches infinity.
+The ratio of a proposed remainder to N would become ill-conditioned
+when the signed N crosses zero; absolute values and zero-denominator
+handling would need to be specified before such a dashboard was useful.
+
+### Precise sufficient target and the initial layer
+
+At fixed radius σ=0, a sufficient yet **unproved** arbitrary-data
+target for every finite T is
+
+    ∫₀ᵀ N_{0,s}(t)dt ≤ θν∫₀ᵀY_{0,s}(t)dt + F_s(T,ν,u₀),
+    0≤θ<1,
+
+with F_s finite, specified solely from initial data and parameters,
+and independent of N and unknown solution norms. Combining it with
+the exact identity would leave `(1−θ)ν∫Y` and bound X on that finite
+interval. Proving this for all smooth data would be a substantive
+global-regularity result; the finite Galerkin identities do not prove it.
+The statement “∫N is finite” without a uniform, non-circular F_s is
+automatic at each fixed cutoff and has no such consequence.
+
+For a growing radius, an additional bound on `∫σ'Z` is needed. Under
+`σ(t)=α sqrt(νt)`, σ' grows like `t^(−1/2)` near zero. This derivative
+is locally integrable; its divergence does **not** imply that a solution
+or its analyticity radius breaks down at initialization. A direct
+Young-inequality estimate instead creates a coefficient `(σ')²/ν`
+behaving like `1/t`, which is a problem for that **particular proof
+route** unless the initial layer is treated differently. As a simple
+check, the linear heat equation has Fourier multiplier
+`exp(−νt|k|²)` and obeys
+
+    X_{α sqrt(νt),s}(t) ≤ exp(α²/2) X_{0,s}(0)
+
+for every t>0: maximize `2α sqrt(νt)|k|−2νt|k|²` over |k| to get
+`α²/2`. Thus the singular σ' by itself cannot be evidence against
+parabolic analyticity. For the nonlinear equation, the reservation
+inequality and radius-term control must be proved together, uniformly
+in N, before claiming a continuum lower analyticity radius.
+
+**External review target:** verify the exact symbols, projection and
+shell partition; distinguish finite arithmetic closure from an a
+priori estimate; identify every use of an unknown trajectory norm in
+F_s; and check the near-zero radius argument separately. No claim of
+global regularity, forced-case breakdown, or novelty of classical
+Gevrey methods is made by this addendum.
