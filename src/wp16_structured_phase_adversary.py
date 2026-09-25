@@ -37,18 +37,30 @@ def canonical_half(k):
     return False
 
 
+DT = 0.0005
+
 def structured_base(system):
     return make_initial(
         system, *SCENARIOS["combined_double_quarter_high"]
     )
 
 
-def active_pairs(system, a):
+def evolved_anchor(system, amplitude=4.0, time=0.0035):
+    steps = round(time / DT)
+    if not math.isclose(steps * DT, time, abs_tol=1e-14):
+        raise ValueError("anchor time must lie on the registered dt grid")
+    a = amplitude * structured_base(system)
+    for _ in range(steps):
+        a = system.rk4(a, DT)
+    return a
+
+
+def active_pairs(system, a, threshold=1e-8):
     pairs = []
     for i, k in enumerate(system.modes):
         if k == (0, 0, 0) or not canonical_half(k):
             continue
-        if np.linalg.norm(a[i]) <= 1e-12:
+        if np.linalg.norm(a[i]) <= threshold:
             continue
         j = system.index[tuple(-x for x in k)]
         pairs.append((i, j, k))
@@ -137,9 +149,15 @@ def search_one(
     local_trials,
     initial_step,
     grid,
+    anchor,
 ):
     system = System(N=N, nu=NU)
-    base = structured_base(system)
+    if anchor == "initial":
+        base = structured_base(system)
+    elif anchor == "evolved":
+        base = evolved_anchor(system)
+    else:
+        raise ValueError(f"unknown anchor {anchor}")
     pairs = active_pairs(system, base)
     m = len(pairs)
     rng = np.random.default_rng(seed)
@@ -189,6 +207,7 @@ def search_one(
     return dict(
         N=N,
         seed=seed,
+        anchor=anchor,
         active_conjugate_pairs=m,
         support_vectors=[list(k) for _, _, k in pairs],
         baseline=baseline,
@@ -212,12 +231,13 @@ def search_one(
 
 def run(
     cutoffs=(4, 7),
-    seeds=(20260925, 20260926, 20260927),
-    random_draws=192,
+    seeds=(20260925, 20260926),
+    random_draws=0,
     local_rounds=5,
-    local_trials=64,
-    initial_step=0.5,
+    local_trials=128,
+    initial_step=0.35,
     grid=24,
+    anchor="evolved",
 ):
     if grid <= 3 * max(cutoffs):
         raise ValueError("grid must exceed 3*max(cutoffs)")
@@ -227,7 +247,7 @@ def run(
         for seed in seeds:
             rows.append(search_one(
                 N, seed, random_draws, local_rounds,
-                local_trials, initial_step, grid
+                local_trials, initial_step, grid, anchor
             ))
 
     return dict(
@@ -237,8 +257,13 @@ def run(
         ),
         family=(
             "phase rotations of every active canonical Fourier pair in the "
-            "registered combined_double_quarter_high initial state; modal "
-            "magnitudes and polarizations fixed"
+            "selected registered structured anchor; modal magnitudes and "
+            "polarizations fixed"
+        ),
+        anchor=anchor,
+        evolved_anchor_definition=(
+            "4 * combined_double_quarter_high evolved with RK4 dt=0.0005 "
+            "to t=0.0035" if anchor == "evolved" else None
         ),
         cutoffs=list(cutoffs),
         seeds=list(seeds),
@@ -257,16 +282,18 @@ if __name__ == "__main__":
         "--output", type=Path,
         default=HERE / "wp16_structured_phase_adversary_results.json"
     )
-    p.add_argument("--random-draws", type=int, default=192)
+    p.add_argument("--random-draws", type=int, default=0)
     p.add_argument("--local-rounds", type=int, default=5)
-    p.add_argument("--local-trials", type=int, default=64)
+    p.add_argument("--local-trials", type=int, default=128)
     p.add_argument("--grid", type=int, default=24)
+    p.add_argument("--anchor", choices=["initial","evolved"], default="evolved")
     a = p.parse_args()
     result = run(
         random_draws=a.random_draws,
         local_rounds=a.local_rounds,
         local_trials=a.local_trials,
         grid=a.grid,
+        anchor=a.anchor,
     )
     a.output.write_text(
         json.dumps(result, indent=2) + "\n", encoding="utf-8"
