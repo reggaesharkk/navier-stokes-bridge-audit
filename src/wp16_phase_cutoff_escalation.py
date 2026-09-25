@@ -230,6 +230,7 @@ def optimize_continuation(
         "amplitude": amplitude,
         "seed": seed,
         "active_conjugate_pairs": len(pairs),
+        "support_vectors": [list(k) for _, _, k in pairs],
         "inherited_pairs": int(inherited.sum()),
         "new_pairs": int((~inherited).sum()),
         "unrotated_baseline": baseline,
@@ -278,6 +279,12 @@ def run(args):
             checkpoint=checkpoint,
         )
         rows.append(row)
+        # True continuation: the next cutoff inherits the optimized phases
+        # from this cutoff mode-by-mode wherever the active support overlaps.
+        phase_map = {
+            tuple(k): float(phi)
+            for k, phi in zip(row["support_vectors"], row["best_phases"])
+        }
 
     def finest(row):
         if not row["refined"]:
