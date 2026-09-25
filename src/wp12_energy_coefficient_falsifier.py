@@ -23,6 +23,8 @@ from adversarial_cutoff_gate import SCENARIOS, make_initial
 from evolve_galerkin import System
 from phase_cascade_trajectory import NU
 from wp11_scaling_audit import dilated_system, discrepancy
+from helicity_phase_gate import field as sparse_field
+from galerkin import nonlinear_on_support
 
 HERE = Path(__file__).resolve().parent
 
@@ -162,6 +164,20 @@ def dilation_check(N, scenario, amplitude_multiplier, s, K, theta, lam=2):
     )
 
 
+
+
+def sparse_h2_anchor():
+    data = sparse_field(1.0, math.pi/2)
+    B = nonlinear_on_support(data)
+    transfer = -sum(
+        (sum(x*x for x in k)**2) * float(np.real(np.vdot(a, B[k])))
+        for k, a in data.items()
+    )
+    if abs(transfer - 24.0) > 1e-12:
+        raise AssertionError(f"Unexpected sparse H2 transfer: {transfer}")
+    return transfer
+
+
 def run(
     cutoffs=(4,7),
     scenarios=("reference","combined_double_quarter_high"),
@@ -172,6 +188,8 @@ def run(
     dt=0.0005,
     t_end=0.005,
 ):
+    sparse_transfer = sparse_h2_anchor()
+
     traces = []
     for scenario in scenarios:
         for N in cutoffs:
@@ -199,6 +217,7 @@ def run(
             "b_required=max(N_high-theta*nu*Y,0)/X; "
             "Q_energy=b_required/sqrt(G)"
         ),
+        sparse_H2_anchor_transfer=sparse_transfer,
         warning=(
             "b_required is tautological/circular and cannot prove L2-L3. "
             "Finite Q_energy values can falsify proposed constants only on "
