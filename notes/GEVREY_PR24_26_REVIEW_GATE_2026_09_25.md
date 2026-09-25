@@ -1,9 +1,8 @@
-# Review gate for draft PRs #24–26
+# Review gate for PRs #24–26
 
 **Prince Upadhyay, Independent Research — 25 September 2026**
 
-This procedure was used for PRs #24 and #25 and remains the review gate for draft PR #26. Passing it would
-support merging finite-Galerkin diagnostics and precise scope notes. It
+This procedure was used for PRs #24 and #25 and remains the review gate for draft PR #26. Passing it supports merging finite-Galerkin diagnostics and precise scope notes. It
 would **not** certify a new Navier–Stokes regularity theorem, an
 independent peer review, or an analyticity radius for arbitrary data.
 
