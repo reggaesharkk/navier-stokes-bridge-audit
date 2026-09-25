@@ -149,6 +149,9 @@ The [WP14 endpoint-geometry coupling gate](notes/WP14_ENDPOINT_GEOMETRY_COUPLING
 
 The [WP15 positive-stretching coefficient gate](notes/WP15_POSITIVE_STRETCHING_COEFFICIENT_GATE_2026_09_25.md) tests the noncircular coefficient \(b_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/G\), which has exactly the concentration scaling required to multiply \(X_2\) in the signed \(H^2\) high-advector target. The [finite stress test](src/wp15_positive_stretching_gate.py) and [verified summary](src/wp15_positive_stretching_verified_summary.json) show that generic nonlinear-dominant random Fourier fields are less demanding than the registered structured phase-cascade trajectory: the random suite reached \(C_{\rm req}^{\rm stretch}\approx0.169\), while the structured \(N=7\) trajectory reached about \(1.024\). No cutoff-independent constant or independent time-integral estimate is proved.
 
+
+The [WP16 structured phase-adversary gate](notes/WP16_STRUCTURED_PHASE_ADVERSARY_GATE_2026_09_25.md) stress-tests the WP15 coefficient by preserving the full evolved modal spectrum and varying only conjugacy-preserving Fourier phases. On the registered \(A=4,\ t=0.0035\) cascade state, the [verified summary](src/wp16_structured_phase_adversary_verified_summary.json) records a rise in the large-amplitude quotient \(C_\infty^{\rm stretch}=[N_2^{>K}]_+/(b_{\rm stretch}X_2)\) from about \(1.0381\) to \(1.0779\) at \(N=7\), while the corresponding \(N=4\) search remains below \(0.069\). This raises the finite tested lower benchmark for any universal pointwise constant but does not establish boundedness, cutoff convergence, or L2–L3.
+
 ## Status and rights
 
 The source code and computations were checked for internal consistency;
