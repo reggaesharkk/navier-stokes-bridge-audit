@@ -232,3 +232,7 @@ The [v0.1 GitHub release](https://github.com/reggaesharkk/navier-stokes-bridge-a
 points to commit `f891356fb99c85ded244dd566d35438e52571792`. The Zenodo
 record archives that 45-file snapshot. Later edits to `main` are not part
 of the v0.1 archive.
+
+## WP16 N12 prospective frozen K36 holdout (26 September 2026)
+
+The source-orbit coalition and pass criteria were frozen in [PR #73](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/73) before N12 data existed. The [executed result](notes/WP16_036_N12_FROZEN_K36_HOLDOUT_RESULT_2026_09_26.md) passes all three finite N12 states; the [raw inputs, outputs, checkpoint, and hashes](results/wp16_n12_holdout/) are archived. The fixed-state grid-96 N12 quotient is `8.692984814467122`. This is a finite cutoff transfer test, not an all-N or continuum claim.
