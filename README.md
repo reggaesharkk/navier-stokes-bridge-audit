@@ -236,3 +236,9 @@ of the v0.1 archive.
 ## WP16 N12 prospective frozen K36 holdout (26 September 2026)
 
 The source-orbit coalition and pass criteria were frozen in [PR #73](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/73) before N12 data existed. The [executed result](notes/WP16_036_N12_FROZEN_K36_HOLDOUT_RESULT_2026_09_26.md) passes all three finite N12 states; the [raw inputs, outputs, checkpoint, and hashes](results/wp16_n12_holdout/) are archived. The fixed-state grid-96 N12 quotient is `8.692984814467122`. This is a finite cutoff transfer test, not an all-N or continuum claim.
+
+## WP16 N15 prospective result and N16 freeze (27 September 2026)
+
+The [N15 prospective time-gate result](notes/WP16_036_N15_PROSPECTIVE_TIME_GATE_RESULT_2026_09_27.md) and [machine-readable summary](results/wp16_n15_holdout/wp16_036_N15_result_summary.json) record the completed 520-proposal continuation and all six predeclared checks passing in each of three states. The frozen N11-derived K36 mass criterion first fails at sampled time 0.0023 in all three, while the signed criterion remains satisfied. This replicates the N14 finite-Galerkin time pattern prospectively; it is not a cutoff-uniform or continuum result.
+
+The [N16 prospective protocol](notes/WP16_036_N16_PROSPECTIVE_FREEZE_2026_09_27.md) fixes seed 20260941, the unchanged 520 proposals and K36 rules, and search grid 64 because grid 48 does not satisfy `grid > 3N` at N16. [Windows instructions](README_N16_WINDOWS.md) start with a trial-0 smoke after the protocol merge. No N16 state or score is part of this freeze.
