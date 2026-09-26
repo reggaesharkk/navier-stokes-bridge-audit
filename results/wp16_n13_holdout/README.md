@@ -1,3 +1,5 @@
 # WP16 N13 prospective holdout raw record
 
 See [the result note](../../notes/WP16_036_N13_FROZEN_K36_HOLDOUT_RESULT_2026_09_26.md) for the frozen criteria, values, and recovery limitations. `SHA256SUMS.txt` hashes the exact uploaded JSON bytes. The original source ranking is in the N12 holdout archive and was checked by the N13 evaluator. The trial-320 intermediate recovery checkpoint referenced by the final N13 JSON was not uploaded; the preserved trial-200 and trial-304 checkpoints and the completed trial-520 checkpoint are included here.
+
+The post-hoc ordered outside-K36 source-group record for all N12/N13 states is stored as `outside_K36_breakdown_N12_N13.json.gz.b64`. Decode with `base64 -d outside_K36_breakdown_N12_N13.json.gz.b64 | gzip -dc > outside_K36_breakdown_N12_N13.json`. The decoded JSON SHA-256 is `5aa9e9e99145eabf3a7abef020b116cbddc0b709e59845565219aa5382e5a6d5`. Its [result note](../../notes/WP16_036_OUTSIDE_K36_N12_N13_POSTHOC_2026_09_26.md) states the post-hoc scope and consistency checks.
