@@ -80,6 +80,7 @@ def run(n12_path, checkpoint_path, output_checkpoint_path, output_path):
         raise ValueError("N12 input SHA-256 differs from the frozen N13 gate")
     n12 = json.loads(n12_path.read_text(encoding="utf-8"))
     cp = json.loads(checkpoint_path.read_text(encoding="utf-8"))
+    checkpoint_sha256 = digest(checkpoint_path)
     if n12.get("cutoffs") != [12] or n12.get("resume_from_N") != 11:
         raise ValueError("N12 continuation structure changed")
     prev = n12["rows"][0]
@@ -139,9 +140,11 @@ def run(n12_path, checkpoint_path, output_checkpoint_path, output_path):
             "records": records,
             "last_processed_trial": trial,
             "elapsed_seconds": float(cp["elapsed_seconds"]) + time.time() - started,
-            "recovery_input_sha256": digest(checkpoint_path),
+            "recovery_input_sha256": checkpoint_sha256,
         }
-        output_checkpoint_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        temporary = output_checkpoint_path.with_name(output_checkpoint_path.name + ".tmp")
+        temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+        temporary.replace(output_checkpoint_path)
 
     def score(proposal):
         return evaluate(system, phase_rotate(base, pairs, proposal), grid=SEARCH_GRID)
@@ -237,7 +240,7 @@ def run(n12_path, checkpoint_path, output_checkpoint_path, output_path):
         "elapsed_seconds": float(cp["elapsed_seconds"]) + time.time() - started,
         "recovery": {
             "method": "checkpoint best state plus deterministic RNG draw replay",
-            "input_checkpoint_sha256": digest(checkpoint_path),
+            "input_checkpoint_sha256": checkpoint_sha256,
             "initial_last_processed_trial": last_trial,
         },
     }
