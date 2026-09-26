@@ -18,7 +18,7 @@ The preregistered descriptive gate requires, **at each** of N12 inherited, targe
 
 The deterministic `src/wp16_phase_cutoff_resume.py` was run from the saved N10/N11 continuation at amplitude `4.0`, anchor time `0.005`, seed `20260937`, and cutoff `12`, with search grid `40`, new global draws `16`, new block rounds `3`, full block rounds `4`, `72` trials per round, block size `40`, and initial step `0.30`. The N12 state had 3575 active conjugate pairs (2787 inherited, 788 new). The inherited quotient was 7.637638320072; the optimized grid-40 quotient was 8.695136695045. At fixed phases, the refined grid-96 quotient was **8.692984814467**. Refinement is evaluation of the same phase state, not another optimization. Runtime recorded in the raw row: 3614.314 seconds.
 
-The N12 checkpoint matches the final N12 row exactly on its 3575 phases, search-grid best dictionary, and all 203 accepted-improvement records.
+The N12 checkpoint matches the final N12 row exactly on its 3575 phases, search-grid best dictionary, and all 203 recorded entries (the baseline, inherited state, and 201 accepted improvements).
 
 ## Frozen holdout result
 
