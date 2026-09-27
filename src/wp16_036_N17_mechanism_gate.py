@@ -82,6 +82,8 @@ def group_rates(system, a, keys, h):
 
 
 def summary(rows, keys):
+    if ORBIT not in rows:
+        raise ValueError("recurrent orbit absent")
     inside = [v for k,v in rows.items() if k in keys]
     outside = [v for k,v in rows.items() if k not in keys]
     I = sum(v["mass"] for v in inside)
@@ -90,8 +92,12 @@ def summary(rows, keys):
     Or = sum(v["rate"] for v in outside)
     positive = sorted(((k,v["rate"]) for k,v in rows.items() if k not in keys),
                       key=lambda x: (-x[1],x[0]))
+    if not positive:
+        raise ValueError("outside groups absent")
+    unique_leader = len(positive) == 1 or positive[0][1] > positive[1][1]
     return {"I": I, "O": O, "F": I-9*O, "I_rate": Ir, "O_rate": Or,
             "F_rate": Ir-9*Or, "leading_outside": positive[0][0],
+            "unique_leader": unique_leader,
             "orbit": rows[ORBIT]}
 
 
@@ -120,8 +126,10 @@ def swap(groups_h, z_h, groups_f, z_f, keys):
         if key == ORBIT: orbit_delta = d
     if orbit_delta is None: raise ValueError("recurrent orbit absent")
     outside_deltas.sort(key=lambda x:(x[1],x[0]))
+    unique_decrease = len(outside_deltas)==1 or outside_deltas[0][1]<outside_deltas[1][1]
     return {"delta_O":delta,"orbit_delta_O":orbit_delta,
             "largest_outside_decrease":outside_deltas[0][0],
+            "unique_decrease":unique_decrease,
             "numerator_swap":numerator,"normalizer_swap":normalizer}
 
 
@@ -154,6 +162,7 @@ def run(n16_path,n17_path,keys_path):
                 "orbit_numerator_rate":x["orbit"]["numerator_rate"],
                 "orbit_normalizer_rate":x["orbit"]["normalizer_rate"],
                 "leading_outside":[list(y) for y in x["leading_outside"]],
+                "unique_leader":x["unique_leader"],
                 "F_rate_h_spread":spread,"orbit_rate_h_spread":orbit_spread}
         if not static["passes_preregistered_consistency_criteria"]:
             result["failure_rules"].append(f"{name}: static K36 gate")
@@ -164,6 +173,7 @@ def run(n16_path,n17_path,keys_path):
                 points["0"]["orbit_numerator_rate"] is None):
             result["failure_rules"].append(f"{name}: recurrent orbit at a kink")
         if not (x["orbit_rate"]>0 and x["I_rate"]>0 and x["O_rate"]>0 and x["F_rate"]<0
+                and x["unique_leader"]
                 and tuple(tuple(y) for y in x["leading_outside"])==ORBIT):
             result["failure_rules"].append(f"{name}: t=.001 turnover/rank prediction")
         result["states"][name]={"static":static,"points":points}
@@ -171,7 +181,8 @@ def run(n16_path,n17_path,keys_path):
             at23[name]=complex_groups(system,advance(system,a0,23))
     gh,zh=at23["inherited"]; gf,zf=at23["full_final"]
     s=swap(gh,zh,gf,zf,keys)
-    if not (s["orbit_delta_O"]<0 and s["largest_outside_decrease"]==ORBIT
+    if not (s["orbit_delta_O"]<0 and s["unique_decrease"]
+            and s["largest_outside_decrease"]==ORBIT
             and s["normalizer_swap"]<0 and abs(s["normalizer_swap"])>abs(s["numerator_swap"])):
         result["failure_rules"].append("t=.0023 state-difference/normalizer prediction")
     result["state_difference_t0023"]={**s,
