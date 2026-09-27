@@ -24,7 +24,7 @@ Pinned canonical inputs, using LF-normalized hashes for JSON text so Windows lin
 - original source-decomposition JSON: `193cbb7f485ab54ceed0d5cb38f97f0fc98c197e5f88e288fdbd277627608c8e`
 - canonical compressed source archive: `ab238d8df279eb925cf8145cb33cb5670513aea61a2547a1ac0a7ae1b1493f95`
 
-The checked compact output is `results/wp16_n13_holdout/K36_turnover_source_rates_N12_N13.json` with SHA-256 `8d5f9b93280e5f3c3a6fb73cb62460a2995a0871ce056de5e21864b5445fe86d`.
+The checked compact output is `results/wp16_n13_holdout/K36_turnover_source_rates_N12_N13.json` with SHA-256 `b8bfabad84c07688cdbfa6f19d0794523bef41cba2b017b6c91c1d4b7046b2fa`.
 
 At the anchor, the six reconstructed `F'` values agree with the previously archived `K36_margin_velocity_N12_N13.json` full-RHS derivative values to maximum absolute difference `6.51e-5`. A four-scale directional check for N13 `inherited` at the anchor gives:
 
