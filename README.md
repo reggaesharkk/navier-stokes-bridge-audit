@@ -250,3 +250,7 @@ The [N16 result](notes/WP16_036_N16_PROSPECTIVE_TIME_GATE_RESULT_2026_09_27.md) 
 ## WP16 N16 post-hoc exit accounting (27 September 2026)
 
 The [exit-mechanism audit](notes/WP16_036_N16_EXIT_MECHANISM_ACCOUNTING_2026_09_27.md), [reproduction script](src/wp16_036_N16_exit_accounting.py), and [derived JSON](results/wp16_n16_holdout/wp16_036_N16_exit_accounting.json) decompose the N16 full-final extra sampled step. At `t=0.0023`, the optimized state has less mass inside K36 than inherited, but its lower outside-K36 normalized group mass contributes enough to keep `F=I-9O` positive. This is post-hoc finite-sample accounting, not a new prospective gate or a continuum estimate.
+
+## WP16 N16 post-hoc source-orbit attribution (27 September 2026)
+
+The [group attribution and normalizer audit](notes/WP16_036_N16_SOURCE_ORBIT_ATTRIBUTION_2026_09_27.md), [reconstruction script](src/wp16_036_N16_group_attribution.py), and [compact output](results/wp16_n16_holdout/wp16_036_N16_group_attribution.json) identify the largest outside-K36 grouped decrease at `t=0.0023`. A symmetric algebraic swap shows that the **aggregate** outside-mass difference is mainly due to the changing tracked complex normalizer, while aggregate numerator changes offset it. This refines the previous margin accounting; it is not a causal or cutoff-uniform result.
