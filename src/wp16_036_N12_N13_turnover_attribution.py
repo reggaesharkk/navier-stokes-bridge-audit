@@ -298,9 +298,42 @@ def run(args):
             for N in ("12", "13") for s in STATE_NAMES
         ),
     }
+
+    stored = {
+        "status": result["status"],
+        "input_sha256": result["input_sha256"],
+        "dt": DT, "steps_to_t001": STEPS, "directional_step": TRACE_H,
+        "frozen_K36_size": 36,
+        "leading_common_outside_group": result["leading_common_outside_group"],
+        "states": {},
+        "persistent_t001_top10_groups_all_six": [
+            {"left_orbit": r["left_orbit"], "right_orbit": r["right_orbit"],
+             "mean_rank": r["mean_rank_when_present"], "mean_rate": r["mean_rate_when_present"]}
+            for r in result["persistent_t001_outside_growth_groups"]
+            if r["top10_occurrence_count_out_of_6"] == 6
+        ],
+        "checks": result["checks"],
+        "interpretation_rule": result["interpretation_rule"],
+    }
+    for N in ("12", "13"):
+        stored["states"]["N" + N] = {}
+        for name in STATE_NAMES:
+            row = result["N"][N][name]
+            stored["states"]["N" + N][name] = {
+                "F_rate_anchor": row["trace"][0]["F_rate"],
+                "I_rate_t001": row["t001"]["I_rate"],
+                "O_rate_t001": row["t001"]["O_rate"],
+                "F_rate_t001": row["t001"]["F_rate"],
+                "first_sampled_F_rate_negative": row["first_sampled_negative_F_rate_time"],
+                "first_sampled_leading_group_rate_positive": row["first_sampled_positive_leading_group_rate_time"],
+                "leading_group_rate_t001": row["t001"]["leading_group_rate"],
+                "leading_group_share_of_net_O_rate_t001": row["t001"]["leading_group_share_of_net_O_rate"],
+                "top5_positive_outside_rate_share_of_net_O_rate_t001": row["t001"]["top5_positive_outside_rate_share_of_net_O_rate"],
+            }
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
     tmp = args.output.with_name(args.output.name + ".tmp")
-    tmp.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    tmp.write_text(json.dumps(stored, indent=2) + "\n", encoding="utf-8")
     tmp.replace(args.output)
     print("SAVED", args.output, flush=True)
 
