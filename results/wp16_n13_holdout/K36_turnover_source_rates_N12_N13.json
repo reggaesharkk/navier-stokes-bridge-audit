@@ -1,0 +1,227 @@
+{
+  "status": "post-hoc finite N12/N13 K36 turnover source-rate attribution; no retuning",
+  "input_sha256": {
+    "n10_n11_lf_normalized": "34a10cf119ab6614c46d29540c4d4701eab082229582fb0a8189add0cd8f96a5",
+    "n12_lf_normalized": "ec07d1a263eb43c1a1d6228164ba80a4e29b90b6206bb606c612192a4ee38855",
+    "n13_lf_normalized": "13e5e56676b9398e7c7ec32f55e32a4d07dec5a3830c67787c6cd6fb5c8e59cd",
+    "source_json_uncompressed": "193cbb7f485ab54ceed0d5cb38f97f0fc98c197e5f88e288fdbd277627608c8e",
+    "source_gzip": "ab238d8df279eb925cf8145cb33cb5670513aea61a2547a1ac0a7ae1b1493f95"
+  },
+  "dt": 0.0001,
+  "steps_to_t001": 10,
+  "directional_step": 1e-08,
+  "frozen_K36_size": 36,
+  "leading_common_outside_group": {
+    "left_orbit": [
+      3,
+      3,
+      4
+    ],
+    "right_orbit": [
+      0,
+      2,
+      3
+    ]
+  },
+  "states": {
+    "N12": {
+      "inherited": {
+        "F_rate_anchor": 401321.34543083597,
+        "I_rate_t001": 82978.87460448351,
+        "O_rate_t001": 37243.3946891494,
+        "F_rate_t001": -252211.67759786107,
+        "first_sampled_F_rate_negative": 0.0004,
+        "first_sampled_leading_group_rate_positive": 0.0003,
+        "leading_group_rate_t001": 13224.115760523957,
+        "leading_group_share_of_net_O_rate_t001": 0.355072781922769,
+        "top5_positive_outside_rate_share_of_net_O_rate_t001": 0.7486958213018762
+      },
+      "target_only": {
+        "F_rate_anchor": 401330.1575955276,
+        "I_rate_t001": 82984.41802097045,
+        "O_rate_t001": 37238.02659672749,
+        "F_rate_t001": -252157.82134957696,
+        "first_sampled_F_rate_negative": 0.0004,
+        "first_sampled_leading_group_rate_positive": 0.0003,
+        "leading_group_rate_t001": 13224.359492225445,
+        "leading_group_share_of_net_O_rate_t001": 0.35513051310263616,
+        "top5_positive_outside_rate_share_of_net_O_rate_t001": 0.7488153840181693
+      },
+      "full_final": {
+        "F_rate_anchor": 209854.16147517422,
+        "I_rate_t001": 212112.71757057836,
+        "O_rate_t001": 49727.97762069212,
+        "F_rate_t001": -235439.08101565074,
+        "first_sampled_F_rate_negative": 0.0005,
+        "first_sampled_leading_group_rate_positive": 0.0005,
+        "leading_group_rate_t001": 13445.56653912754,
+        "leading_group_share_of_net_O_rate_t001": 0.27038233168631326,
+        "top5_positive_outside_rate_share_of_net_O_rate_t001": 0.5393398908613403
+      }
+    },
+    "N13": {
+      "inherited": {
+        "F_rate_anchor": 208744.06744890657,
+        "I_rate_t001": 184492.90270581841,
+        "O_rate_t001": 50077.03742410138,
+        "F_rate_t001": -266200.434111094,
+        "first_sampled_F_rate_negative": 0.0005,
+        "first_sampled_leading_group_rate_positive": 0.0005,
+        "leading_group_rate_t001": 13260.982206375615,
+        "leading_group_share_of_net_O_rate_t001": 0.26481163600132,
+        "top5_positive_outside_rate_share_of_net_O_rate_t001": 0.5201976662140343
+      },
+      "target_only": {
+        "F_rate_anchor": 187391.87260695215,
+        "I_rate_t001": 56749.2142426018,
+        "O_rate_t001": 38729.84461222906,
+        "F_rate_t001": -291819.3872674597,
+        "first_sampled_F_rate_negative": 0.0004,
+        "first_sampled_leading_group_rate_positive": 0.0004,
+        "leading_group_rate_t001": 12044.979530667631,
+        "leading_group_share_of_net_O_rate_t001": 0.31099994464900055,
+        "top5_positive_outside_rate_share_of_net_O_rate_t001": 0.5834753877210462
+      },
+      "full_final": {
+        "F_rate_anchor": 121276.53035799644,
+        "I_rate_t001": 67719.36104237317,
+        "O_rate_t001": 34063.934971649694,
+        "F_rate_t001": -238856.05370247405,
+        "first_sampled_F_rate_negative": 0.0007,
+        "first_sampled_leading_group_rate_positive": 0.0009,
+        "leading_group_rate_t001": 9597.678508133089,
+        "leading_group_share_of_net_O_rate_t001": 0.2817548388382295,
+        "top5_positive_outside_rate_share_of_net_O_rate_t001": 0.5866797379796959
+      }
+    }
+  },
+  "persistent_t001_top10_groups_all_six": [
+    {
+      "left_orbit": [
+        3,
+        3,
+        4
+      ],
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "mean_rank": 1.0,
+      "mean_rate": 12466.28033950888
+    },
+    {
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "right_orbit": [
+        2,
+        5,
+        7
+      ],
+      "mean_rank": 2.0,
+      "mean_rate": 4221.243318602852
+    },
+    {
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "mean_rank": 3.0,
+      "mean_rate": 3475.5215032452234
+    },
+    {
+      "left_orbit": [
+        4,
+        4,
+        5
+      ],
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "mean_rank": 5.166666666666667,
+      "mean_rate": 2395.620448429151
+    },
+    {
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "mean_rank": 6.166666666666667,
+      "mean_rate": 2156.9056000407077
+    },
+    {
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "right_orbit": [
+        2,
+        3,
+        9
+      ],
+      "mean_rank": 6.833333333333333,
+      "mean_rate": 1956.6225920993516
+    },
+    {
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "right_orbit": [
+        1,
+        2,
+        8
+      ],
+      "mean_rank": 7.0,
+      "mean_rate": 1910.3229596565777
+    },
+    {
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "right_orbit": [
+        0,
+        3,
+        4
+      ],
+      "mean_rank": 7.333333333333333,
+      "mean_rate": 1794.8743899097394
+    }
+  ],
+  "checks": {
+    "max_abs_anchor_F_rate_difference_from_archived_margin_velocity": 6.506784120574594e-05,
+    "N13_inherited_anchor_F_rate_stability": {
+      "5e-09": 208744.06746419077,
+      "1e-08": 208744.06744890657,
+      "2e-08": 208744.06744872584,
+      "4e-08": 208744.06745779893
+    },
+    "N13_inherited_anchor_F_rate_stability_spread": 1.5464931493625045e-05,
+    "all_six_t001_I_rates_positive": true,
+    "all_six_t001_O_rates_positive": true,
+    "all_six_t001_F_rates_negative": true,
+    "leading_common_group_rank1_at_t001_all_six": true
+  },
+  "interpretation_rule": "Post-hoc finite-Galerkin mechanism diagnostic. Source rankings and sampled turnover times are descriptive; no frozen key, phase, or threshold is retuned and no all-N/continuum claim follows."
+}
