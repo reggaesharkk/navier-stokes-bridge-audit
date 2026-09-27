@@ -254,3 +254,7 @@ The [exit-mechanism audit](notes/WP16_036_N16_EXIT_MECHANISM_ACCOUNTING_2026_09_
 ## WP16 N16 post-hoc source-orbit attribution (27 September 2026)
 
 The [group attribution and normalizer audit](notes/WP16_036_N16_SOURCE_ORBIT_ATTRIBUTION_2026_09_27.md), [reconstruction script](src/wp16_036_N16_group_attribution.py), and [compact output](results/wp16_n16_holdout/wp16_036_N16_group_attribution.json) identify the largest outside-K36 grouped decrease at `t=0.0023`. A symmetric algebraic swap shows that the **aggregate** outside-mass difference is mainly due to the changing tracked complex normalizer, while aggregate numerator changes offset it. This refines the previous margin accounting; it is not a causal or cutoff-uniform result.
+
+## WP16 N17 pre-data continuation and mechanism freeze (27 September 2026)
+
+The [N17 source and normalizer mechanism prefreeze](notes/WP16_036_N17_MECHANISM_PREFREEZE_2026_09_27.md) specifies a test of the recurrent outside orbit observed in the N12/N13 trajectory and N16 state comparison. The [complete N17 continuation freeze](notes/WP16_036_N17_COMPLETE_PROSPECTIVE_FREEZE_2026_09_27.md) fixes seed 20260942, grid 64, the 520-proposal schedule, checkpointing, unchanged K36 broad time gate, and [Windows instructions](README_N17_WINDOWS.md). N12–N16 are discovery data for the source-level hypothesis. This freeze contains no N17 state or score. After merge, the Windows trial-0 smoke may construct N17 and score baseline/inherited only; all results, including failures, must be retained. Neither gate is a continuum proof.
