@@ -246,3 +246,7 @@ The [N16 prospective protocol](notes/WP16_036_N16_PROSPECTIVE_FREEZE_2026_09_27.
 ## WP16 N16 prospective finite time gate (27 September 2026)
 
 The [N16 result](notes/WP16_036_N16_PROSPECTIVE_TIME_GATE_RESULT_2026_09_27.md) and [machine-readable summary](results/wp16_n16_holdout/wp16_036_N16_result_summary.json) record the outcome under the protocol frozen in PR #91. All six predeclared checks pass in each of three states. Inherited and target-only first fail the 90% mass gate at sampled time 0.0023; the full-final state first fails at 0.0024, still inside the frozen exit window. Its saved half-step rows are both below 90%, while the preceding coarse sample at 0.00230 is above, yielding a sampled bracket [0.00230, 0.00235]. This is finite-Galerkin evidence, not an all-N or PDE theorem.
+
+## WP16 N16 post-hoc exit accounting (27 September 2026)
+
+The [exit-mechanism audit](notes/WP16_036_N16_EXIT_MECHANISM_ACCOUNTING_2026_09_27.md), [reproduction script](src/wp16_036_N16_exit_accounting.py), and [derived JSON](results/wp16_n16_holdout/wp16_036_N16_exit_accounting.json) decompose the N16 full-final extra sampled step. At `t=0.0023`, the optimized state has less mass inside K36 than inherited, but its lower outside-K36 normalized group mass contributes enough to keep `F=I-9O` positive. This is post-hoc finite-sample accounting, not a new prospective gate or a continuum estimate.
