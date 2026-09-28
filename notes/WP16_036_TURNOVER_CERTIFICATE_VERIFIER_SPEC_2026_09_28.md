@@ -43,7 +43,6 @@ any of the following occurs:
 - the normalizer lower bound is non-positive;
 - the endpoint `F` upper bound is non-negative;
 - the exact initial `F` lower bound is non-positive;
-- a required independent-recomputation flag is false;
 - stale or incompatible segment artifacts are mixed into the package.
 
 No tolerance-based replacement of a mismatching SHA-256 is allowed.
