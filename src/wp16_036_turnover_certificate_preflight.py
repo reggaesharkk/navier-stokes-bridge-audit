@@ -69,8 +69,10 @@ def main() -> int:
             blocked("schema mismatch")
         if not resolved(obj.get("protocol_version")):
             blocked("protocol_version unresolved")
-        if obj.get("status") not in {"COMPLETE_PENDING_INDEPENDENT_VERIFICATION", "CERTIFIED"}:
-            blocked("status is not a completed-certificate state")
+        if not resolved(obj.get("created_at_utc")):
+            blocked("created_at_utc unresolved")
+        if obj.get("status") not in {"COMPLETE_VERIFIED", "CERTIFIED"}:
+            blocked("status is not a verified completed-certificate state")
 
         fixed = obj.get("fixed_inputs", {})
         for k, v in EXPECTED.items():
