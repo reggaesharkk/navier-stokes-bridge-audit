@@ -2,7 +2,7 @@
 
 This is an additive step after the [post-hoc 112-pair reduction](WP16_036_SPARSE_TURNOVER_REDUCTION_2026_09_28.md). It certifies an **instantaneous finite-Galerkin algebraic statement only**. The negative later-time value in the numerical experiment remains unvalidated.
 
-Read each finite decimal entry of the fixed 112-pair coefficient table as an *exact rational number*. For every positive mode `k`, apply the rational Leray projection `a_k -> a_k - k(k·a_k)/|k|²`; then set `a_-k = conjugate(a_k)`. This defines a precisely specified, real, zero-mean, divergence-free trigonometric polynomial on the 3-torus. The largest component change from the decimal table is strictly less than `5e-15`. The exact checker verifies `k·a_k=0` as a rational identity for every listed mode.
+Read each finite decimal entry of the fixed 112-pair coefficient table as an *exact rational number*. For every positive mode `k`, apply the rational Leray projection `a_k -> a_k - k(k·a_k)/|k|²`; then set `a_-k = conjugate(a_k)`. This defines a precisely specified, real, zero-mean, divergence-free trigonometric polynomial on the 3-torus. The largest component change from the decimal table is exactly `5e-15`. The exact checker verifies `k·a_k=0` as a rational identity for every listed mode.
 
 With the **unchanged original K36 orbit-key file**, compute the tracked complex normalizer `z`, ordered convolution contributions `w_j`, and `g_j=Im(w_j/z)` using Python arbitrary-precision rational fractions. Summing `I=sum_{j in K36}|g_j|` and `O=sum_{j outside K36}|g_j|` gives the following *outward decimal enclosures of exact rational numbers*:
 
