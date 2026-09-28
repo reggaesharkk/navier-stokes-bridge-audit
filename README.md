@@ -262,3 +262,7 @@ The [N17 source and normalizer mechanism prefreeze](notes/WP16_036_N17_MECHANISM
 ## WP16 N17 prospective result (28 September 2026)
 
 The [N17 result note](notes/WP16_036_N17_RESULT_AND_MECHANISM_FAILURE_2026_09_28.md) and [compact machine summary](results/wp16_n17_holdout/wp16_036_N17_result_summary.json) record 520/520 proposals and two separate frozen outcomes. All three states pass the broad K36 static/time gate, with first sampled mass exit at `.0024`. The separately frozen ordered-orbit/normalizer mechanism evaluator stops on a directional-split assertion and records **failed or unevaluable**; post-hoc inspection also finds substantive prediction misses. Both outcomes and original hashes are retained. This is finite Galerkin evidence, not a continuum regularity result.
+
+## WP16 post-hoc sparse turnover reduction (28 September 2026)
+
+The [N11 112-pair initial-data witness](notes/WP16_036_SPARSE_TURNOVER_REDUCTION_2026_09_28.md) is derived after the N17 result. Its K36 margin changes sign between `t=0` and `.003` under finite Galerkin evolution, with replayable coefficients and three time-step checks. It is a numerical reduction, not an interval certificate, a minimal-support theorem, or a continuum result.
