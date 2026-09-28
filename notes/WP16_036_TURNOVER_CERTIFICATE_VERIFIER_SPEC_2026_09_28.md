@@ -77,12 +77,13 @@ The canonical manifest must contain at least:
 
 ## Segment coverage
 
-Let the segment records be sorted by index. The verifier must require
+Let the segment records be sorted by index. The verifier must require:
 
-[
-t_0=0,qquad t_{n+1}^{m start}=t_n^{m end},
-qquad t_{m final}=0.003
-]
+`t_0 = 0`
+
+`t_(n+1,start) = t_(n,end)`
+
+`t_final = 0.003`
 
 as exact decimal/rational equality in the exported manifest representation.
 
@@ -91,32 +92,23 @@ The number of records must equal the declared segment count. Every index from
 
 ## Error recurrence
 
-For segment width (h_n), certified residual upper bound (R_n), certified
-gradient upper bound (G_n), and previous trajectory radius
-(arepsilon_n), the verifier must independently recompute an outward upper
-bound for
+For segment width `h_n`, certified residual upper bound `R_n`, certified
+gradient upper bound `G_n`, and previous trajectory radius `eps_n`, the
+verifier must independently recompute an outward upper bound for
 
-[
-arepsilon_{n+1}
-le
-e^{G_nh_n}arepsilon_n
-+
-R_nrac{e^{G_nh_n}-1}{G_n}
-]
+`eps_(n+1) <= exp(G_n h_n) eps_n + R_n (exp(G_n h_n)-1)/G_n`
 
-for (G_n>0), with the continuous (G_n=0) limit (R_nh_n).
+when `G_n>0`, with the continuous `G_n=0` limit `R_n h_n`.
 
 The generator's stored accumulated radius is not authoritative. The verifier
-must recompute the recurrence from (arepsilon_0=0) and reject any stored
-radius that is smaller than its independently reproduced upper bound.
+must recompute the recurrence from `eps_0=0` and reject any stored radius that
+is smaller than its independently reproduced upper bound.
 
 ## Normalizer gate
 
 The package must prove a lower bound
 
-[
-|z(u(t))|ge z_*>0
-]
+`|z(u(t))| >= z_* > 0`
 
 for every required point/ball used to define the grouped observable. A sampled
 numerical value is insufficient.
@@ -129,15 +121,11 @@ minimum.
 
 The manifest must contain an outward interval
 
-[
-F(u(0.003))in[F_-,F_+].
-]
+`F(u(0.003)) in [F_-, F_+]`.
 
 The certificate passes the endpoint gate only if
 
-[
-F_+<0.
-]
+`F_+ < 0`.
 
 The existing float64 value near `-48.39054` is diagnostic context only and
 must never be substituted for this interval.
@@ -146,9 +134,7 @@ must never be substituted for this interval.
 
 The verifier must bind to the existing exact result and require
 
-[
-645.8037741471le F(u(0))le645.8037741472
-]
+`645.8037741471 <= F(u(0)) <= 645.8037741472`
 
 with strictly positive lower endpoint.
 
