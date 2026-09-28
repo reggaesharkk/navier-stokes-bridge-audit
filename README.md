@@ -8,6 +8,14 @@ This project is maintained as an independent exploratory mathematical audit with
 
 Prince Upadhyay, Independent Research · version 0.2 · 24 September 2026
 
+## 28 September 2026 finite-N11 validated crossing
+
+The post-hoc 112-pair N11 turnover datum now has a completed computer-assisted certificate. All 120 whole-segment Arb residual/gradient enclosures were replayed from the preserved predictor arrays, the exact initial margin is positive, the normalizer remains bounded away from zero, and the endpoint interval is strictly negative. Therefore the fixed finite N11 Fourier-Galerkin trajectory has at least one K36 90% crossing on `(0,0.003)`.
+
+Certified bounds include `F(0) in [645.8037741471,645.8037741472]`, uniform normalizer `>48990.29795521`, and `F(0.003) in [-54.748409847,-42.032667894]`. The certificate archive SHA-256 is `d29224e1dd4ad9f9454951415a3b080bc9f092839e24caaeddd056013785cfbe`.
+
+See [the validated theorem note](notes/WP16_036_N11_VALIDATED_TURNOVER_2026_09_28.md). This theorem concerns one fixed, post-hoc finite N11 Galerkin trajectory only. It does not establish continuum Navier–Stokes regularity, blowup, or cutoff-uniform persistence.
+
 This repository accompanies [REPORT.md](REPORT.md), a scoped audit of
 ten finite Fourier Galerkin work packages for the **unforced, periodic**
 three-dimensional Navier–Stokes equations. The most complete analytic
