@@ -268,3 +268,24 @@ The [N17 result note](notes/WP16_036_N17_RESULT_AND_MECHANISM_FAILURE_2026_09_28
 The [N11 112-pair initial-data witness](notes/WP16_036_SPARSE_TURNOVER_REDUCTION_2026_09_28.md) is derived after the N17 result. Its K36 margin changes sign between `t=0` and `.003` under finite Galerkin evolution, with replayable coefficients and three time-step checks. It is a numerical reduction, not an interval certificate, a minimal-support theorem, or a continuum result. The [exact rational initial anchor](notes/WP16_036_SPARSE_TURNOVER_EXACT_ANCHOR_2026_09_28.md) proves `F(0)>0` for a nearby exactly divergence-free rational field; the evolved negative sign still awaits validated trajectory bounds.
 
 The [validated-trajectory feasibility gate](notes/WP16_036_TURNOVER_CERTIFICATE_FEASIBILITY_2026_09_28.md) derives an N11 a posteriori energy-error inequality and records sampled residual/gradient diagnostics for the next certificate. Its residual and endpoint bounds are not yet validated.
+
+
+## WP16 finite-N11 turnover certificate proof package (28 September 2026)
+
+The [pending theorem statement](notes/WP16_036_TURNOVER_CROSSING_THEOREM_DRAFT_2026_09_28.md),
+[independent-verifier contract](notes/WP16_036_TURNOVER_CERTIFICATE_VERIFIER_SPEC_2026_09_28.md),
+[held publication template](notes/WP16_036_TURNOVER_CERTIFICATE_PUBLICATION_DRAFT_2026_09_28.md),
+[manifest template](results/wp16_n17_holdout/wp16_036_turnover_certificate_manifest.template.json),
+and [fail-closed publication preflight](src/wp16_036_turnover_certificate_preflight.py)
+prepare the proof package around the sparse N11 witness.
+
+These files do **not** claim that the crossing has been certified. The exact
+initial sign is already proved, but publication remains blocked until a
+complete continuous-time interval package independently verifies the
+trajectory-error recurrence, a strictly positive normalizer lower bound, and a
+strictly negative upper bound for `F(0.003)`. Only then does continuity yield
+a finite-N11 K36 90% mass-threshold crossing for the explicit rational initial
+field.
+
+The scope is one finite Galerkin trajectory; no all-N or continuum
+Navier-Stokes conclusion is implied.
