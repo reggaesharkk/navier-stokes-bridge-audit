@@ -92,3 +92,22 @@ Certified intervals are:
 All three upper endpoints are strictly negative. This certifies the C500 upper functional at the existing finite cutoffs; it does not yet certify a lower-cutoff-only next-cutoff prediction or any continuum statement.
 
 The archived v0.7 ZIP SHA-256 is `17c3d67aaa9ef113b6534f61e83532c914eeba28f21c46550ca30a71ff46113c`.
+
+
+## v0.8 kink-safe quadratic dual bridge
+
+WP19 v0.8 removes the absolute-value sign-flip obstruction from the dual-weighted endpoint architecture with the exact scalar inequality
+
+`|x| <= sign(x0)*x + (x-x0)^2/(2|x0|)`.
+
+Applied groupwise at the lower endpoint, this gives
+
+`G_C500(v) <= G_C500(a) + [L_a(v)-L_a(a)] + Q_a(v)`,
+
+where `L_a` is a smooth signed endpoint functional and `Q_a` is an explicit nonnegative quadratic correction over only the 36 K36 ratios. No K36 sign-stability assumption is required.
+
+On the saved transitions the observed quadratic corrections are `0.750228` for N11->N12 and `0.268059` for N12->N13. Reinterpreting the v0.6 adjoint as the first-order sensitivity of `L_a`, the smooth observed remainders are only `-0.048112` and `-0.002768`.
+
+After charging the v0.7 certified base upper margin, the sum of absolute observed first-order terms, the observed Q term, and the absolute smooth remainder, the scouting residual margins are approximately `31.17` and `47.06`. These are design budgets, not interval certificates.
+
+The archived v0.8 ZIP SHA-256 is `b192fd222da5e7d50d908cf4037981f83f2ce4c6a79a9b4517d1f21bfa804b47`.
