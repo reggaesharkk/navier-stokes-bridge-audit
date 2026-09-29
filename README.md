@@ -379,3 +379,12 @@ Using the N13 K36 numerator sign chart that was frozen prospectively in v0.9, an
 The prospective N13->N14 dual-weighted signed-numerator scout finds `Delta G~+2.9190`: the C500 surrogate becomes less negative at N14, so the N11->N13 decreasing trend is not monotone. All 120 observed first-order step contributions are positive and the floating linearization remainder is about 0.04575% of the actual signed-numerator change.
 
 These N14 values are predictor/scouting results, not a validated trajectory certificate. The existing Arb N14 whole-segment check remains to be run in an environment with `python-flint`. No all-N or continuum Navier-Stokes conclusion is claimed.
+
+
+## 30 September 2026 — N14 validated and WP19 v0.12 recursive closure gate
+
+The prospective same-rational-datum N14 Arb workflow completed with `PASS`: the 120 whole-segment 128-bit Arb enclosures give terminal trajectory-error upper bound `0.000012825905`, endpoint `F(T) in [-89.015834781,-85.160766265]`, and whole-path normalizer lower bound `48850.68586052`. The rigorous same-datum finite-cutoff chain is therefore N11, N12, N13, N14.
+
+The [v0.12 recursive-closure note](notes/WP19_v0_12_RECURSIVE_CLOSURE_AND_REGULARITY_GATE.md) fixes the low projector at N11 and derives the exact high-to-low feedback forcing `Gamma_M`. A finite-dimensional energy estimate shows that convergence of this closure forcing in `L1_t L2_x` controls convergence of the fixed N11 projections, and hence controls the frozen signed C500 numerator through a finite Lipschitz constant.
+
+The same note also proves why the observable cannot by itself be a regularity criterion: negative F/G occurs on smooth finite Fourier states, and the exact fixed-Pi11 identity makes G blind to arbitrary high-frequency additions. The correct next target is therefore a coupling estimate between shellwise closure increments and an independent high-frequency dissipation/continuation criterion. No all-N, continuum singularity, or global regularity theorem is claimed.
