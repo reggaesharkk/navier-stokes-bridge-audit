@@ -75,3 +75,20 @@ The non-rigorous discrete-adjoint scout gives:
 These are floating scouting quantities, not interval certificates. The next proof target is a rigorous scalar dual-weighted residual bound plus a second-order remainder enclosure, not a global state-norm bound.
 
 The archived v0.6 ZIP SHA-256 is `ed6346092007e9cd15ad17c157aa55b69990606fdaed4397874edff037d9dedd`.
+
+
+## v0.7 exact-rational C500 endpoint certificate
+
+WP19 v0.7 validates the v0.6 C500 endpoint surrogate on the already certified same-datum N11-N13 trajectories.
+
+The saved endpoint node is reconstructed using the same exact-decimal solenoidal/reality projection rule as the Arb endpoint certificate, and `G_C500` is evaluated with exact rational arithmetic. The previously certified endpoint error formula is a key-independent coefficient-9 source/normalizer envelope, so it also encloses perturbations of `G_C500`.
+
+Certified intervals are:
+
+- N11: `[-54.174149219, -41.458407264]`
+- N12: `[-56.770960917, -53.534635536]`
+- N13: `[-57.555599822, -53.965413679]`
+
+All three upper endpoints are strictly negative. This certifies the C500 upper functional at the existing finite cutoffs; it does not yet certify a lower-cutoff-only next-cutoff prediction or any continuum statement.
+
+The archived v0.7 ZIP SHA-256 is `17c3d67aaa9ef113b6534f61e83532c914eeba28f21c46550ca30a71ff46113c`.

@@ -341,3 +341,12 @@ A frozen C500 outside coalition gives an exact algebraic upper bound `F <= G_C50
 The saved N11->N12 and N12->N13 predictor families were then used for a **non-rigorous discrete-adjoint scout**. Instead of bounding the entire cutoff error in L2 and multiplying by a global endpoint Lipschitz constant, the scout weights each projected cutoff defect by the sensitivity of the endpoint surrogate. The observed first-order defect sums are `-7.505923` and `-0.604941`, while the sums of the absolute step contributions are only `9.489442` and `6.198853`, compared with starting negative upper margins `47.816278` and `55.152798`.
 
 This does not certify a cutoff bridge. It identifies a more promising rigorous target: interval-enclose the dual-weighted scalar residual and its second-order remainder. No cutoff-uniform or continuum Navier-Stokes theorem is claimed.
+
+
+## 29 September 2026 — WP19 v0.7 C500 endpoint certificate
+
+The [v0.7 certificate](notes/WP19_v0_7_C500_ENDPOINT_CERTIFICATE.md) upgrades the frozen C500 endpoint surrogate from a floating diagnostic to a rigorous endpoint functional on the already validated N11-N13 same-datum trajectories.
+
+Using exact rational evaluation of the precisely defined decimal endpoint field together with the existing Arb-certified global coefficient-9 perturbation envelope, the true C500 upper-observable intervals are `[-54.174149219,-41.458407264]` at N11, `[-56.770960917,-53.534635536]` at N12, and `[-57.555599822,-53.965413679]` at N13. Every upper endpoint is strictly negative.
+
+This does not predict an unseen cutoff. It validates the fixed endpoint objective that the v0.6 dual-weighted residual program will attempt to propagate across cutoffs. No continuum Navier-Stokes theorem is claimed.
