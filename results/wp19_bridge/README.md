@@ -157,3 +157,26 @@ For the prospectively frozen N13->N14 signed-numerator adjoint scout, `Delta G=+
 Thus the earlier N11->N13 decrease in G does not continue monotonically at N14. The current runtime lacks `python-flint`, so the N14 120-segment Arb enclosure has not been run here.
 
 The archived v0.11 ZIP SHA-256 is `0f3853212d697c0dcc3619454e15e6543a21f2d05a039f988ccc1f54c09ffe86`.
+
+
+## v0.12 recursive low/high closure and regularity compatibility gate
+
+The prospective N14 same-datum Arb validation passed with terminal trajectory-error upper bound `0.000012825905`, endpoint interval `[-89.015834781,-85.160766265]`, and whole-path normalizer lower bound `48850.68586052`. The rigorous same-datum finite-cutoff chain is now N11-N14.
+
+v0.12 translates the recursive-closure idea into the exact fixed projection `P=P11`. For `u_M=v_M+h_M`, the low state satisfies
+
+`dv_M/dt + nu A v_M + P B(v_M,v_M) = Gamma_M`
+
+with
+
+`Gamma_M=-P[B(v_M,h_M)+B(h_M,v_M)+B(h_M,h_M)]`.
+
+For two cutoffs, the fixed finite-dimensional energy estimate gives a cutoff-independent stability inequality of the form
+
+`||v_M-v_L|| <= exp(C11||u0||T) ||Gamma_M-Gamma_L||_{L1_t L2_x}`.
+
+This reduces all-cutoff transfer of the frozen signed numerator to a summable high-to-low closure budget.
+
+v0.12 also records two exact obstructions to a naive regularity interpretation. First, a negative K36/C500 value is compatible with a smooth finite Fourier state, so the static sign cannot itself imply singularity. Second, because `G_C500(a)=G_C500(Pi11 a)`, arbitrarily large high-frequency tails can be added without changing G; therefore G alone cannot control a high-frequency regularity criterion or determining wavenumber.
+
+The next gate is to bound the shellwise closure increment by a genuine high-frequency dissipation/continuation quantity. The archived v0.12 ZIP SHA-256 is `6d59f7d9c62ad968cae86034ef333883488364c0540c234d6f1afa9e526af702`.
