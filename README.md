@@ -314,3 +314,10 @@ The first [WP19 scouting result](notes/WP19_v0_3_SCOUT_REPORT.md) evaluates the 
 Compact outputs, provenance, and the SHA-256 values of the three Drive archive ZIPs are under [`results/wp19_bridge/`](results/wp19_bridge/). The scouting scripts are [`src/wp19_cutoff_bridge_diagnostic.py`](src/wp19_cutoff_bridge_diagnostic.py) and [`src/wp19_sampled_physical_strain.py`](src/wp19_sampled_physical_strain.py).
 
 No WP19 result currently establishes cutoff-uniform convergence, a continuum theorem, Navier-Stokes blowup, or global regularity.
+
+
+## 29 September 2026 — WP19 v0.4 one-sided K36 bridge
+
+[WP19 v0.4](notes/WP19_v0_4_ONE_SIDED_K36_CUTOFF_BRIDGE.md) sharpens the cutoff question using an exact property of the frozen K36 observable. Every selected K36 orbit lies below norm 10 (maximum squared norm 93), so for any cutoff N>=10, adding modes supported strictly above N while holding the low coefficients fixed cannot increase F=I-9O. The direct high-shell effect is therefore one-sided favorable; only its dynamical backreaction on the existing low coefficients can threaten a negative sign.
+
+The accompanying backreaction scout measures the low-mode forcing on the saved same-datum N11->N12 and N12->N13 trajectories. Its sampled recurrence values are about 0.3731 and 0.3230 versus observed low-mode endpoint drifts about 0.2256 and 0.2030. These are non-rigorous diagnostics. The next proof target is a rigorous whole-segment backreaction bound together with an orbit-aware low-mode endpoint perturbation certificate. No cutoff-uniform or continuum theorem is claimed.

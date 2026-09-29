@@ -26,3 +26,11 @@ The full node-by-node scouting traces and sampled physical-strain arrays are ret
 The v0.3 computation is explicitly **non-rigorous scouting**. It identifies the current proof-loss bottleneck: the Fourier-l1 strain majorant is much looser than the sampled physical-space symmetric strain. The next proof target is a whole-segment rigorous enclosure of `||S(u_N)||_{L-infinity,op}`, combined with an Arb enclosure of the newly opened-shell forcing.
 
 The historical N14-N17 phase/time-gate data are not the same datum as the later N11-N13 rational-witness Arb certificate family and must not be relabeled as such.
+
+## v0.4 one-sided observable bridge
+
+WP19 v0.4 proves an exact finite algebraic monotonicity statement for the frozen K36 observable: once the low coefficients are fixed and the cutoff is at least 10, newly added higher modes cannot increase F=I-9O. They cannot enter any selected K36 orbit-pair key, while new outside-key masses contribute nonnegatively to O.
+
+The dynamic cutoff problem therefore reduces to controlling the high shell's backreaction on the old low modes. The accompanying scout records low-mode endpoint drifts 0.225582 for N11->N12 and 0.203005 for N12->N13, with sampled backreaction recurrences 0.373078 and 0.322998. These are diagnostics, not certificates.
+
+The archived v0.4 ZIP SHA-256 is `1cfa821bc7ccadc50db77c068dc756cfd1b89051595e2caa7b708625f8a123a4`.
