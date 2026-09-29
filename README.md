@@ -273,17 +273,15 @@ The [N17 result note](notes/WP16_036_N17_RESULT_AND_MECHANISM_FAILURE_2026_09_28
 
 ## WP16 post-hoc sparse turnover reduction (28 September 2026)
 
-The [N11 112-pair initial-data witness](notes/WP16_036_SPARSE_TURNOVER_REDUCTION_2026_09_28.md) is derived after the N17 result. Its K36 margin changes sign between `t=0` and `.003` under finite Galerkin evolution, with replayable coefficients and three time-step checks. It is a numerical reduction, not an interval certificate, a minimal-support theorem, or a continuum result. The [exact rational initial anchor](notes/WP16_036_SPARSE_TURNOVER_EXACT_ANCHOR_2026_09_28.md) proves `F(0)>0` for a nearby exactly divergence-free rational field; the evolved negative sign still awaits validated trajectory bounds.
-
-The [validated-trajectory feasibility gate](notes/WP16_036_TURNOVER_CERTIFICATE_FEASIBILITY_2026_09_28.md) derives an N11 a posteriori energy-error inequality and records sampled residual/gradient diagnostics for the next certificate. Its residual and endpoint bounds are not yet validated.
+The [N11 112-pair initial-data witness](notes/WP16_036_SPARSE_TURNOVER_REDUCTION_2026_09_28.md) was selected after the N17 exploratory result. The original numerical reduction and exact rational initial anchor remain part of the history. The evolved N11 sign is now supported by the separate validated certificate in [the N11 proof note](notes/WP16_036_N11_VALIDATED_TURNOVER_2026_09_28.md); the earlier feasibility-gate diagnostics were sampled development checks, not the final interval bounds.
 
 
 ## WP16 same-datum finite-cutoff certificates (29 September 2026)
 
-The fixed 112-pair rational datum now has validated K36 sign crossings for the finite N11 and N12 Fourier–Galerkin ODEs. The N12 run reuses the exact N11 datum, zero-padded in the new modes, with the same viscosity, observable, and endpoint. Its receipt reports 120 independently rechecked Arb segments, initial F(0) in [645.8037741471,645.8037741472], endpoint F(0.003) in [-73.63322101,-70.396895629], and a whole-path normalizer lower bound of 49091.85228719.
+The fixed 112-pair rational datum now has validated K36 sign crossings for the finite N11 and N12 Fourier–Galerkin ODEs. The N12 run reuses the exact N11 datum, zero-padded in the new modes, with the same viscosity, observable, and endpoint. The post-audit run reports 120 independently rechecked Arb segments, initial F(0) in [645.8037741471,645.8037741472], endpoint F(0.003) in [-73.63322101,-70.396895629], and a whole-path normalizer lower bound of 49091.85228719.
 
-See the [N11–N12 report](notes/N11_to_N12_Cutoff_Persistence_Report_v1.md), the [N12 replay receipt](results/wp16_n12_same_datum/independent_replay_20260929/n12_same_datum_certificate.json), and the [replay log](results/wp16_n12_same_datum/independent_replay_20260929/replay.log). The source and rerun instructions are in [next-work/n12_same_datum](next-work/n12_same_datum/README.md).
+See the [N11–N12 report](notes/N11_to_N12_Cutoff_Persistence_Report_v1.md), the [post-audit N12 receipt](results/wp16_n12_same_datum/post_audit_replay_20260929/n12_same_datum_certificate.json), and its [replay log](results/wp16_n12_same_datum/post_audit_replay_20260929/replay.log). The source and rerun instructions are in [next-work/n12_same_datum](next-work/n12_same_datum/README.md).
 
-The replay receipt predates the follow-up source edits that make the norm regularization explicit, form the Grönwall step with Arb, and support both the GitHub and ZIP directory layouts. The previous float step was conservatively above the exact decimal step; the edited runner has not yet been replayed end-to-end.
+This rerun used the updated source, including the Arb decimal timestep and endpoint labels. The large predictor arrays remain separately downloadable from Drive; their hashes and the extraction command are documented with the source.
 
-These results concern two specific finite-dimensional trajectories. They do not establish cutoff-uniform control, a continuum Navier–Stokes result, or blowup.
+The results concern two specific finite-dimensional trajectories. They do not establish cutoff-uniform control, a continuum Navier–Stokes result, or blowup.
