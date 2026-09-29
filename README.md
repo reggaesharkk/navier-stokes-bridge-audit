@@ -357,3 +357,14 @@ This does not predict an unseen cutoff. It validates the fixed endpoint objectiv
 The [v0.8 gate](notes/WP19_v0_8_KINK_SAFE_QUADRATIC_DUAL_BRIDGE.md) gives a global quadratic upper tangent for each K36 absolute-value term. It rewrites the endpoint bridge as one smooth signed scalar objective plus an explicit 36-group nonnegative quadratic correction, so a future interval adjoint proof need not assume that K36 group signs remain fixed.
 
 On the existing N11->N12 and N12->N13 saved transitions, the quadratic corrections are about `0.7502` and `0.2681`. Combined with the v0.6 dual-weighted scout and the v0.7 certified base margins, large retrospective rigorization budgets remain. The dynamic terms are still floating diagnostics; no unseen cutoff or continuum theorem is certified.
+
+
+## 29 September 2026 — WP19 v0.9 certified sign chambers
+
+The [v0.9 certificate](notes/WP19_v0_9_CERTIFIED_K36_SIGN_CHAMBERS.md) proves that all 36 K36 numerator signs are fixed inside each of the already certified N11-N13 endpoint uncertainty balls. N12 and N13 share one sign chamber; N11 differs in one key. The N13 sign chart is frozen before any same-datum N14 endpoint result is generated.
+
+## 29 September 2026 — WP19 v0.10 signed numerator certificate
+
+The [v0.10 certificate](notes/WP19_v0_10_SIGNED_C500_NUMERATOR_CERTIFICATE.md) uses those sign locks and group-specific source perturbation bounds to certify the C500 signed numerator directly. The resulting certified C500 upper bounds are approximately `-44.8447`, `-54.4141`, and `-54.9610` at N11, N12, and N13.
+
+This is still finite-cutoff endpoint work. The unresolved step is a rigorous dynamic next-cutoff bridge for the frozen signed numerator; no all-N or continuum theorem is claimed.
