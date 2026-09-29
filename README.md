@@ -291,6 +291,6 @@ The results concern two specific finite-dimensional trajectories. They do not es
 
 The complete N13 package—including its source, predictor arrays, 120 segment enclosures, certificate, replay log, first-pass receipt, and per-file checksums—is attached to the [N13 GitHub pre-release](https://github.com/reggaesharkk/navier-stokes-bridge-audit/releases/tag/n13-same-datum-v1). The archive SHA-256 is `858eeec4a1cb323d23e91ffa9914af823a388a78ecc39c758abea3fcdec9ac5e`.
 
-The fixed N13 Galerkin run passed 120/120 independent Arb comparisons. Its terminal error upper bound is 0.000012244529, endpoint interval is [-87.154087422, -83.563901281], and whole-path normalizer lower bound is 48869.38355689. The full N11–N13 comparison and scope limits are recorded in the [N11–N13 report](https://github.com/reggaesharkk/navier-stokes-bridge-audit/releases/download/n13-same-datum-v1/N13_Same_Datum_Certified_Crossing_v1.zip).
+The fixed N13 Galerkin run passed 120/120 independent Arb comparisons. Its terminal error upper bound is 0.000012244529, endpoint interval is [-87.154087422, -83.563901281], and whole-path normalizer lower bound is 48869.38355689. The full N11–N13 comparison and scope limits are recorded in the [N11–N13 report](notes/N11_to_N13_Same_Datum_Cutoff_Report_2026_09_29.md).
 
 These are finite-dimensional results for specified Galerkin systems. They do not establish cutoff-uniform control, a continuum Navier–Stokes result, or blowup.
