@@ -140,3 +140,20 @@ The corresponding signed numerator upper bounds are all strictly negative, and t
 The dynamic cutoff-transfer problem is still open. The next rigorous target is a validated dual-weighted residual plus second-order remainder for this frozen signed numerator.
 
 The archived v0.10 ZIP SHA-256 is `e8875372558cfc805e0082bf74f5cf6fa90ccbb8a96e5a7acb3b9d5911ffab5a`.
+
+
+## v0.11 fixed-Pi11 locality and prospective N14 transfer
+
+WP19 v0.11 sharpens the v0.6 support result to an exact projection identity. Every orbit entering the frozen K36+C500 numerator has norm at most 11, and the normalizer anchors are also inside N11. Therefore, for every cutoff `M>=11`, the signed numerator depends only on `Pi_11 a`, and whenever the normalizer is nonzero,
+
+`G_C500(a) = G_C500(Pi_11 a)`.
+
+A same-rational-datum N14 predictor was then generated **after** the v0.9 N13 K36 sign chart had been frozen. The predictor uses the unchanged witness, `nu=0.1`, `T=0.003`, 120 RK4 steps and no retuning. Predictor array hashes are recorded in `N14_SAME_DATUM_PREDICTOR_METADATA.json`.
+
+The prospective floating N14 endpoint gives approximately `F=-87.088300523` and `G_C500=-52.841462912`. An independent half-step run differs by only `6.1163e-9` in endpoint L2 and preserves the frozen N13 K36 numerator sign chart 36/36. These are numerical diagnostics, not an Arb trajectory certificate.
+
+For the prospectively frozen N13->N14 signed-numerator adjoint scout, `Delta G=+2.919044`. The signed-numerator change is about `+7.73799e9`, the first-order dual sum is about `+7.74153e9`, and the floating remainder is about `-3.54e6` (roughly 0.04575% of the actual numerator change). All 120 observed first-order step contributions are positive.
+
+Thus the earlier N11->N13 decrease in G does not continue monotonically at N14. The current runtime lacks `python-flint`, so the N14 120-segment Arb enclosure has not been run here.
+
+The archived v0.11 ZIP SHA-256 is `0f3853212d697c0dcc3619454e15e6543a21f2d05a039f988ccc1f54c09ffe86`.

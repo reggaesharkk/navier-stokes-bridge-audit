@@ -368,3 +368,14 @@ The [v0.9 certificate](notes/WP19_v0_9_CERTIFIED_K36_SIGN_CHAMBERS.md) proves th
 The [v0.10 certificate](notes/WP19_v0_10_SIGNED_C500_NUMERATOR_CERTIFICATE.md) uses those sign locks and group-specific source perturbation bounds to certify the C500 signed numerator directly. The resulting certified C500 upper bounds are approximately `-44.8447`, `-54.4141`, and `-54.9610` at N11, N12, and N13.
 
 This is still finite-cutoff endpoint work. The unresolved step is a rigorous dynamic next-cutoff bridge for the frozen signed numerator; no all-N or continuum theorem is claimed.
+
+
+## 29 September 2026 — WP19 v0.11 fixed-Pi11 locality and prospective N14 scout
+
+The [v0.11 note](notes/WP19_v0_11_FIXED_PI11_AND_PROSPECTIVE_N14.md) proves an exact endpoint-locality refinement: every frozen K36+C500 source orbit and every normalizer anchor is already contained in N11. Hence the frozen signed numerator, and `G_C500` whenever its normalizer is nonzero, depend only on the fixed projection `Pi_11 a` for every cutoff `M>=11`.
+
+Using the N13 K36 numerator sign chart that was frozen prospectively in v0.9, an untouched same-rational-datum N14 predictor was generated with no retuning. Its floating endpoint has `F~-87.0883` and `G_C500~-52.8415`; a half-step comparison changes the endpoint state by about `6.12e-9` in L2, and the frozen N13 sign chart matches 36/36 at both step sizes.
+
+The prospective N13->N14 dual-weighted signed-numerator scout finds `Delta G~+2.9190`: the C500 surrogate becomes less negative at N14, so the N11->N13 decreasing trend is not monotone. All 120 observed first-order step contributions are positive and the floating linearization remainder is about 0.04575% of the actual signed-numerator change.
+
+These N14 values are predictor/scouting results, not a validated trajectory certificate. The existing Arb N14 whole-segment check remains to be run in an environment with `python-flint`. No all-N or continuum Navier-Stokes conclusion is claimed.
