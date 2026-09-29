@@ -330,3 +330,14 @@ The [v0.5 locality gate](notes/WP19_v0_5_FIXED_COALITION_LOCALITY.md) further re
 Without retuning the coalition, the saved same-datum endpoint diagnostics give `U_C200=-33.178421` at N11, `-44.220575` at N12, and `-46.113595` at N13. Those numerical values remain floating diagnostics pending interval re-evaluation; the finite-support inequality is algebraic.
 
 The next open gate is no longer an all-low-mode L2 estimate. It is support-aware dynamical control of the fixed 569-mode set under backreaction from arbitrarily higher shells.
+
+
+## 29 September 2026 — WP19 v0.6 dual-weighted residual bridge
+
+The [v0.6 bridge](notes/WP19_v0_6_DUAL_WEIGHTED_RESIDUAL_BRIDGE.md) introduces a stronger endpoint upper surrogate and a goal-oriented cutoff-error diagnostic.
+
+A frozen C500 outside coalition gives an exact algebraic upper bound `F <= G_C500` whenever the tracked normalizer is nonzero. The surrogate uses 1,048 ordered K-channel source pairs and 1,159 fixed Fourier modes; its support does not grow once the cutoff is at least 11.
+
+The saved N11->N12 and N12->N13 predictor families were then used for a **non-rigorous discrete-adjoint scout**. Instead of bounding the entire cutoff error in L2 and multiplying by a global endpoint Lipschitz constant, the scout weights each projected cutoff defect by the sensitivity of the endpoint surrogate. The observed first-order defect sums are `-7.505923` and `-0.604941`, while the sums of the absolute step contributions are only `9.489442` and `6.198853`, compared with starting negative upper margins `47.816278` and `55.152798`.
+
+This does not certify a cutoff bridge. It identifies a more promising rigorous target: interval-enclose the dual-weighted scalar residual and its second-order remainder. No cutoff-uniform or continuum Navier-Stokes theorem is claimed.
