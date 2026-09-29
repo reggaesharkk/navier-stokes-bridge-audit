@@ -278,22 +278,12 @@ The [N11 112-pair initial-data witness](notes/WP16_036_SPARSE_TURNOVER_REDUCTION
 The [validated-trajectory feasibility gate](notes/WP16_036_TURNOVER_CERTIFICATE_FEASIBILITY_2026_09_28.md) derives an N11 a posteriori energy-error inequality and records sampled residual/gradient diagnostics for the next certificate. Its residual and endpoint bounds are not yet validated.
 
 
-## WP16 finite-N11 turnover certificate proof package (28 September 2026)
+## WP16 same-datum finite-cutoff certificates (29 September 2026)
 
-The [pending theorem statement](notes/WP16_036_TURNOVER_CROSSING_THEOREM_DRAFT_2026_09_28.md),
-[independent-verifier contract](notes/WP16_036_TURNOVER_CERTIFICATE_VERIFIER_SPEC_2026_09_28.md),
-[held publication template](notes/WP16_036_TURNOVER_CERTIFICATE_PUBLICATION_DRAFT_2026_09_28.md),
-[manifest template](results/wp16_n17_holdout/wp16_036_turnover_certificate_manifest.template.json),
-and [fail-closed publication preflight](src/wp16_036_turnover_certificate_preflight.py)
-prepare the proof package around the sparse N11 witness.
+The fixed 112-pair rational datum now has validated K36 sign crossings for the finite N11 and N12 Fourier–Galerkin ODEs. The N12 run reuses the exact N11 datum, zero-padded in the new modes, with the same viscosity, observable, and endpoint. Its receipt reports 120 independently rechecked Arb segments, initial F(0) in [645.8037741471,645.8037741472], endpoint F(0.003) in [-73.63322101,-70.396895629], and a whole-path normalizer lower bound of 49091.85228719.
 
-These files do **not** claim that the crossing has been certified. The exact
-initial sign is already proved, but publication remains blocked until a
-complete continuous-time interval package independently verifies the
-trajectory-error recurrence, a strictly positive normalizer lower bound, and a
-strictly negative upper bound for `F(0.003)`. Only then does continuity yield
-a finite-N11 K36 90% mass-threshold crossing for the explicit rational initial
-field.
+See the [N11–N12 report](notes/N11_to_N12_Cutoff_Persistence_Report_v1.md), the [N12 replay receipt](results/wp16_n12_same_datum/independent_replay_20260929/n12_same_datum_certificate.json), and the [replay log](results/wp16_n12_same_datum/independent_replay_20260929/replay.log). The source and rerun instructions are in [next-work/n12_same_datum](next-work/n12_same_datum/README.md).
 
-The scope is one finite Galerkin trajectory; no all-N or continuum
-Navier-Stokes conclusion is implied.
+The replay receipt predates the follow-up source edits that make the norm regularization explicit, form the Grönwall step with Arb, and support both the GitHub and ZIP directory layouts. The previous float step was conservatively above the exact decimal step; the edited runner has not yet been replayed end-to-end.
+
+These results concern two specific finite-dimensional trajectories. They do not establish cutoff-uniform control, a continuum Navier–Stokes result, or blowup.
