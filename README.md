@@ -294,3 +294,23 @@ The complete N13 package—including its source, predictor arrays, 120 segment e
 The fixed N13 Galerkin run passed 120/120 independent Arb comparisons. Its terminal error upper bound is 0.000012244529, endpoint interval is [-87.154087422, -83.563901281], and whole-path normalizer lower bound is 48869.38355689. The full N11–N13 comparison and scope limits are recorded in the [N11–N13 report](notes/N11_to_N13_Same_Datum_Cutoff_Report_2026_09_29.md).
 
 These are finite-dimensional results for specified Galerkin systems. They do not establish cutoff-uniform control, a continuum Navier–Stokes result, or blowup.
+
+
+## 29 September 2026 — WP19 consecutive-cutoff bridge program
+
+WP19 starts a proof-oriented cutoff-comparison track built around the same fixed rational witness used in the N11-N13 Arb certificate family.
+
+The analytic gate derives a lower-cutoff-only difference inequality for
+`E_N(t)=||u_{N+1}(t)-u_N(t)||_2` with forcing
+
+`h_N(t)=||(Π_{N+1}-Π_N)B(u_N,u_N)||_2`.
+
+See [WP19 v0.1](notes/WP19_CONSECUTIVE_CUTOFF_BRIDGE_GATE_v0_1.md).
+
+A separate [evidence map](notes/WP19_v0_2_EVIDENCE_MAP.md) records that the older prospective WP16 phase/K36 program continued through N17, while keeping those optimizer-derived N14-N17 states logically separate from the later zero-padded 112-pair same-datum Arb certificates at N11-N13. The N17 broad time gate passed, but its separately frozen mechanism gate failed or became unevaluable; that failure remains part of the record.
+
+The first [WP19 scouting result](notes/WP19_v0_3_SCOUT_REPORT.md) evaluates the new-shell forcing on the saved N11 and N12 predictor paths. In node-sampled diagnostics, the forcing integral decreases from about `0.6925` for N11->N12 to `0.5239` for N12->N13. The crude Fourier-l1 strain majorant gives approximately 20x-overlarge endpoint error estimates, while a sampled physical-space symmetric-strain diagnostic reduces the gap to roughly 2x. This is **not a rigorous cutoff certificate**; it identifies the next proof bottleneck: a whole-segment rigorous enclosure of `||S(u_N)||_{L-infinity,op}`.
+
+Compact outputs, provenance, and the SHA-256 values of the three Drive archive ZIPs are under [`results/wp19_bridge/`](results/wp19_bridge/). The scouting scripts are [`src/wp19_cutoff_bridge_diagnostic.py`](src/wp19_cutoff_bridge_diagnostic.py) and [`src/wp19_sampled_physical_strain.py`](src/wp19_sampled_physical_strain.py).
+
+No WP19 result currently establishes cutoff-uniform convergence, a continuum theorem, Navier-Stokes blowup, or global regularity.
