@@ -1,30 +1,74 @@
-# N12 same-datum certificate
+# N12 fixed-datum cutoff check
 
-This package records the N12 finite Galerkin certificate for the same fixed rational 112-pair datum used at N11. The datum is embedded into N12 by zero-padding the new modes. Viscosity is 0.1, the interval is [0, 0.003], and the grid has 120 steps.
+The question and pass gates were frozen in `PROTOCOL.md` before the N12 run.
+The same exact rational trigonometric datum used for the N11 certificate was
+embedded in the N12 Galerkin system by assigning zero to every new mode.
+The viscosity, endpoint, observable, ordered K36 keys, and 120-step grid were
+kept fixed.
 
 ## Result
 
-The archived replay receipt and log are in the dated results folder at ../../results/wp16_n12_same_datum/independent_replay_20260929/. They report PASS, 120 independently rechecked Arb segment enclosures, initial F interval [645.8037741471, 645.8037741472], endpoint F interval [-73.63322101, -70.396895629], terminal L2 error upper bound 0.000011374869 using symmetric strain, and a whole-path normalizer lower bound 49091.85228719.
+All 120 Arb whole-segment enclosures were generated, and a separate second
+Arb pass recomputed and accepted every one of them. The endpoint and
+normalizer evaluation from the saved enclosures gives:
 
-The receipt was produced before the later proof and code-clarity edits. It used a Python float timestep that was checked to lie above 1/40000, so its error bound is conservative. The current runner uses an Arb decimal timestep and has not yet been run end-to-end after that cleanup. See the N11–N12 report at ../../notes/N11_to_N12_Cutoff_Persistence_Report_v1.md.
+| Gate | Certified value |
+| --- | ---: |
+| Exact initial observable `F(0)` | `[645.8037741471, 645.8037741472]` |
+| Galerkin trajectory error at `T=0.003`, symmetric-strain bound | `<= 0.000011374869` |
+| Original full-gradient error bound for comparison | `<= 0.000050798503` |
+| True N12 endpoint observable `F(T)` | `[-73.63322101, -70.396895629]` |
+| Whole-path K36 normalizer absolute value | `>= 49091.85228719` |
 
-## Reproduce in this GitHub checkout
+Thus the same fixed datum has a rigorously certified sign crossing at both
+N11 and N12. This is evidence at two finite cutoffs. It establishes neither
+cutoff-uniform control nor a continuum Navier–Stokes theorem. A zero need not
+be unique or occur at the same time at the two cutoffs.
 
-The source expects the repository’s existing src/ and results/ data. The predictor arrays are too large for this source-only update and remain as separate Drive archives. Download N12_Predictor_Nodes_v1.zip and N12_Predictor_RHS_v1.zip into the repository root. Their archive SHA-256 values are:
+`results/post_audit_replay_20260929/` records the cleaned-up runner's full
+replay. It independently recomputed and accepted all 120 segment enclosures,
+then completed the trajectory, endpoint, and whole-path normalizer checks in
+the same invocation. Its certificate reports
+`independent_arb_segment_replay: true`. Earlier receipts remain in
+`results/full_run/` and `results/independent_replay_20260929/` as historical
+records; use the post-audit receipt for the current source. The updated
+endpoint writer labels the raw Arb lower ball and rounded decimal lower bound
+separately.
 
-- Nodes: 57985729f5e6f08712573ea1ffa88ad24f7dfb7bfb049e46396e7b8158f6e2ea
-- RHS: 7d6e867cff74949d779c8f86de5f5106c10f8a5b6034a14b20c39f0282b57a65
+The norm inequality remains valid at zeros of `w`: for `ε>0`, put
+`y_ε=(||w||₂²+ε²)^(1/2)`. The energy inequality implies
+`y_ε'≤S y_ε+R`, where `S=||S(v)||∞,op` and `R=||r||₂`; integrate this
+scalar inequality on each segment and let `ε` decrease to zero. The code's
+update `e^(Sh)(E+hR)` bounds the resulting Grönwall expression because
+`(e^(Sh)-1)/S≤h e^(Sh)` for `S≥0` (including its limit at `S=0`).
 
-From the repository root, extract the arrays into a fresh output directory and run the verifier:
+## Reproduce
 
-    OUT=results/wp16_n12_same_datum/replay-input
-    mkdir -p "$OUT"
-    unzip -p N12_Predictor_Nodes_v1.zip vrk-zenodo/next-work/n12_same_datum/results/full_run/nodes.npy > "$OUT/nodes.npy"
-    unzip -p N12_Predictor_RHS_v1.zip vrk-zenodo/next-work/n12_same_datum/results/full_run/rhs.npy > "$OUT/rhs.npy"
-    PYTHONDONTWRITEBYTECODE=1 python3 next-work/n12_same_datum/tools/run_n12_certificate.py --output-dir "$OUT" --workers 8 --recompute-segments
+From the directory containing `vrk-zenodo`, install `numpy==2.3.5` and
+`python-flint==0.9.0` in a Python environment, then run:
 
-Use Python 3.12, numpy==2.3.5, and python-flint==0.9.0. The check takes substantial CPU time. The checked-in replay receipt preserves the previous complete run; it does not claim that this cleaned-up source was already run.
+```bash
+python vrk-zenodo/next-work/n12_same_datum/tools/run_n12_certificate.py \
+  --output-dir vrk-zenodo/next-work/n12_same_datum/results/full_run \
+  --workers 8 --recompute-segments
+```
 
-## Scope
+The script checks the witness/key SHA-256, predictor array hashes, all 120
+segment input hashes, symmetric-strain error recurrence, exact initial sign,
+endpoint Arb interval, and whole-path normalizer bound. The two Arb passes
+take substantial CPU time. Rerunning without `--recompute-segments` quickly
+rechecks the stored segment digests and final gates but does not regenerate
+the Arb enclosures.
 
-This is a sign crossing for one fixed finite-dimensional N12 ODE. It is not a cutoff-uniform estimate or a continuum Navier–Stokes theorem.
+The three downloadable ZIPs extract into one `vrk-zenodo` directory: the
+source/certificate ZIP contains this note, scripts, frozen witness and keys,
+their source dependencies, and all 120 segment enclosures; the other two
+contain the predictor node and RHS arrays. Extract all three into the same
+parent directory before checking hashes or running the full replay. These
+packages were produced without changing the frozen N11 or N17 releases.
+
+From `vrk-zenodo`, check all 250 archived files before replay:
+
+```bash
+sha256sum -c next-work/n12_same_datum/SHA256SUMS.txt
+```

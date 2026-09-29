@@ -55,18 +55,16 @@ float representation.
 
 ## Verification and limits
 
-The N12 run used 120 whole-segment Arb enclosures at 128-bit precision.
-The stored node/RHS arrays and all segment inputs are SHA-256 tied to the
-frozen witness and K36 keys. The clean replay at
-`results/independent_replay_20260929/` independently recomputed and accepted
-all 120 segments; its log and JSON record
-`independent_arb_segment_replay=true`. This replay preceded the present
-source cleanup. Its recurrence used the Python float representation of
-`0.000025`, which was checked to be above the exact rational step and thus
-made the error bound slightly conservative. The current runner uses the
-Arb decimal step directly. The replay receipt is evidence for the earlier
-source and remains a valid, slightly looser bound; the edited runner itself
-has not yet been rerun end-to-end.
+The post-audit N12 run used 120 whole-segment Arb enclosures at 128-bit
+precision. It independently recomputed and accepted all 120 saved segment
+enclosures, then completed the trajectory, endpoint, and whole-path
+normalizer gates in the same invocation. Its certificate and log are in
+`results/wp16_n12_same_datum/post_audit_replay_20260929/`; the certificate
+reports `independent_arb_segment_replay=true`. This run used the updated
+runner, including the Arb decimal timestep, endpoint lower-bound labels, and
+the GitHub/ZIP layout fallback. The predictor arrays and segment inputs are
+SHA-256 tied to the frozen witness and K36 keys. Earlier receipts remain
+available in the local N12 package as historical records.
 
 This is a rigorous result for **two finite-dimensional ODEs**. It does not
 bound the difference between successive cutoffs for all N, certify a
@@ -90,8 +88,3 @@ The full N12 data are split into `N12_Source_and_Certificate_v1.zip`,
 three into the same directory. The source package includes the frozen
 protocol, executable verifier, report, segment files, and a 250-file checksum
 manifest. The N11 bracket has its own small companion ZIP.
-
-
-## GitHub replay assets
-
-The current GitHub tree stores the cleaned-up N12 source under next-work/n12_same_datum/ and the prior full-run receipt under results/wp16_n12_same_datum/independent_replay_20260929/. The receipt and segment-enclosure ZIP are checksummed there. The predictor arrays are not committed; their separate archive hashes and extraction command are in the package README.
