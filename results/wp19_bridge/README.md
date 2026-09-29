@@ -111,3 +111,32 @@ On the saved transitions the observed quadratic corrections are `0.750228` for N
 After charging the v0.7 certified base upper margin, the sum of absolute observed first-order terms, the observed Q term, and the absolute smooth remainder, the scouting residual margins are approximately `31.17` and `47.06`. These are design budgets, not interval certificates.
 
 The archived v0.8 ZIP SHA-256 is `b192fd222da5e7d50d908cf4037981f83f2ce4c6a79a9b4517d1f21bfa804b47`.
+
+
+## v0.9 certified K36 sign chambers
+
+WP19 v0.9 resolves the 36 K36 absolute-value signs inside each existing certified endpoint ball.
+
+All 36 numerator signs are certified at N11, N12, and N13. The weakest sign-margin ratios `|n_g|/Delta n_g` are approximately `3.1054`, `1.9571`, and `5.2772`, respectively.
+
+N12 and N13 lie in the same 36-sign chamber. N11 differs in exactly one frozen key, `((2,2,2),(2,5,8))`.
+
+The N13 sign chart is frozen prospectively for a future same-datum N14 test with SHA-256 `7cbb307c70aa14fabdc28ae07f0965716bf498e63c371b61e1b9bfd00611c7bd`.
+
+The archived v0.9 ZIP SHA-256 is `ee1fda165f6f980fd77f6907017c832c729bc9ebaf29c0ee93ef3e3cf309c566`.
+
+## v0.10 signed C500 numerator certificate
+
+WP19 v0.10 uses the v0.9 sign locks to remove the K36 absolute values from the current endpoint balls and certifies the signed C500 numerator directly.
+
+Instead of charging every retained group with the global source perturbation, v0.10 uses a group-specific Cauchy bound over the repeated source indices. Certified C500 upper bounds improve to approximately:
+
+- N11: `-44.8446856075`
+- N12: `-54.4140649514`
+- N13: `-54.9610084477`
+
+The corresponding signed numerator upper bounds are all strictly negative, and the independent normalizer lower bounds remain positive.
+
+The dynamic cutoff-transfer problem is still open. The next rigorous target is a validated dual-weighted residual plus second-order remainder for this frozen signed numerator.
+
+The archived v0.10 ZIP SHA-256 is `e8875372558cfc805e0082bf74f5cf6fa90ccbb8a96e5a7acb3b9d5911ffab5a`.
