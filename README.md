@@ -321,3 +321,12 @@ No WP19 result currently establishes cutoff-uniform convergence, a continuum the
 [WP19 v0.4](notes/WP19_v0_4_ONE_SIDED_K36_CUTOFF_BRIDGE.md) sharpens the cutoff question using an exact property of the frozen K36 observable. Every selected K36 orbit lies below norm 10 (maximum squared norm 93), so for any cutoff N>=10, adding modes supported strictly above N while holding the low coefficients fixed cannot increase F=I-9O. The direct high-shell effect is therefore one-sided favorable; only its dynamical backreaction on the existing low coefficients can threaten a negative sign.
 
 The accompanying backreaction scout measures the low-mode forcing on the saved same-datum N11->N12 and N12->N13 trajectories. Its sampled recurrence values are about 0.3731 and 0.3230 versus observed low-mode endpoint drifts about 0.2256 and 0.2030. These are non-rigorous diagnostics. The next proof target is a rigorous whole-segment backreaction bound together with an orbit-aware low-mode endpoint perturbation certificate. No cutoff-uniform or continuum theorem is claimed.
+
+
+## 29 September 2026 — WP19 v0.5 fixed finite coalition locality
+
+The [v0.5 locality gate](notes/WP19_v0_5_FIXED_COALITION_LOCALITY.md) further reduces the K36 cutoff bridge to a fixed finite endpoint witness. A frozen N11-derived coalition of 200 outside-K36 orbit-pair groups defines an upper observable `U_C200` satisfying `F <= U_C200`. Together with all 36 K36 keys, the retained observable uses only 461 ordered K-channel source pairs and 569 Fourier modes, and this support no longer grows once the cutoff reaches N=11.
+
+Without retuning the coalition, the saved same-datum endpoint diagnostics give `U_C200=-33.178421` at N11, `-44.220575` at N12, and `-46.113595` at N13. Those numerical values remain floating diagnostics pending interval re-evaluation; the finite-support inequality is algebraic.
+
+The next open gate is no longer an all-low-mode L2 estimate. It is support-aware dynamical control of the fixed 569-mode set under backreaction from arbitrarily higher shells.

@@ -34,3 +34,21 @@ WP19 v0.4 proves an exact finite algebraic monotonicity statement for the frozen
 The dynamic cutoff problem therefore reduces to controlling the high shell's backreaction on the old low modes. The accompanying scout records low-mode endpoint drifts 0.225582 for N11->N12 and 0.203005 for N12->N13, with sampled backreaction recurrences 0.373078 and 0.322998. These are diagnostics, not certificates.
 
 The archived v0.4 ZIP SHA-256 is `1cfa821bc7ccadc50db77c068dc756cfd1b89051595e2caa7b708625f8a123a4`.
+
+
+## v0.5 fixed finite coalition locality
+
+WP19 v0.5 freezes a post-hoc N11-derived set of 200 outside-K36 orbit-pair groups. Because omitted outside groups only decrease the full observable, the retained coalition defines an exact upper observable `U_C200` with `F <= U_C200`.
+
+The union of K36 and C200 uses exactly 461 ordered K-channel source pairs and 569 unique Fourier modes. Every retained orbit has norm at most 11, so this support is unchanged at N=11,12,13,14,17 and, algebraically, for every larger cutoff.
+
+The unchanged C200 upper observable is negative at the saved same-datum endpoints:
+- N11: -33.178421
+- N12: -44.220575
+- N13: -46.113595
+
+These three values are floating transfer diagnostics. The support-locality theorem and `F <= U_C200` inequality are exact. A single global low-mode L2 perturbation ball remains far too loose, so the next gate must propagate support-aware or direction-aware error on the fixed 569-mode set.
+
+C200 SHA-256: `4fb5531fcc6c4490aa7826992ff843f27fefdbc1427c7587ac0544027420e698`.
+
+The archived v0.5 ZIP SHA-256 is `fa1c440248016c015bd974b191232d1ffc687f2b5b722eabb31bf61ee30a5a5f`.
