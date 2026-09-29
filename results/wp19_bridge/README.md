@@ -52,3 +52,26 @@ These three values are floating transfer diagnostics. The support-locality theor
 C200 SHA-256: `4fb5531fcc6c4490aa7826992ff843f27fefdbc1427c7587ac0544027420e698`.
 
 The archived v0.5 ZIP SHA-256 is `fa1c440248016c015bd974b191232d1ffc687f2b5b722eabb31bf61ee30a5a5f`.
+
+
+## v0.6 dual-weighted residual bridge
+
+WP19 v0.6 replaces the norm-first endpoint perturbation route with a goal-oriented discrete-adjoint scout.
+
+A post-hoc N11-derived C500 outside coalition is frozen with SHA-256 `79bdc347358705b4611f10f76a50db16e5edff572d1822ca1459cd868e15c216`. Using
+`n_g = Im(w_g * conj(z))` and fixed signs `tau_g`, it defines the exact upper surrogate
+
+`G_C500 = (sum_K36 |n_g| - 9 sum_C500 tau_g n_g)/|z|^2`
+
+with `F <= G_C500` whenever the normalizer is nonzero.
+
+The C500 surrogate depends on exactly 1,048 ordered source pairs and 1,159 Fourier modes for every cutoff at least 11. The materialized C500 JSON is retained in the v0.6 archive; `src/wp19_v0_6_build_fixed_c500.py` deterministically regenerates it and verifies its hash.
+
+The non-rigorous discrete-adjoint scout gives:
+
+- N11->N12: base upper margin `-47.816278`, projected-higher value `-55.152798`, linearized dual-weighted defect sum `-7.505923`, observed nonlinear remainder `+0.169403`, and sum of absolute step contributions `9.489442`.
+- N12->N13: base upper margin `-55.152798`, projected-higher value `-55.760507`, linearized dual-weighted defect sum `-0.604941`, observed remainder `-0.002768`, and sum of absolute step contributions `6.198853`.
+
+These are floating scouting quantities, not interval certificates. The next proof target is a rigorous scalar dual-weighted residual bound plus a second-order remainder enclosure, not a global state-norm bound.
+
+The archived v0.6 ZIP SHA-256 is `ed6346092007e9cd15ad17c157aa55b69990606fdaed4397874edff037d9dedd`.
