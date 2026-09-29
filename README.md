@@ -350,3 +350,10 @@ The [v0.7 certificate](notes/WP19_v0_7_C500_ENDPOINT_CERTIFICATE.md) upgrades th
 Using exact rational evaluation of the precisely defined decimal endpoint field together with the existing Arb-certified global coefficient-9 perturbation envelope, the true C500 upper-observable intervals are `[-54.174149219,-41.458407264]` at N11, `[-56.770960917,-53.534635536]` at N12, and `[-57.555599822,-53.965413679]` at N13. Every upper endpoint is strictly negative.
 
 This does not predict an unseen cutoff. It validates the fixed endpoint objective that the v0.6 dual-weighted residual program will attempt to propagate across cutoffs. No continuum Navier-Stokes theorem is claimed.
+
+
+## 29 September 2026 — WP19 v0.8 kink-safe quadratic dual bridge
+
+The [v0.8 gate](notes/WP19_v0_8_KINK_SAFE_QUADRATIC_DUAL_BRIDGE.md) gives a global quadratic upper tangent for each K36 absolute-value term. It rewrites the endpoint bridge as one smooth signed scalar objective plus an explicit 36-group nonnegative quadratic correction, so a future interval adjoint proof need not assume that K36 group signs remain fixed.
+
+On the existing N11->N12 and N12->N13 saved transitions, the quadratic corrections are about `0.7502` and `0.2681`. Combined with the v0.6 dual-weighted scout and the v0.7 certified base margins, large retrospective rigorization budgets remain. The dynamic terms are still floating diagnostics; no unseen cutoff or continuum theorem is certified.
