@@ -138,7 +138,7 @@ def main():
       "objective":"fixed degree-7 polynomial signed-C500 numerator on P11",
       "frozen":{
         "witness_sha256":EXPECTED_WITNESS,"K36_sha256":EXPECTED_K36,
-        "K36_sign_chart_sha256":obj.EXPECTED_SIGN_CHART,"C500_semantic_sha256":EXPECTED_C500_SEMANTIC,
+        "K36_sign_vector_semantic_sha256":obj.EXPECTED_SIGN_SEMANTIC,"C500_semantic_sha256":EXPECTED_C500_SEMANTIC,
         "K36_signs_retuned":False,"C500_retuned":False},
       "base_nominal_signed_numerator":J0,"target_nominal_signed_numerator":J1,"actual_delta_signed_numerator":actual,
       "exact_endpoint_crosscheck":{
