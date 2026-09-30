@@ -276,7 +276,7 @@ jobs:
 
       - name: Record final hashes
         run: |
-          find final -type f -print0 | sort -z | xargs -0 sha256sum > final/SHA256SUMS.txt
+          find final -type f ! -name SHA256SUMS.txt -print0 | sort -z | xargs -0 sha256sum > final/SHA256SUMS.txt
 
       - name: Upload aggregate certificate
         uses: actions/upload-artifact@v4
