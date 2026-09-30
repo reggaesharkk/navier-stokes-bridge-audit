@@ -434,3 +434,14 @@ The [v0.16 Arb gate](notes/WP19_v0_16_BGT_CRITICAL_SPACE_ARB_GATE.md) tests a pu
 A 160-bit lower screen using one omitted mode and the first Hermite segment proves the criterion's left-hand side is already above one by an enormous margin: `log(LHS)>6.217838664529e12`. This is a rigorous no-go for that certification route, not evidence of singularity or nonexistence.
 
 The continuum program now pivots to reconstruction-specific Fourier-linearized stability, retaining the actual modewise viscous damping and the known full-PDE truncation residual rather than collapsing the dynamics into a universal Gronwall constant.
+
+
+## 30 September 2026 — WP19 v0.17-v0.18 fast tail stress test
+
+The same frozen rational datum was extended in floating arithmetic through N18 with no retuning. N18 falsifies a simple monotone C500 trend, but the magnitude of consecutive cutoff corrections and the fixed-low recursive closure differences continue to shrink sharply.
+
+The more relevant sampled closure-difference totals decrease from about `1.72e-2` (N14->15) to `9.07e-3`, `3.50e-3`, and `9.97e-4` (N17->18).
+
+Rather than validate these cutoffs serially, N15-N18 whole-segment Arb checks were launched in parallel in workflow run `36669057015`. Until that matrix closes, N15-N18 remain scouting results and the rigorous same-datum chain remains N11-N14.
+
+See [v0.17](notes/WP19_v0_17_SAME_DATUM_N15_N17_FAST_TAIL_SCOUT.md) and [v0.18](notes/WP19_v0_18_N18_STRESS_AND_PARALLEL_ARB.md).
