@@ -388,3 +388,12 @@ The prospective same-rational-datum N14 Arb workflow completed with `PASS`: the 
 The [v0.12 recursive-closure note](notes/WP19_v0_12_RECURSIVE_CLOSURE_AND_REGULARITY_GATE.md) fixes the low projector at N11 and derives the exact high-to-low feedback forcing `Gamma_M`. A finite-dimensional energy estimate shows that convergence of this closure forcing in `L1_t L2_x` controls convergence of the fixed N11 projections, and hence controls the frozen signed C500 numerator through a finite Lipschitz constant.
 
 The same note also proves why the observable cannot by itself be a regularity criterion: negative F/G occurs on smooth finite Fourier states, and the exact fixed-Pi11 identity makes G blind to arbitrary high-frequency additions. The correct next target is therefore a coupling estimate between shellwise closure increments and an independent high-frequency dissipation/continuation criterion. No all-N, continuum singularity, or global regularity theorem is claimed.
+
+
+## 30 September 2026 — WP19 v0.13 fixed-output continuum closure
+
+The [v0.13 note](notes/WP19_v0_13_FIXED_OUTPUT_CLOSURE_AND_WEAK_LIMIT.md) proves a cutoff-independent low-output bilinear estimate for `P11 B(a,b)` with explicit Fourier constant `sqrt(5574)`. It follows that, for any Leray-Hopf weak solution, spectral truncations of the high-frequency feedback converge in `L1_t L2_x` to the exact fixed-low closure forcing.
+
+Because the frozen signed C500 numerator depends only on finitely many N11 coefficients, a future cutoff-uniform negative signed-numerator margin can pass along a standard Galerkin subsequence to a Leray-Hopf weak limit without requiring strong convergence of the entire state. This is a continuum observable passage, not a regularity theorem.
+
+The remaining cutoff-transfer term is the state/backreaction drift; v0.13 isolates it from the direct new-shell closure contribution so the next proof gate can target it with the existing adjoint machinery.

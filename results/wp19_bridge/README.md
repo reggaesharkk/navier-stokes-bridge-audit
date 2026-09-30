@@ -180,3 +180,18 @@ This reduces all-cutoff transfer of the frozen signed numerator to a summable hi
 v0.12 also records two exact obstructions to a naive regularity interpretation. First, a negative K36/C500 value is compatible with a smooth finite Fourier state, so the static sign cannot itself imply singularity. Second, because `G_C500(a)=G_C500(Pi11 a)`, arbitrarily large high-frequency tails can be added without changing G; therefore G alone cannot control a high-frequency regularity criterion or determining wavenumber.
 
 The next gate is to bound the shellwise closure increment by a genuine high-frequency dissipation/continuation quantity. The archived v0.12 ZIP SHA-256 is `6d59f7d9c62ad968cae86034ef333883488364c0540c234d6f1afa9e526af702`.
+
+
+## v0.13 fixed-output closure and weak-limit passage
+
+WP19 v0.13 proves the fixed-output Fourier estimate
+
+`||P11 B(a,b)||_2 <= sqrt(5574) ||a||_2 ||b||_{H1}`,
+
+where `sqrt(5574) ~= 74.6592258197` and the constant is independent of the outer cutoff.
+
+Applied to the exact high-to-low closure forcing, this shows that for any Leray-Hopf weak solution the spectrally truncated closure converges to the full fixed-low closure in `L1_t L2_x`. Standard Galerkin compactness then implies that a future cutoff-uniform negative margin for the fixed polynomial signed numerator would pass to a Leray-Hopf weak limit through the finitely many `P11` coefficients.
+
+v0.13 also gives an explicit direct shell-addition bound for the closure increment. The remaining hard term is the state/backreaction drift between `P_M u_{M+1}` and `u_M`, which is the target for the existing stability/adjoint machinery.
+
+The archived v0.13 ZIP SHA-256 is `fd236ae9056711c139ede0db750c8c566e47ee571fa62b9a1417023bbcf72606`.
