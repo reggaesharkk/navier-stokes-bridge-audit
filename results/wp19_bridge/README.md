@@ -285,3 +285,28 @@ After the exact unit-torus Navier-Stokes rescaling, a 160-bit Arb lower gate use
 This does not imply blowup or failure of continuum strong existence. It rules out this particular generic-constant certification route and motivates reconstruction-specific Fourier-linearized stability with modewise viscosity.
 
 The archived v0.16 ZIP SHA-256 is `382c9cdff7902990132ba36f1d593e72cf1f6bdf66ec3878352f903d6a57073c`.
+
+
+## v0.17-v0.18 same-datum fast tail scouts
+
+The untouched same rational datum was extended in floating arithmetic through N15, N16, N17 and N18 with no retuning.
+
+The original K36 endpoint remains strongly negative numerically through N18. The fixed C500 surrogate gives approximately:
+
+`N14 -52.84146, N15 -50.62254, N16 -50.22688, N17 -50.12304, N18 -50.15012`.
+
+N18 therefore breaks any simple monotone-in-N story. The absolute sizes of the successive G corrections nevertheless have ratios about `0.178, 0.262, 0.261`.
+
+More directly, the sampled fixed-low closure differences have L1_t L2_x totals about
+
+`0.017159, 0.009070, 0.003500, 0.000997`
+
+for N14->15 through N17->18, with ratios about `0.529, 0.386, 0.285`.
+
+These are floating theorem-design diagnostics, not infinite-tail bounds.
+
+To minimize wall time, whole-segment same-datum Arb validation for N15-N18 was launched as a four-way GitHub Actions matrix, run `36669057015`.
+
+Archive hashes:
+- v0.17: `ef2f7307ed4b15ea5d59b2f162f4fde9797bf3473c17c20642fd21aefaab7621`
+- v0.18: `ad3678c4db7aa78b35e27574eb01044a0417c84a745d22e63893c810df7b365e`
