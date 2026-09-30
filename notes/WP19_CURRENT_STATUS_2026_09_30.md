@@ -254,3 +254,46 @@ A generic same-datum whole-segment validator now runs N15, N16, N17 and N18 in p
 Each job repeats the N14 proof architecture independently at its cutoff: 120 whole-segment 128-bit Arb residual/gradient enclosures, trajectory-error propagation, K36 endpoint sign gate, and whole-path normalizer guard.
 
 Until those jobs finish successfully, the rigorous same-datum chain remains N11-N14.
+
+
+## 14. v0.19 boundary-annulus correction: direct shell is summable
+
+WP19 v0.19 corrects the remaining direct-shell conclusion from v0.14.
+
+For a fixed low output `|k|<=11`, a newly opened shell `s_{M+1}` can couple to the old state only through the boundary annulus
+
+`M-11 < |p| <= M`.
+
+Thus the direct consecutive-cutoff closure term obeys
+
+`||DeltaGamma_M^direct||_{L1L2} <= C11 ||u0||_2^2/(2nu) [1/(M(M-11))+1/M^2]`.
+
+The series is absolutely summable because
+
+`1/[M(M-11)] = (1/11)[1/(M-11)-1/M]`.
+
+Therefore the direct new-shell term is no longer the all-cutoff obstruction. The remaining hard term is the recursive state/backreaction drift
+
+`Gamma_M(P_M u_{M+1}) - Gamma_M(u_M)`.
+
+## 15. v0.20 goal-oriented fixed-F11 adjoint scout
+
+A reconstruction-specific adjoint scout now targets the fixed low observable
+
+`F11(P11 u_M(T))`.
+
+Observed endpoint values remain strongly negative from N14 through N18:
+
+`-60.7795, -58.4633, -58.0254, -57.8962, -57.9152`.
+
+The first-order dual-weighted shell corrections for N14->15 through N17->18 are approximately
+
+`2.30313, 0.432965, 0.132338, -0.017294`.
+
+Their magnitude ratios are about
+
+`0.188, 0.306, 0.131`.
+
+The linearized predictions reproduce the actual fixed-F11 cutoff changes with observed remainders of about 0.56%, 1.14%, 2.44%, and 8.95% respectively. The N18 sign reversal is captured.
+
+This is floating scouting, not an interval adjoint certificate. It identifies the goal-oriented dual-weighted transfer—not a generic full-state norm—as the next rigorization target.
