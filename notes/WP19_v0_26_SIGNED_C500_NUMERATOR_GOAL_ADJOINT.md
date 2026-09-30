@@ -23,7 +23,7 @@ The denominator/normalizer is kept separate, exactly as required by the v0.25b n
 
 - witness SHA-256: `4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624`
 - K36 key SHA-256: `7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47`
-- prospective N13 K36 sign-chart SHA-256: `7cbb307c70aa14fabdc28ae07f0965716bf498e63c371b61e1b9bfd00611c7bd`
+- prospective N13 K36 sign-chart file SHA-256: `de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1` (tracked git blob `f06df05437fd717337b5bf11939e997f2a7d165e`; unchanged since its first commit)
 - portable C500 semantic SHA-256: `1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f`
 - `nu = 0.1`, `T = 0.003`, `h = 0.000025`, 120 steps.
 
