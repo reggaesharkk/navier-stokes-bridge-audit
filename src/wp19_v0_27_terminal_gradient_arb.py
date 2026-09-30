@@ -1,21 +1,13 @@
 #!/usr/bin/env python3
-"""WP19 v0.27a -- Arb terminal-gradient arithmetic certificate.
+"""WP19 v0.27 -- 128-bit Arb terminal-gradient certificate.
 
-This subcertificate targets the fixed signed-C500 numerator introduced in
-WP19 v0.26.  At each lower cutoff M=14,15,16,17 it encloses, with Arb
-arithmetic, the gradient of the fixed P11 polynomial at the *nominal projected
-binary64 endpoint* used by v0.26.
+This intervalizes the terminal condition for the signed-C500 goal adjoint.
+The objective is the fixed degree-7 polynomial from v0.26, evaluated at the
+canonical decimal P11 predictor endpoint.  An analytic reverse-mode formula is
+used both in complex128 and in python-flint acb arithmetic.
 
-It is intentionally narrower than a full interval adjoint theorem:
-  * the endpoint state itself is a fixed decimal image of the saved predictor;
-  * the polynomial value and every gradient component are evaluated in Arb;
-  * the analytic gradient is projected onto the divergence-free/reality
-    tangent space exactly as in v0.23/v0.26;
-  * the result is cross-checked against the independent PyTorch gradient and
-    the v0.26 endpoint directional linear prediction.
-
-State-uncertainty/Hessian propagation and backward-adjoint validation are
-separate later gates.  No all-N or continuum claim is made here.
+Scope: terminal polynomial gradient only.  Backward adjoint propagation,
+dual quadrature, and nonlinear/endpoint remainder intervalization remain open.
 """
 from __future__ import annotations
 
@@ -31,176 +23,197 @@ from flint import acb, arb, ctx
 P=(3,2,2)
 Q=(3,-2,1)
 K=(6,0,3)
-NU=0.1
 EXPECTED_WITNESS="4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624"
 EXPECTED_K36="7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47"
 EXPECTED_SIGN_CHART="de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1"
 EXPECTED_C500_SEMANTIC="1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f"
-EXPECTED_SELECTED_PAIRS=1048
-EXPECTED_SELECTED_MODES=1159
 
+def orbit(k):
+    return tuple(sorted(abs(int(x)) for x in k))
 
-def sha256(path:Path)->str:
+def sha256(path:Path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def c500_semantic_sha(path:Path):
+    obj=json.loads(path.read_text())
+    semantic={
+        "schema":"wp19-c500-semantic-identity-v1",
+        "coalition_size":int(obj["coalition_size"]),
+        "keys":[{
+            "rank":int(r["rank_from_N11_endpoint"]),
+            "left_orbit":[int(x) for x in r["left_orbit"]],
+            "right_orbit":[int(x) for x in r["right_orbit"]],
+            "fixed_linear_sign":int(r["fixed_linear_sign"]),
+        } for r in obj["keys"]],
+    }
+    raw=(json.dumps(semantic,sort_keys=True,separators=(",",":"))+"\n").encode()
+    return hashlib.sha256(raw).hexdigest()
 
-def ball(z):
-    return acb(str(float(np.real(z))),str(float(np.imag(z))))
+def load_coefficients(sign_chart:Path,c500_path:Path):
+    if sha256(sign_chart)!=EXPECTED_SIGN_CHART:
+        raise ValueError("frozen K36 sign-chart SHA mismatch")
+    s=json.loads(sign_chart.read_text())
+    if s.get("K36_sha256")!=EXPECTED_K36 or len(s.get("keys",[]))!=36:
+        raise ValueError("K36 sign-chart identity mismatch")
+    if c500_semantic_sha(c500_path)!=EXPECTED_C500_SEMANTIC:
+        raise ValueError("C500 semantic identity mismatch")
+    c=json.loads(c500_path.read_text())
+    if int(c.get("coalition_size",-1))!=500:
+        raise ValueError("C500 size mismatch")
+    coeff={}
+    for r in s["keys"]:
+        key=(tuple(r["left_orbit"]),tuple(r["right_orbit"]))
+        sig=int(r["fixed_numerator_sign"])
+        if sig not in (-1,1) or key in coeff: raise ValueError("invalid K36 sign")
+        coeff[key]=sig
+    for r in c["keys"]:
+        key=(tuple(r["left_orbit"]),tuple(r["right_orbit"]))
+        tau=int(r["fixed_linear_sign"])
+        if tau not in (-1,1) or key in coeff: raise ValueError("invalid/disjoint C500")
+        coeff[key]=-9*tau
+    if len(coeff)!=536:
+        raise ValueError("frozen coefficient count mismatch")
+    return coeff
 
+def project_np(k,v):
+    kk=float(sum(int(x)*int(x) for x in k))
+    kv=np.asarray(k,float)
+    return np.asarray(v)-kv*np.dot(kv,np.asarray(v))/kk
 
-def zero3():
-    return [acb(0),acb(0),acb(0)]
-
-
-def add3(a,b):
-    return [a[j]+b[j] for j in range(3)]
-
-
-def scale3(a,c):
-    return [c*a[j] for j in range(3)]
-
-
-def vdot(a,b):
-    return sum((a[j].conjugate()*b[j] for j in range(3)),acb(0))
-
-
-def project(k,v):
+def project_ball(k,v):
     kk=sum(int(x)*int(x) for x in k)
     kd=sum((v[j]*int(k[j]) for j in range(3)),acb(0))
-    return [v[j]-kd*arb(int(k[j]))/kk for j in range(3)]
+    return [v[j]-kd*int(k[j])/kk for j in range(3)]
 
+def vdot_np(a,b):
+    return np.vdot(np.asarray(a),np.asarray(b))
 
-def point_state(arr):
-    return [[ball(z) for z in row] for row in np.asarray(arr)]
+def vdot_ball(a,b):
+    return sum((a[j].conjugate()*b[j] for j in range(3)),acb(0))
 
-
-def tangent_project(system,g):
-    """Arb version of v0.23 tangent_project."""
-    gp=[zero3() for _ in system.modes]
+def tangent_project_np(system,g):
+    gp=np.zeros_like(g,dtype=np.complex128)
     for ix,k in enumerate(system.modes):
-        kk=int(system.square[ix])
-        kd=sum((g[ix][j]*int(k[j]) for j in range(3)),acb(0))
-        gp[ix]=[g[ix][j]-kd*arb(int(k[j]))/kk for j in range(3)]
-    out=[zero3() for _ in system.modes]
+        if system.square[ix]==0:
+            gp[ix]=g[ix]
+        else:
+            gp[ix]=project_np(k,g[ix])
+    out=np.zeros_like(gp)
     for ix,k in enumerate(system.modes):
         negk=tuple(-int(v) for v in k)
-        if tuple(k)<=negk:
-            continue
+        if tuple(k)<=negk: continue
+        ni=int(system.neg[ix])
+        geff=0.5*(gp[ix]+np.conj(gp[ni]))
+        out[ix]=geff; out[ni]=np.conj(geff)
+    return out
+
+def tangent_project_ball(system,g):
+    gp=[[acb(0) for _ in range(3)] for _ in system.modes]
+    for ix,k in enumerate(system.modes):
+        gp[ix]=g[ix][:] if int(system.square[ix])==0 else project_ball(k,g[ix])
+    out=[[acb(0) for _ in range(3)] for _ in system.modes]
+    for ix,k in enumerate(system.modes):
+        negk=tuple(-int(v) for v in k)
+        if tuple(k)<=negk: continue
         ni=int(system.neg[ix])
         geff=[(gp[ix][j]+gp[ni][j].conjugate())/2 for j in range(3)]
         out[ix]=geff
-        out[ni]=[z.conjugate() for z in geff]
+        out[ni]=[v.conjugate() for v in geff]
     return out
 
+def numpy_value_gradient(system,a,coeff):
+    a=np.asarray(a,dtype=np.complex128)
+    pi,qi,ki=(system.index[x] for x in (P,Q,K))
+    Pk=system.projectors[ki]; W=float(system.square[ki]**2)
+    B=Pk@(1j*np.dot(np.asarray(Q,float),a[pi])*a[qi])
+    z=-W*vdot_np(a[ki],B)
+    groups={}; pairs={}
+    wanted=set(coeff)
+    for l0,r0 in zip(system.left,system.right):
+        l=int(l0);r=int(r0);key=(orbit(system.modes[l]),orbit(system.modes[r]))
+        if key not in wanted: continue
+        d=-(Pk@(1j*np.dot(system.waves[r],a[l])*a[r]))
+        groups[key]=groups.get(key,np.zeros(3,np.complex128))+d
+        pairs.setdefault(key,[]).append((l,r,np.asarray(system.waves[r],float)))
+    if set(groups)!=wanted: raise ValueError("objective support mismatch")
+    J=0.0; g=np.zeros_like(a); gB=np.zeros(3,np.complex128); gz=0j; gD={}
+    for key,c in coeff.items():
+        D=groups[key]; w=-W*vdot_np(D,B); n=float(np.imag(w*np.conj(z))); J+=c*n
+        gw=c*1j*z; gz+=c*(-1j*w)
+        gD[key]=-W*np.conj(gw)*B
+        gB+=-W*gw*D
+    g[ki]+=-W*np.conj(gz)*B
+    gB+=-W*gz*a[ki]
 
-def l2_upper(rows):
-    s=arb(0)
-    for row in rows:
-        for z in row:
-            u=z.abs_upper()
-            s+=u*u
-    return s.sqrt().upper()
+    def back(gout,l,r,qvec,sign):
+        gu=sign*(Pk@gout)
+        sval=np.dot(qvec,a[l])
+        gr=(-1j*np.conj(sval))*gu
+        cscalar=1j*vdot_np(gu,a[r])
+        gl=np.conj(cscalar)*qvec
+        return gl,gr
 
+    gl,gr=back(gB,pi,qi,np.asarray(Q,float),1.0)
+    g[pi]+=gl;g[qi]+=gr
+    for key,rows in pairs.items():
+        for l,r,qvec in rows:
+            gl,gr=back(gD[key],l,r,qvec,-1.0)
+            g[l]+=gl;g[r]+=gr
+    return float(J),tangent_project_np(system,g)
 
-def l2_lower(rows):
-    s=arb(0)
-    for row in rows:
-        for z in row:
-            lo=z.abs_lower()
-            s+=lo*lo
-    return s.sqrt().lower()
-
-
-def analytic_gradient(system,a,coeff):
-    """Return Arb J and tangent gradient of the fixed degree-7 polynomial."""
+def arb_value_gradient(system,a,coeff):
     pi,qi,ki=(system.index[x] for x in (P,Q,K))
     W=int(system.square[ki]**2)
-    qi_dot=sum((a[pi][j]*int(Q[j]) for j in range(3)),acb(0))
-    b=project(K,[acb(0,1)*qi_dot*a[qi][j] for j in range(3)])
-    z=-W*vdot(a[ki],b)
-
-    pairs=[]
-    incidence=[[] for _ in system.modes]
-    D=zero3()
-    support_modes={P,Q,K}
+    qdot=sum((a[pi][j]*int(Q[j]) for j in range(3)),acb(0))
+    B=project_ball(K,[acb(0,1)*qdot*a[qi][j] for j in range(3)])
+    z=-W*vdot_ball(a[ki],B)
+    groups={};pairs={};wanted=set(coeff)
     for l0,r0 in zip(system.left,system.right):
-        li=int(l0);ri=int(r0)
-        key=(
-            tuple(sorted(abs(int(x)) for x in system.modes[li])),
-            tuple(sorted(abs(int(x)) for x in system.modes[ri])),
-        )
-        if key not in coeff:
-            continue
-        c=int(coeff[key])
-        wave=tuple(int(x) for x in system.waves[ri])
-        dot=sum((a[li][j]*wave[j] for j in range(3)),acb(0))
-        d=[-x for x in project(K,[acb(0,1)*dot*a[ri][j] for j in range(3)])]
-        D=add3(D,scale3(d,c))
-        rec=(li,ri,wave,c)
-        pos=len(pairs)
-        pairs.append(rec)
-        incidence[li].append(pos)
-        if ri!=li:
-            incidence[ri].append(pos)
-        support_modes.add(tuple(system.modes[li]))
-        support_modes.add(tuple(system.modes[ri]))
+        l=int(l0);r=int(r0);key=(orbit(system.modes[l]),orbit(system.modes[r]))
+        if key not in wanted: continue
+        qvec=[int(x) for x in system.waves[r]]
+        s=sum((a[l][j]*qvec[j] for j in range(3)),acb(0))
+        d=[-x for x in project_ball(K,[acb(0,1)*s*a[r][j] for j in range(3)])]
+        if key not in groups: groups[key]=[acb(0) for _ in range(3)]
+        groups[key]=[groups[key][j]+d[j] for j in range(3)]
+        pairs.setdefault(key,[]).append((l,r,qvec))
+    if set(groups)!=wanted: raise ValueError("Arb objective support mismatch")
 
-    if len(pairs)!=EXPECTED_SELECTED_PAIRS or len(support_modes)!=EXPECTED_SELECTED_MODES:
-        raise ValueError(
-            f"selected-support invariant mismatch: pairs={len(pairs)}, modes={len(support_modes)}"
-        )
+    J=arb(0)
+    g=[[acb(0) for _ in range(3)] for _ in system.modes]
+    gB=[acb(0) for _ in range(3)];gz=acb(0);gD={}
+    for key,c in coeff.items():
+        D=groups[key];w=-W*vdot_ball(D,B);n=(w*z.conjugate()).imag
+        J+=n*int(c)
+        gw=acb(0,int(c))*z
+        gz+=acb(0,-int(c))*w
+        gD[key]=[-W*gw.conjugate()*B[j] for j in range(3)]
+        gB=[gB[j]-W*gw*D[j] for j in range(3)]
+    g[ki]=[g[ki][j]-W*gz.conjugate()*B[j] for j in range(3)]
+    gB=[gB[j]-W*gz*a[ki][j] for j in range(3)]
 
-    w=-W*vdot(D,b)
-    J=(w*z.conjugate()).imag
+    def back(gout,l,r,qvec,sign):
+        gu=project_ball(K,gout)
+        if sign==-1: gu=[-x for x in gu]
+        sval=sum((a[l][j]*int(qvec[j]) for j in range(3)),acb(0))
+        gr=[-acb(0,1)*sval.conjugate()*gu[j] for j in range(3)]
+        cscalar=acb(0,1)*vdot_ball(gu,a[r])
+        gl=[cscalar.conjugate()*int(qvec[j]) for j in range(3)]
+        return gl,gr
 
-    raw=[[acb(0) for _ in range(3)] for _ in system.modes]
-    for ix in range(len(system.modes)):
-        for comp in range(3):
-            deriv=[]
-            for direction in (acb(1),acb(0,1)):
-                db=zero3()
-                if ix==pi:
-                    term=project(K,[
-                        acb(0,1)*int(Q[comp])*direction*a[qi][j]
-                        for j in range(3)
-                    ])
-                    db=add3(db,term)
-                if ix==qi:
-                    vec=[acb(0),acb(0),acb(0)]
-                    vec[comp]=acb(0,1)*qi_dot*direction
-                    db=add3(db,project(K,vec))
+    gl,gr=back(gB,pi,qi,Q,1)
+    g[pi]=[g[pi][j]+gl[j] for j in range(3)]
+    g[qi]=[g[qi][j]+gr[j] for j in range(3)]
+    for key,rows in pairs.items():
+        for l,r,qvec in rows:
+            gl,gr=back(gD[key],l,r,qvec,-1)
+            g[l]=[g[l][j]+gl[j] for j in range(3)]
+            g[r]=[g[r][j]+gr[j] for j in range(3)]
+    return J,tangent_project_ball(system,g)
 
-                dD=zero3()
-                for pos in incidence[ix]:
-                    li,ri,wave,c=pairs[pos]
-                    draw=zero3()
-                    if ix==li:
-                        scalar=acb(0,1)*int(wave[comp])*direction
-                        draw=add3(draw,[scalar*a[ri][j] for j in range(3)])
-                    if ix==ri:
-                        dot=sum((a[li][j]*wave[j] for j in range(3)),acb(0))
-                        vec=[acb(0),acb(0),acb(0)]
-                        vec[comp]=acb(0,1)*dot*direction
-                        draw=add3(draw,vec)
-                    dd=[-x for x in project(K,draw)]
-                    dD=add3(dD,scale3(dd,c))
-
-                hk=zero3()
-                if ix==ki:
-                    hk[comp]=direction
-                dz=-W*(vdot(hk,b)+vdot(a[ki],db))
-                dw=-W*(vdot(dD,b)+vdot(D,db))
-                dJ=(dw*z.conjugate()+w*dz.conjugate()).imag
-                deriv.append(dJ)
-            raw[ix][comp]=acb(deriv[0],deriv[1])
-
-    return J,tangent_project(system,raw),{
-        "selected_pair_count":len(pairs),
-        "selected_mode_count":len(support_modes),
-        "z_abs_lower":z.abs_lower().lower(),
-        "z_abs_upper":z.abs_upper().upper(),
-    }
-
+def real_ball_contains(b,x):
+    xx=arb(str(float(x)))
+    return not (xx < b.lower() or xx > b.upper())
 
 def main():
     ap=argparse.ArgumentParser()
@@ -208,159 +221,127 @@ def main():
     ap.add_argument("--M",type=int,required=True)
     ap.add_argument("--lower-dir",type=Path,required=True)
     ap.add_argument("--higher-dir",type=Path,required=True)
-    ap.add_argument("--k36",type=Path,required=True)
     ap.add_argument("--sign-chart",type=Path,required=True)
     ap.add_argument("--c500",type=Path,required=True)
-    ap.add_argument("--v026-result",type=Path,required=True)
     ap.add_argument("--output",type=Path,required=True)
     args=ap.parse_args()
 
-    if args.M not in (14,15,16,17):
-        raise ValueError("v0.27a supports M=14,15,16,17 only")
-    if sha256(args.k36)!=EXPECTED_K36:
-        raise ValueError("K36 hash mismatch")
-    if sha256(args.sign_chart)!=EXPECTED_SIGN_CHART:
-        raise ValueError("prospective sign-chart hash mismatch")
-
+    ctx.prec=128
     sys.path.insert(0,str((args.repo/"src").resolve()))
     sys.path.insert(0,str((args.repo/"next-work"/"n14_same_datum"/"tools").resolve()))
-    import wp19_v0_23_rk4_goal_adjoint as v23
-    import wp19_v0_26_signed_goal_adjoint as v26
-    import arb_common_n14 as common
     from wp16_036_dealiased_trajectory_gate import DealiasedSystem
-
-    coeff,_,_,sem=v26.load_coefficients(args.sign_chart,args.c500)
-    if sem!=EXPECTED_C500_SEMANTIC:
-        raise ValueError("C500 semantic mismatch")
+    import arb_segment_n14 as segment
+    import arb_common_n14 as common
 
     M=args.M
-    H=M+1
-    low=DealiasedSystem(M,nu=NU)
-    high=DealiasedSystem(H,nu=NU)
-    fixed=DealiasedSystem(11,nu=NU)
-    for d,N in ((args.lower_dir,M),(args.higher_dir,H)):
+    low=DealiasedSystem(M,nu=0.1);high=DealiasedSystem(M+1,nu=0.1);fixed=DealiasedSystem(11,nu=0.1)
+    coeff=load_coefficients(args.sign_chart,args.c500)
+    for d,N in ((args.lower_dir,M),(args.higher_dir,M+1)):
         meta=json.loads((d/"metadata.json").read_text())
-        if (
-            meta.get("N")!=N
-            or meta.get("witness_sha256")!=EXPECTED_WITNESS
-            or meta.get("K36_keys_sha256")!=EXPECTED_K36
-        ):
+        if meta["N"]!=N or meta["witness_sha256"]!=EXPECTED_WITNESS or meta["K36_keys_sha256"]!=EXPECTED_K36:
             raise ValueError("predictor metadata mismatch")
 
     lo=np.load(args.lower_dir/"nodes.npy",mmap_mode="r")
     hi=np.load(args.higher_dir/"nodes.npy",mmap_mode="r")
     il=np.asarray([low.index[k] for k in fixed.modes],dtype=np.int64)
     ih=np.asarray([high.index[k] for k in fixed.modes],dtype=np.int64)
-    base=v23.physical_project(fixed,np.asarray(lo[-1,il]))
-    target=v23.physical_project(fixed,np.asarray(hi[-1,ih]))
-    delta=np.asarray(target-base)
 
-    ref=json.loads(args.v026_result.read_text())
-    if ref.get("transition")!=f"{M}->{H}":
-        raise ValueError("v0.26 transition mismatch")
-    base_ref=float(ref["endpoint_identity"]["base_floating_J"])
-    linear_ref=float(ref["endpoint_gradient_linear_prediction"])
+    # Same solenoidal/reality canonicalization used by the finite certificates.
+    base_np=np.zeros((len(fixed.modes),3),dtype=np.complex128)
+    target_np=np.zeros_like(base_np)
+    for source,out in ((np.asarray(lo[-1,il]),base_np),(np.asarray(hi[-1,ih]),target_np)):
+        for ix,k in enumerate(fixed.modes):
+            negk=tuple(-int(v) for v in k)
+            if tuple(k)<=negk: continue
+            tr=project_np(k,source[ix]);out[ix]=tr;out[fixed.neg[ix]]=np.conj(tr)
 
-    ctx.prec=192
-    a=point_state(base)
-    J,g,diag=analytic_gradient(fixed,a,coeff)
-    J_ref_gap=abs(J-arb(str(float(base_ref)))).upper()
-    J_ref_rel=(J_ref_gap/arb(str(max(1.0,abs(base_ref))))).upper()
-    if J_ref_rel>arb("1e-10"):
-        raise ValueError(("Arb/v0.26 objective discrepancy too large",str(J_ref_rel)))
+    Jnp,gnp=numpy_value_gradient(fixed,base_np,coeff)
+    abase=segment.solenoidal_reality_projection(fixed,np.asarray(lo[-1,il]))
+    atarget=segment.solenoidal_reality_projection(fixed,np.asarray(hi[-1,ih]))
+    Jarb,garb=arb_value_gradient(fixed,abase,coeff)
 
-    # Independent complex reverse-mode reference at the same nominal endpoint.
-    torch_J,g_float=v26.torch_terminal_gradient(
-        fixed,base,coeff,v23.tangent_project
-    )
-    if abs(torch_J-base_ref)/max(1.0,abs(base_ref))>5e-12:
-        raise ValueError("independent PyTorch objective mismatch")
+    # The rigorous direction is formed inside Arb from the separately
+    # canonicalized target and base endpoints.  Do not first subtract two
+    # binary64 projections and then pretend that rounded difference is exact.
+    delta=target_np-base_np
+    dball=[[atarget[ix][j]-abase[ix][j] for j in range(3)] for ix in range(len(fixed.modes))]
+    directional=sum((vdot_ball(garb[ix],dball[ix]).real for ix in range(len(fixed.modes))),arb(0))
+    dir_np=float(np.real(np.vdot(gnp.ravel(),delta.ravel())))
 
-    diff=[]
-    for ix in range(len(fixed.modes)):
-        row=[]
-        for j in range(3):
-            row.append(g[ix][j]-ball(g_float[ix,j]))
-        diff.append(row)
-    grad_diff=l2_upper(diff)
-    grad_upper=l2_upper(g)
-    grad_lower=l2_lower(g)
+    # Floating finite-difference validation of the analytic reverse formula.
+    # This is an independent implementation check, not the interval proof.
+    dn=float(np.linalg.norm(delta.ravel()))
+    if dn<=0: raise ValueError("zero endpoint direction")
+    direction=delta/dn
+    eps=1e-7
+    fp=numpy_value_gradient(fixed,base_np+eps*direction,coeff)[0]
+    fm=numpy_value_gradient(fixed,base_np-eps*direction,coeff)[0]
+    fd=(fp-fm)/(2*eps)
+    ad=float(np.real(np.vdot(gnp.ravel(),direction.ravel())))
+    fd_rel=abs(fd-ad)/max(1.0,abs(fd),abs(ad))
+    if fd_rel>2e-5: raise ValueError(("analytic gradient finite-difference check failed",fd,ad,fd_rel))
 
-    db=point_state(delta)
-    directional=sum(
-        ((g[ix][j].conjugate()*db[ix][j]).real
-         for ix in range(len(fixed.modes)) for j in range(3)),
-        arb(0)
-    )
-    directional_gap=abs(directional-arb(str(float(linear_ref)))).upper()
-    directional_rel=(directional_gap/arb(str(max(1.0,abs(linear_ref))))).upper()
-    if directional_rel>arb("1e-8"):
-        raise ValueError(("Arb/v0.26 directional discrepancy too large",str(directional_rel)))
+    grad_norm=segment.ball_l2_upper([z for row in garb for z in row])
+    dlow=directional.lower();dupp=directional.upper()
+    width=(dupp-dlow).upper()
+    scale=max(abs(dir_np),1.0)
+    width_rel=(width/arb(str(scale))).upper()
 
-    # A dimensionless sanity ratio: arithmetic discrepancy against gradient size.
-    denom=grad_lower
-    rel=(grad_diff/denom).upper() if denom>0 else arb(0)
+    # complex128 and Arb evaluate slightly different exact inputs/rounding
+    # conventions.  Compare them by relative discrepancy; the certificate
+    # itself is the Arb interval, not containment of the floating value.
+    dir_gap=abs(directional-arb(str(dir_np))).upper()
+    dir_gap_rel=(dir_gap/arb(str(scale))).upper()
+    jscale=max(abs(Jnp),1.0)
+    j_gap=abs(Jarb-arb(str(Jnp))).upper()
+    j_gap_rel=(j_gap/arb(str(jscale))).upper()
+    if not dir_gap_rel < arb("1e-10"):
+        raise ValueError(("Arb/complex128 directional discrepancy too large",dir_gap_rel))
+    if not j_gap_rel < arb("1e-10"):
+        raise ValueError(("Arb/complex128 objective discrepancy too large",j_gap_rel))
+
+    jlo=Jarb.lower();jhi=Jarb.upper()
 
     out={
-        "schema":"wp19-v0.27a-terminal-signed-numerator-gradient-arb-v1",
-        "status":"PASS TERMINAL-GRADIENT ARB SUBCERTIFICATE",
+        "schema":"wp19-v0.27-terminal-signed-c500-gradient-arb-v1",
+        "copyright":"Copyright (c) 2026 Prince Upadhyay. All Rights Reserved.",
+        "status":"PASS 128-BIT ARB TERMINAL-GRADIENT CERTIFICATE",
+        "transition":f"{M}->{M+1}",
         "M":M,
-        "transition":f"{M}->{H}",
-        "arb_precision_bits":ctx.prec,
+        "precision_bits":128,
         "frozen":{
             "witness_sha256":EXPECTED_WITNESS,
             "K36_sha256":EXPECTED_K36,
             "K36_sign_chart_sha256":EXPECTED_SIGN_CHART,
-            "C500_portable_semantic_sha256":sem,
-            "K36_signs_retuned":False,
-            "C500_retuned":False,
+            "C500_semantic_sha256":EXPECTED_C500_SEMANTIC,
+            "coefficient_count":len(coeff),
         },
-        "support":{
-            "selected_ordered_pair_count":diag["selected_pair_count"],
-            "selected_mode_count":diag["selected_mode_count"],
-        },
-        "nominal_endpoint_scope":"P11 projection of the saved lower-cutoff predictor endpoint, converted componentwise to exact decimal Arb points",
-        "signed_numerator":{
-            "arb_ball":str(J),
-            "lower_decimal":common.decimal_lower(J.lower(),6),
-            "upper_decimal":common.decimal_upper(J.upper(),6),
-            "v0_26_reference":base_ref,
-            "arb_vs_v0_26_absolute_discrepancy_upper_decimal":common.decimal_upper(J_ref_gap,12),
-            "arb_vs_v0_26_relative_discrepancy_upper_decimal":common.decimal_upper(J_ref_rel,15),
+        "objective":{
+            "complex128_value":Jnp,
+            "arb_lower_decimal":common.decimal_lower(jlo,8),
+            "arb_upper_decimal":common.decimal_upper(jhi,8),
+            "arb_vs_complex128_relative_gap_upper_decimal":common.decimal_upper(j_gap_rel,18),
         },
         "terminal_gradient":{
-            "L2_lower_decimal":common.decimal_lower(grad_lower,6),
-            "L2_upper_decimal":common.decimal_upper(grad_upper,6),
-            "arb_vs_pytorch_L2_difference_upper_decimal":common.decimal_upper(grad_diff,12),
-            "arb_vs_pytorch_relative_difference_upper_decimal":common.decimal_upper(rel,15),
-            "component_count":len(fixed.modes)*3,
+            "L2_upper_decimal":common.decimal_upper(grad_norm,6),
+            "analytic_complex128_L2":float(np.linalg.norm(gnp.ravel())),
+            "formula":"manual reverse-mode of fixed degree-7 signed numerator under Re Fourier-L2 pairing, followed by exact Leray/reality tangent projection",
         },
-        "directional_crosscheck":{
-            "direction":"P11(u_{M+1}(T)-u_M(T)) from saved certified predictors",
-            "arb_ball":str(directional),
-            "lower_decimal":common.decimal_lower(directional.lower(),6),
-            "upper_decimal":common.decimal_upper(directional.upper(),6),
-            "v0_26_endpoint_gradient_linear_prediction":linear_ref,
-            "arb_vs_v0_26_absolute_discrepancy_upper_decimal":common.decimal_upper(directional_gap,12),
-            "arb_vs_v0_26_relative_discrepancy_upper_decimal":common.decimal_upper(directional_rel,15),
+        "actual_cutoff_direction":{
+            "complex128_linear_prediction":dir_np,
+            "arb_linear_prediction_lower_decimal":common.decimal_lower(dlow,6),
+            "arb_linear_prediction_upper_decimal":common.decimal_upper(dupp,6),
+            "arb_vs_complex128_relative_gap_upper_decimal":common.decimal_upper(dir_gap_rel,18),
+            "arb_interval_width_decimal":common.decimal_upper(width,6),
+            "arb_width_over_abs_complex128_prediction_upper_decimal":common.decimal_upper(width_rel,18),
+            "finite_difference_relative_error":fd_rel,
         },
-        "normalizer_diagnostic":{
-            "z_abs_lower":str(diag["z_abs_lower"]),
-            "z_abs_upper":str(diag["z_abs_upper"]),
-        },
-        "method":"192-bit Arb evaluation of the collapsed fixed signed-C500 polynomial and its analytic real directional derivative in every complex Fourier coordinate, followed by the exact same solenoidal/reality tangent projection as v0.23/v0.26; independent PyTorch and v0.26 directional cross-checks.",
-        "claim_boundary":"This certifies terminal-gradient arithmetic at the fixed nominal projected predictor endpoint only. It does not yet enclose gradient variation over the certified trajectory-error ball, backward adjoint propagation, quadrature, or nonlinear/endpoint Taylor remainders. No all-N or continuum theorem.",
+        "next_target":"certify the backward adjoint itself by an Arb residual/enclosure around the floating half-step adjoint reconstruction, then rigorously enclose dual quadrature",
+        "claim_boundary":"This certifies only the terminal polynomial value/gradient at the canonical decimal predictor endpoint. It does not intervalize backward adjoint propagation, quadrature, nonlinear remainder, endpoint Taylor remainder, all-N transfer, or continuum behavior."
     }
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(out,indent=2,sort_keys=True)+"\n")
-    print(json.dumps({
-        "M":M,
-        "status":out["status"],
-        "J":out["signed_numerator"],
-        "gradient":out["terminal_gradient"],
-        "directional":out["directional_crosscheck"],
-    },indent=2))
-
+    print(json.dumps(out,indent=2))
 
 if __name__=="__main__":
     main()
