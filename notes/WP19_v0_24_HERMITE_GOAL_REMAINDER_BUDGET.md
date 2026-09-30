@@ -68,3 +68,13 @@ v0.24 combines this with the predictor state difference plus a binary64 replay o
 ## Claim boundary
 
 All new v0.24 numerical values are floating scouts. The existing N11–N18 Arb trajectory certificates remain the rigorous finite results. No all-N persistence, continuum regularity, or singularity theorem is claimed.
+
+## Executed result
+
+GitHub Actions run `36719160820` completed successfully. Aggregate artifact digest: `sha256:bf0fcf894ddddc7068a6634d6ee53873a8cea4b889378f68002bdc5d9fda659a`.
+
+The Hermite/Simpson refinement remained very close to the actual fixed-F11 cutoff changes. The largest total relative remainder over `14->15` through `17->18` was about `1.2747%`, and the nonlinear radius-bound scout decreased monotonically as `2.7363, 1.3717, 0.6616, 0.1986`.
+
+The intervalization-design gate therefore **passed**. However, the generic nonlinear bound is still thousands of times larger than the observed dynamic remainder, so it should be treated as a conservative envelope, not as evidence of sharpness.
+
+**Next step:** before spending Arb budget on a non-smooth ratio objective, extend the already rigorous fixed-sign C500 signed-numerator certificate through N14–N18. This turns the future adjoint terminal objective into a fixed polynomial quantity with a separately certified normalizer guard.

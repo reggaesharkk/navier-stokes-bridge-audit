@@ -1,12 +1,7 @@
 name: WP19 v0.24 Hermite goal remainder budget
 
+# Completed historical workflow. Manual replay only.
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/wp19_v0_24_hermite_goal.yml'
-      - 'src/wp19_v0_24_hermite_goal_remainder.py'
-      - 'notes/WP19_v0_24_HERMITE_GOAL_REMAINDER_BUDGET.md'
   workflow_dispatch:
 
 permissions:

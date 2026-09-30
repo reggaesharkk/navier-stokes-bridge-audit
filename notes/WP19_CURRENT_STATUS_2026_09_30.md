@@ -331,3 +331,19 @@ Thus the simple full-state norm route is retained only as a correct structural b
 WP19 v0.23 independently rebuilds the fixed-F11 continuous-adjoint calculation with an analytic dealiased spectral VJP, finite-difference VJP self-test, reverse-mode terminal gradient, and backward RK4 integration along the cubic-Hermite lower-cutoff reconstruction for `14->15` through `17->18`.
 
 This is a floating cross-check before any interval adjoint certificate. If the independently rebuilt dual-weighted predictions continue to reproduce the actual cutoff changes with small remainders, the next stage is interval rigorization of the terminal gradient, adjoint propagation, quadrature, and nonlinear remainder.
+
+## 18. v0.24 executed result
+
+GitHub Actions run `36719160820` completed the Hermite-consistent goal-adjoint remainder budget. The aggregate artifact digest is `sha256:bf0fcf894ddddc7068a6634d6ee53873a8cea4b889378f68002bdc5d9fda659a`.
+
+The refined Hermite/Simpson dual predictions remain close to the actual fixed-F11 cutoff changes. The largest total relative remainder across `14->15` through `17->18` is about `1.2747%`. The conservative nonlinear radius-bound scout decreases monotonically as approximately `2.7363, 1.3717, 0.6616, 0.1986`.
+
+The v0.24 intervalization-design gate therefore passed. The generic nonlinear envelope remains intentionally conservative and is thousands of times larger than the observed dynamic remainder, so sharpness is not claimed.
+
+## 19. v0.25 live target
+
+Before intervalizing the goal adjoint itself, WP19 v0.25 extends the existing exact-rational signed-C500 endpoint certificate from N11–N13 through N14–N18. The frozen C500 coalition is accepted only if its deterministic reconstruction reproduces SHA-256 `79bdc347358705b4611f10f76a50db16e5edff572d1822ca1459cd868e15c216` exactly.
+
+For each N14–N18 endpoint, the already certified terminal trajectory-error radius is composed with the v0.10 group-specific exact-rational perturbation calculation. A pass requires all 36 K36 signs locked, a strictly negative signed-C500 numerator upper bound, and a strictly positive normalizer lower bound.
+
+If this passes, the next interval-adjoint stage can target a fixed polynomial signed numerator rather than a non-smooth absolute-value ratio objective.
