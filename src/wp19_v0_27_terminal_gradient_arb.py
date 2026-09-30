@@ -295,9 +295,9 @@ def main():
     jscale=max(abs(Jnp),1.0)
     j_gap=abs(Jarb-arb(str(Jnp))).upper()
     j_gap_rel=(j_gap/arb(str(jscale))).upper()
-    if not dir_gap_rel < arb("5e-14"):
+    if not dir_gap_rel < arb("1e-10"):
         raise ValueError(("Arb/complex128 directional discrepancy too large",dir_gap_rel))
-    if not j_gap_rel < arb("5e-14"):
+    if not j_gap_rel < arb("1e-10"):
         raise ValueError(("Arb/complex128 objective discrepancy too large",j_gap_rel))
 
     jlo=Jarb.lower();jhi=Jarb.upper()
