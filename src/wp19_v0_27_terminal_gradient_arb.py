@@ -257,15 +257,19 @@ def main():
 
     Jnp,gnp=numpy_value_gradient(fixed,base_np,coeff)
     abase=segment.solenoidal_reality_projection(fixed,np.asarray(lo[-1,il]))
+    atarget=segment.solenoidal_reality_projection(fixed,np.asarray(hi[-1,ih]))
     Jarb,garb=arb_value_gradient(fixed,abase,coeff)
 
-    # Actual cutoff direction, canonicalized identically.
+    # The rigorous direction is formed inside Arb from the separately
+    # canonicalized target and base endpoints.  Do not first subtract two
+    # binary64 projections and then pretend that rounded difference is exact.
     delta=target_np-base_np
-    dball=[[segment.ball(delta[ix,j]) for j in range(3)] for ix in range(len(fixed.modes))]
+    dball=[[atarget[ix][j]-abase[ix][j] for j in range(3)] for ix in range(len(fixed.modes))]
     directional=sum((vdot_ball(garb[ix],dball[ix]).real for ix in range(len(fixed.modes))),arb(0))
     dir_np=float(np.real(np.vdot(gnp.ravel(),delta.ravel())))
 
     # Floating finite-difference validation of the analytic reverse formula.
+    # This is an independent implementation check, not the interval proof.
     dn=float(np.linalg.norm(delta.ravel()))
     if dn<=0: raise ValueError("zero endpoint direction")
     direction=delta/dn
@@ -276,8 +280,6 @@ def main():
     ad=float(np.real(np.vdot(gnp.ravel(),direction.ravel())))
     fd_rel=abs(fd-ad)/max(1.0,abs(fd),abs(ad))
     if fd_rel>2e-5: raise ValueError(("analytic gradient finite-difference check failed",fd,ad,fd_rel))
-    if not real_ball_contains(directional,dir_np):
-        raise ValueError(("Arb directional derivative does not contain complex128 analytic value",directional,dir_np))
 
     grad_norm=segment.ball_l2_upper([z for row in garb for z in row])
     dlow=directional.lower();dupp=directional.upper()
@@ -285,9 +287,20 @@ def main():
     scale=max(abs(dir_np),1.0)
     width_rel=(width/arb(str(scale))).upper()
 
+    # complex128 and Arb evaluate slightly different exact inputs/rounding
+    # conventions.  Compare them by relative discrepancy; the certificate
+    # itself is the Arb interval, not containment of the floating value.
+    dir_gap=abs(directional-arb(str(dir_np))).upper()
+    dir_gap_rel=(dir_gap/arb(str(scale))).upper()
+    jscale=max(abs(Jnp),1.0)
+    j_gap=abs(Jarb-arb(str(Jnp))).upper()
+    j_gap_rel=(j_gap/arb(str(jscale))).upper()
+    if not dir_gap_rel < arb("5e-14"):
+        raise ValueError(("Arb/complex128 directional discrepancy too large",dir_gap_rel))
+    if not j_gap_rel < arb("5e-14"):
+        raise ValueError(("Arb/complex128 objective discrepancy too large",j_gap_rel))
+
     jlo=Jarb.lower();jhi=Jarb.upper()
-    if not real_ball_contains(Jarb,Jnp):
-        raise ValueError(("Arb objective does not contain complex128 analytic value",Jarb,Jnp))
 
     out={
         "schema":"wp19-v0.27-terminal-signed-c500-gradient-arb-v1",
@@ -307,7 +320,7 @@ def main():
             "complex128_value":Jnp,
             "arb_lower_decimal":common.decimal_lower(jlo,8),
             "arb_upper_decimal":common.decimal_upper(jhi,8),
-            "complex128_value_contained":True,
+            "arb_vs_complex128_relative_gap_upper_decimal":common.decimal_upper(j_gap_rel,18),
         },
         "terminal_gradient":{
             "L2_upper_decimal":common.decimal_upper(grad_norm,6),
@@ -318,7 +331,7 @@ def main():
             "complex128_linear_prediction":dir_np,
             "arb_linear_prediction_lower_decimal":common.decimal_lower(dlow,6),
             "arb_linear_prediction_upper_decimal":common.decimal_upper(dupp,6),
-            "complex128_prediction_contained":True,
+            "arb_vs_complex128_relative_gap_upper_decimal":common.decimal_upper(dir_gap_rel,18),
             "arb_interval_width_decimal":common.decimal_upper(width,6),
             "arb_width_over_abs_complex128_prediction_upper_decimal":common.decimal_upper(width_rel,18),
             "finite_difference_relative_error":fd_rel,
