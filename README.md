@@ -445,3 +445,14 @@ The more relevant sampled closure-difference totals decrease from about `1.72e-2
 Rather than validate these cutoffs serially, N15-N18 whole-segment Arb checks were launched in parallel in workflow run `36669057015`. Until that matrix closes, N15-N18 remain scouting results and the rigorous same-datum chain remains N11-N14.
 
 See [v0.17](notes/WP19_v0_17_SAME_DATUM_N15_N17_FAST_TAIL_SCOUT.md) and [v0.18](notes/WP19_v0_18_N18_STRESS_AND_PARALLEL_ARB.md).
+
+
+## 30 September 2026 — WP19 v0.19-v0.20
+
+[WP19 v0.19](notes/WP19_v0_19_BOUNDARY_ANNULUS_DIRECT_SHELL_THEOREM.md) uses exact Fourier support geometry to show that a new shell can feed a fixed P11 output only through the last 11 units of old radial support. The resulting direct consecutive-cutoff bound is O(M^-2) and absolutely summable by the Galerkin energy identity. This corrects the coarser v0.14 O(1/M) direct-term obstruction.
+
+The only structural all-cutoff term left is recursive state/backreaction drift.
+
+[WP19 v0.20](notes/WP19_v0_20_GOAL_ORIENTED_FIXED_F11_TAIL_ADJOINT_SCOUT.md) then tests a fixed low observable, F11(P11 u_M(T)), with a reconstruction-specific continuous adjoint. The dual-weighted shell corrections across N14->18 have magnitudes about `2.303, 0.433, 0.132, 0.0173`, and reproduce the actual fixed-F11 cutoff changes to within small observed first-order remainders.
+
+This makes interval validation of the goal-oriented adjoint plus nonlinear remainder the current bridge target. No all-N or continuum theorem is claimed yet.
