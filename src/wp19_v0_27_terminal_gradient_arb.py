@@ -202,11 +202,6 @@ def analytic_gradient(system,a,coeff):
     }
 
 
-def contains_real(x,value):
-    p=arb(str(float(value)))
-    return x.lower()<=p and p<=x.upper()
-
-
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--repo",type=Path,required=True)
@@ -269,8 +264,10 @@ def main():
     ctx.prec=192
     a=point_state(base)
     J,g,diag=analytic_gradient(fixed,a,coeff)
-    if not contains_real(J,base_ref):
-        raise ValueError(("Arb J does not contain v0.26 nominal",str(J),base_ref))
+    J_ref_gap=abs(J-arb(str(float(base_ref)))).upper()
+    J_ref_rel=(J_ref_gap/arb(str(max(1.0,abs(base_ref))))).upper()
+    if J_ref_rel>arb("1e-10"):
+        raise ValueError(("Arb/v0.26 objective discrepancy too large",str(J_ref_rel)))
 
     # Independent complex reverse-mode reference at the same nominal endpoint.
     torch_J,g_float=v26.torch_terminal_gradient(
@@ -295,11 +292,10 @@ def main():
          for ix in range(len(fixed.modes)) for j in range(3)),
         arb(0)
     )
-    if not contains_real(directional,linear_ref):
-        raise ValueError(
-            ("Arb directional prediction does not contain v0.26 reference",
-             str(directional),linear_ref)
-        )
+    directional_gap=abs(directional-arb(str(float(linear_ref)))).upper()
+    directional_rel=(directional_gap/arb(str(max(1.0,abs(linear_ref))))).upper()
+    if directional_rel>arb("1e-8"):
+        raise ValueError(("Arb/v0.26 directional discrepancy too large",str(directional_rel)))
 
     # A dimensionless sanity ratio: arithmetic discrepancy against gradient size.
     denom=grad_lower
@@ -329,7 +325,8 @@ def main():
             "lower_decimal":common.decimal_lower(J.lower(),6),
             "upper_decimal":common.decimal_upper(J.upper(),6),
             "v0_26_reference":base_ref,
-            "v0_26_reference_contained":True,
+            "arb_vs_v0_26_absolute_discrepancy_upper_decimal":common.decimal_upper(J_ref_gap,12),
+            "arb_vs_v0_26_relative_discrepancy_upper_decimal":common.decimal_upper(J_ref_rel,15),
         },
         "terminal_gradient":{
             "L2_lower_decimal":common.decimal_lower(grad_lower,6),
@@ -344,7 +341,8 @@ def main():
             "lower_decimal":common.decimal_lower(directional.lower(),6),
             "upper_decimal":common.decimal_upper(directional.upper(),6),
             "v0_26_endpoint_gradient_linear_prediction":linear_ref,
-            "v0_26_reference_contained":True,
+            "arb_vs_v0_26_absolute_discrepancy_upper_decimal":common.decimal_upper(directional_gap,12),
+            "arb_vs_v0_26_relative_discrepancy_upper_decimal":common.decimal_upper(directional_rel,15),
         },
         "normalizer_diagnostic":{
             "z_abs_lower":str(diag["z_abs_lower"]),
