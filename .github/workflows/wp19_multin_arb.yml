@@ -1,11 +1,9 @@
 name: WP19 same-datum Arb N15-N18
 
+# Frozen after the certified N11-N18 chain. Run manually only.
+# This avoids accidental six-hour N15-N18 matrix reruns when shared validator
+# source is edited for recovery, replay, or later work packages.
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/wp19_multin_arb.yml"
-      - "src/wp19_multin_same_datum_arb.py"
   workflow_dispatch:
 
 permissions:
