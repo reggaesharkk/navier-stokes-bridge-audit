@@ -61,3 +61,11 @@ This is a **falsification gate**, not a certificate.
 The analytic Lipschitz inequality is exact. The new numerical values produced by v0.22 are floating scouts, even though they reuse outward-rounded quantities from the previously completed Arb certificates.
 
 No new all-N persistence theorem, continuum regularity theorem, or singularity theorem is claimed.
+
+## Executed result
+
+GitHub Actions run `36714882801` completed successfully; artifact digest `sha256:3b0eb255dabe1f0480334d31a8021b3f3dc3c775f0985361aa17df70483acb58`.
+
+The radius-augmented recursive-drift contribution decreases from about `17.19` to `4.17` across `14->15` through `17->18`, but the exact-form v0.19 direct-shell energy bound is enormous at these cutoffs: about `1.14e6, 8.31e5, 6.46e5, 5.22e5`. The combined simple route is therefore numerically useless for preserving the available endpoint margin.
+
+**Decision:** do not spend interval-computation budget on the full-state Lipschitz route. It is retained as a correct structural estimate and a negative result. The next live route is the goal-oriented adjoint/dual-weighted formulation from v0.20.
