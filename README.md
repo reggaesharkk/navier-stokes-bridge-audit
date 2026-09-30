@@ -8,6 +8,15 @@ This project is maintained as an independent exploratory mathematical audit with
 
 Prince Upadhyay, Independent Research · version 0.2 · 24 September 2026
 
+## 30 September 2026 — certified same-datum chain through N18
+
+The fixed 112-pair rational datum is now computer-assisted certified at every finite Galerkin cutoff `N=11,...,18`, with no retuning between cutoffs. Each cutoff replays 120 whole-segment Arb residual/gradient enclosures, propagates a trajectory-error radius, certifies a strictly negative endpoint interval for `F=I-9O`, and verifies whole-path nonvanishing of the normalizer.
+
+The N18 recovery reused 99 hash-validated completed segment certificates from the six-hour-limited run, computed only segments `099–119`, and reran the global endpoint and normalizer gates. The recovered N18 endpoint interval is `[-88.699660529,-84.159654865]`, with terminal error bound `0.000013774643` and whole-path normalizer lower bound `48860.59568947`.
+
+See [WP19 v0.21](notes/WP19_v0_21_N11_N18_CERTIFIED_CHAIN.md) and its [machine record](results/wp19_bridge/WP19_v0_21_N11_N18_CERTIFIED_CHAIN.json). This is a finite `N=11,...,18` theorem family for one frozen datum, not an all-cutoff or continuum Navier–Stokes theorem.
+
+
 ## 28 September 2026 finite-N11 validated crossing
 
 The post-hoc 112-pair N11 turnover datum now has a completed computer-assisted certificate. All 120 whole-segment Arb residual/gradient enclosures were replayed from the preserved predictor arrays, the exact initial margin is positive, the normalizer remains bounded away from zero, and the endpoint interval is strictly negative. Therefore the fixed finite N11 Fourier-Galerkin trajectory has at least one K36 90% crossing on `(0,0.003)`.
