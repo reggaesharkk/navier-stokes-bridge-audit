@@ -22,6 +22,7 @@ def main():
     p.add_argument("--n11-nodes",type=Path,required=True)
     p.add_argument("--k36",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
+    p.add_argument("--allow-semantic-fallback",action="store_true")
     a=p.parse_args()
 
     raw=a.k36.read_bytes()
