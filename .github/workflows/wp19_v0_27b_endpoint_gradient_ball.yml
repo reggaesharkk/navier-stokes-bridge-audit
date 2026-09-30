@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/wp19_v0_27b_endpoint_gradient_ball.yml'
       - 'src/wp19_v0_27b_endpoint_gradient_ball.py'
-      - 'src/wp19_v0_27_terminal_gradient_arb.py'
+      - 'src/wp19_v0_27a_terminal_gradient_arb.py'
       - 'notes/WP19_v0_27b_ENDPOINT_GRADIENT_BALL_ARB.md'
       - 'notes/WP19_v0_27_RECOVERY_CHECKPOINT_2026_09_30.md'
   workflow_dispatch:
