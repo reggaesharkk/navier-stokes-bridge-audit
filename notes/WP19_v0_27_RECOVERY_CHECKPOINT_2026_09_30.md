@@ -11,7 +11,7 @@
 - certified source commit before this ledger: `8274cefc0332a049bcdf56646109d3021504cf14`
 - workflow run: `36735640067`
 - workflow conclusion: **success**
-- workflow: `.github/workflows/wp19_v0_27_terminal_gradient_arb.yml`
+- workflow: `.github/workflows/wp19_v0_27a_terminal_gradient_arb.yml`
 
 ## Frozen scientific inputs
 
