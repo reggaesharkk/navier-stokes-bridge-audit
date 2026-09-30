@@ -116,8 +116,51 @@ def segment_worker(out_s:str,N:int,step:int)->tuple[int,str]:
     tmp.replace(path)
     return step,"computed"
 
+def cached_segment_status(out:Path,N:int):
+    """Validate recovered segment JSONs against the exact predictor bytes.
+
+    Interrupted GitHub jobs upload only atomically-renamed JSONs, but recovery
+    must still verify every cached segment before trusting it.
+    """
+    nodes=np.load(out/"nodes.npy",mmap_mode="r")
+    rhs=np.load(out/"rhs.npy",mmap_mode="r")
+    valid=[]; removed=[]
+    for step in range(STEPS):
+        path=out/f"{step:03d}.json"
+        if not path.exists():
+            continue
+        try:
+            old=json.loads(path.read_text())
+            digest=hashlib.sha256(b"".join(x.tobytes() for x in (
+                nodes[step],nodes[step+1],rhs[step],rhs[step+1]
+            ))).hexdigest()
+            ok=(
+                old.get("step")==step
+                and old.get("N",N)==N
+                and old.get("input_binary_sha256")==digest
+                and "residual_L2_upper_decimal" in old
+                and "gradient_Fourier_l1_upper_decimal" in old
+            )
+            if step==0:
+                ok=ok and old.get("exact_rational_initial_field_sha256")==EXPECTED_WITNESS
+            if ok:
+                valid.append(step)
+                continue
+        except Exception:
+            pass
+        path.unlink(missing_ok=True)
+        removed.append(step)
+    return valid,removed
+
 def generate_segments(out:Path,N:int,workers:int)->None:
-    missing=[i for i in range(STEPS) if not (out/f"{i:03d}.json").exists()]
+    valid,removed=cached_segment_status(out,N)
+    print(
+        "N",N,"validated cached segments",len(valid),
+        "removed stale/corrupt",removed,
+        flush=True
+    )
+    missing=[i for i in range(STEPS) if i not in set(valid)]
+    print("N",N,"missing segments",missing,flush=True)
     with ProcessPoolExecutor(max_workers=workers) as pool:
         futures=[pool.submit(segment_worker,str(out),N,i) for i in missing]
         for future in as_completed(futures):
