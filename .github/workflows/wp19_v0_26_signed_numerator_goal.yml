@@ -1,0 +1,193 @@
+name: WP19 v0.26 signed numerator goal adjoint
+
+on:
+  push:
+    branches: [wp19-v0.26-signed-numerator-adjoint]
+    paths:
+      - '.github/workflows/wp19_v0_26_signed_numerator_goal.yml'
+      - 'src/wp19_v0_26_signed_objective.py'
+      - 'src/wp19_v0_26_signed_numerator_goal_adjoint.py'
+      - 'notes/WP19_v0_26_SIGNED_NUMERATOR_GOAL_ADJOINT.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  prepare-c500:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install NumPy
+        run: python -m pip install numpy==2.3.5
+      - name: Reproduce historical N11 predictor
+        run: |
+          set -euxo pipefail
+          mkdir -p work/c500
+          python - <<'PY'
+          import hashlib,sys
+          from pathlib import Path
+          import numpy as np
+          root=Path('.').resolve();sys.path.insert(0,str(root/'src'))
+          import wp16_036_sparse_turnover_exact_anchor as exact
+          import wp16_036_sparse_turnover_witness as witness_mod
+          from wp16_036_dealiased_trajectory_gate import DealiasedSystem
+          witness=root/'results/wp16_n17_holdout/wp16_036_sparse_turnover_112_pairs.json'
+          modes,_,sha=exact.input_state(witness)
+          assert sha=='4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624'
+          s=DealiasedSystem(witness_mod.N)
+          a=np.asarray([[complex(float(v[0]),float(v[1])) for v in modes.get(k,(exact.ZERO,)*3)] for k in s.modes],np.complex128)
+          nodes=np.lib.format.open_memmap('work/c500/n11_nodes.npy',mode='w+',dtype=np.complex128,shape=(121,len(s.modes),3))
+          for step in range(121):
+              nodes[step]=a
+              if step<120:a=s.rk4(a,0.000025)
+          nodes.flush()
+          got=hashlib.sha256(Path('work/c500/n11_nodes.npy').read_bytes()).hexdigest()
+          exp='b70bf7f7fe85a8c073c02c80e54e1f10d0642f5d030dfe569470c5970ebdda29'
+          assert got==exp,(got,exp)
+          print('N11 predictor SHA PASS',got)
+          PY
+      - name: Rebuild portable frozen C500
+        run: |
+          python src/wp19_v0_25_rebuild_c500_portable.py             --repo .             --n11-nodes work/c500/n11_nodes.npy             --k36 results/wp16_n12_holdout/frozen_K36_ordered_source_orbits.json             --output work/c500/frozen_C500.json             --report work/c500/C500_RECONSTRUCTION_REPORT.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-26-frozen-c500
+          path: |
+            work/c500/frozen_C500.json
+            work/c500/C500_RECONSTRUCTION_REPORT.json
+          if-no-files-found: error
+          retention-days: 30
+
+  transfer:
+    needs: prepare-c500
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        M: [14,15,16,17]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          python -m pip install numpy==2.3.5
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          name: wp19-v0-26-frozen-c500
+          path: work/c500
+      - name: Download certified trajectory pair
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          M=${{ matrix.M }}; H=$((M+1))
+          mkdir -p work/lower work/higher
+          case "$M" in
+            14) gh run download 36608785015 --repo '${{ github.repository }}' --name wp19-n14-arb-certificate --dir work/lower ;;
+            15|16|17) gh run download 36669057015 --repo '${{ github.repository }}' --name wp19-same-datum-N$M-arb --dir work/lower ;;
+          esac
+          case "$H" in
+            15|16|17) gh run download 36669057015 --repo '${{ github.repository }}' --name wp19-same-datum-N$H-arb --dir work/higher ;;
+            18) gh run download 36706229638 --repo '${{ github.repository }}' --name wp19-same-datum-N18-arb-recovered --dir work/higher ;;
+          esac
+          for d in work/lower work/higher; do
+            test -f $d/nodes.npy; test -f $d/rhs.npy; test -f $d/metadata.json
+            test -f $d/000.json; test -f $d/119.json
+          done
+      - name: Download exact v0.25b endpoint certificates
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          M=${{ matrix.M }}; H=$((M+1))
+          mkdir -p work/cert-lo work/cert-hi
+          gh run download 36726449421 --repo '${{ github.repository }}' --name wp19-v0-25b-N$M --dir work/cert-lo
+          gh run download 36726449421 --repo '${{ github.repository }}' --name wp19-v0-25b-N$H --dir work/cert-hi
+          test -f work/cert-lo/N$M'_signed_C500.json'
+          test -f work/cert-hi/N$H'_signed_C500.json'
+      - name: Run fixed signed-numerator goal-adjoint gate
+        run: |
+          M=${{ matrix.M }}; H=$((M+1))
+          mkdir -p results/wp19_v0_26
+          python src/wp19_v0_26_signed_numerator_goal_adjoint.py             --repo . --M $M             --lower-dir work/lower --higher-dir work/higher             --k36 results/wp16_n12_holdout/frozen_K36_ordered_source_orbits.json             --sign-chart results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json             --c500 work/c500/frozen_C500.json             --lower-cert work/cert-lo/N$M'_signed_C500.json'             --higher-cert work/cert-hi/N$H'_signed_C500.json'             --output results/wp19_v0_26/M$M'_to_M'$H.json
+      - name: Hash transition result
+        run: sha256sum results/wp19_v0_26/*.json > results/wp19_v0_26/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-26-M${{ matrix.M }}
+          path: results/wp19_v0_26
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    needs: transfer
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wp19-v0-26-M*
+          path: gathered
+      - name: Aggregate signed-numerator transfer gate
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          rows=[]
+          for M in (14,15,16,17):
+              x=json.loads(Path(f'gathered/wp19-v0-26-M{M}/M{M}_to_M{M+1}.json').read_text())
+              rows.append({
+                'transition':x['transition'],
+                'actual_delta_signed_numerator':x['actual_delta_signed_numerator'],
+                'dual_prediction':x['hermite_simpson_dual_prediction'],
+                'total_relative_remainder':x['total_relative_remainder'],
+                'gradient_check_relative_error':x['objective_gradient_directional_check_relative_error'],
+                'base_certified_negative_margin':x['exact_endpoint_crosscheck']['base_negative_margin'],
+                'dual_over_margin':x['margin_ratios']['abs_dual_prediction_over_base_certified_margin'],
+                'remainder_over_margin':x['margin_ratios']['abs_total_remainder_over_base_certified_margin'],
+                'radius_nonlinear_bound_over_margin':x['margin_ratios']['radius_nonlinear_bound_over_base_certified_margin'],
+                'all_36_frozen_signs_match':x['exact_endpoint_crosscheck']['all_36_frozen_signs_match_both_certified_endpoints'],
+              })
+          max_rel=max(r['total_relative_remainder'] for r in rows)
+          max_grad=max(r['gradient_check_relative_error'] for r in rows)
+          max_dual_margin=max(r['dual_over_margin'] for r in rows)
+          max_rem_margin=max(r['remainder_over_margin'] for r in rows)
+          max_nl_margin=max(r['radius_nonlinear_bound_over_margin'] for r in rows)
+          intervalization_candidate=(max_rel<0.05 and max_grad<2e-5 and max_rem_margin<0.05 and max_nl_margin<1.0)
+          summary={
+            'schema':'wp19-v0.26-signed-c500-numerator-goal-adjoint-summary-v1',
+            'copyright':'Copyright (c) 2026 Prince Upadhyay. All Rights Reserved.',
+            'status':'PASS INTERVALIZATION-CANDIDATE GATE' if intervalization_candidate else 'SHARPEN BEFORE INTERVALIZATION',
+            'rows':rows,
+            'maximum_total_relative_remainder':max_rel,
+            'maximum_gradient_check_relative_error':max_grad,
+            'maximum_dual_over_certified_margin':max_dual_margin,
+            'maximum_remainder_over_certified_margin':max_rem_margin,
+            'maximum_radius_nonlinear_bound_over_certified_margin':max_nl_margin,
+            'proceed_to_interval_adjoint':intervalization_candidate,
+            'next_target':'Interval-enclose the fixed signed-numerator terminal gradient, adjoint propagation, residual quadrature, endpoint polynomial Taylor remainder, and dynamic nonlinear remainder; keep normalizer positivity as a separate certified guard.',
+            'claim_boundary':'Floating signed-numerator transfer gate only; no all-N or continuum theorem.'
+          }
+          Path('final').mkdir()
+          Path('final/WP19_v0_26_SUMMARY.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+          for p in Path('gathered').glob('wp19-v0-26-M*/M*_to_M*.json'):
+              (Path('final')/p.name).write_bytes(p.read_bytes())
+          print(json.dumps(summary,indent=2))
+          PY
+      - name: Record final hashes
+        run: find final -type f -print0 | sort -z | xargs -0 sha256sum > final/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-26-signed-numerator-goal-adjoint
+          path: final
+          if-no-files-found: error
+          retention-days: 30
