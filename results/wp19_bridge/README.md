@@ -249,3 +249,28 @@ and
 Applied to the recursive closure forcing, this replaces the v0.13 derivative-bearing bound by an energy-level estimate. For one fixed Leray-Hopf solution, the direct high-shell-to-low closure increments are absolutely summable. For **consecutive different Galerkin solutions**, uniform energy/dissipation alone gives only a worst-case `O(1/M)` direct increment, which is not summable. The remaining all-cutoff target is therefore shell-energy decay stronger than `1/M` plus the recursive state/backreaction drift.
 
 The archived v0.14 ZIP SHA-256 is `0afb76a98ffc8e6c67858ce61cac50e71e4b39b22e726cb382735d4e11f01f68`.
+
+
+## v0.15 full-PDE residual and a-posteriori regularity scout
+
+WP19 v0.15 measures the continuum truncation residual
+`Q14 B(u14,u14)` on the 121 saved nodes of the separately Arb-validated N14 predictor.
+
+This is explicitly **floating node-sampled scouting**, not a continuum certificate.
+
+Headline diagnostics:
+
+- `||R_tail||_(L2_t H^-1) ~= 0.3312582611`
+- `||R_tail||_(L1_t H^-1) ~= 0.0166855303`
+- `||R_tail||_(L2_t L2) ~= 4.9703990588`
+- `||R_tail||_(L1_t H1) ~= 3.7718196582`
+- sampled `sup_t ||u14||_L3 ~= 117.844184420`
+- sampled `||u14||_(L4_t L6) ~= 31.081463808`
+
+The positive-norm residual route is therefore not an attractive direct next certificate at N14. The Fourier `H^-1` residual is materially smaller: the `L1_t H1` diagnostic is about 226 times the `L1_t H^-1` diagnostic.
+
+This redirects the continuum-regularity verification effort toward a modern negative-residual a-posteriori criterion. The missing rigorous pieces include whole-segment residual enclosure, `W^-1,3`, explicit torus constants, and combination with the existing Galerkin path radius.
+
+Drive archive ID: `12ucoktQPMr74ARBcSGGEeJHboEi6pGr-`.
+
+The archived v0.15 ZIP SHA-256 is `dc2811af36412ca93ac0602f90b3b9a22bea1505708f4ad4bcc0fe84b3822d1b`.

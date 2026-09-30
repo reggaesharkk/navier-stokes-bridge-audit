@@ -416,3 +416,12 @@ for divergence-free `a`, where independent Wolfram enumeration gives 5,574 nonze
 For one fixed Leray-Hopf solution this yields absolute summability of the direct high-shell-to-low closure increments. For consecutive distinct Galerkin solutions, the energy-only worst-case direct increment still has a leading `O(1/M)` rate, so summable cutoff transfer remains open. The remaining proof target is stronger shell decay plus recursive state/backreaction control. See [WP19 v0.14](notes/WP19_v0_14_DIVERGENCE_FREE_OUTPUT_FREQUENCY_CANCELLATION.md).
 
 These results do not establish all-cutoff persistence, a continuum regularity theorem, finite-time blowup, or a solution of the three-dimensional Navier-Stokes Millennium problem.
+
+
+## 30 September 2026 — WP19 v0.15 full-PDE residual scout
+
+The [v0.15 scout](notes/WP19_v0_15_FULL_PDE_RESIDUAL_AND_APOSTERIORI_SCOUT.md) evaluates the full-PDE truncation residual `Q14 B(u14,u14)` on the 121 saved N14 predictor nodes. The finite N14 Galerkin path itself remains separately Arb-certified; the new residual calculation is floating scouting only.
+
+The sampled residual has `L2_t H^-1 ~= 0.3313` and `L1_t H^-1 ~= 0.01669`, versus `L2_t L2 ~= 4.9704` and `L1_t H1 ~= 3.7718`. This large norm separation makes a negative-Sobolev a-posteriori strong-solution criterion a more plausible continuum-verification route than the older positive-residual-norm route.
+
+No continuum strong-solution or regularity conclusion is claimed from v0.15.
