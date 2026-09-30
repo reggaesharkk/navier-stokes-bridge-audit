@@ -1,101 +1,69 @@
-# WP19 v0.27a — Arb Terminal Signed-Numerator Gradient Subcertificate
+# WP19 v0.27 — Arb Terminal Signed-C500 Gradient Certificate
 
 **Author:** Prince Upadhyay, Independent Research  
 **Date:** 30 September 2026  
-**Status:** intervalization subgate following the successful WP19 v0.26 pre-interval design gate.
+**Status:** first intervalized component after the v0.26 pre-interval gate.
 
 ## Target
 
-WP19 v0.26 established that the fixed signed-C500 numerator is the useful goal functional for cutoff transfer and that its floating continuous-adjoint predictions are small compared with the already rigorous negative numerator margin.
+v0.26 established that the fixed signed-C500 numerator is the correct smooth
+goal functional and that its floating Hermite goal-adjoint transfer is small
+relative to the already rigorous negative endpoint margin.
 
-The first intervalization task is deliberately narrow: certify the arithmetic of the terminal gradient of the fixed polynomial at the exact nominal projected endpoint used by v0.26.
+v0.27 intervalizes the **terminal condition** of that adjoint.
 
-For
-
-[
-J(a)=sum_{gin K36}sigma_g n_g(a)-9sum_{gin C500}	au_g n_g(a),
-]
-
-the 36 signs (sigma_g), the 500 C500 signs (	au_g), the witness, and all selected orbit-pair groups remain frozen.
-
-Using the real pairing (dJ=operatorname{Re}langle g,hangle), v0.27a evaluates the analytic directional derivative in the real and imaginary coordinate directions for every fixed-N11 Fourier coefficient, constructs the complex gradient, and applies the same divergence-free/reality tangent projection used in v0.23-v0.26.
-
-## Algebraic collapse
-
-Because all frozen coefficients are real, the 536 retained group contributions can be combined before differentiation.
-
-Let
-
-- (b=P_K,i(Qcdot a_p)a_q),
-- (z=-Wlangle a_k,bangle),
-- (D=sum_g c_g d_g), where (c_g=sigma_g) for K36 and (c_g=-9	au_g) for C500,
-- (w=-Wlangle D,bangle).
-
-Then
+For the frozen polynomial
 
 [
-J=operatorname{Im}(woverline z).
+J(a)=\sum_{g\in K36}\sigma_g n_g(a)-9\sum_{g\in C500}\tau_g n_g(a),
 ]
 
-For a perturbation (h),
+the code evaluates both (J) and (J'(a)) at the canonical decimal
+(P_{11}) predictor endpoint with 128-bit Arb/acb arithmetic.
 
-[
-db=P_K i[(Qcdot h_p)a_q+(Qcdot a_p)h_q],
-]
+## Why this is tractable
 
-[
-dz=-W(langle h_k,bangle+langle a_k,dbangle),
-]
+The adjoint used in v0.26 is defined along the known cubic-Hermite
+reconstruction. Therefore its terminal condition is the derivative at the
+known predictor endpoint; it does **not** require placing the entire terminal
+trajectory-error ball into automatic differentiation.
 
-[
-dw=-W(langle dD,bangle+langle D,dbangle),
-]
+The signed numerator is degree seven, but it has frozen finite support:
+36 K36 groups plus 500 C500 groups. An analytic reverse-mode formula is used
+instead of interval finite differences.
 
-and
+## Independent formula check
 
-[
-dJ=operatorname{Im}(dw,overline z+w,overline{dz}).
-]
+Before the Arb version was committed, the same analytic reverse-mode formula
+was evaluated in complex128 at the N14 endpoint and compared against the
+existing v0.26 PyTorch reverse-mode terminal gradient. The relative L2
+difference was approximately (1.15\times 10^{-15}), with both norms near
+(4.691959667101\times10^{12}).
 
-This is evaluated with 192-bit Arb arithmetic.
+The workflow additionally performs a centered directional finite-difference
+check and requires the Arb directional derivative interval to contain the
+complex128 analytic result.
 
-## Frozen identities
+## Frozen provenance
 
 - witness SHA-256: `4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624`
 - K36 SHA-256: `7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47`
-- corrected prospective N13 K36 sign-chart SHA-256: `de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1`
-- portable C500 semantic SHA-256: `1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f`
-- selected ordered source pairs: 1048
-- selected source modes: 1159
+- prospective K36 sign-chart SHA-256: `de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1`
+- C500 semantic SHA-256: `1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f`
 
-No datum, sign, key, rank, or coalition member is retuned.
+No datum, sign, coalition member, or coefficient is retuned.
 
-## Matrix
+## Decision
 
-The subcertificate is evaluated at the lower endpoint of each already studied transfer:
+If all four transitions `14->15`, `15->16`, `16->17`, `17->18`
+return a tight 128-bit terminal-gradient enclosure, the next stage is an
+a-posteriori Arb validation of the **backward adjoint ODE** around the saved
+floating half-step adjoint reconstruction, followed by rigorous dual
+quadrature.
 
-- N14 for 14→15,
-- N15 for 15→16,
-- N16 for 16→17,
-- N17 for 17→18.
+## Claim boundary
 
-Each job downloads the existing certified predictor artifacts, reconstructs C500 from the byte-identical historical N11 predictor, and compares the Arb result against two independent v0.26 quantities:
-
-1. the PyTorch reverse-mode terminal gradient;
-2. the saved v0.26 endpoint directional linear prediction along (P_{11}(u_{M+1}(T)-u_M(T))).
-
-## Pass meaning
-
-A PASS means the fixed nominal terminal-gradient arithmetic has been independently enclosed with Arb and agrees with the floating implementation used by v0.26.
-
-It **does not** yet certify:
-
-- variation of the terminal gradient over the certified endpoint state-error ball;
-- backward adjoint propagation;
-- dual quadrature;
-- endpoint Taylor remainder;
-- dynamic nonlinear remainder;
-- an all-N persistence theorem;
-- any continuum Navier–Stokes regularity or blowup claim.
-
-Those are separate subsequent interval subgates.
+v0.27 certifies only the terminal polynomial value/gradient at the canonical
+decimal predictor endpoint. It does not yet certify backward adjoint
+propagation, dual quadrature, the nonlinear remainder, the endpoint Taylor
+remainder, an all-N transfer theorem, or continuum Navier–Stokes behavior.
