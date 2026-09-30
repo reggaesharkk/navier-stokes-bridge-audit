@@ -43,11 +43,18 @@ jobs:
           sys.path.insert(0,str(root/'src'))
           import hashlib
           import wp16_036_sparse_turnover_exact_anchor as exact
-          import wp16_036_turnover_bernstein_screen as screen
+          import wp16_036_sparse_turnover_witness as turnover_witness
+          from wp16_036_dealiased_trajectory_gate import DealiasedSystem
           witness=root/'results/wp16_n17_holdout/wp16_036_sparse_turnover_112_pairs.json'
           expected='4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624'
-          assert hashlib.sha256(witness.read_bytes()).hexdigest()==expected
-          s,a=screen.initial_field(witness)
+          modes,_,sha=exact.input_state(witness)
+          assert sha==expected
+          s=DealiasedSystem(turnover_witness.N)
+          a=np.asarray([
+              [complex(float(v[0]),float(v[1]))
+               for v in modes.get(k,(exact.ZERO,)*3)]
+              for k in s.modes
+          ],dtype=np.complex128)
           nodes=np.lib.format.open_memmap(
               'work/c500/n11_nodes.npy',
               mode='w+',
