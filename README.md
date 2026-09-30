@@ -397,3 +397,22 @@ The [v0.13 note](notes/WP19_v0_13_FIXED_OUTPUT_CLOSURE_AND_WEAK_LIMIT.md) proves
 Because the frozen signed C500 numerator depends only on finitely many N11 coefficients, a future cutoff-uniform negative signed-numerator margin can pass along a standard Galerkin subsequence to a Leray-Hopf weak limit without requiring strong convergence of the entire state. This is a continuum observable passage, not a regularity theorem.
 
 The remaining cutoff-transfer term is the state/backreaction drift; v0.13 isolates it from the direct new-shell closure contribution so the next proof gate can target it with the existing adjoint machinery.
+
+
+## 30 September 2026 — N14 validated same-datum chain and WP19 v0.14
+
+The prospective same-rational-datum N14 validation completed successfully. Using the unchanged 112-pair witness, frozen K36 keys, `nu=0.1`, `T=0.003`, and 120 whole-segment 128-bit Arb enclosures, the validated N14 endpoint is
+
+`F(0.003) in [-89.015834781,-85.160766265]`
+
+with terminal trajectory-error upper bound `0.000012825905` and whole-path normalizer lower bound `48850.68586052`. The rigorous same-datum finite-Galerkin chain is now **N11, N12, N13, N14**. See [the N14 validated result](notes/WP19_N14_VALIDATED_SAME_DATUM_RESULT_2026_09_30.md).
+
+WP19 v0.14 then sharpens the recursive-closure analysis. In Fourier space, incompressibility gives `a_p dot q = a_p dot k` whenever `k=p+q`, so a fixed low-output interaction does not pay the high input derivative. Consequently,
+
+`||P_11 B(a,b)||_2 <= sqrt(404724) ||a||_2 ||b||_2`
+
+for divergence-free `a`, where independent Wolfram enumeration gives 5,574 nonzero N11 output modes and `sqrt(404724) ~= 636.179220031588`.
+
+For one fixed Leray-Hopf solution this yields absolute summability of the direct high-shell-to-low closure increments. For consecutive distinct Galerkin solutions, the energy-only worst-case direct increment still has a leading `O(1/M)` rate, so summable cutoff transfer remains open. The remaining proof target is stronger shell decay plus recursive state/backreaction control. See [WP19 v0.14](notes/WP19_v0_14_DIVERGENCE_FREE_OUTPUT_FREQUENCY_CANCELLATION.md).
+
+These results do not establish all-cutoff persistence, a continuum regularity theorem, finite-time blowup, or a solution of the three-dimensional Navier-Stokes Millennium problem.
