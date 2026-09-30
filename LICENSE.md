@@ -15,3 +15,11 @@ When reusing the text or results, credit Prince Upadhyay, link the license
 and source, and indicate changes, as required by CC BY 4.0. When distributing
 the code, retain the copyright and MIT license notice. These licenses do not
 imply peer review, validation of a PDE result, or endorsement of derivatives.
+
+## Prospective licensing boundary — 30 September 2026
+
+The licenses above continue to govern material already distributed under them and are not revoked.
+
+For material first authored and first published in this repository **after 30 September 2026**, the default is **All Rights Reserved** unless that file, directory, release manifest, or accompanying notice expressly applies another license.
+
+No additional patent license is granted by this prospective notice. See [IP_NOTICE_2026_09_30.md](IP_NOTICE_2026_09_30.md) for the repository's dated intellectual-property boundary and provenance statement.
