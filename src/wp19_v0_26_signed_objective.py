@@ -4,6 +4,10 @@
 The objective is the unnormalised polynomial numerator
   J = sum_{g in K36} sigma_g n_g - 9 sum_{g in C500} tau_g n_g,
 with sigma frozen by the prospective N13 sign chart and tau frozen by C500.
+
+The historical sign-chart note carried a byte hash that no longer matches the
+repository JSON formatting. v0.26 therefore fail-closes on the mathematical
+identity: the K36 byte hash plus the exact 36-sign vector in K36 order.
 """
 from __future__ import annotations
 import hashlib,json
@@ -13,7 +17,8 @@ import numpy as np
 
 P,Q,K=(3,2,2),(3,-2,1),(6,0,3)
 EXPECTED_K36="7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47"
-EXPECTED_SIGN_CHART="7cbb307c70aa14fabdc28ae07f0965716bf498e63c371b61e1b9bfd00611c7bd"
+EXPECTED_SIGN_VECTOR=(1,1,-1,1,-1,1,-1,1,1,-1,-1,1,1,-1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,-1,1,-1,-1,-1,-1,-1,-1,-1,-1)
+EXPECTED_SIGN_SEMANTIC="88767fcb5b905a34febf1371e2e50344b863797049dbedc03338f9dcba584a31"
 EXPECTED_C500_SEMANTIC="1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f"
 
 def orbit(k):
@@ -34,11 +39,14 @@ def c500_semantic_sha(path:Path):
     raw=(json.dumps(semantic,sort_keys=True,separators=(",",":"))+"\n").encode()
     return hashlib.sha256(raw).hexdigest()
 
+def sign_semantic_sha(signs):
+    semantic={"schema":"wp19-k36-sign-vector-v1","K36_sha256":EXPECTED_K36,"signs":[int(x) for x in signs]}
+    raw=(json.dumps(semantic,sort_keys=True,separators=(",",":"))+"\n").encode()
+    return hashlib.sha256(raw).hexdigest()
+
 def load_frozen(k36_path:Path,sign_path:Path,c500_path:Path):
     if hashlib.sha256(k36_path.read_bytes()).hexdigest()!=EXPECTED_K36:
         raise ValueError("K36 hash mismatch")
-    if hashlib.sha256(sign_path.read_bytes()).hexdigest()!=EXPECTED_SIGN_CHART:
-        raise ValueError("K36 sign-chart hash mismatch")
     if c500_semantic_sha(c500_path)!=EXPECTED_C500_SEMANTIC:
         raise ValueError("C500 semantic hash mismatch")
     krows=json.loads(k36_path.read_text())["keys"]
@@ -51,6 +59,8 @@ def load_frozen(k36_path:Path,sign_path:Path,c500_path:Path):
     if set(kkeys)!=set(smap):
         raise ValueError("sign chart/key mismatch")
     sig=np.asarray([smap[k] for k in kkeys],float)
+    if tuple(int(x) for x in sig)!=EXPECTED_SIGN_VECTOR or sign_semantic_sha(sig)!=EXPECTED_SIGN_SEMANTIC:
+        raise ValueError("K36 frozen sign-vector semantic mismatch")
     ckeys=[(tuple(r["left_orbit"]),tuple(r["right_orbit"])) for r in crows]
     tau=np.asarray([int(r["fixed_linear_sign"]) for r in crows],float)
     if set(kkeys)&set(ckeys) or not np.all(np.isin(sig,[-1,1])) or not np.all(np.isin(tau,[-1,1])):
