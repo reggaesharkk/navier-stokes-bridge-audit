@@ -195,3 +195,57 @@ Applied to the exact high-to-low closure forcing, this shows that for any Leray-
 v0.13 also gives an explicit direct shell-addition bound for the closure increment. The remaining hard term is the state/backreaction drift between `P_M u_{M+1}` and `u_M`, which is the target for the existing stability/adjoint machinery.
 
 The archived v0.13 ZIP SHA-256 is `fd236ae9056711c139ede0db750c8c566e47ee571fa62b9a1417023bbcf72606`.
+
+
+## N14 same-datum Arb validation — PASS
+
+The prospective N14 whole-segment validation completed successfully on GitHub Actions run `36608785015`.
+
+Frozen setup:
+
+- same 112-pair rational witness as N11-N13;
+- witness SHA-256 `4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624`;
+- frozen K36 SHA-256 `7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47`;
+- `nu=0.1`, `T=0.003`, 120 whole-segment 128-bit Arb enclosures;
+- no N14 retuning.
+
+Validated outputs:
+
+- terminal trajectory-error upper bound: `0.000012825905`;
+- `F(0) in [645.8037741471,645.8037741472]`;
+- `F(0.003) in [-89.015834781,-85.160766265]`;
+- whole-path normalizer lower bound: `48850.68586052`.
+
+The rigorous same-datum finite-Galerkin chain is therefore N11-N14.
+
+The complete workflow artifact contains 126 files, is 127,530,612 bytes, and has SHA-256 `b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698`.
+
+This remains a finite-Galerkin certificate, not an all-N or continuum theorem.
+
+## v0.14 divergence-free output-frequency cancellation
+
+WP19 v0.14 sharpens the fixed-output closure estimate using incompressibility.
+
+For `k=p+q` and divergence-free advecting coefficient `a_p`,
+
+`a_p dot q = a_p dot (k-p) = a_p dot k`.
+
+Thus a high input frequency does not appear as a derivative loss when the output is restricted to the fixed low projector. The exact estimate is
+
+`||P_K B(a,b)||_2 <= C_K ||a||_2 ||b||_2`
+
+with
+
+`C_K^2 = sum_{0<|k|<=K} |k|^2`.
+
+For `K=11`, independent Wolfram enumeration gives 5,574 nonzero output modes,
+
+`sum |k|^2 = 404724`
+
+and
+
+`C_11 = sqrt(404724) ~= 636.179220031588`.
+
+Applied to the recursive closure forcing, this replaces the v0.13 derivative-bearing bound by an energy-level estimate. For one fixed Leray-Hopf solution, the direct high-shell-to-low closure increments are absolutely summable. For **consecutive different Galerkin solutions**, uniform energy/dissipation alone gives only a worst-case `O(1/M)` direct increment, which is not summable. The remaining all-cutoff target is therefore shell-energy decay stronger than `1/M` plus the recursive state/backreaction drift.
+
+The archived v0.14 ZIP SHA-256 is `0afb76a98ffc8e6c67858ce61cac50e71e4b39b22e726cb382735d4e11f01f68`.
