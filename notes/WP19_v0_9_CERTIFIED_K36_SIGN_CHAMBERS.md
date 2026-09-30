@@ -42,9 +42,11 @@ So the N12->N13 endpoint transfer has no K36 endpoint kink at all.
 
 The N13 sign chart is frozen before any same-datum N14 endpoint certificate is generated.
 
-Frozen sign-chart SHA-256:
+Frozen sign-chart SHA-256 (historical record; corrected below):
 
 `7cbb307c70aa14fabdc28ae07f0965716bf498e63c371b61e1b9bfd00611c7bd`
+
+**Provenance correction — 30 September 2026:** the tracked sign-chart file has git blob `f06df05437fd717337b5bf11939e997f2a7d165e` and is byte-identical to the file first committed in `5c0b34f4a887db62c2dc8d9f8558e98d38a4e0bd`. Its actual file SHA-256 is `de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1`. The `7cbb307c...` value above was an erroneous recorded digest; no K36 key or frozen sign changed.
 
 A future N14 transfer must use this exact chart without retuning.
 
