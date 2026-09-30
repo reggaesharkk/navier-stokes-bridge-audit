@@ -41,23 +41,33 @@ jobs:
           import numpy as np
           root=Path('.').resolve()
           sys.path.insert(0,str(root/'src'))
+          import hashlib
           import wp16_036_sparse_turnover_exact_anchor as exact
-          from wp16_036_dealiased_trajectory_gate import DealiasedSystem
+          import wp16_036_turnover_bernstein_screen as screen
           witness=root/'results/wp16_n17_holdout/wp16_036_sparse_turnover_112_pairs.json'
-          field,_,sha=exact.input_state(witness)
           expected='4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624'
-          assert sha==expected, sha
-          s=DealiasedSystem(11,nu=0.1)
-          a=np.asarray([[complex(float(z[0]),float(z[1])) for z in field.get(k,(exact.ZERO,)*3)] for k in s.modes],dtype=np.complex128)
-          for step in range(120):
-              a=s.rk4(a,0.000025)
-          np.save('work/c500/n11_endpoint.npy',np.asarray([a]))
-          print('N11 endpoint regenerated',np.linalg.norm(a.ravel()))
+          assert hashlib.sha256(witness.read_bytes()).hexdigest()==expected
+          s,a=screen.initial_field(witness)
+          nodes=np.lib.format.open_memmap(
+              'work/c500/n11_nodes.npy',
+              mode='w+',
+              dtype=np.complex128,
+              shape=(121,len(s.modes),3)
+          )
+          for step in range(121):
+              nodes[step]=a
+              if step<120:
+                  a=s.rk4(a,0.000025)
+          nodes.flush()
+          node_sha=hashlib.sha256(Path('work/c500/n11_nodes.npy').read_bytes()).hexdigest()
+          expected_nodes='b70bf7f7fe85a8c073c02c80e54e1f10d0642f5d030dfe569470c5970ebdda29'
+          assert node_sha==expected_nodes,(node_sha,expected_nodes)
+          print('N11 predictor nodes reproduced exactly',node_sha)
           PY
 
           python src/wp19_v0_6_build_fixed_c500.py \
             --repo . \
-            --n11-nodes work/c500/n11_endpoint.npy \
+            --n11-nodes work/c500/n11_nodes.npy \
             --k36 results/wp16_n12_holdout/frozen_K36_ordered_source_orbits.json \
             --output work/c500/frozen_C500.json
 
