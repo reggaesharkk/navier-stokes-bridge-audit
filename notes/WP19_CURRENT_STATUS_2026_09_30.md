@@ -319,3 +319,15 @@ Their magnitude ratios are about
 The linearized predictions reproduce the actual fixed-F11 cutoff changes with observed remainders of about 0.56%, 1.14%, 2.44%, and 8.95% respectively. The N18 sign reversal is captured.
 
 This is floating scouting, not an interval adjoint certificate. It identifies the goal-oriented dual-weighted transfer—not a generic full-state norm—as the next rigorization target.
+
+## 16. v0.22 executed verdict
+
+GitHub Actions run `36714882801` completed the recursive state/backreaction Lipschitz falsification gate. The radius-augmented recursive contribution decreases across the same-datum transitions, approximately `17.19, 12.07, 8.46, 4.17`, but the v0.19 energy-only direct-shell theorem bound is numerically enormous at N14–N17: approximately `1.14e6, 8.31e5, 6.46e5, 5.22e5`.
+
+Thus the simple full-state norm route is retained only as a correct structural bound and is **rejected as a practical margin-closing route at the current constants**. The next live route is goal-oriented adjoint control.
+
+## 17. v0.23 live target
+
+WP19 v0.23 independently rebuilds the fixed-F11 continuous-adjoint calculation with an analytic dealiased spectral VJP, finite-difference VJP self-test, reverse-mode terminal gradient, and backward RK4 integration along the cubic-Hermite lower-cutoff reconstruction for `14->15` through `17->18`.
+
+This is a floating cross-check before any interval adjoint certificate. If the independently rebuilt dual-weighted predictions continue to reproduce the actual cutoff changes with small remainders, the next stage is interval rigorization of the terminal gradient, adjoint propagation, quadrature, and nonlinear remainder.
