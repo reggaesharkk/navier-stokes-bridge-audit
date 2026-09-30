@@ -122,8 +122,14 @@ jobs:
           M=int('${{ matrix.M }}')
           x=json.loads(Path(f'results/wp19_v0_27c0/M{M}_arb_vjp_point.json').read_text())
           assert x['status']=='PASS ARB ADJOINT-VJP POINT CROSSCHECK',x
-          assert float(x['arb_vs_fft_relative_difference_upper_decimal'])<1e-10,x
-          print(json.dumps({'M':M,'relative_difference_upper':x['arb_vs_fft_relative_difference_upper_decimal']},indent=2))
+          direct=float(x['selected_mode_direct_crosscheck']['arb_vs_explicit_direct_relative_difference_upper_decimal'])
+          assert direct<1e-12,x
+          print(json.dumps({
+              'M':M,
+              'arb_vs_explicit_direct_relative_upper':direct,
+              'arb_vs_fft_relative_upper':x['arb_vs_fft_relative_difference_upper_decimal'],
+              'fft_vs_explicit_direct_relative':x['selected_mode_direct_crosscheck']['fft_vs_explicit_direct_relative_difference'],
+          },indent=2))
           PY
       - name: Hash
         run: sha256sum results/wp19_v0_27c0/*.json > results/wp19_v0_27c0/SHA256SUMS.txt
@@ -150,8 +156,18 @@ jobs:
           rows=[]
           for M in (14,15,16,17):
               x=json.loads(Path(f'gathered/wp19-v0-27c0-M{M}/M{M}_arb_vjp_point.json').read_text())
-              rows.append({'M':M,'status':x['status'],'relative_difference_upper':x['arb_vs_fft_relative_difference_upper_decimal'],'absolute_L2_difference_upper':x['arb_vs_fft_L2_difference_upper_decimal']})
-          passed=all(r['status']=='PASS ARB ADJOINT-VJP POINT CROSSCHECK' and float(r['relative_difference_upper'])<1e-10 for r in rows)
+              rows.append({
+                  'M':M,
+                  'status':x['status'],
+                  'arb_vs_explicit_direct_relative_upper':x['selected_mode_direct_crosscheck']['arb_vs_explicit_direct_relative_difference_upper_decimal'],
+                  'arb_vs_fft_relative_upper':x['arb_vs_fft_relative_difference_upper_decimal'],
+                  'fft_vs_explicit_direct_relative':x['selected_mode_direct_crosscheck']['fft_vs_explicit_direct_relative_difference'],
+              })
+          passed=all(
+              r['status']=='PASS ARB ADJOINT-VJP POINT CROSSCHECK'
+              and float(r['arb_vs_explicit_direct_relative_upper'])<1e-12
+              for r in rows
+          )
           out={
               'schema':'wp19-v0.27c0-arb-adjoint-vjp-point-summary-v1',
               'status':'PASS ARB ADJOINT-VJP POINT CROSSCHECK' if passed else 'FAIL',
