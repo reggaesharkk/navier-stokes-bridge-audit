@@ -22,6 +22,8 @@ Let `mu_h` be the cubic Hermite reconstruction from the saved adjoint values and
 
 The adjoint Hermite path and primal Hermite predictor are cubic in the segment parameter. Since the adjoint RHS is linear in the adjoint and linear in the primal velocity, the residual is a Fourier-valued polynomial of degree at most six. The implementation must enclose each complete polynomial segment, not a set of sample times.
 
+The stored arrays remain binary64 source data. When building Arb inputs, represent every stored real/imaginary value by its exact `float.as_integer_ratio()` rational (or by an explicitly outward-rounded interval containing that rational). Do not treat `str(float_value)` as an enclosure of the underlying binary64 value. The Hermite reconstruction is the exact rational-coefficient surrogate defined by those imported nodes/RHS values; its residual, including all RK4/interpolation defects, is what the validated bound must control.
+
 For each Fourier mode/component, convert the residual polynomial to Bernstein form on `[0,1]`. If its degree-six Bernstein coefficients are `b_0,...,b_6`, then
 
 `sup_{s in segment} |r_mode,component(s)| <= max_l |b_l|`.
