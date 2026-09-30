@@ -1,11 +1,7 @@
 name: WP19 N18 resume from segment 099
 
+# Completed historical workflow. Manual replay only.
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/wp19_n18_resume.yml"
-      - "src/wp19_multin_same_datum_arb.py"
   workflow_dispatch:
 
 permissions:
