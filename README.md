@@ -425,3 +425,12 @@ The [v0.15 scout](notes/WP19_v0_15_FULL_PDE_RESIDUAL_AND_APOSTERIORI_SCOUT.md) e
 The sampled residual has `L2_t H^-1 ~= 0.3313` and `L1_t H^-1 ~= 0.01669`, versus `L2_t L2 ~= 4.9704` and `L1_t H1 ~= 3.7718`. This large norm separation makes a negative-Sobolev a-posteriori strong-solution criterion a more plausible continuum-verification route than the older positive-residual-norm route.
 
 No continuum strong-solution or regularity conclusion is claimed from v0.15.
+
+
+## 30 September 2026 — WP19 v0.16 critical-space criterion no-go
+
+The [v0.16 Arb gate](notes/WP19_v0_16_BGT_CRITICAL_SPACE_ARB_GATE.md) tests a published critical-space a-posteriori sufficient strong-existence criterion against the exact validated N14 cubic-Hermite reconstruction.
+
+A 160-bit lower screen using one omitted mode and the first Hermite segment proves the criterion's left-hand side is already above one by an enormous margin: `log(LHS)>6.217838664529e12`. This is a rigorous no-go for that certification route, not evidence of singularity or nonexistence.
+
+The continuum program now pivots to reconstruction-specific Fourier-linearized stability, retaining the actual modewise viscous damping and the known full-PDE truncation residual rather than collapsing the dynamics into a universal Gronwall constant.

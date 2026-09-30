@@ -274,3 +274,14 @@ This redirects the continuum-regularity verification effort toward a modern nega
 Drive archive ID: `12ucoktQPMr74ARBcSGGEeJHboEi6pGr-`.
 
 The archived v0.15 ZIP SHA-256 is `dc2811af36412ca93ac0602f90b3b9a22bea1505708f4ad4bcc0fe84b3822d1b`.
+
+
+## v0.16 rigorous critical-space a-posteriori no-go
+
+WP19 v0.16 evaluates the published Brunk-Giesselmann-Tscherpel critical-space sufficient strong-existence criterion against the exact N14 cubic-Hermite reconstruction.
+
+After the exact unit-torus Navier-Stokes rescaling, a 160-bit Arb lower gate uses only the first Hermite segment and one omitted Fourier mode `k=(12,5,6)`. It proves `A>0.00720428952807`, `log M>9.326757996764e12`, and therefore `log(criterion LHS)>6.217838664529e12>0`. The sufficient condition `LHS<=1` is rigorously false for this reconstruction.
+
+This does not imply blowup or failure of continuum strong existence. It rules out this particular generic-constant certification route and motivates reconstruction-specific Fourier-linearized stability with modewise viscosity.
+
+The archived v0.16 ZIP SHA-256 is `382c9cdff7902990132ba36f1d593e72cf1f6bdf66ec3878352f903d6a57073c`.
