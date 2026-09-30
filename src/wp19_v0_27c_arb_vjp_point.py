@@ -134,6 +134,7 @@ def main():
 
     root=args.repo.resolve()
     sys.path.insert(0,str((root/"src").resolve()))
+    sys.path.insert(0,str((root/"next-work"/"n14_same_datum"/"tools").resolve()))
     import wp19_v0_23_rk4_goal_adjoint as v23
     import wp19_v0_26_signed_goal_adjoint as v26
     import wp19_v0_27_terminal_gradient_arb as v27a
