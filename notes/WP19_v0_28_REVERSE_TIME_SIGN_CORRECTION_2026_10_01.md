@@ -18,7 +18,7 @@ The exact adjoint equation used here is the finite Galerkin system
 \partial_t\lambda=\operatorname{VJP}(u,\lambda)+\nu\Lambda\lambda,
 \]
 
-as written in `src/wp19_v0_23_rk4_goal_adjoint.py` (SHA-256 `0ba7cd0464076271a80864118d930d384d2cce6a1974650f278f8e02a7756e01`), with its Galerkin vector field in `src/wp16_036_dealiased_trajectory_gate.py` (SHA-256 `c44824c9562c4e79b11e8838e663ecf77d0992ba5d146b4c5015717018baae14`). For `e=\lambda-L`, subtraction gives
+as written in `src/wp19_v0_23_rk4_goal_adjoint.py` (SHA-256 `0ba7cd0464076271a80864118d930d384d2cce6a1974650f278f8e02a7756e01`), with its Galerkin vector field in `src/wp16_036_dealiased_trajectory_gate.py` (SHA-256 `c44824c9562c4e79b11e8838e663ecf77d0992ba5d146b4c5015717018baae14`). These M14 half-segments embed into the finite M15 high-system support used by the adjoint. For `e=\lambda-L`, subtraction gives
 
 \[
 \partial_t e = \operatorname{VJP}(u,e)+\nu\Lambda e-r,
@@ -44,7 +44,7 @@ D^+\|e\|_2/D\tau \le \|S(u)\|_{L^\infty,op}\|e\|_2+\|r\|_2.
 
 The negative viscous term can be dropped for an upper bound. The archived strain-only scalar recurrence is valid under the assumptions and imported whole-segment bounds below. Adding `22.5` to the exponent coefficient remains a valid but looser upper recurrence, not a required correction.
 
-The argument is conditional on all of the following: (1) the error is real, divergence-free, and Hermitian-symmetric, with the Leray projection commuting with \(\Lambda\); (2) the true primal field is exactly divergence-free; (3) the exact adjoint is the solution of the finite Galerkin adjoint ODE above, using the archived projected/truncated convolution; (4) one Fourier-coefficient \(\ell^2\) convention is used consistently for the error, residual, primal perturbation, and strain bounds; (5) the supplied strain \(L\) and residual \(R\) bound their norms continuously over the entire half-segment; (6) the supplied primal radius bounds the primal error throughout that segment; and (7) the terminal error bound is valid in the same norm. This packet identifies and hashes the equations and producer sources but does not reconstruct the exact adjoint trajectory or independently prove the supplied segment bounds.
+The argument is conditional on all of the following: (1) the error is real, divergence-free, and Hermitian-symmetric, with the Leray projection commuting with \(\Lambda\); (2) the true primal field is exactly divergence-free; (3) the exact adjoint is the solution of the finite M15 Galerkin adjoint ODE above for the M14-to-M15 segment, using the archived projected/truncated convolution; (4) one Fourier-coefficient \(\ell^2\) convention is used consistently for the error, residual, primal perturbation, and strain bounds; (5) the supplied strain \(L\) and residual \(R\) bound their norms continuously over the entire half-segment; (6) the supplied primal radius bounds the primal error throughout that segment; and (7) the terminal error bound is valid in the same norm. This packet identifies and hashes the equations and producer sources but does not reconstruct the exact adjoint trajectory or independently prove the supplied segment bounds.
 
 ## Recomputed recurrence
 

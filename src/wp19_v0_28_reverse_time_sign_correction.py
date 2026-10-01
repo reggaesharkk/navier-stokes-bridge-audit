@@ -226,12 +226,13 @@ def build() -> dict:
         "rights_notice": "Copyright (c) 2026 Prince Upadhyay. All Rights Reserved.",
         "protocol": {"cutoff_M": 14, "viscosity": str(NU), "terminal_time": "3/1000",
                      "backward_segment_order": [239, 238, 237], "segment_width": str(H),
+                     "adjoint_support_M": 15,
                      "witness_sha256": FROZEN["witness_sha256"], "K36_sha256": FROZEN["K36_sha256"],
                      "C500_portable_semantic_sha256": FROZEN["C500_portable_semantic_sha256"],
                      "no_retuning": True},
         "sign_derivation": {
             "producer_residual_definition": "r = dL/dt - VJP(u,L) - nu*Lambda*L",
-            "exact_adjoint_equation": "d(lambda)/dt = VJP(u,lambda) + nu*Lambda*lambda, as defined by adjoint_rhs in src/wp19_v0_23_rk4_goal_adjoint.py for the frozen finite Galerkin system",
+            "exact_adjoint_equation": "for the M14-to-M15 segment, d(lambda)/dt = VJP(u,lambda) + nu*Lambda*lambda on the M15 high-system support, as defined by adjoint_rhs in src/wp19_v0_23_rk4_goal_adjoint.py",
             "error_definition": "e = lambda - L",
             "forward_time_error_equation": "de/dt = VJP(u,e) + nu*Lambda*e - r",
             "backward_time_variable": "tau = T - t",
@@ -241,7 +242,7 @@ def build() -> dict:
             "assumptions": [
                 "e is real, divergence-free, and Hermitian-symmetric; the Leray projection commutes with Lambda",
                 "u_true is exactly divergence-free",
-                "the exact adjoint follows the finite Galerkin ODE stated above, with the projected truncated convolution used by the archived system",
+                "the exact adjoint follows the finite M15 Galerkin ODE stated above for the M14-to-M15 segment, with the projected truncated convolution used by the archived system",
                 "the same Fourier-coefficient ell2 norm is used for e, residual, primal-radius perturbations, and strain estimates",
                 "archived strain L and residual R bound the relevant norms over each entire continuous half-segment",
                 "the archived primal radius bounds the primal trajectory error throughout its associated segment",
