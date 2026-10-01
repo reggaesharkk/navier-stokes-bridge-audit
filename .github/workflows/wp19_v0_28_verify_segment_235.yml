@@ -1,0 +1,91 @@
+name: WP19 v0.28 M14 step 235 independent verification
+on:
+  push:
+    branches: [wp19-v0-28-independent-step235-audit]
+    paths:
+      - '.github/workflows/wp19_v0_28_verify_segment_235.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify-step-235:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Check frozen arithmetic implementation
+        run: python src/wp19_v0_28_adjoint_segment_arb.py --self-check
+      - name: Retrieve and verify frozen inputs and producer artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower work/adjoint work/producer output
+          gh api repos/${{ github.repository }}/actions/artifacts/11059294923/zip > work/lower.zip
+          gh api repos/${{ github.repository }}/actions/artifacts/11121015458/zip > work/adjoint.zip
+          gh api repos/${{ github.repository }}/actions/artifacts/11175535650/zip > work/producer.zip
+          echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
+          echo '330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058  work/adjoint.zip' | sha256sum -c -
+          echo '5475a757f60cab48e2fb50a8877a53ac6771cdb0960b3f5753d6048e8ebc71f2  work/producer.zip' | sha256sum -c -
+          unzip -q work/lower.zip -d work/lower
+          unzip -q work/adjoint.zip -d work/adjoint
+          unzip -q work/producer.zip -d work/producer
+          echo '7800c3396ed3635ad57b858e2f0e1c7e66bd1fbfc7c8bec34302f06340f40855  work/producer/M14_segment_235.json' | sha256sum -c -
+          cp work/producer/M14_segment_235.json output/
+      - name: Independently recompute the step 235 residual
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_verify_residual_step235.py \
+            --step 235 --lower-dir work/lower --adjoint-dir work/adjoint \
+            --segment work/producer/M14_segment_235.json \
+            --output output/independent_residual_235.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('output/independent_residual_235.json').read_text())
+          assert report['step']==235 and report['M']==14
+          assert report['status']=='INDEPENDENT_STEP_235_RECOMPUTATION_COMPLETE_ARCHIVE_COMPARISON_RECORDED'
+          assert report['segment_sha256']=='7800c3396ed3635ad57b858e2f0e1c7e66bd1fbfc7c8bec34302f06340f40855'
+          assert report['bounds']['independent_total_residual_L2_upper']
+          assert report['bounds']['backward_strain_only_log_norm_upper']
+          print('PASS independent step 235 residual recomputation')
+          print('independent residual upper:',report['bounds']['independent_total_residual_L2_upper'])
+          print('independent strain upper:',report['bounds']['independent_primal_strain_upper'])
+          PY
+      - name: Build verification provenance and file manifest
+        if: success()
+        run: |
+          set -euo pipefail
+          cp src/wp19_v0_28_verify_residual_step235.py src/wp19_v0_28_adjoint_segment_arb.py output/
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          root=Path('output')
+          provenance={
+            'schema':'wp19-v0.28-step-235-independent-verification-provenance-v1',
+            'step':235,
+            'producer_run_id':36886640347,
+            'producer_artifact_id':11175535650,
+            'producer_artifact_zip_sha256':'5475a757f60cab48e2fb50a8877a53ac6771cdb0960b3f5753d6048e8ebc71f2',
+            'producer_segment_sha256':'7800c3396ed3635ad57b858e2f0e1c7e66bd1fbfc7c8bec34302f06340f40855',
+            'frozen_lower_artifact_id':11059294923,
+            'frozen_adjoint_artifact_id':11121015458,
+            'independent_verifier_sha256':hashlib.sha256(Path('src/wp19_v0_28_verify_residual_step235.py').read_bytes()).hexdigest()
+          }
+          (root/'PROVENANCE.json').write_text(json.dumps(provenance,indent=2,sort_keys=True)+chr(10))
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          lines=[f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}' for p in files]
+          (root/'SHA256SUMS.txt').write_text(chr(10).join(lines)+chr(10))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: wp19-v0-28-M14-step-235-independent-verification
+          path: output
+          if-no-files-found: error
+          retention-days: 90
