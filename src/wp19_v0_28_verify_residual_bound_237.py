@@ -1,4 +1,3 @@
-PASS independent radix-layout VJP self-check
 #!/usr/bin/env python3
 """Independent Fourier-ball recomputation of the M14 step-237 residual bound.
 
