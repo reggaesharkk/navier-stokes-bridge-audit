@@ -1,0 +1,77 @@
+name: WP19 v0.28 isolated M14 step 236 producer
+on:
+  push:
+    branches: [wp19-v0-28-independent-step236-audit]
+    paths:
+      - '.github/workflows/wp19_v0_28_adjoint_segment_236.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  segment-236:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Frozen arithmetic and convolution checks
+        run: python src/wp19_v0_28_adjoint_segment_arb.py --self-check
+      - name: Retrieve and verify immutable inputs
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower work/adjoint work/c500 output
+          gh api repos/\${{ github.repository }}/actions/artifacts/11059294923/zip > work/lower.zip
+          gh api repos/\${{ github.repository }}/actions/artifacts/11121015458/zip > work/adjoint.zip
+          gh api repos/\${{ github.repository }}/actions/artifacts/11114258089/zip > work/c500.zip
+          echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
+          echo '330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058  work/adjoint.zip' | sha256sum -c -
+          echo 'ae0c129951c25bd35215760168ce62d0586ce7fed09e3019d8ea0b5a24180dc2  work/c500.zip' | sha256sum -c -
+          unzip -q work/lower.zip -d work/lower
+          unzip -q work/adjoint.zip -d work/adjoint
+          unzip -q work/c500.zip -d work/c500
+      - name: Enclose the frozen M14 half-segment at step 236
+        run: |
+          set -euo pipefail
+          timeout 1800s python -u src/wp19_v0_28_adjoint_segment_arb.py \
+            --M 14 --step 236 --lower-dir work/lower --adjoint-dir work/adjoint \
+            --sign-chart results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json \
+            --c500 work/c500/frozen_C500.json --output output/M14_segment_236.json 2>&1 | tee output/pilot.log
+      - name: Assert output step and frozen identities
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('output/M14_segment_236.json')
+          report=json.loads(p.read_text())
+          assert report['M']==14 and report['step']==236
+          assert report['status']=='CONTINUOUS_SEGMENT_ENCLOSURE_ONLY'
+          assert report['forward_time_interval_rational']==['236/80000','237/80000']
+          print('PASS step 236 identity and interval')
+          print('residual upper:', report['bounds']['residual_L2_upper'])
+          print('strain upper:', report['bounds']['logarithmic_norm_upper'])
+          PY
+      - name: Build provenance manifest
+        if: always()
+        run: |
+          set -euo pipefail
+          cp src/wp19_v0_28_adjoint_segment_arb.py output/
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root=Path('output')
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          (root/'SHA256SUMS.txt').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n' for p in files))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wp19-v0-28-M14-segment-236-producer
+          path: output
+          if-no-files-found: error
+          retention-days: 90
