@@ -1,0 +1,58 @@
+name: WP19 v0.28 independent segment-237 strain check
+on:
+  push:
+    branches: [wp19-v0-28-independent-strain-audit]
+    paths:
+      - 'src/wp19_v0_28_verify_strain_bound_237.py'
+      - '.github/workflows/wp19_v0_28_independent_strain_237.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  strain-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Checker helper self-test
+        run: python src/wp19_v0_28_verify_strain_bound_237.py --self-check
+      - name: Retrieve frozen N14 certificate artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower output
+          gh api repos/${{ github.repository }}/actions/artifacts/11059294923/zip > work/lower.zip
+          echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
+          unzip -q work/lower.zip -d work/lower
+      - name: Reconstruct Bernstein strain upper independently
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_verify_strain_bound_237.py \
+            --lower-dir work/lower \
+            --segment results/wp19_v0_28/pilot_chained_237_36820757066/M14_segment_237.json \
+            --output output/independent_strain_check.json
+      - name: Hash output bundle
+        if: always()
+        run: |
+          set -euo pipefail
+          cp src/wp19_v0_28_verify_strain_bound_237.py output/
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root=Path('output')
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          (root/'SHA256SUMS.txt').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n' for p in files))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wp19-v0-28-independent-strain-237
+          path: output
+          if-no-files-found: error
+          retention-days: 90
