@@ -117,13 +117,18 @@ def packed_vjp(s, u, lam):
     B = 4*s.N+1; stride = B**3
     left = [(int(k[0])+s.N)+B*(int(k[1])+s.N)+B*B*(int(k[2])+s.N) for k in s.modes]
     right = [(int(k[0])+2*s.N)+B*(int(k[1])+2*s.N)+B*B*(int(k[2])+2*s.N) for k in s.modes]
-    size = 3*stride+max(left)+1
     def pack(c, comp, derivative=None):
-        values = [0]*size
+        # Set the highest coefficient first, then only nonzero entries.
+        # A dense constructor repeatedly normalizes long zero gaps.
+        values = {}
         for i, slot in enumerate(left):
             factor = acb(0,int(s.modes[i][derivative])) if derivative is not None else 1
-            for d in range(4): values[slot+d*stride] = c[d][i][comp]*factor
-        return acb_poly(values)
+            for d in range(4):
+                z = c[d][i][comp]*factor
+                if not z.is_zero(): values[slot+d*stride] = z
+        poly = acb_poly([])
+        for slot in sorted(values, reverse=True): poly[slot] = values[slot]
+        return poly
     U = [pack(u,j) for j in range(3)]
     L = [pack(lam,j) for j in range(3)]
     print("packed base fields",round(time.monotonic()-tick,3),flush=True)

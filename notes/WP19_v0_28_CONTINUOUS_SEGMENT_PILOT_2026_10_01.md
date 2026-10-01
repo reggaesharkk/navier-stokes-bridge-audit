@@ -37,3 +37,23 @@ No automatic 960-segment expansion is authorized by this workflow.
 Complete backward path, rigorous dual quadrature, nonlinear remainder,
 normalizer control, and signed observable transfer inequality remain open.
 This pilot is not a continuum or all-cutoff result.
+
+## Executed failure and computational repair
+
+Run `36813631740`, source commit `864fe3b61bb76615b379ae675323e63d4915aeae`,
+exited 124 at the frozen 1800-second limit. All archive hashes and the
+independent coefficient check passed. Input/terminal-gradient preparation
+took 5.836 seconds; packing six base polynomials took 793.876 seconds.
+Only three of nine convolution groups completed. No segment JSON exists and
+no recurrence verifier ran. The failure log is preserved under
+`results/wp19_v0_28/pilot_timeout_36813631740/`.
+
+The repair changes coefficient storage only: initialize the highest nonzero
+coefficient first and assign the remaining nonzero coefficients in descending
+order. Omitted coefficients are exactly zero. The same coefficient balls,
+18 multiplication expressions, dyadic imports, 192-bit precision, Bernstein
+bound, witness, signs, and time segment remain fixed. This is not the proposed
+nine-product algebra rewrite. The independent explicit sum self-check still
+passes with the same displayed arithmetic radius. A 793000-degree two-entry
+construction took 0.118 seconds locally; this is a packing diagnostic, not a
+prediction of full-segment execution time.

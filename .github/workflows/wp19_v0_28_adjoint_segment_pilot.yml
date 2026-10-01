@@ -2,6 +2,9 @@ name: WP19 v0.28 continuous adjoint segment pilot
 on:
   push:
     branches: [wp19-v0.28-adjoint-hermite-residual]
+    paths:
+      - 'src/wp19_v0_28_adjoint_segment_arb.py'
+      - 'src/wp19_v0_28_verify_segment_pilot.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -46,7 +49,14 @@ jobs:
         if: always()
         run: |
           mkdir -p output
-          find output -type f ! -name SHA256SUMS.txt -print0 | sort -z | xargs -0 -r sha256sum > output/SHA256SUMS.txt
+          cp src/wp19_v0_28_adjoint_segment_arb.py src/wp19_v0_28_verify_segment_pilot.py output/
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root=Path('output')
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          (root/'SHA256SUMS.txt').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n' for p in files))
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
