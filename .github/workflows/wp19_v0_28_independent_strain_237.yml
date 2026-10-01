@@ -1,9 +1,10 @@
-name: WP19 v0.28 independent segment-237 strain check
+name: WP19 v0.28 independent segment-237 bound check
 on:
   pull_request:
     branches: [main]
     paths:
       - 'src/wp19_v0_28_verify_strain_bound_237.py'
+      - 'src/wp19_v0_28_verify_residual_bound_237.py'
       - '.github/workflows/wp19_v0_28_independent_strain_237.yml'
   workflow_dispatch:
 permissions:
@@ -12,7 +13,7 @@ permissions:
 jobs:
   strain-check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -21,6 +22,8 @@ jobs:
       - run: python -m pip install numpy==2.3.5 python-flint==0.8.0
       - name: Checker helper self-test
         run: python src/wp19_v0_28_verify_strain_bound_237.py --self-check
+      - name: Independent residual helper self-test
+        run: python src/wp19_v0_28_verify_residual_bound_237.py --self-check
       - name: Retrieve frozen N14 certificate artifact
         env:
           GH_TOKEN: ${{ github.token }}
@@ -30,18 +33,39 @@ jobs:
           gh api repos/${{ github.repository }}/actions/artifacts/11059294923/zip > work/lower.zip
           echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
           unzip -q work/lower.zip -d work/lower
-      - name: Reconstruct Bernstein strain upper independently
+      - name: Retrieve frozen adjoint path artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/adjoint
+          gh api repos/${{ github.repository }}/actions/artifacts/11120698789/zip > work/adjoint.zip
+          echo 'ef3ff8cca997b783b8a065072cce1d2793e9940d2f7db89076afffcc2298a13b  work/adjoint.zip' | sha256sum -c -
+          unzip -q work/adjoint.zip -d work/adjoint
+          report_path=$(find work/adjoint -name M14_arb_vjp_point.json -print -quit)
+          test -n "$report_path"
+          echo "ADJOINT_DIR=$(dirname "$report_path")" >> "$GITHUB_ENV"
+      - name: Reconstruct segment strain and corrected log norm independently
         run: |
           set -euo pipefail
           python src/wp19_v0_28_verify_strain_bound_237.py \
             --lower-dir work/lower \
             --segment results/wp19_v0_28/pilot_chained_237_36820757066/M14_segment_237.json \
             --output output/independent_strain_check.json
+      - name: Reconstruct the whole-segment residual independently
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_verify_residual_bound_237.py \
+            --lower-dir work/lower \
+            --adjoint-dir "$ADJOINT_DIR" \
+            --segment results/wp19_v0_28/pilot_chained_237_36820757066/M14_segment_237.json \
+            --output output/independent_residual_check.json
       - name: Hash output bundle
         if: always()
         run: |
           set -euo pipefail
           cp src/wp19_v0_28_verify_strain_bound_237.py output/
+          cp src/wp19_v0_28_verify_residual_bound_237.py output/
           python - <<'PY'
           import hashlib
           from pathlib import Path
