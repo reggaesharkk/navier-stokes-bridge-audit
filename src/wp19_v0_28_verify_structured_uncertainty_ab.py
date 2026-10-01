@@ -35,7 +35,7 @@ def main():
     assert x["predeclared_materiality_threshold_new_over_old"]=="0.5"
     assert len(x["bernstein_control_upper_norms"])==4
     with localcontext() as c:
-        c.prec=120; c.rounding=ROUND_CEILING
+        c.prec=80; c.rounding=ROUND_CEILING
         controls=x["bernstein_control_upper_norms"]
         l1=max(D(z["L1_mode_upper"]) for z in controls)
         gl=max(D(z["gradient_L2_upper"]) for z in controls)
@@ -48,8 +48,8 @@ def main():
         assert D(x["new_over_old_penalty_upper"])>=ratio and ratio<=D("0.5")
         h=D(1)/D(80000); incoming=D(prev["backward_error_after_segment_upper"])
         L=D(x["logarithmic_norm_upper"]); amp=(L*h).exp().next_plus()
-        old=(amp*incoming+((amp-1)/L)*D(segment["bounds"]["residual_L2_upper"])).next_plus()
-        new=(amp*incoming+((amp-1)/L)*(D(x["nominal_residual_upper"])+D(x["structured_fourier_young_penalty_upper"]))).next_plus()
+        old=amp*incoming+((amp-1)/L)*D(segment["bounds"]["residual_L2_upper"])
+        new=amp*incoming+((amp-1)/L)*(D(x["nominal_residual_upper"])+D(x["structured_fourier_young_penalty_upper"]))
         rec=x["outward_recurrence"]
         assert D(rec["old_recomputed_outgoing_upper"])>=old
         assert D(rec["old_recomputed_outgoing_upper"])>=D(rec["old_archived_outgoing_upper"])

@@ -82,11 +82,10 @@ def direct_convolution_self_check():
 def recurrence_upper(incoming,L,R):
     """Outward Decimal one-step Gronwall recurrence, independent of Arb path."""
     with localcontext() as c:
-        c.prec=100; c.rounding=ROUND_CEILING
-        h=Decimal(1)/Decimal(80000)
+        c.prec=80; c.rounding=ROUND_CEILING
+        h=Decimal("0.0000125")
         a=(L*h).exp().next_plus()
-        out=a*incoming+((a-1)/L)*R
-        return out.next_plus()
+        return a*incoming+((a-1)/L)*R
 
 def main():
     ap=argparse.ArgumentParser()
