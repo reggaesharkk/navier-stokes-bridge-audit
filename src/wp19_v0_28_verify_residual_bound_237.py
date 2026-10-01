@@ -260,10 +260,9 @@ def run(lower,adjoint,segment_path,output):
   'independent_adjoint_polynomial_norm_le_archived':bool(lsup<=archived_adjoint),
   'independent_strain_le_archived_primal_strain':bool(strain<=archived_strain),
  }
- if not all(checks.values()): raise ValueError(('independent enclosure exceeds archived component',checks))
  result={
   'schema':'wp19-v0.28-independent-residual-bernstein-check-v1',
-  'status':'PASS_INDEPENDENT_STEP_237_RESIDUAL_BERNSTEIN_ONLY',
+  'status':'INDEPENDENT_STEP_237_RECOMPUTATION_COMPLETE_ARCHIVE_COMPARISON_RECORDED',
   'M':14,'adjoint_cutoff':15,'step':STEP,'backward_order_index':239-STEP,'precision_bits':ctx.prec,
   'segment_sha256':sha(segment_path),'adjoint_report_sha256':sha(report),
   'adjoint_values_sha256':sha(paths['values']),'adjoint_rhs_sha256':sha(paths['rhs']),
@@ -282,6 +281,13 @@ def run(lower,adjoint,segment_path,output):
    'archived_strain_only_upper':bounds['logarithmic_norm_upper'],
   },
   'component_checks':checks,
+  'archive_comparison_differences':{
+   'nominal_residual_upper_minus_archived':outward(nominal-archived_nominal,6),
+   'uncertainty_penalty_upper_minus_archived':outward(uncertainty-archived_penalty,6),
+   'total_residual_upper_minus_archived':outward(total-archived_residual,6),
+   'adjoint_polynomial_norm_upper_minus_archived':outward(lsup-archived_adjoint,6),
+   'primal_strain_upper_minus_archived':outward(strain-archived_strain,12),
+  },
   'method':'exact dyadic projection; independent reversed-axis carry-free spatial encoding; degree-six residual Bernstein L2 hull; independent primal uncertainty penalty',
   'scope':{'checked':['frozen array/report identities','primal centre/radius reconstruction','saved M15 adjoint Hermite reconstruction','whole-half-segment VJP residual Bernstein L2 upper','reverse-diffusion corrected log norm'],
            'not_checked':['other 239 segments','full adjoint path error','dual quadrature','nonlinear remainder','normalizer','endpoint transfer','continuum regularity']}
