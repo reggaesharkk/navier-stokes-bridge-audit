@@ -1,5 +1,8 @@
 # Navier–Stokes bridge audit: finite Fourier diagnostics
 
+> **Rights boundary — effective 1 October 2026:** New author-owned original material first published here from this date is **All Rights Reserved** by default. Earlier express licenses remain in force for the material they cover. Read [the rights policy](RIGHTS_POLICY_2026_10_01.md) and the [shared portfolio evidence standard](https://github.com/reggaesharkk/Reggae-shark-universe-/blob/main/PORTFOLIO_EVIDENCE_AND_RIGHTS_STANDARD_2026_10_01.md).
+
+
 ## 24 September 2026 scope note
 
 This project is maintained as an independent exploratory mathematical audit within the wider Reggae Shark Universe. Its finite-mode checks, counterexamples, and small-data estimate do not constitute an arbitrary-data global-regularity proof for the three-dimensional incompressible Navier–Stokes equations.
@@ -226,10 +229,13 @@ The [targeted [0,3,m] orbit-family result](notes/WP16_TARGETED_ORBIT_FAMILY_RESU
 The source code and computations were checked for internal consistency;
 the research has not been externally peer reviewed or accepted as a
 novel PDE theorem. A public repository and a DOI identify a version;
-neither certifies its mathematics. The Python code is licensed under
-[MIT](LICENSES/MIT.txt); the research text is licensed under
-[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode).
-See [LICENSE.md](LICENSE.md) for the file-level scope and attribution.
+neither certifies its mathematics. For earlier releases, specified source code was distributed under
+[MIT](LICENSES/MIT.txt), and specified research text and results under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode), as documented
+in their contemporaneous license notices. Those grants continue for material
+already licensed under them. New author-owned material first published after
+30 September 2026 is All Rights Reserved by default. See [LICENSE.md](LICENSE.md)
+and [RIGHTS_POLICY_2026_10_01.md](RIGHTS_POLICY_2026_10_01.md) for scope.
 
 ## Cite the archived version
 
