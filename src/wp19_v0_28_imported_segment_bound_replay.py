@@ -84,6 +84,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--step-timeout", type=int, default=2400)
     args = parser.parse_args()
+    args.output_dir = args.output_dir.resolve()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     if digest(PRODUCER) != EXPECTED_PRODUCER_SHA256:
         raise AssertionError("frozen producer source SHA-256 mismatch")
