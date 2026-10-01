@@ -475,3 +475,5 @@ This makes interval validation of the goal-oriented adjoint plus nonlinear remai
 ## 1 October 2026 — WP19 v0.28 correction
 
 The separate backward-adjoint pilot omitted the reverse-time (+\nu |k|^2) contribution from its scalar error growth rate. The corrected audit supersedes those three outgoing radii for adjoint-error use; no segment continuation is certified from the earlier chain. See [the correction record](notes/WP19_v0_28_BACKWARD_DIFFUSION_RECURRENCE_CORRECTION_2026_10_01.md) and [current status addendum](notes/WP19_CURRENT_STATUS_2026_09_30.md). This does not alter the separate validated finite N11–N18 endpoint certificate.
+
+The follow-up [corrected-chain certificate](notes/WP19_v0_28_CORRECTED_RECURRENCE_CHAIN_2026_10_01.md) independently recomputes the scalar error recurrence over the same three frozen M14 segments, including reverse diffusion. It is a limited recurrence result conditional on the pinned producer-supplied continuous-segment bounds; the full adjoint and signed-observable endpoint transfer remain open.
