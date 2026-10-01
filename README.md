@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 14574)
+Total output lines: 479
+
 # Navier–Stokes bridge audit: finite Fourier diagnostics
 
 > **Rights boundary — effective 1 October 2026:** New author-owned original material first published here from this date is **All Rights Reserved** by default. Earlier express licenses remain in force for the material they cover. Read [the rights policy](RIGHTS_POLICY_2026_10_01.md) and the [shared portfolio evidence standard](https://github.com/reggaesharkk/Reggae-shark-universe-/blob/main/PORTFOLIO_EVIDENCE_AND_RIGHTS_STANDARD_2026_10_01.md).
@@ -160,139 +163,7 @@ The [Gevrey uniform majorant gate](notes/GEVREY_UNIFORM_MAJORANT_GATE_2026_09_25
 The [WP12 energy-level coefficient falsifier](notes/WP12_ENERGY_COEFFICIENT_FALSIFIER_2026_09_25.md) identifies \(\sqrt G\) as the unique monomial of the energy-level norms \(\mathcal E=\|u\|_2^2\) and \(G=\|\nabla u\|_2^2\) with the amplitude degree and Navier-Stokes scaling required of an L2-L3 coefficient. It then rejects the universal \(C\sqrt G\) high-advector coefficient analytically at \(s=2\) using the repository's positive-transfer triad, localization, and fixed-energy physical concentration. Its [finite falsifier](src/wp12_energy_coefficient_falsifier.py), [verified summary](src/wp12_energy_coefficient_verified_summary.json), and [Colab notebook](notebooks/WP12_energy_coefficient_colab.ipynb) retain the circular required coefficient only as a target for future noncircular geometric/frequency candidates.
 
 
-The [WP13 endpoint-vorticity gate](notes/WP13_ENDPOINT_VORTICITY_GATE_2026_09_25.md) sharpens the WP12 concentration obstruction: for the fixed-energy family \(u_\lambda(x)=\lambda^{3/2}v(\lambda x)\), the required L2 coefficient scales like \(\lambda^{5/2}\), whereas \(\|\omega\|_{L^p}\sim\lambda^{5/2-3/p}\). Hence every finite-\(p\) magnitude-only coefficient \(C\|\omega\|_{L^p}\) is too weak on that family; the endpoint \(p=\infty\) is the first magnitude scale not rejected by this argument. The [finite endpoint diagnostic](src/wp13_endpoint_vorticity_gate.py) and [verified summary](src/wp13_endpoint_vorticity_verified_summary.json) compare the circular required coefficient with sampled \(L^4,L^8,L^\infty\) vorticity norms and a rigorous finite-Fourier endpoint envelope, while explicitly leaving the independent endpoint time-integral problem open.
-
-
-The [WP14 endpoint-geometry coupling gate](notes/WP14_ENDPOINT_GEOMETRY_COUPLING_GATE_2026_09_25.md) matches the circular endpoint target \(\Gamma_{\rm req}=b_{\rm req}/\|\omega\|_{\infty,\mathrm{grid}}\) to dimensionless geometry on the same Galerkin states. It tests \(g_{\rm dir}=\ell_\omega L_{\max}\), endpoint-normalized positive stretching \(g_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/(\|\omega\|_{\infty,\mathrm{grid}}G)\), and exact high-advector \(H^2\) triadic coherence \(\chi_{2,\rm high}\). The [verified summary](src/wp14_endpoint_geometry_verified_summary.json) records strong descriptive co-movement of \(\Gamma_{\rm req}\) with \(g_{\rm dir}\) and \(g_{\rm stretch}\) on the aggressive \(N=7\) family, while explicitly not promoting correlation into an a priori estimate. The gate exposes the next noncircular candidate \(b_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/G\), whose domination and independent time-integral properties remain open.
-
-
-The [WP15 positive-stretching coefficient gate](notes/WP15_POSITIVE_STRETCHING_COEFFICIENT_GATE_2026_09_25.md) tests the noncircular coefficient \(b_{\rm stretch}=\langle(\omega\cdot S\omega)_+\rangle/G\), which has exactly the concentration scaling required to multiply \(X_2\) in the signed \(H^2\) high-advector target. The [finite stress test](src/wp15_positive_stretching_gate.py) and [verified summary](src/wp15_positive_stretching_verified_summary.json) show that generic nonlinear-dominant random Fourier fields are less demanding than the registered structured phase-cascade trajectory: the random suite reached \(C_{\rm req}^{\rm stretch}\approx0.169\), while the structured \(N=7\) trajectory reached about \(1.024\). No cutoff-independent constant or independent time-integral estimate is proved.
-
-
-The [WP16 structured phase-adversary gate](notes/WP16_STRUCTURED_PHASE_ADVERSARY_GATE_2026_09_25.md) stress-tests the WP15 coefficient by preserving the full evolved modal spectrum and varying only conjugacy-preserving Fourier phases. On the registered \(A=4,\ t=0.0035\) cascade state, the [verified summary](src/wp16_structured_phase_adversary_verified_summary.json) records a rise in the large-amplitude quotient \(C_\infty^{\rm stretch}=[N_2^{>K}]_+/(b_{\rm stretch}X_2)\) from about \(1.0381\) to \(1.0779\) at \(N=7\), while the corresponding \(N=4\) search remains below \(0.069\). This raises the finite tested lower benchmark for any universal pointwise constant but does not establish boundedness, cutoff convergence, or L2–L3.
-
-
-The [WP17 sparse multiscale ladder gate](notes/WP17_SPARSE_MULTISCALE_LADDER_GATE_2026_09_25.md) allows relative amplitudes and phases to vary across scaled copies of the exact sparse triad. Its [verified summary](src/wp17_sparse_multiscale_ladder_verified_summary.json) raises the refined finite adversarial benchmark for the WP15 coefficient to \(C_\infty^{\rm stretch}\approx5.113\) at \(96^3\), but finds no growth with ladder length \(L=2,\dots,6\). The optimizers instead saturate the second-scale amplitude bound, pointing toward a dominant scale-2 sparse-triad limit. No universal constant or L2–L3 theorem is established.
-
-
-The [WP18 isolated triad limit gate](notes/WP18_ISOLATED_TRIAD_LIMIT_GATE_2026_09_25.md) reduces the dominant scale-2 sparse-triad limit to the exact formula \(N_2^{>2}=-512A^3\sin\theta\), \(G=112A^2\), \(X_2=1024A^2\), and a two-angle positive-stretching quadrature. Its [verified summary](src/wp18_isolated_triad_limit_verified_summary.json) gives \(C_\infty\approx5.059699\) at the sampled optimum \(\theta=-\pi/2\) after \(4096^2\) quadrature refinement. This remains below WP17’s refined ladder value \(\approx5.112933\), confirming a finite satellite-scale interaction correction.
-
-
-
-The [WP16 phase-only cutoff continuation audit](notes/WP16_N10_N11_VERIFIED_CONTINUATION_2026_09_25.md) extends the refined evolved-spectrum phase-only adversary through (N=10,11) by deterministic continuation of the optimized lower-cutoff phase map. The [verified summary](src/wp16_n10_n11_verified_summary.json) records the refined sequence
-
-[
-C_7approx3.74413,quad
-C_8approx4.65605,quad
-C_9approx6.26104,quad
-C_{10}approx7.15966,quad
-C_{11}approx8.03489.
-]
-
-The raw N=10/N=11 result and N=11 checkpoint were checked for hash identity/provenance and exact agreement of the N=11 optimized phases, best search-grid observables, and 212 accepted-improvement records. The finite sequence now rises across five consecutively tested cutoffs, but this remains optimizer-dependent finite Galerkin evidence: it does not prove asymptotic divergence, failure of every cutoff-independent closure, singularity formation, or global regularity.
-
-
-
-The [WP16 phase-structure reverse-engineering gate](notes/WP16_PHASE_STRUCTURE_REVERSE_ENGINEERING_2026_09_25.md) asks whether the rising N=10/N=11 phase-only optimizers admit a simple mode-phase law. The [diagnostic](src/wp16_phase_structure_reverse_engineering.py) and [verified summary](src/wp16_phase_structure_verified_summary.json) find almost uniform one-point mode phases and almost uniform *unweighted* triad-relative phases, while the 2,084 inherited N=10 phases remain strongly stable into N=11 modulo the spatial-translation gauge: about 79% move by less than 0.25 radians and about 95% by less than 0.5 radians. The optimization history separates new-shell transfer recovery from full-torus denominator depletion. This redirects the analytical search toward coefficient-weighted, gauge-invariant triad phases and a recursive extension/relaxation mechanism rather than a low-degree radial phase formula.
-
-
-
-The [executed coefficient-weighted triad-phase result](notes/WP16_WEIGHTED_TRIAD_PHASE_RESULT_2026_09_25.md) rejects a simple outer-shell-transfer explanation for the growing phase-only quotient. At N=11, triads touching the newly opened shell carry about 10.51% of the absolute H2 envelope but only 8.45% of signed transfer, while the new shell acting as advector carries only about 0.55% of the envelope and 0.21% of signed transfer. Shell 4 alone carries about 69.78% of the signed transfer, and shells 4+5 together about 91.10%. The optimized global triadic coherence fraction also falls relative to the unrotated evolved base state. The [verified summary](src/wp16_weighted_triad_phase_verified_summary.json) therefore redirects the mechanism search toward depletion of the physical-space positive-stretching denominator rather than increasing global numerator alignment.
-
-
-
-The [executed positive-stretching depletion result](notes/WP16_POSITIVE_STRETCHING_DEPLETION_RESULT_2026_09_25.md) compares the inherited N=10 phase map embedded in N=11 against the final optimized N=11 phase map at fixed modal magnitudes. On the refined (96^3) grid, (P_+) falls by about 6.25% while the positive-set volume shrinks by only about 1.84%. The top 1/5/10% contribution fractions remain nearly unchanged, and inherited positive-quantile bins show the strongest suppression in the 90–99% band rather than in the top 1% alone. The [verified summary](src/wp16_positive_stretching_depletion_verified_summary.json) therefore identifies broad spatial redistribution/depression of positive stretching, not simple clipping of a tiny extreme hot set.
-
-
-
-The [N=11 phase-path block decomposition](notes/WP16_FACTORIZED_RECURSIVE_MECHANISM_2026_09_25.md) separates the recursive step into 2,084 inherited-core phase corrections and 703 newly opened-shell phases. At (96^3), old-core corrections alone raise the quotient by about 8.68% mainly through a 5.92% reduction of positive stretching, while new-shell phases alone raise it by about 8.83% mainly through a 7.98% increase in signed high-frequency transfer. The combined gain is about 18.38%, with only about 0.089% multiplicative interaction beyond the product of the two block gains. The [verified summary](src/wp16_factorized_recursive_mechanism_verified_summary.json) therefore identifies a near-factorized finite recursive mechanism: new modes build numerator, small inherited-core corrections deplete the denominator.
-
-
-
-The [N=11 old-core shell-compression result](notes/WP16_OLD_CORE_SHELL_COMPRESSION_RESULT_2026_09_25.md) shows moderate radial compression of the inherited-core denominator-relaxation step. Shell 7 is the strongest isolated block, raising the quotient by about 3.42% with 247 phase pairs. The ranked five-shell set ({7,4,8,5,6}) uses 993 of 2,084 inherited pairs and recovers about 89% of the full old-core quotient gain and about 85.5% of the positive-stretching depletion. The [verified summary](src/wp16_old_core_shell_compression_verified_summary.json) therefore narrows the next target to internal compression of the dominant shell blocks rather than another radial decomposition.
-
-
-
-The [shell-7/shell-4 internal compression result](notes/WP16_ORBIT_COMPRESSION_RESULT_2026_09_25.md) finds a strong coordinate-magnitude orbit basis. The leading orbit ([0,3,6]) uses 12 phase pairs and recovers about 55% of the full shell-7/4 quotient gain. The first six ranked absolute-coordinate orbits use only 84 of 314 target pairs and recover about 99.66% of the quotient gain. However, that compact subset recovers only about 71.7% of the full positive-stretching depletion, so quotient compression is stronger than denominator-mechanism compression. The [verified summary](src/wp16_orbit_compression_verified_summary.json) motivates a cross-cutoff orbit-response/rank audit as the next LRSC-style structural test.
-
-
-
-The [two-step cross-cutoff orbit/rank result](notes/WP16_TWO_STEP_ORBIT_RANK_RESULT_2026_09_25.md) confirms persistence of the six N11-dominant absolute-coordinate orbit families across N9→N10 and N10→N11, with ([0,3,6]) the strongest persistent orbit. It also corrects the original SVD interpretation: because (d\log C=d\log N+(-d\log P_+)) at each cutoff, the six-column response matrix has two exact algebraic dependencies and maximum rank 4. The observed rank 4 therefore does not demonstrate low-rank collapse. The [verified summary](src/wp16_two_step_orbit_rank_verified_summary.json) redirects the rank test to a corrected three-step independent-response matrix.
-
-
-
-The [targeted [0,3,m] orbit-family result](notes/WP16_TARGETED_ORBIT_FAMILY_RESULT_2026_09_25.md) finds that ([0,3,6]) is the exceptional persistent orbit across all three tested recursive steps: (d\log C=0.01215) for N8→N9, (0.00920) for N9→N10, and (0.04516) for N10→N11. The prospectively tested ([0,3,9]) response is positive at first availability but extremely weak ((d\log C\approx3.02\times10^{-6}), endpoint (C)-gain ≈0.00145%). The broader ([0,3,m]) sequence is not uniformly sign-stable, so a smooth arithmetic family law is not supported. The [verified summary](src/wp16_targeted_orbit_family_verified_summary.json) redirects the next structural test toward explaining the exceptional [0,3,6] response.
-
-## Status and rights
-
-The source code and computations were checked for internal consistency;
-the research has not been externally peer reviewed or accepted as a
-novel PDE theorem. A public repository and a DOI identify a version;
-neither certifies its mathematics. For earlier releases, specified source code was distributed under
-[MIT](LICENSES/MIT.txt), and specified research text and results under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode), as documented
-in their contemporaneous license notices. Those grants continue for material
-already licensed under them. New author-owned material first published after
-30 September 2026 is All Rights Reserved by default. See [LICENSE.md](LICENSE.md)
-and [RIGHTS_POLICY_2026_10_01.md](RIGHTS_POLICY_2026_10_01.md) for scope.
-
-## Cite the archived version
-
-For the v0.2 files, cite the version-specific Zenodo DOI:
-
-Upadhyay, Prince (2026). *Navier–Stokes Bridge Audit: Finite Fourier
-Diagnostics* (version 0.2) [software]. Zenodo.
-[https://doi.org/10.5281/zenodo.22939984](https://doi.org/10.5281/zenodo.22939984).
-
-The v0.1 DOI below identifies only the earlier snapshot.
-
-Upadhyay, Prince (2026). *Navier–Stokes Bridge Audit: Finite Fourier
-Diagnostics* (version 0.1) [software]. Zenodo.
-[https://doi.org/10.5281/zenodo.22932635](https://doi.org/10.5281/zenodo.22932635).
-
-The [v0.1 GitHub release](https://github.com/reggaesharkk/navier-stokes-bridge-audit/releases/tag/v0.1)
-points to commit `f891356fb99c85ded244dd566d35438e52571792`. The Zenodo
-record archives that 45-file snapshot. Later edits to `main` are not part
-of the v0.1 archive.
-
-## WP16 N12 prospective frozen K36 holdout (26 September 2026)
-
-The source-orbit coalition and pass criteria were frozen in [PR #73](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/73) before N12 data existed. The [executed result](notes/WP16_036_N12_FROZEN_K36_HOLDOUT_RESULT_2026_09_26.md) passes all three finite N12 states; the [raw inputs, outputs, checkpoint, and hashes](results/wp16_n12_holdout/) are archived. The fixed-state grid-96 N12 quotient is `8.692984814467122`. This is a finite cutoff transfer test, not an all-N or continuum claim.
-
-## WP16 N15 prospective result and N16 freeze (27 September 2026)
-
-The [N15 prospective time-gate result](notes/WP16_036_N15_PROSPECTIVE_TIME_GATE_RESULT_2026_09_27.md) and [machine-readable summary](results/wp16_n15_holdout/wp16_036_N15_result_summary.json) record the completed 520-proposal continuation and all six predeclared checks passing in each of three states. The frozen N11-derived K36 mass criterion first fails at sampled time 0.0023 in all three, while the signed criterion remains satisfied. This replicates the N14 finite-Galerkin time pattern prospectively; it is not a cutoff-uniform or continuum result.
-
-The [N16 prospective protocol](notes/WP16_036_N16_PROSPECTIVE_FREEZE_2026_09_27.md) fixes seed 20260941, the unchanged 520 proposals and K36 rules, and search grid 64 because grid 48 does not satisfy `grid > 3N` at N16. [Windows instructions](README_N16_WINDOWS.md) start with a trial-0 smoke after the protocol merge. No N16 state or score is part of this freeze.
-
-## WP16 N16 prospective finite time gate (27 September 2026)
-
-The [N16 result](notes/WP16_036_N16_PROSPECTIVE_TIME_GATE_RESULT_2026_09_27.md) and [machine-readable summary](results/wp16_n16_holdout/wp16_036_N16_result_summary.json) record the outcome under the protocol frozen in PR #91. All six predeclared checks pass in each of three states. Inherited and target-only first fail the 90% mass gate at sampled time 0.0023; the full-final state first fails at 0.0024, still inside the frozen exit window. Its saved half-step rows are both below 90%, while the preceding coarse sample at 0.00230 is above, yielding a sampled bracket [0.00230, 0.00235]. This is finite-Galerkin evidence, not an all-N or PDE theorem.
-
-## WP16 N16 post-hoc exit accounting (27 September 2026)
-
-The [exit-mechanism audit](notes/WP16_036_N16_EXIT_MECHANISM_ACCOUNTING_2026_09_27.md), [reproduction script](src/wp16_036_N16_exit_accounting.py), and [derived JSON](results/wp16_n16_holdout/wp16_036_N16_exit_accounting.json) decompose the N16 full-final extra sampled step. At `t=0.0023`, the optimized state has less mass inside K36 than inherited, but its lower outside-K36 normalized group mass contributes enough to keep `F=I-9O` positive. This is post-hoc finite-sample accounting, not a new prospective gate or a continuum estimate.
-
-## WP16 N16 post-hoc source-orbit attribution (27 September 2026)
-
-The [group attribution and normalizer audit](notes/WP16_036_N16_SOURCE_ORBIT_ATTRIBUTION_2026_09_27.md), [reconstruction script](src/wp16_036_N16_group_attribution.py), and [compact output](results/wp16_n16_holdout/wp16_036_N16_group_attribution.json) identify the largest outside-K36 grouped decrease at `t=0.0023`. A symmetric algebraic swap shows that the **aggregate** outside-mass difference is mainly due to the changing tracked complex normalizer, while aggregate numerator changes offset it. This refines the previous margin accounting; it is not a causal or cutoff-uniform result.
-
-## WP16 N17 pre-data continuation and mechanism freeze (27 September 2026)
-
-The [N17 source and normalizer mechanism prefreeze](notes/WP16_036_N17_MECHANISM_PREFREEZE_2026_09_27.md) specifies a test of the recurrent outside orbit observed in the N12/N13 trajectory and N16 state comparison. The [complete N17 continuation freeze](notes/WP16_036_N17_COMPLETE_PROSPECTIVE_FREEZE_2026_09_27.md) fixes seed 20260942, grid 64, the 520-proposal schedule, checkpointing, unchanged K36 broad time gate, and [Windows instructions](README_N17_WINDOWS.md). N12–N16 are discovery data for the source-level hypothesis. This freeze contains no N17 state or score. After merge, the Windows trial-0 smoke may construct N17 and score baseline/inherited only; all results, including failures, must be retained. Neither gate is a continuum proof.
-
-## WP16 N17 prospective result (28 September 2026)
-
-The [N17 result note](notes/WP16_036_N17_RESULT_AND_MECHANISM_FAILURE_2026_09_28.md) and [compact machine summary](results/wp16_n17_holdout/wp16_036_N17_result_summary.json) record 520/520 proposals and two separate frozen outcomes. All three states pass the broad K36 static/time gate, with first sampled mass exit at `.0024`. The separately frozen ordered-orbit/normalizer mechanism evaluator stops on a directional-split assertion and records **failed or unevaluable**; post-hoc inspection also finds substantive prediction misses. Both outcomes and original hashes are retained. This is finite Galerkin evidence, not a continuum regularity result.
-
-## WP16 post-hoc sparse turnover reduction (28 September 2026)
-
-The [N11 112-pair initial-data witness](notes/WP16_036_SPARSE_TURNOVER_REDUCTION_2026_09_28.md) was selected after the N17 exploratory result. The original numerical reduction and exact rational initial anchor remain part of the history. The evolved N11 sign is now supported by the separate validated certificate in [the N11 proof note](notes/WP16_036_N11_VALIDATED_TURNOVER_2026_09_28.md); the earlier feasibility-gate diagnostics were sampled development checks, not the final interval bounds.
-
-
-## WP16 same-datum finite-cutoff certificates (29 September 2026)
-
-The fixed 112-pair rational datum now has validated K36 sign crossings for the finite N11 and N12 Fourier–Galerkin ODEs. The N12 run reuses the exact N11 datum, zero-padded in the new modes, with the same viscosity, observable, and endpoint. The post-audit run reports 120 independently rechecked Arb segments, initial F(0) in [645.8037741471,645.8037741472], endpoint F(0.003) in [-73.63322101,-70.396895629], and a whole-path normalizer lower bound of 49091.85228719.
+The [WP13 endpoint-vorticity gate](notes/WP13_ENDPOINT_VORTICITY_GATE_2026_09_25.md) sharpens the WP12 concentration obstruction: for the fixed-energy family \(u_\lambda(x)=\lambda^{3/2}v(\lambda x)\), the required L2 coefficient scales like \(\lambda^{5/2}\), whereas \(\|\omega\|_{L^p}\sim\lambda^{5/2-3/p}\). Hence every finite-\(p\) magnitude-only coefficient \(C\|\omega\|_{L^p}\) is too weak on that family; the endpoint \(p=\infty\) is the first magnitude scale not rejected by this argument. The [finite endpoint diagnostic](src/wp13_endpoint_vorticity_gate.py) and [verified summary](src/wp13_endpoint_vorticity_verified_summary.json) compare the circular required coefficient with sampled \(L^4,L^8,L^\infty\) vorticity norms and a rigorous finite-Fourier endpoint envelope, while explicitly leaving t…4574 tokens truncated…onal datum now has validated K36 sign crossings for the finite N11 and N12 Fourier–Galerkin ODEs. The N12 run reuses the exact N11 datum, zero-padded in the new modes, with the same viscosity, observable, and endpoint. The post-audit run reports 120 independently rechecked Arb segments, initial F(0) in [645.8037741471,645.8037741472], endpoint F(0.003) in [-73.63322101,-70.396895629], and a whole-path normalizer lower bound of 49091.85228719.
 
 See the [N11–N12 report](notes/N11_to_N12_Cutoff_Persistence_Report_v1.md), the [post-audit N12 receipt](results/wp16_n12_same_datum/post_audit_replay_20260929/n12_same_datum_certificate.json), and its [replay log](results/wp16_n12_same_datum/post_audit_replay_20260929/replay.log). The source and rerun instructions are in [next-work/n12_same_datum](next-work/n12_same_datum/README.md).
 
@@ -475,3 +346,5 @@ This makes interval validation of the goal-oriented adjoint plus nonlinear remai
 ## 1 October 2026 — WP19 v0.28 correction
 
 The separate backward-adjoint pilot omitted the reverse-time (+\nu |k|^2) contribution from its scalar error growth rate. The corrected audit supersedes those three outgoing radii for adjoint-error use; no segment continuation is certified from the earlier chain. See [the correction record](notes/WP19_v0_28_BACKWARD_DIFFUSION_RECURRENCE_CORRECTION_2026_10_01.md) and [current status addendum](notes/WP19_CURRENT_STATUS_2026_09_30.md). This does not alter the separate validated finite N11–N18 endpoint certificate.
+
+The follow-up [corrected-chain certificate](notes/WP19_v0_28_CORRECTED_RECURRENCE_CHAIN_2026_10_01.md) independently recomputes the scalar error recurrence over the same three frozen M14 segments, including reverse diffusion. It is a limited recurrence result conditional on the pinned producer-supplied continuous-segment bounds; the full adjoint and signed-observable endpoint transfer remain open.
