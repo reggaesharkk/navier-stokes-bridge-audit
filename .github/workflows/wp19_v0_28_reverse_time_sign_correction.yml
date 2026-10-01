@@ -1,5 +1,13 @@
 name: WP19 v0.28 reverse-time sign correction
 on:
+  pull_request:
+    paths:
+      - '.github/workflows/wp19_v0_28_reverse_time_sign_correction.yml'
+      - 'README.md'
+      - 'notes/**'
+      - 'src/wp19_v0_28_reverse_time_sign_correction.py'
+      - 'src/wp19_v0_28_verify_reverse_time_sign_correction.py'
+      - 'results/wp19_v0_28/**'
   push:
     branches: [wp19-v0.28-reverse-time-sign-correction]
     paths:
