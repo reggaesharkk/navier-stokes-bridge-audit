@@ -1,3 +1,4 @@
+PASS independent radix-layout VJP self-check
 #!/usr/bin/env python3
 """Independent Fourier-ball recomputation of the M14 step-237 residual bound.
 
@@ -121,12 +122,14 @@ def carry_free_vjp(waves, u, lam):
  left=[k[2]+n+base*(k[1]+n)+base**2*(k[0]+n) for k in waves]
  right=[k[2]+2*n+base*(k[1]+2*n)+base**2*(k[0]+2*n) for k in waves]
  def pack(c,component,derivative=None):
-  p=acb_poly([])
+  values={}
   for i,slot in enumerate(left):
    factor=acb(0,waves[i][derivative]) if derivative is not None else acb(1)
    for d in range(4):
     z=c[d][i][component]*factor
-    if not z.is_zero(): p[slot+d*stride]=z
+    if not z.is_zero(): values[slot+d*stride]=z
+  p=acb_poly([])
+  for exponent in sorted(values,reverse=True): p[exponent]=values[exponent]
   return p
  U=[pack(u,j) for j in range(3)]
  L=[pack(lam,j) for j in range(3)]
