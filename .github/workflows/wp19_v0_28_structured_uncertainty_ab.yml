@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/wp19_v0_28_structured_uncertainty_ab.yml'
       - 'src/wp19_v0_28_structured_uncertainty_ab.py'
+      - 'src/wp19_v0_28_verify_structured_uncertainty_ab.py'
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,8 +20,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install numpy==2.3.5 python-flint==0.8.0
-      - name: Verify independent arithmetic self-checks
-        run: python src/wp19_v0_28_adjoint_segment_arb.py --self-check
+      - name: Verify independent direct-convolution and Young-bound self-check
+        run: python src/wp19_v0_28_structured_uncertainty_ab.py --self-check
       - name: Retrieve and hash-check the frozen M14 adjoint path
         env:
           GH_TOKEN: ${{ github.token }}
@@ -36,9 +37,19 @@ jobs:
           python -u src/wp19_v0_28_structured_uncertainty_ab.py \
             --adjoint-dir work/adjoint \
             --segment results/wp19_v0_28/pilot_chained_237_36820757066/M14_segment_237.json \
+            --previous-verification results/wp19_v0_28/pilot_chained_238_36819581437/chain_verification.json \
+            --current-verification results/wp19_v0_28/pilot_chained_237_36820757066/chain_verification.json \
             --output output/structured_uncertainty_ab.json
           cp src/wp19_v0_28_structured_uncertainty_ab.py output/
+          cp src/wp19_v0_28_verify_structured_uncertainty_ab.py output/
           cp results/wp19_v0_28/pilot_chained_237_36820757066/M14_segment_237.json output/baseline_segment_237.json
+          cp results/wp19_v0_28/pilot_chained_238_36819581437/chain_verification.json output/previous_chain_verification.json
+          cp results/wp19_v0_28/pilot_chained_237_36820757066/chain_verification.json output/baseline_chain_verification.json
+          python src/wp19_v0_28_verify_structured_uncertainty_ab.py \
+            output/structured_uncertainty_ab.json \
+            output/baseline_segment_237.json \
+            output/previous_chain_verification.json \
+            output/baseline_chain_verification.json
           python - <<'PY'
           import hashlib
           from pathlib import Path
