@@ -347,3 +347,10 @@ Before intervalizing the goal adjoint itself, WP19 v0.25 extends the existing ex
 For each N14–N18 endpoint, the already certified terminal trajectory-error radius is composed with the v0.10 group-specific exact-rational perturbation calculation. A pass requires all 36 K36 signs locked, a strictly negative signed-C500 numerator upper bound, and a strictly positive normalizer lower bound.
 
 If this passes, the next interval-adjoint stage can target a fixed polynomial signed numerator rather than a non-smooth absolute-value ratio objective.
+
+
+## Addendum — 1 October 2026: WP19 v0.28 recurrence correction
+
+PR [#145](https://github.com/reggaesharkk/navier-stokes-bridge-audit/pull/145), merged as `a99414216bddc9da83054d254485b79ca9b134b9`, freezes a correction to the separate v0.28 backward-adjoint pilot. The backward adjoint has reverse-time anti-diffusion (+\nu |k|^2); the earlier scalar error recurrence omitted its bound (\nu\max |k|^2=22.5). The strain-only outgoing radii for three M14 half-segments are therefore superseded for adjoint-error use. The corrected sequential upper bounds are 74,903,737,341.768087 (segment 239), 76,596,803,403.200881 (238), and 78,324,232,548.824620 (237).
+
+The original recurrence files remain unchanged as historical records. The continuous residual enclosures and standalone structured-penalty comparison remain separately recorded, but no complete adjoint chain is certified; do not continue from the old radii. This correction concerns the v0.28 adjoint pilot only. It does not alter the separate validated finite N11–N18 signed-C500 endpoint certificates in v0.25b. No continuum Navier–Stokes claim follows.

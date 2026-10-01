@@ -1,5 +1,7 @@
 # Navier–Stokes bridge audit: finite Fourier diagnostics
 
+> **Rights boundary — effective 1 October 2026:** New author-owned original material first published here from this date is **All Rights Reserved** by default. Earlier express licenses remain in force for the material they cover. Read [the rights policy](RIGHTS_POLICY_2026_10_01.md) and the [shared portfolio evidence standard](https://github.com/reggaesharkk/Reggae-shark-universe-/blob/main/PORTFOLIO_EVIDENCE_AND_RIGHTS_STANDARD_2026_10_01.md).
+
 ## 24 September 2026 scope note
 
 This project is maintained as an independent exploratory mathematical audit within the wider Reggae Shark Universe. Its finite-mode checks, counterexamples, and small-data estimate do not constitute an arbitrary-data global-regularity proof for the three-dimensional incompressible Navier–Stokes equations.
@@ -226,10 +228,13 @@ The [targeted [0,3,m] orbit-family result](notes/WP16_TARGETED_ORBIT_FAMILY_RESU
 The source code and computations were checked for internal consistency;
 the research has not been externally peer reviewed or accepted as a
 novel PDE theorem. A public repository and a DOI identify a version;
-neither certifies its mathematics. The Python code is licensed under
-[MIT](LICENSES/MIT.txt); the research text is licensed under
-[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/legalcode).
-See [LICENSE.md](LICENSE.md) for the file-level scope and attribution.
+neither certifies its mathematics. For earlier releases, specified source code was distributed under
+[MIT](LICENSES/MIT.txt), and specified research text and results under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/legalcode), as documented
+in their contemporaneous license notices. Those grants continue for material
+already licensed under them. New author-owned material first published after
+30 September 2026 is All Rights Reserved by default. See [LICENSE.md](LICENSE.md)
+and [RIGHTS_POLICY_2026_10_01.md](RIGHTS_POLICY_2026_10_01.md) for scope.
 
 ## Cite the archived version
 
@@ -465,3 +470,8 @@ The only structural all-cutoff term left is recursive state/backreaction drift.
 [WP19 v0.20](notes/WP19_v0_20_GOAL_ORIENTED_FIXED_F11_TAIL_ADJOINT_SCOUT.md) then tests a fixed low observable, F11(P11 u_M(T)), with a reconstruction-specific continuous adjoint. The dual-weighted shell corrections across N14->18 have magnitudes about `2.303, 0.433, 0.132, 0.0173`, and reproduce the actual fixed-F11 cutoff changes to within small observed first-order remainders.
 
 This makes interval validation of the goal-oriented adjoint plus nonlinear remainder the current bridge target. No all-N or continuum theorem is claimed yet.
+
+
+## 1 October 2026 — WP19 v0.28 correction
+
+The separate backward-adjoint pilot omitted the reverse-time (+\nu |k|^2) contribution from its scalar error growth rate. The corrected audit supersedes those three outgoing radii for adjoint-error use; no segment continuation is certified from the earlier chain. See [the correction record](notes/WP19_v0_28_BACKWARD_DIFFUSION_RECURRENCE_CORRECTION_2026_10_01.md) and [current status addendum](notes/WP19_CURRENT_STATUS_2026_09_30.md). This does not alter the separate validated finite N11–N18 endpoint certificate.
