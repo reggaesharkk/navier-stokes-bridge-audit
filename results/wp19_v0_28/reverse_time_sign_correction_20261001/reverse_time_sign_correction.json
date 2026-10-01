@@ -2,6 +2,7 @@
   "protocol": {
     "C500_portable_semantic_sha256": "1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f",
     "K36_sha256": "7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47",
+    "adjoint_support_M": 15,
     "backward_segment_order": [
       239,
       238,
@@ -17,7 +18,7 @@
   "provenance_sha256": {
     "Galerkin_system_source": "c44824c9562c4e79b11e8838e663ecf77d0992ba5d146b4c5015717018baae14",
     "adjoint_system_source": "0ba7cd0464076271a80864118d930d384d2cce6a1974650f278f8e02a7756e01",
-    "correction_source": "6744488931a5fe8d0aab2c53617cf43a0385f3c36f6c4953d6b7410e962c8cfc",
+    "correction_source": "858c103ea8fe74aa32db5a982221aa4e896af2b4f5ed7af577770ef1479fa7ba",
     "historical_reports": [
       "41694c84922a28b0b99f9e2936589f8c2f8cb6c49fc2a68a281623a4fb39cb7e",
       "c611b9eb2c5770d1880e64fdc7e0fc9f5136aef2f71b8b9afc4e1f533d09596c",
@@ -128,7 +129,7 @@
     "assumptions": [
       "e is real, divergence-free, and Hermitian-symmetric; the Leray projection commutes with Lambda",
       "u_true is exactly divergence-free",
-      "the exact adjoint follows the finite Galerkin ODE stated above, with the projected truncated convolution used by the archived system",
+      "the exact adjoint follows the finite M15 Galerkin ODE stated above for the M14-to-M15 segment, with the projected truncated convolution used by the archived system",
       "the same Fourier-coefficient ell2 norm is used for e, residual, primal-radius perturbations, and strain estimates",
       "archived strain L and residual R bound the relevant norms over each entire continuous half-segment",
       "the archived primal radius bounds the primal trajectory error throughout its associated segment",
@@ -140,7 +141,7 @@
     "energy_bound": "D^+||e||_2/dtau <= ||S(u)||_{Linf,op}*||e||_2 + ||r||_2; -nu*<Lambda e,e> is nonpositive and may be dropped",
     "energy_identity": "1/2*d||e||_2^2/dtau = -<VJP(u,e),e> - nu*<Lambda e,e> + <r,e>",
     "error_definition": "e = lambda - L",
-    "exact_adjoint_equation": "d(lambda)/dt = VJP(u,lambda) + nu*Lambda*lambda, as defined by adjoint_rhs in src/wp19_v0_23_rk4_goal_adjoint.py for the frozen finite Galerkin system",
+    "exact_adjoint_equation": "for the M14-to-M15 segment, d(lambda)/dt = VJP(u,lambda) + nu*Lambda*lambda on the M15 high-system support, as defined by adjoint_rhs in src/wp19_v0_23_rk4_goal_adjoint.py",
     "forward_time_error_equation": "de/dt = VJP(u,e) + nu*Lambda*e - r",
     "galerkin_source_sha256": "c44824c9562c4e79b11e8838e663ecf77d0992ba5d146b4c5015717018baae14",
     "producer_residual_definition": "r = dL/dt - VJP(u,L) - nu*Lambda*L",

@@ -69,6 +69,8 @@ def main() -> None:
         raise SystemExit("FAIL: schema mismatch")
     if not d.get("protocol", {}).get("no_retuning"):
         raise SystemExit("FAIL: no-retuning flag missing")
+    if d.get("protocol", {}).get("cutoff_M") != 14 or d.get("protocol", {}).get("adjoint_support_M") != 15:
+        raise SystemExit("FAIL: M14 segment / M15 adjoint support identity mismatch")
     base = ROOT / "results/wp19_v0_28"
     segpaths = [base / f"pilot_{name}/M14_segment_{step}.json" for name, step in [
         ("v2_36818369196", 239), ("chained_238_36819581437", 238), ("chained_237_36820757066", 237)]]
@@ -116,6 +118,8 @@ def main() -> None:
         raise SystemExit("FAIL: reverse-time residual sign mismatch")
     if len(d["sign_derivation"].get("assumptions", [])) < 6:
         raise SystemExit("FAIL: required conditional assumptions are missing")
+    if "M15" not in d["sign_derivation"].get("exact_adjoint_equation", ""):
+        raise SystemExit("FAIL: exact adjoint support is not explicitly identified as M15")
     for row in d["segment_rows"]:
         if row["segment_source_sha256"] != EXPECTED["producer"]:
             raise SystemExit(f"FAIL: producer source not bound at step {row['step']}")
