@@ -39,9 +39,41 @@ pilot, including its scalar primal-error recurrence, with integer-only
 outward decimal rounding from Arb's exact `(mid, radius, exponent)` enclosure.
 The v2 self-check includes large-magnitude micro-decimal cases and a rational
 `1/3` case. No residual, trajectory, witness, normalizer, or K36 quantity is
-retuned. The same M14 half-segment must be recomputed before its output can be
-accepted. Until that recomputation and the independent verifier pass, this
-gate remains pending and no wider claim is made.
+retuned. The same M14 half-segment was recomputed with v2; its accepted limited
+result is recorded below. No wider claim is made.
+
+## Corrected v2 execution
+
+Run `36818369196` completed successfully in 288.454 seconds. The integer-only
+formatter check and independent explicit Fourier temporal-coefficient check
+passed; the same frozen input artifacts were retrieved and hash-checked; the
+whole-segment Arb calculation completed; and the separate Decimal recurrence
+verifier returned `PASS LIMITED PILOT RECURRENCE CHECK`. Its artifact digest is
+`sha256:2d69fe0f090a8a82d70f5e2c2c9e431b41804c29bcdbf5a48ae3b9c841a6e268`.
+The exact artifact files and manifest are preserved under
+`results/wp19_v0_28/pilot_v2_36818369196/`.
+
+The resulting bounds include:
+
+| Quantity | v2 outward upper bound |
+| --- | ---: |
+| Nominal residual L2 | `53884259.691875` |
+| Primal-uncertainty residual penalty | `770976002083.118621` |
+| Total residual L2 | `771029886342.810495` |
+| Backward logarithmic norm | `1758.617670280` |
+| Adjoint polynomial L2 | `4691959667101.257366` |
+| True primal radius | `0.000059241340007` |
+| Terminal adjoint error | `73244978636.905585` |
+| One-segment propagated adjoint error | `74882674993.048618657819149585465296325142145058928574913811532113780128124368218` |
+
+The printed component uppers sum to `771029886342.810496`, one micro-unit
+above the separately rounded total. The checker permits at most two units at
+the six-decimal output precision for this separate-rounding effect; the
+v1 discrepancy was 82 units and remains rejected. This PASS is limited to the
+single continuous segment enclosure and its one-step scalar recurrence. The
+other 239 M14 segments, other cutoff paths, dual quadrature, nonlinear
+remainder, independent normalizer control, and final signed transfer
+inequality remain pending. No theorem is promoted.
 
 ## Execution and failure preservation
 
