@@ -42,6 +42,27 @@ jobs:
             --M 14 --step 236 --lower-dir work/lower --adjoint-dir work/adjoint \
             --sign-chart results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json \
             --c500 work/c500/frozen_C500.json --output output/M14_segment_236.json 2>&1 | tee output/pilot.log
+      - name: Independently recompute step 236 residual
+        run: |
+          set -euo pipefail
+          segment_sha256=$(sha256sum output/M14_segment_236.json | awk '{print $1}')
+          python src/wp19_v0_28_verify_residual_step236.py \
+            --step 236 --segment-sha256 "$segment_sha256" \
+            --lower-dir work/lower --adjoint-dir work/adjoint \
+            --segment output/M14_segment_236.json \
+            --output output/independent_residual_236.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('output/independent_residual_236.json')
+          report=json.loads(p.read_text())
+          assert report['step']==236
+          assert report['segment_sha256']
+          assert report['bounds']['independent_total_residual_L2_upper']
+          print('PASS independent step 236 residual recomputation')
+          print('independent residual upper:', report['bounds']['independent_total_residual_L2_upper'])
+          print('independent strain upper:', report['bounds']['independent_primal_strain_upper'])
+          PY
       - name: Assert output step and frozen identities
         run: |
           python - <<'PY'
@@ -60,7 +81,7 @@ jobs:
         if: always()
         run: |
           set -euo pipefail
-          cp src/wp19_v0_28_adjoint_segment_arb.py output/
+          cp src/wp19_v0_28_adjoint_segment_arb.py src/wp19_v0_28_verify_residual_step236.py output/
           python - <<'PY'
           import hashlib
           from pathlib import Path
