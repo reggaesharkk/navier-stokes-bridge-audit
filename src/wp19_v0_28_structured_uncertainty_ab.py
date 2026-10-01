@@ -9,6 +9,7 @@ Arb encloses every norm and arithmetic operation.
 """
 from __future__ import annotations
 import argparse, hashlib, json, math
+from decimal import Decimal, localcontext, ROUND_CEILING
 from pathlib import Path
 import numpy as np
 from flint import acb, arb, ctx
@@ -77,6 +78,15 @@ def direct_convolution_self_check():
     return {"status":"PASS","direct_vjp_identity":"PASS Arb interval overlap coefficientwise",
             "young_bound_dominates_direct_vjp":"PASS","actual_L2_upper":base.safe_decimal_upper(base.norm(direct),18),
             "young_L2_upper":base.safe_decimal_upper(young,18)}
+
+def recurrence_upper(incoming,L,R):
+    """Outward Decimal one-step Gronwall recurrence, independent of Arb path."""
+    with localcontext() as c:
+        c.prec=100; c.rounding=ROUND_CEILING
+        h=Decimal(1)/Decimal(80000)
+        a=(L*h).exp().next_plus()
+        out=a*incoming+((a-1)/L)*R
+        return out.next_plus()
 
 def main():
     ap=argparse.ArgumentParser()
@@ -147,13 +157,14 @@ def main():
     ratio=(new_penalty/old_penalty).upper()
     status="MATERIAL_TIGHTENING" if ratio<=PREDECLARED_MAX_RATIO else "NO_MATERIAL_TIGHTENING"
     incoming=arb(previous["backward_error_after_segment_upper"])
-    L=arb(seg["bounds"]["logarithmic_norm_upper"]); h=base.HALF_H
-    growth=(L*h).exp().upper()
+    L=arb(seg["bounds"]["logarithmic_norm_upper"])
     nominal=arb(seg["bounds"]["nominal_residual_L2_upper"])
-    old_out=(growth*incoming+((growth-1)/L)*arb(seg["bounds"]["residual_L2_upper"])).upper()
-    new_out=(growth*incoming+((growth-1)/L)*(nominal+new_penalty)).upper()
+    incoming_d=Decimal(previous["backward_error_after_segment_upper"])
+    L_d=Decimal(seg["bounds"]["logarithmic_norm_upper"])
+    old_out=recurrence_upper(incoming_d,L_d,Decimal(seg["bounds"]["residual_L2_upper"]))
+    new_out=recurrence_upper(incoming_d,L_d,Decimal(seg["bounds"]["nominal_residual_L2_upper"])+Decimal(penalty_text))
     if new_out>old_out: raise ValueError("structured residual did not improve the outward recurrence")
-    old_archived=arb(current["backward_error_after_segment_upper"])
+    old_archived=Decimal(current["backward_error_after_segment_upper"])
     if old_out<old_archived: raise ValueError("recomputed old recurrence undercuts archived outward value")
     direct_check=direct_convolution_self_check()
     out={
@@ -168,13 +179,13 @@ def main():
       "structured_fourier_young_factor_upper":factor_text,
       "structured_fourier_young_penalty_upper":penalty_text,
       "new_over_old_penalty_upper":base.safe_decimal_upper(ratio,12),
-      "incoming_adjoint_error_upper":base.safe_decimal_upper(incoming,15),
+      "incoming_adjoint_error_upper":previous["backward_error_after_segment_upper"],
       "nominal_residual_upper":base.safe_decimal_upper(nominal,6),
       "logarithmic_norm_upper":base.safe_decimal_upper(L,9),
       "outward_recurrence":{"step_width":"1/80000",
-        "old_recomputed_outgoing_upper":base.safe_decimal_upper(old_out,15),
+        "old_recomputed_outgoing_upper":str(old_out),
         "old_archived_outgoing_upper":current["backward_error_after_segment_upper"],
-        "new_structured_outgoing_upper":base.safe_decimal_upper(new_out,15),
+        "new_structured_outgoing_upper":str(new_out),
         "comparison":"new <= old recomputed; old recomputed >= archived verifier value"},
       "independent_direct_convolution_self_check":direct_check,
       "bernstein_control_upper_norms":per_text,

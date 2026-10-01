@@ -35,7 +35,7 @@ def main():
     assert x["predeclared_materiality_threshold_new_over_old"]=="0.5"
     assert len(x["bernstein_control_upper_norms"])==4
     with localcontext() as c:
-        c.prec=100; c.rounding=ROUND_CEILING
+        c.prec=120; c.rounding=ROUND_CEILING
         controls=x["bernstein_control_upper_norms"]
         l1=max(D(z["L1_mode_upper"]) for z in controls)
         gl=max(D(z["gradient_L2_upper"]) for z in controls)
