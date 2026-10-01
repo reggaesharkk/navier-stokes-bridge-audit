@@ -1,7 +1,7 @@
 name: WP19 v0.28 independent segment-237 strain check
 on:
-  push:
-    branches: [wp19-v0-28-independent-strain-audit]
+  pull_request:
+    branches: [main]
     paths:
       - 'src/wp19_v0_28_verify_strain_bound_237.py'
       - '.github/workflows/wp19_v0_28_independent_strain_237.yml'
