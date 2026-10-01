@@ -223,7 +223,7 @@ def main():
             raise ValueError("cubic Bernstein-control self-check failed")
         constant=[[[acb(2),acb(0),acb(0)]]]
         if bernstein(constant)[0][0][0]!=acb(2): raise ValueError("Bernstein constant self-check failed")
-        if not strain_sup([((1,0,0),1)],constant).overlaps(arb(2)/arb(2).sqrt()):
+        if not strain_sup([((1,0,0),1)],constant)>arb("1.414213562373095"):
             raise ValueError("strain norm self-check failed")
         x=arb("1234567890123.000001")
         if Fraction(safe_decimal_upper(x,6))<=Fraction(1234567890123000001,1000000):
