@@ -159,9 +159,11 @@ def main():
     L=arb(seg["bounds"]["logarithmic_norm_upper"])
     nominal=arb(seg["bounds"]["nominal_residual_L2_upper"])
     incoming_d=Decimal(previous["backward_error_after_segment_upper"])
-    L_d=Decimal(seg["bounds"]["logarithmic_norm_upper"])
+    L_text=base.safe_decimal_upper(L,9)
+    nominal_text=base.safe_decimal_upper(nominal,6)
+    L_d=Decimal(L_text)
     old_out=recurrence_upper(incoming_d,L_d,Decimal(seg["bounds"]["residual_L2_upper"]))
-    new_out=recurrence_upper(incoming_d,L_d,Decimal(seg["bounds"]["nominal_residual_L2_upper"])+Decimal(penalty_text))
+    new_out=recurrence_upper(incoming_d,L_d,Decimal(nominal_text)+Decimal(penalty_text))
     if new_out>old_out: raise ValueError("structured residual did not improve the outward recurrence")
     old_archived=Decimal(current["backward_error_after_segment_upper"])
     if old_out<old_archived: raise ValueError("recomputed old recurrence undercuts archived outward value")
@@ -179,8 +181,8 @@ def main():
       "structured_fourier_young_penalty_upper":penalty_text,
       "new_over_old_penalty_upper":base.safe_decimal_upper(ratio,12),
       "incoming_adjoint_error_upper":previous["backward_error_after_segment_upper"],
-      "nominal_residual_upper":base.safe_decimal_upper(nominal,6),
-      "logarithmic_norm_upper":base.safe_decimal_upper(L,9),
+      "nominal_residual_upper":nominal_text,
+      "logarithmic_norm_upper":L_text,
       "outward_recurrence":{"step_width":"1/80000",
         "old_recomputed_outgoing_upper":str(old_out),
         "old_archived_outgoing_upper":current["backward_error_after_segment_upper"],
