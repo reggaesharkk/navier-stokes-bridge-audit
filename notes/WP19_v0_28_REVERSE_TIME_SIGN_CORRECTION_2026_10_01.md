@@ -2,26 +2,32 @@
 
 **Status: strain-only scalar recurrence reproduced; conclusion is conditional on the archived continuous-segment bounds.**
 
-This additive correction supersedes the sign interpretation in the earlier v0.28 backward-diffusion audit and its follow-up corrected-chain note. Those records remain unchanged as history. The claim that adding `nu * max(|k|^2) = 22.5` was required is withdrawn: the error radius is propagated from the terminal time toward decreasing forward time, and viscosity is contractive in that direction.
+This additive correction supersedes the sign interpretation in the earlier v0.28 backward-diffusion audit and its follow-up corrected-chain note. Those records remain unchanged as history; the new machine-readable result lists their hashes and the specific claims superseded. The claim that adding `nu * max(|k|^2) = 22.5` was required is withdrawn: the error radius is propagated from terminal time toward decreasing forward time, and viscosity is dissipative in the reverse-propagation `ell2` energy estimate.
 
 ## Sign derivation
 
-The archived producer defines the residual by
+The archived producer source, copied byte-identically into all three pilot folders (SHA-256 `e1495d9e6e9ebcfa79f7440ca6abecf01a9d77f0bc64a200b8f68a2af1844f31`), defines the residual by
 
 \[
 r = \partial_t L - \operatorname{VJP}(u,L) - \nu\Lambda L.
 \]
 
-For the difference between an exact and approximate adjoint, the forward-time error equation has the form
+The exact adjoint equation used here is the finite Galerkin system
 
 \[
-\partial_t e = \operatorname{VJP}(u,e)+\nu\Lambda e \pm r,
+\partial_t\lambda=\operatorname{VJP}(u,\lambda)+\nu\Lambda\lambda,
 \]
 
-where the sign of the forcing residual does not affect its norm bound. Set reverse time \(\tau=T-t\). Then
+as written in `src/wp19_v0_23_rk4_goal_adjoint.py` (SHA-256 `0ba7cd0464076271a80864118d930d384d2cce6a1974650f278f8e02a7756e01`), with its Galerkin vector field in `src/wp16_036_dealiased_trajectory_gate.py` (SHA-256 `c44824c9562c4e79b11e8838e663ecf77d0992ba5d146b4c5015717018baae14`). For `e=\lambda-L`, subtraction gives
 
 \[
-\partial_\tau e=-\operatorname{VJP}(u,e)-\nu\Lambda e\mp r.
+\partial_t e = \operatorname{VJP}(u,e)+\nu\Lambda e-r,
+\]
+
+Set reverse time \(\tau=T-t\). Then
+
+\[
+\partial_\tau e=-\operatorname{VJP}(u,e)-\nu\Lambda e+r.
 \]
 
 In the \(L^2\) energy estimate, the transport part is skew, the Leray projection drops against divergence-free \(e\), the strain contribution is bounded by \(\|S(u)\|_{L^\infty,op}\), and
@@ -30,13 +36,15 @@ In the \(L^2\) energy estimate, the transport part is skew, the Leray projection
 \langle \Lambda e,e\rangle=\sum_k |k|^2|e_k|^2\ge 0.
 \]
 
-Therefore, in reverse time,
+Under the assumptions below, the transport contribution is skew after projection, the remaining linear contribution is bounded by the symmetric strain, and \(\langle\Lambda e,e\rangle\ge0\). Therefore, in reverse time,
 
 \[
 D^+\|e\|_2/D\tau \le \|S(u)\|_{L^\infty,op}\|e\|_2+\|r\|_2.
 \]
 
-The negative viscous term can be dropped for an upper bound. The archived strain-only scalar recurrence is valid under its stated imported bounds. Adding `22.5` to the exponent coefficient remains a valid but looser upper recurrence, not a required correction.
+The negative viscous term can be dropped for an upper bound. The archived strain-only scalar recurrence is valid under the assumptions and imported whole-segment bounds below. Adding `22.5` to the exponent coefficient remains a valid but looser upper recurrence, not a required correction.
+
+The argument is conditional on all of the following: (1) the error is real, divergence-free, and Hermitian-symmetric, with the Leray projection commuting with \(\Lambda\); (2) the true primal field is exactly divergence-free; (3) the exact adjoint is the solution of the finite Galerkin adjoint ODE above, using the archived projected/truncated convolution; (4) one Fourier-coefficient \(\ell^2\) convention is used consistently for the error, residual, primal perturbation, and strain bounds; (5) the supplied strain \(L\) and residual \(R\) bound their norms continuously over the entire half-segment; (6) the supplied primal radius bounds the primal error throughout that segment; and (7) the terminal error bound is valid in the same norm. This packet identifies and hashes the equations and producer sources but does not reconstruct the exact adjoint trajectory or independently prove the supplied segment bounds.
 
 ## Recomputed recurrence
 
@@ -57,10 +65,10 @@ The A/B record pins the same baseline segment-237 SHA-256 and incoming radius, b
 | Quantity | Segment 237 | A/B re-evaluation |
 |---|---:|---:|
 | strain upper | 1752.285153301 | 1752.285153303 |
-| nominal residual upper | 53857205.702019 | 53857205.702021 |
+| nominal residual upper (not used by the old recurrence) | 53857205.702019 | 53857205.702021 |
 | primal radius upper | 0.000055664765007 | 0.000055664765009 |
 
-These are separate reported upper bounds; the A/B values are not substituted into the archived official chain. Its own old-formula recomputation is `78258186399.831235707571984…`, slightly above the archived outgoing value `78258186399.829279366902453…`, consistent with its larger displayed strain and residual bounds. The A/B artifact's structured-residual comparison remains diagnostic-only. It is a separate re-evaluation, not merely a display-rounding duplicate of the segment record.
+The A/B source (`results/wp19_v0_28/structured_uncertainty_ab_20261001/wp19_v0_28_structured_uncertainty_ab.py`, SHA-256 `b746a70ed9b3d00b8e591b962358207e1050c1bfe378467729048cbcca2b8c77`) computes its old-formula recurrence using its separately rounded strain upper (1752.285153303), the same incoming radius, and the segment's `residual_L2_upper` (724222211753.270303). It does **not** use either displayed nominal-residual value in that old recurrence. Replaying those inputs gives `78258186399.831235707571984…`, which exceeds the archived outgoing value `78258186399.829279366902453…` by about `0.00195634067`. Replacing only the A/B strain by the segment strain while keeping the same incoming radius and segment residual accounts for that entire difference. The packet does not include the arrays needed to explain why the separately recomputed/rounded strain is larger by `2e-9`; that cause remains unresolved. The structured-residual comparison remains diagnostic-only and is not substituted into the archived official chain. The A/B JSON's historical status label is left untouched; this correction labels the comparison diagnostic-only within its own record.
 
 ## Provenance and reproduction
 
@@ -72,9 +80,15 @@ python src/wp19_v0_28_verify_reverse_time_sign_correction.py
 sha256sum -c results/wp19_v0_28/reverse_time_sign_correction_20261001/SHA256SUMS.txt
 ```
 
-The result and manifest are under `results/wp19_v0_28/reverse_time_sign_correction_20261001/`. The package includes the two files that were missing from the earlier review bundle and listed in its inner manifests: `notes/WP19_CURRENT_STATUS_2026_09_30.md` and `.github/workflows/wp19_v0_28_backward_diffusion_audit.yml`. Inner manifests are repository-root-relative and should be verified from the repository root.
+The result and manifest are under `results/wp19_v0_28/reverse_time_sign_correction_20261001/`. The package includes the two files that were missing from the earlier review bundle and listed in its inner manifests: `notes/WP19_CURRENT_STATUS_2026_09_30.md` and `.github/workflows/wp19_v0_28_backward_diffusion_audit.yml`. The main correction, corrected-chain, and backward-audit manifests use repository-root-relative paths and must be checked from the repository root. The three historical pilot manifests use paths relative to their own directories; check them from inside each pilot directory:
 
-The archived predictor arrays, adjoint arrays, lower nodes, and primal segment JSON inputs needed to independently reconstruct the producer's segment bounds are not included in this correction package. The reported whole-segment strain and residual enclosures are therefore **not independently re-established here**; the recurrence conclusion is conditional on those archived bounds and their producer provenance.
+```bash
+for d in results/wp19_v0_28/pilot_v2_36818369196 results/wp19_v0_28/pilot_chained_238_36819581437 results/wp19_v0_28/pilot_chained_237_36820757066; do
+  (cd "$d" && sha256sum -c SHA256SUMS.txt)
+done
+```
+
+The archived predictor arrays, adjoint arrays, lower nodes, and primal segment JSON inputs needed to independently reconstruct the producer's segment bounds are not included in this correction package. The reported whole-segment strain and residual enclosures are therefore **not independently re-established here**; the recurrence conclusion is conditional on those archived bounds and their producer provenance. The replay verifier is a separate arithmetic implementation of the same scalar recurrence, not an independent derivation of the PDE estimate.
 
 ## Claim boundary
 

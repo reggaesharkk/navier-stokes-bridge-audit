@@ -30,6 +30,10 @@ EXPECTED = {
     "old_audit": "cd223389619c1780516514f7118c87ddc94e8d04c9c7528ce4cfc749948ee540",
     "old_audit_source": "55884d2d0c5b5c23100170f1e5bc167e70135eea2066b5be1b23a68e9cbbe2b7",
     "old_chain": "e8403177d80ac24d6658bc63e9ac6302af70b2bee8cdcdc61f5df11ff71f8e60",
+    "producer": "e1495d9e6e9ebcfa79f7440ca6abecf01a9d77f0bc64a200b8f68a2af1844f31",
+    "adjoint_source": "0ba7cd0464076271a80864118d930d384d2cce6a1974650f278f8e02a7756e01",
+    "galerkin_source": "c44824c9562c4e79b11e8838e663ecf77d0992ba5d146b4c5015717018baae14",
+    "ab_source": "b746a70ed9b3d00b8e591b962358207e1050c1bfe378467729048cbcca2b8c77",
 }
 
 
@@ -61,7 +65,7 @@ def replay(x: Decimal, L: Decimal, R: Decimal) -> Decimal:
 
 def main() -> None:
     d = json.loads(DATA.read_text())
-    if d.get("schema") != "wp19-v0.28-reverse-time-sign-correction-v1":
+    if d.get("schema") != "wp19-v0.28-reverse-time-sign-correction-v2":
         raise SystemExit("FAIL: schema mismatch")
     if not d.get("protocol", {}).get("no_retuning"):
         raise SystemExit("FAIL: no-retuning flag missing")
@@ -78,6 +82,19 @@ def main() -> None:
         raise SystemExit("FAIL: frozen report hash mismatch")
     if sha(base / "structured_uncertainty_ab_20261001/structured_uncertainty_ab.json") != EXPECTED["A_B"]:
         raise SystemExit("FAIL: A/B hash mismatch")
+    producer_paths = [
+        base / "pilot_v2_36818369196/wp19_v0_28_adjoint_segment_arb.py",
+        base / "pilot_chained_238_36819581437/wp19_v0_28_adjoint_segment_arb.py",
+        base / "pilot_chained_237_36820757066/wp19_v0_28_adjoint_segment_arb.py",
+    ]
+    if [sha(p) for p in producer_paths] != [EXPECTED["producer"]] * 3:
+        raise SystemExit("FAIL: archived producer source identity mismatch")
+    if sha(ROOT / "src/wp19_v0_23_rk4_goal_adjoint.py") != EXPECTED["adjoint_source"]:
+        raise SystemExit("FAIL: exact-adjoint source hash mismatch")
+    if sha(ROOT / "src/wp16_036_dealiased_trajectory_gate.py") != EXPECTED["galerkin_source"]:
+        raise SystemExit("FAIL: Galerkin-system source hash mismatch")
+    if sha(base / "structured_uncertainty_ab_20261001/wp19_v0_28_structured_uncertainty_ab.py") != EXPECTED["ab_source"]:
+        raise SystemExit("FAIL: A/B source hash mismatch")
     ab = json.loads((base / "structured_uncertainty_ab_20261001/structured_uncertainty_ab.json").read_text())
     segment_237 = json.loads(segpaths[-1].read_text())
     if (ab.get("step") != 237 or ab.get("M") != 14
@@ -93,6 +110,15 @@ def main() -> None:
         raise SystemExit("FAIL: prior chain hash mismatch")
     if [row["step"] for row in d["segment_rows"]] != [239, 238, 237]:
         raise SystemExit("FAIL: segment order mismatch")
+    if d["sign_derivation"]["forward_time_error_equation"] != "de/dt = VJP(u,e) + nu*Lambda*e - r":
+        raise SystemExit("FAIL: forward-time residual sign mismatch")
+    if d["sign_derivation"]["backward_time_error_equation"] != "de/dtau = -VJP(u,e) - nu*Lambda*e + r":
+        raise SystemExit("FAIL: reverse-time residual sign mismatch")
+    if len(d["sign_derivation"].get("assumptions", [])) < 6:
+        raise SystemExit("FAIL: required conditional assumptions are missing")
+    for row in d["segment_rows"]:
+        if row["segment_source_sha256"] != EXPECTED["producer"]:
+            raise SystemExit(f"FAIL: producer source not bound at step {row['step']}")
     radius = Decimal(d["segment_rows"][0]["incoming_error_upper"])
     for row in d["segment_rows"]:
         if Decimal(row["incoming_error_upper"]) != radius:
@@ -116,10 +142,18 @@ def main() -> None:
         raise SystemExit("FAIL: A/B separate outgoing comparison changed")
     if ab_view["shared_baseline_segment_sha256"] != EXPECTED["segments"][-1]:
         raise SystemExit("FAIL: A/B baseline segment identity mismatch")
+    if ab_view.get("nominal_residual_is_used_by_old_recurrence") is not False:
+        raise SystemExit("FAIL: A/B old-recurrence input distinction absent")
+    if abs(Decimal(ab_view["A_B_old_recurrence_replayed_upper"]) - Decimal(ab_view["A_B_old_recomputed_outgoing_upper"])) > Decimal("1e-60"):
+        raise SystemExit("FAIL: A/B old recurrence did not replay")
+    if abs(Decimal(ab_view["outgoing_difference_from_2e_9_strain_shift_using_shared_segment_residual"]) - Decimal(ab_view["A_B_minus_archived_outgoing_difference"])) > Decimal("1e-60"):
+        raise SystemExit("FAIL: A/B output-gap attribution mismatch")
+    if len(d.get("supersedes", [])) < 5:
+        raise SystemExit("FAIL: machine-readable superseded-record links absent")
     if d.get("scope", {}).get("terminology") != "The verifier is a separate implementation of the recurrence, not an independent derivation of the PDE estimate.":
         raise SystemExit("FAIL: verifier scope label mismatch")
     report = (
-        "PASS: hashes, order, radius carry, outward recurrence replay, conservative-chain ordering, and scope labels\n"
+        "PASS: hashes, source identities, order, radius carry, outward recurrence replay, conservative-chain ordering, A/B reconciliation, and scope labels\n"
         "LIMIT: conditional on producer-supplied segment strain/residual bounds; no endpoint transfer theorem\n"
         "METHOD: separate arithmetic implementation of the scalar recurrence; not an independent PDE derivation\n"
     )
