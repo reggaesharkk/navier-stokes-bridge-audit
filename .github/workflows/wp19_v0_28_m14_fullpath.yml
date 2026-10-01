@@ -1,0 +1,131 @@
+name: WP19 v0.28 M14 full-path adjoint error certificate
+
+on:
+  push:
+    branches: [wp19-v0-28-m14-fullpath-cert]
+    paths:
+      - '.github/workflows/wp19_v0_28_m14_fullpath.yml'
+      - 'src/wp19_v0_28_verify_fullpath_segment.py'
+      - 'src/wp19_v0_28_aggregate_fullpath_adjoint.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  segment-shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 24
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen arithmetic dependencies
+        run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Check both independent arithmetic implementations
+        run: |
+          python src/wp19_v0_28_adjoint_segment_arb.py --self-check
+          python src/wp19_v0_28_verify_fullpath_segment.py --self-check
+      - name: Retrieve and verify immutable inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower work/adjoint work/c500 output
+          gh api repos/${{ github.repository }}/actions/artifacts/11059294923/zip > work/lower.zip
+          gh api repos/${{ github.repository }}/actions/artifacts/11121015458/zip > work/adjoint.zip
+          gh api repos/${{ github.repository }}/actions/artifacts/11114258089/zip > work/c500.zip
+          echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
+          echo '330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058  work/adjoint.zip' | sha256sum -c -
+          echo 'ae0c129951c25bd35215760168ce62d0586ce7fed09e3019d8ea0b5a24180dc2  work/c500.zip' | sha256sum -c -
+          unzip -q work/lower.zip -d work/lower
+          unzip -q work/adjoint.zip -d work/adjoint
+          unzip -q work/c500.zip -d work/c500
+      - name: Independently enclose and replay ten adjacent half-segments
+        env:
+          SHARD: ${{ matrix.shard }}
+        run: |
+          set -euo pipefail
+          start=$((SHARD * 10))
+          end=$((start + 9))
+          out=output/shard_${SHARD}
+          mkdir -p "$out"
+          for step in $(seq "$start" "$end"); do
+            python -u src/wp19_v0_28_adjoint_segment_arb.py \
+              --M 14 --step "$step" --lower-dir work/lower --adjoint-dir work/adjoint \
+              --sign-chart results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json \
+              --c500 work/c500/frozen_C500.json --output "$out/M14_segment_${step}.json" \
+              2>&1 | tee "$out/producer_${step}.log"
+            segment_sha=$(sha256sum "$out/M14_segment_${step}.json" | awk '{print $1}')
+            python -u src/wp19_v0_28_verify_fullpath_segment.py \
+              --step "$step" --segment-sha256 "$segment_sha" \
+              --lower-dir work/lower --adjoint-dir work/adjoint \
+              --segment "$out/M14_segment_${step}.json" \
+              --output "$out/independent_residual_${step}.json"
+          done
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root=Path('output')/('shard_'+os.environ['SHARD'])
+          files=sorted(p for p in root.iterdir() if p.is_file())
+          provenance={
+              'schema':'wp19-v0.28-M14-fullpath-shard-provenance-v1',
+              'workflow_commit':os.environ['GITHUB_SHA'],
+              'shard':int(os.environ['SHARD']),
+              'first_step':int(os.environ['SHARD'])*10,
+              'last_step':int(os.environ['SHARD'])*10+9,
+              'producer_sha256':hashlib.sha256(Path('src/wp19_v0_28_adjoint_segment_arb.py').read_bytes()).hexdigest(),
+              'independent_verifier_sha256':hashlib.sha256(Path('src/wp19_v0_28_verify_fullpath_segment.py').read_bytes()).hexdigest(),
+          }
+          (root/'PROVENANCE.json').write_text(json.dumps(provenance,indent=2,sort_keys=True)+'\n')
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          (root/'SHA256SUMS.txt').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}'+chr(10) for p in files))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-fullpath-shard-${{ matrix.shard }}
+          path: output/shard_${{ matrix.shard }}
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: segment-shard
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download all 24 verified shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wp19-v0-28-M14-fullpath-shard-*
+          path: gathered
+      - name: Build outward full-path recurrence
+        run: python src/wp19_v0_28_aggregate_fullpath_adjoint.py --root gathered --output final/M14_fullpath_adjoint_error.json
+      - name: Package aggregate with checksums
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root=Path('final')
+          root.mkdir(exist_ok=True)
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          (root/'SHA256SUMS.txt').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}'+chr(10) for p in files))
+          for row in (root/'SHA256SUMS.txt').read_text().splitlines():
+              digest,name=row.split('  ',1)
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-fullpath-adjoint-certificate
+          path: final
+          if-no-files-found: error
+          retention-days: 90
