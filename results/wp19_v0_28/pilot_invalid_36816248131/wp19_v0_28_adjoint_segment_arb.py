@@ -13,7 +13,6 @@ import math
 import sys
 import time
 from pathlib import Path
-from fractions import Fraction
 import numpy as np
 from flint import acb, acb_poly, arb, ctx
 
@@ -27,7 +26,7 @@ import wp19_v0_26_signed_goal_adjoint as frozen_goal
 import wp16_036_sparse_turnover_exact_anchor as exact
 from wp16_036_dealiased_trajectory_gate import DealiasedSystem
 
-PROTOCOL = "wp19-v0.28-adjoint-segment-arb-v2"
+PROTOCOL = "wp19-v0.28-adjoint-segment-arb-v1"
 ctx.prec = 192
 H = arb(1) / 40000
 HALF_H = arb(1) / 80000
@@ -41,51 +40,6 @@ def sha(p):
     with Path(p).open("rb") as f:
         for b in iter(lambda: f.read(1 << 20), b""): h.update(b)
     return h.hexdigest()
-
-def safe_decimal_upper(x, places=12):
-    """Return an outward decimal upper bound using integer arithmetic only.
-
-    The shared legacy formatter converts through binary64, which can lose
-    several decimal units for large values. Here Arb supplies an exact
-    integer midpoint/radius/exponent enclosure; its upper rational endpoint
-    is rounded upward to the requested decimal grid without floats.
-    """
-    if places < 0:
-        raise ValueError("places must be nonnegative")
-    mid, rad, exp = (int(v) for v in x.mid_rad_10exp())
-    upper_integer = mid + rad
-    shift = exp + places
-    if shift >= 0:
-        exact_grid_numerator = upper_integer * (10 ** shift)
-        units = exact_grid_numerator
-    else:
-        denominator = 10 ** (-shift)
-        exact_grid_numerator = upper_integer
-        units = -((-upper_integer) // denominator)
-    # Strict slack in the last printed decimal place.
-    units += 1
-    sign = "-" if units < 0 else ""
-    digits = str(abs(units)).zfill(places + 1)
-    if places:
-        digits = digits[:-places] + "." + digits[-places:]
-    candidate = sign + digits
-    if shift >= 0:
-        strictly_above = units > exact_grid_numerator
-    else:
-        strictly_above = units * denominator > exact_grid_numerator
-    if not strictly_above:
-        raise ArithmeticError("integer outward decimal conversion failed")
-    return candidate
-
-def decimal_fraction(text):
-    """Parse a finite decimal string as an exact rational for self-checks."""
-    sign = -1 if text.startswith("-") else 1
-    body = text[1:] if sign < 0 else text
-    if "." not in body:
-        return Fraction(sign * int(body), 1)
-    whole, fractional = body.split(".")
-    den = 10 ** len(fractional)
-    return Fraction(sign * (int(whole) * den + int(fractional)), den)
 
 def dyadic(x):
     # Never use a decimal repr as an enclosure of a stored binary64 value.
@@ -214,7 +168,7 @@ def old_radius_and_identity(directory, nodes, rhs, M):
         if not R>=0 or not G>=0: raise ValueError("negative primal majorant")
         # Reproduce the archived conservative recurrence without tightening it.
         S=G
-        E=arb(safe_decimal_upper((S*H).exp()*(E+H*R),12))
+        E=arb(common.decimal_upper((S*H).exp()*(E+H*R),12))
         bounds.append(E)
     return bounds
 
@@ -246,18 +200,6 @@ def terminal_error(low,high,nodes,adj,primal_radius,coeff):
 
 def self_check():
     ctx.prec=192
-    # Regression gate: large values at micro precision must serialize above
-    # the exact Arb upper endpoint without a binary64 round trip.
-    for raw, places in (("771116932371.42349", 6),
-                        ("771170816631.115284", 6),
-                        ("1e100", 6), ("1/3", 18)):
-        x = arb(raw) if raw != "1/3" else arb(1) / 3
-        text = safe_decimal_upper(x, places)
-        mid, rad, exp = (int(v) for v in x.mid_rad_10exp())
-        exact_arb_upper = Fraction(mid + rad) * (Fraction(10) ** exp)
-        if decimal_fraction(text) <= exact_arb_upper:
-            raise ValueError("outward-decimal formatter self-check failed")
-    print("PASS integer-only outward decimal serialization",flush=True)
     s=DealiasedSystem(2,nu=.1); rng=np.random.default_rng(20261001)
     c=[]
     for _ in range(8):
@@ -353,14 +295,14 @@ def main():
          "inputs":{"adjoint_report_sha256":sha(report_path),"adjoint_values_sha256":sha(paths["values"]),
                    "adjoint_rhs_sha256":sha(paths["rhs"]),"lower_nodes_sha256":sha(args.lower_dir/"nodes.npy"),
                    "lower_rhs_sha256":sha(args.lower_dir/"rhs.npy"),"primal_segment_sha256":sha(args.lower_dir/f"{j:03d}.json")},
-         "bounds":{"nominal_residual_L2_upper":safe_decimal_upper(Rpoly,6),
-                   "primal_uncertainty_residual_penalty_upper":safe_decimal_upper(perturb,6),
-                   "residual_L2_upper":safe_decimal_upper(R,6),"logarithmic_norm_upper":safe_decimal_upper(strain,9),
-                   "adjoint_polynomial_L2_upper":safe_decimal_upper(lsup,6),
-                   "binary_decimal_predictor_distance_upper":safe_decimal_upper(delta,18),
-                   "true_primal_radius_upper":safe_decimal_upper(delta_true,15),
-                   "terminal_primal_radius_upper":safe_decimal_upper(terminal_radius,15),
-                   "terminal_adjoint_error_upper":safe_decimal_upper(epsilon0,6)},
+         "bounds":{"nominal_residual_L2_upper":common.decimal_upper(Rpoly,6),
+                   "primal_uncertainty_residual_penalty_upper":common.decimal_upper(perturb,6),
+                   "residual_L2_upper":common.decimal_upper(R,6),"logarithmic_norm_upper":common.decimal_upper(strain,9),
+                   "adjoint_polynomial_L2_upper":common.decimal_upper(lsup,6),
+                   "binary_decimal_predictor_distance_upper":common.decimal_upper(delta,18),
+                   "true_primal_radius_upper":common.decimal_upper(delta_true,15),
+                   "terminal_primal_radius_upper":common.decimal_upper(terminal_radius,15),
+                   "terminal_adjoint_error_upper":common.decimal_upper(epsilon0,6)},
          "whole_segment_method":"degree-six Fourier-valued residual; Bernstein convex-hull L2 bound; exact dyadic imports/projections; old primal radius plus predictor-centre discrepancy",
          "elapsed_seconds":time.monotonic()-started,
          "claim_boundary":"One finite M14->15 half-step enclosure only; no complete adjoint path, dual quadrature, transfer theorem, all-N or continuum claim."}

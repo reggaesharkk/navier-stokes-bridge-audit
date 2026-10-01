@@ -24,6 +24,25 @@ The backward logarithmic norm uses the symmetric strain envelope; viscosity
 is dissipative in backward time. The independent Decimal checker propagates
 one scalar error step. It does not independently recompute the residual.
 
+## v1 serialization failure and v2 correction
+
+Run `36816248131` completed the M14 segment computation but its independent
+verifier correctly rejected the output. The printed total residual upper
+(`771170816631.115284`) was `0.000082` below the exact sum of its two printed
+component uppers (`771170816631.115366`). The full invalid artifact, source,
+verifier, log, manifest, and exact failure calculation are preserved under
+`results/wp19_v0_28/pilot_invalid_36816248131/`.
+
+The v1 producer serialized Arb values through the shared helper that converts
+to binary64 before decimal rounding. v2 replaces that path throughout the
+pilot, including its scalar primal-error recurrence, with integer-only
+outward decimal rounding from Arb's exact `(mid, radius, exponent)` enclosure.
+The v2 self-check includes large-magnitude micro-decimal cases and a rational
+`1/3` case. No residual, trajectory, witness, normalizer, or K36 quantity is
+retuned. The same M14 half-segment must be recomputed before its output can be
+accepted. Until that recomputation and the independent verifier pass, this
+gate remains pending and no wider claim is made.
+
 ## Execution and failure preservation
 
 A separate explicit Fourier/time-coefficient check must pass first.

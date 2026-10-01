@@ -8,7 +8,7 @@ from pathlib import Path
 
 def verify(path):
     x=json.loads(path.read_text())
-    if x['schema']!='wp19-v0.28-adjoint-segment-arb-v2' or x['status']!='CONTINUOUS_SEGMENT_ENCLOSURE_ONLY':
+    if x['schema']!='wp19-v0.28-adjoint-segment-arb-v1' or x['status']!='CONTINUOUS_SEGMENT_ENCLOSURE_ONLY':
         raise ValueError('unexpected segment protocol/status')
     if x['M']!=14 or x['step']!=239 or x['backward_order_index']!=0 or x['forward_time_interval_rational']!=['239/80000','240/80000']:
         raise ValueError('pilot is not the first backward segment')
