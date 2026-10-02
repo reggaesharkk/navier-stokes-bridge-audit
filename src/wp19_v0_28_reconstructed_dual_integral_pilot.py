@@ -28,7 +28,8 @@ def sha(path):
     return h.hexdigest()
 
 def lower_decimal(x, places=15):
-    return "-"+base.safe_decimal_upper(-x,places)
+    upper_of_neg = base.safe_decimal_upper(-x, places)
+    return upper_of_neg[1:] if upper_of_neg.startswith("-") else "-"+upper_of_neg
 
 def main():
     ap=argparse.ArgumentParser()
