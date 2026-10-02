@@ -32,7 +32,7 @@ The replay uses the frozen M14 whole-segment `gradient_Fourier_l1_upper_decimal`
 
 `E[n+1] = exp(M[n] h) E[n] + R[n] (exp(M[n] h)-1) / M[n]`, with `h=1/80000`.
 
-All input decimal strings are outward upper bounds. The exponential is bounded with an exact rational degree-20 Taylor sum plus a geometric upper bound on its positive tail. The replay verifies all 12 shards, identical frozen input hashes, and exact step coverage 0–239. It obtains terminal radius `10.559636070809868141657764813075`; maximum segment gradient bound is `2486.991992`.
+All input decimal strings are outward upper bounds. The exponential is bounded with an exact rational degree-20 Taylor sum plus a geometric upper bound on its positive tail. The replay verifies all 12 shards, identical frozen input hashes, and exact step coverage 0–239. It obtains terminal radius `10.559636070809868141657764813075`; maximum segment gradient bound is `2486.991992`. For scale only, this is about 178,248 times the earlier M14 terminal tube radius `0.000059241340007`; the two radii refer to different error equations, so this ratio is not a certification comparison.
 
 The result is `PASS_M15_FORCED_L2_RADIUS_ONLY`. It bounds Y-U in M15 L2 under the frozen segment majorants. It is intentionally not treated as an objective-transfer bound.
 
