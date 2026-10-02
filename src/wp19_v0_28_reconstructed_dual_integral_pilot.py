@@ -111,7 +111,7 @@ def main():
         "frozen_inputs":{
             "adjoint_report_sha256":sha(report),
             "adjoint_values_sha256":sha(values),
-            "adjoint_rhs_sha256":sha(adjrsh),
+            "adjoint_rhs_sha256":sha(adjrhs),
             "lower_nodes_sha256":sha(a.lower_dir/"nodes.npy"),
             "lower_rhs_sha256":sha(a.lower_dir/"rhs.npy"),
             "lower_metadata_sha256":sha(a.lower_dir/"metadata.json")
