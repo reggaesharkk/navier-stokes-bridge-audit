@@ -142,6 +142,8 @@ def main() -> None:
     if n15 != 14147:
         raise ArithmeticError("independent M15 mode-count check failed")
     support_ratio = sqrt_upper_ratio(n15, n14)
+    if support_ratio < Fraction(15, 14):
+        raise ArithmeticError("support correction does not dominate the 14-to-15 cutoff factor")
 
     linear_total = Fraction(0)
     quadratic_total = Fraction(0)
@@ -196,8 +198,8 @@ def main() -> None:
         "method": (
             "Exact rational replay. Recover an upper on each original Young "
             "coefficient by dividing its outward quadratic term by a lower "
-            "bound on the source delta; enlarge the sqrt(mode-count) factor "
-            "from M14 to M15; apply the exact-rational M15 forced radius to "
+            "bound on the source delta; enlarge the cutoff and sqrt(mode-count) "
+            "factors from M14 to M15; apply the exact-rational M15 forced radius to "
             "the adjoint-defect and quadratic terms; bound the terminal pairing."
         ),
         "claim_boundary": (
