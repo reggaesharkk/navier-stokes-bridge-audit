@@ -36,6 +36,9 @@
       "common frozen input hashes",
       "exact step coverage 0..239"
     ],
-    "claim_boundary": "M15 L2 forced-radius only; adjoint-weighted defect, quadratic objective remainder, endpoint transfer, normalizer, and continuum gates remain open."
+    "claim_boundary": "M15 L2 forced-radius only; adjoint-weighted defect, quadratic objective remainder, endpoint transfer, normalizer, and continuum gates remain open.",
+    "previous_M14_terminal_radius_upper": "0.000059241340007",
+    "scale_ratio_vs_previous_M14_radius_approx": "178247.758568",
+    "scale_ratio_claim_boundary": "Diagnostic comparison only; these bounds refer to different error equations."
   }
 }
