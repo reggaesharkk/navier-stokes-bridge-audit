@@ -30,7 +30,11 @@ def main():
         raise ValueError(f"expected 12 shard files, found {len(files)}")
     shards = []
     for p in files:
-        x = json.loads(p.read_text())
+        raw = p.read_text()
+        # Accept the literal backslash-n marker emitted by the original shard writer.
+        if raw.endswith("\\\\n"):
+            raw = raw[:-2]
+        x = json.loads(raw)
         if x.get("schema") != SHARD_SCHEMA or x.get("status") != PASS or x.get("M") != 14:
             raise ValueError(f"shard schema/status/cutoff mismatch: {p.name}")
         if x.get("count") != EXPECTED_COUNT or len(x.get("steps", [])) != EXPECTED_COUNT:
