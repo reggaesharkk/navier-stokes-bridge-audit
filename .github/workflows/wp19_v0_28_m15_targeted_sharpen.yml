@@ -1,0 +1,115 @@
+name: WP19 v0.28 targeted M15-support quadratic replay
+
+on:
+  push:
+    branches: [wp19-v0-28-duality-compatibility-audit]
+    paths:
+      - '.github/workflows/wp19_v0_28_m15_targeted_sharpen.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  target-steps-220-239:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen arithmetic dependencies
+        run: |
+          python -m pip install numpy==2.3.5 python-flint
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Download frozen lower N14 path
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          mkdir -p work/lower
+          gh run download 36608785015 --repo '${{ github.repository }}' \
+            --name wp19-n14-arb-certificate --dir work/lower
+          test -f work/lower/nodes.npy
+          test -f work/lower/rhs.npy
+          test -f work/lower/metadata.json
+      - name: Download frozen M15-support adjoint path
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          mkdir -p work/adjoint
+          gh run download 36763902966 --repo '${{ github.repository }}' \
+            --name wp19-v0-27c1-M14 --dir work/adjoint
+          test -f work/adjoint/M14_adjoint_values.npy
+          test -f work/adjoint/M14_adjoint_rhs.npy
+          test -f work/adjoint/M14_arb_vjp_point.json
+      - name: Recompute direct M15-support coefficients on steps 220-239
+        run: |
+          set -euxo pipefail
+          python src/wp19_v0_28_goal_weighted_targeted_m15_support.py \
+            --start 220 --count 20 \
+            --lower-dir work/lower --adjoint-dir work/adjoint \
+            --output results/wp19_v0_28/duality_compatibility_audit_20261002/target_steps_220_239.json
+      - name: Replay full-path remainder with sharper final-20 coefficients
+        run: |
+          python - <<'PY'
+          import json
+          from decimal import Decimal
+          from fractions import Fraction
+          from pathlib import Path
+
+          root=Path('results/wp19_v0_28/duality_compatibility_audit_20261002')
+          target=json.loads((root/'target_steps_220_239.json').read_text())
+          old=json.loads((root/'m15_weighted_remainder.json').read_text())
+          radius=json.loads((root/'m15_forced_radius.json').read_text())
+          assert target['start']==220 and target['count']==20
+          assert [r['step'] for r in target['steps']]==list(range(220,240))
+          assert len(radius['steps_detail'])==240
+
+          def f(s): return Fraction(Decimal(s))
+          H=Fraction(1,80000)
+          old_target=sum((f(r['M15_support_corrected_quadratic_upper'])
+                          for r in old['steps_detail'] if r['step']>=220),Fraction(0))
+          new_target=sum((H*f(radius['steps_detail'][n]['forced_error_L2_upper'])**2
+                          *f(target['steps'][n-220]['young_M15_support_upper'])
+                          for n in range(220,240)),Fraction(0))
+          q_old=f(old['M15_support_corrected_quadratic_integral_upper'])
+          q_new=q_old-old_target+new_target
+          linear=f(old['adjoint_defect_integral_upper'])
+          endpoint=f(old['terminal_saved_adjoint_boundary_product_upper'])
+          total=q_new+linear+endpoint
+          signed=f(old['frozen_signed_dual_integral_lower'])
+          def ceil_dec(x, places=24):
+              scale=10**places
+              u=(x.numerator*scale+x.denominator-1)//x.denominator
+              s=str(u).zfill(places+1)
+              return s[:-places]+'.'+s[-places:]
+          result={
+            'schema':'wp19-v0.28-m15-targeted-quadratic-replay-v1',
+            'target_steps':[220,239],
+            'status':'PASS_TARGETED_RECOMPUTATION_NO_CLOSURE' if signed-total<=0 else 'PASS_TARGETED_RECOMPUTATION_MARGIN_PRESERVED',
+            'old_steps_220_239_quadratic_upper':ceil_dec(old_target),
+            'direct_m15_steps_220_239_quadratic_upper':ceil_dec(new_target),
+            'full_path_quadratic_upper_with_target_replacement':ceil_dec(q_new),
+            'adjoint_defect_upper_retained_steps_0_239':old['adjoint_defect_integral_upper'],
+            'terminal_boundary_upper_retained':old['terminal_saved_adjoint_boundary_product_upper'],
+            'remainder_total_upper':ceil_dec(total),
+            'frozen_signed_integral_lower':old['frozen_signed_dual_integral_lower'],
+            'signed_margin_lower':ceil_dec(signed-total),
+            'step_coefficient_source':'192-bit Arb Bernstein controls, direct M15 support factor (15*l1 + sqrt(14147)*sqrt(grad2)), serialized outward to 24 decimal places',
+            'claim_boundary':'Finite-path conservative budget check only; the frozen dual integral and original goal-weighted result are unchanged. This does not establish an all-cutoff or continuum claim.'
+          }
+          (root/'targeted_m15_quadratic_replay.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(result,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-m15-targeted-220-239
+          path: |
+            results/wp19_v0_28/duality_compatibility_audit_20261002/target_steps_220_239.json
+            results/wp19_v0_28/duality_compatibility_audit_20261002/targeted_m15_quadratic_replay.json
+          if-no-files-found: error
+          retention-days: 30
