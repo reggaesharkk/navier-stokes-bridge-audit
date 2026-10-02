@@ -1,7 +1,7 @@
 {
   "schema": "wp19-v0.28-duality-compatibility-audit-v1",
   "date": "2026-10-02",
-  "status": "BLOCKED_MISSING_M15_ERROR_RADIUS",
+  "status": "PARTIAL_M15_FORCED_RADIUS_COMPUTED_ADJOINT_WEIGHTED_REMAINDER_OPEN",
   "preserved_freeze": {
     "dual_integral_status": "PASS_RECONSTRUCTION_DUAL_INTEGRAL_ONLY",
     "steps": 240,
@@ -15,12 +15,27 @@
     "terminal_reconstruction_boundary_product_upper": "277957977.931533676582",
     "prior_endpoint_taylor_plus_interior_upper": "282300477.131407882477"
   },
-  "disposition": "Not reconciled. Existing goal-weighted delta is an M14 predictor radius and does not enclose the M15 solution error relative to the embedded M14 reconstruction. The recorded scale ratio is diagnostic only, not a contradiction.",
-  "required_next_gate": "Outward M15 forced-error radius for e=Y-U, driven from zero by the full M15 residual, then recompute adjoint-defect and nonlinear terms on that tube.",
+  "disposition": "The prior endpoint/tube bound used an M14 predictor radius. An exact-rational L2 forced-radius replay now bounds the M15 solution difference from the embedded M14 path by 10.559636070809868141657764813075 at the final time. Adjoint-weighted defect and quadratic objective remainders remain open; no transfer conclusion is made.",
+  "required_next_gate": "Recompute the adjoint-defect integral with the M15 radius, recompute the quadratic objective remainder with a bound valid on full M15 support, then reconcile terminal and normalizer bounds.",
   "source_paths": [
     "src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py",
     "src/wp19_v0_28_reconstructed_dual_integral_pilot.py",
     "src/wp19_v0_28_goal_weighted_primal_uncertainty_fullpath.py",
-    "src/wp19_v0_28_adjoint_segment_arb.py"
-  ]
+    "src/wp19_v0_28_adjoint_segment_arb.py",
+    "src/wp19_v0_28_m15_forced_radius_replay.py"
+  ],
+  "m15_forced_radius": {
+    "status": "PASS_M15_FORCED_L2_RADIUS_ONLY",
+    "result_path": "results/wp19_v0_28/duality_compatibility_audit_20261002/m15_forced_radius.json",
+    "final_forced_error_L2_upper": "10.559636070809868141657764813075",
+    "max_gradient_Fourier_l1_upper": "2486.991992",
+    "recurrence": "E[n+1]=exp(M[n]h)E[n]+R[n](exp(M[n]h)-1)/M[n], E[0]=0, h=1/80000",
+    "exponential_enclosure": "Exact rational degree-20 Taylor sum plus geometric upper bound on the positive tail",
+    "validations": [
+      "12 shards",
+      "common frozen input hashes",
+      "exact step coverage 0..239"
+    ],
+    "claim_boundary": "M15 L2 forced-radius only; adjoint-weighted defect, quadratic objective remainder, endpoint transfer, normalizer, and continuum gates remain open."
+  }
 }
