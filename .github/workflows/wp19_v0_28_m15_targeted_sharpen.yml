@@ -1,10 +1,11 @@
 name: WP19 v0.28 targeted M15-support quadratic replay
 
 on:
-  push:
-    branches: [wp19-v0-28-duality-compatibility-audit]
+  pull_request:
+    branches: [wp19-v0-28-m14-fullpath-cert]
     paths:
       - '.github/workflows/wp19_v0_28_m15_targeted_sharpen.yml'
+      - 'src/wp19_v0_28_goal_weighted_targeted_m15_support.py'
   workflow_dispatch:
 
 permissions:
