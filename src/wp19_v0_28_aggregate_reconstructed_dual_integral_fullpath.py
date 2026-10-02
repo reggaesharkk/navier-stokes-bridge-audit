@@ -32,7 +32,7 @@ def main():
     for p in files:
         raw = p.read_text()
         # Accept the literal backslash-n marker emitted by the original shard writer.
-        if raw.endswith("\\\\n"):
+        if raw.endswith("\\n"):
             raw = raw[:-2]
         x = json.loads(raw)
         if x.get("schema") != SHARD_SCHEMA or x.get("status") != PASS or x.get("M") != 14:
