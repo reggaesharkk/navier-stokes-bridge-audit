@@ -11,7 +11,6 @@ from pathlib import Path
 import numpy as np
 from flint import acb, arb, ctx
 import wp19_v0_28_adjoint_segment_arb as base
-from wp19_v0_26_signed_goal_adjoint import EXPECTED_C1_M14
 
 ctx.prec = 192
 M = 14
