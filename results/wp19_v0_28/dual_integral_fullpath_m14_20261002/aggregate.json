@@ -1,0 +1,75 @@
+{
+  "M": 14,
+  "claim_boundary": "This encloses the signed dual integral for the saved cubic reconstructions over all 240 half-steps. It excludes true-path radii, terminal-gradient/Taylor and nonlinear remainders, independent normalizer transfer, and continuum conclusions.",
+  "frozen_inputs": {
+    "adjoint_report_sha256": "981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8",
+    "adjoint_rhs_sha256": "8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
+    "adjoint_values_sha256": "00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab",
+    "lower_metadata_sha256": "0ce684a72ba61de86b6d4293c28e14c6cff260585b86c3bd6ebea447b041c43e",
+    "lower_nodes_sha256": "e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0",
+    "lower_rhs_sha256": "f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253"
+  },
+  "maximum_reconstructed_primal_defect_L2_upper": "123.975695614405",
+  "maximum_saved_adjoint_polynomial_L2_upper": "4746871683936.828785663740",
+  "pilot_source_sha256": "c6ec8c08ff4d6d1c0ebcf2aa13fcc054348a06b7c230e348a67010cd88f963a5",
+  "schema": "wp19-v0.28-reconstructed-dual-integral-fullpath-v1",
+  "segments": 240,
+  "shard_runner_sha256": "14478f31aaa3f46ef9544bb692ff801824ead02cf766b4dabad0c70bfc4b6d6b",
+  "shards": [
+    {
+      "count": 20,
+      "start": 0
+    },
+    {
+      "count": 20,
+      "start": 20
+    },
+    {
+      "count": 20,
+      "start": 40
+    },
+    {
+      "count": 20,
+      "start": 60
+    },
+    {
+      "count": 20,
+      "start": 80
+    },
+    {
+      "count": 20,
+      "start": 100
+    },
+    {
+      "count": 20,
+      "start": 120
+    },
+    {
+      "count": 20,
+      "start": 140
+    },
+    {
+      "count": 20,
+      "start": 160
+    },
+    {
+      "count": 20,
+      "start": 180
+    },
+    {
+      "count": 20,
+      "start": 200
+    },
+    {
+      "count": 20,
+      "start": 220
+    }
+  ],
+  "signed_integral_lower": "5758574435.605829673039071",
+  "signed_integral_upper": "5758574435.605829673039791",
+  "status": "PASS_RECONSTRUCTION_DUAL_INTEGRAL_ONLY",
+  "step_coverage": [
+    0,
+    239
+  ]
+}
