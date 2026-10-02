@@ -1,0 +1,26 @@
+{
+  "schema": "wp19-v0.28-duality-compatibility-audit-v1",
+  "date": "2026-10-02",
+  "status": "BLOCKED_MISSING_M15_ERROR_RADIUS",
+  "preserved_freeze": {
+    "dual_integral_status": "PASS_RECONSTRUCTION_DUAL_INTEGRAL_ONLY",
+    "steps": 240,
+    "signed_integral_lower": "5758574435.605829673039071",
+    "signed_integral_upper": "5758574435.605829673039791",
+    "aggregate_sha256": "8b3a7806e462786b887c635f1e6dbd323faadf8c5e0dedd42143969afebf75a3"
+  },
+  "compared_goal_weighted_bounds": {
+    "status": "PASS_RECONSTRUCTION_GOAL_WEIGHTED_PRIMAL_TUBE_ONLY",
+    "combined_interior_primal_tube_upper": "3368.516639829895",
+    "terminal_reconstruction_boundary_product_upper": "277957977.931533676582",
+    "prior_endpoint_taylor_plus_interior_upper": "282300477.131407882477"
+  },
+  "disposition": "Not reconciled. Existing goal-weighted delta is an M14 predictor radius and does not enclose the M15 solution error relative to the embedded M14 reconstruction. The recorded scale ratio is diagnostic only, not a contradiction.",
+  "required_next_gate": "Outward M15 forced-error radius for e=Y-U, driven from zero by the full M15 residual, then recompute adjoint-defect and nonlinear terms on that tube.",
+  "source_paths": [
+    "src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py",
+    "src/wp19_v0_28_reconstructed_dual_integral_pilot.py",
+    "src/wp19_v0_28_goal_weighted_primal_uncertainty_fullpath.py",
+    "src/wp19_v0_28_adjoint_segment_arb.py"
+  ]
+}
