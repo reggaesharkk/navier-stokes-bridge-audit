@@ -8,6 +8,12 @@
     0,
     239
   ],
+  "dominant_quadratic_shard": {
+    "count": 20,
+    "share_of_quadratic_total_approx": "0.696092",
+    "start": 220,
+    "sum_of_per_step_upper_bounds": "79714789407812.328251708391"
+  },
   "frozen_inputs": {
     "adjoint_report_sha256": "981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8",
     "adjoint_rhs_sha256": "8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
@@ -1468,5 +1474,47 @@
     }
   ],
   "sum_of_three_remainder_terms_upper": "164063087678950.088632165980",
-  "terminal_saved_adjoint_boundary_product_upper": "49545386543507.498269542068"
+  "terminal_saved_adjoint_boundary_product_upper": "49545386543507.498269542068",
+  "top_quadratic_steps": [
+    {
+      "step": 239,
+      "upper": "6727292440946.235753739059"
+    },
+    {
+      "step": 238,
+      "upper": "6321243918908.302108871525"
+    },
+    {
+      "step": 237,
+      "upper": "5939770984304.201855287333"
+    },
+    {
+      "step": 236,
+      "upper": "5582631765704.023774214179"
+    },
+    {
+      "step": 235,
+      "upper": "5247023102901.899425681399"
+    },
+    {
+      "step": 234,
+      "upper": "4932734698220.302163282779"
+    },
+    {
+      "step": 233,
+      "upper": "4637312956836.988917052586"
+    },
+    {
+      "step": 232,
+      "upper": "4360580001110.403106327127"
+    },
+    {
+      "step": 231,
+      "upper": "4100390357240.748380727832"
+    },
+    {
+      "step": 230,
+      "upper": "3856594610704.610395732855"
+    }
+  ]
 }
