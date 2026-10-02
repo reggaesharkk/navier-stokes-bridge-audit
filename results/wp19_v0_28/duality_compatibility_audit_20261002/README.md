@@ -1,62 +1,63 @@
 # M14/M15 duality compatibility audit
 
 **Date:** 2026-10-02  
-**Disposition:** `BLOCKED_MISSING_M15_ERROR_RADIUS`  
+**Disposition:** `PARTIAL_M15_FORCED_RADIUS_COMPUTED; ADJOINT_WEIGHTED_REMAINDER_OPEN`  
 **Purpose:** determine whether the frozen M14 dual integral can be combined with the existing goal-weighted uncertainty and endpoint bounds.
 
 ## Decision
 
-The frozen signed integral is valid for the saved M14 cubic reconstruction embedded in the M15 system. It is **not yet reconciled** with the existing endpoint/uncertainty bounds. Source inspection found that those bounds use an M14 predictor-error radius, while the dual residual drives the difference between the M15 trajectory and that embedded M14 reconstruction. The required M15 error radius is absent.
+The frozen signed integral is valid for the saved M14 cubic reconstruction embedded in the M15 system. It is not reconciled with the earlier endpoint/uncertainty bounds: those bounds used an M14 predictor-error radius, while the dual residual drives the difference between the M15 trajectory and that embedded M14 reconstruction.
 
-This is a missing-hypothesis/coverage issue. It does not show that either frozen computation is numerically wrong, and it does not establish a failure of the finite-observable transfer.
+The missing full-space radius has now been computed from the frozen residuals and whole-segment gradient bounds using a standard L2 difference-energy inequality. The resulting outward terminal radius is 10.559636070809868141657764813075. This closes the missing L2-radius input only. It does not close the adjoint-weighted defect, quadratic objective remainder, endpoint transfer, or normalizer gate.
+
+This is a compatibility and coverage correction. It does not show either frozen computation is numerically wrong and does not establish a failure of the finite-observable transfer.
 
 ## Frozen evidence
 
-- Dual quadrature: `PASS_RECONSTRUCTION_DUAL_INTEGRAL_ONLY`, all 240 half-steps, interval
-  `[5758574435.605829673039071, 5758574435.605829673039791]`.
+- Dual quadrature: `PASS_RECONSTRUCTION_DUAL_INTEGRAL_ONLY`, all 240 half-steps, interval `[5758574435.605829673039071, 5758574435.605829673039791]`.
 - Aggregate SHA-256: `8b3a7806e462786b887c635f1e6dbd323faadf8c5e0dedd42143969afebf75a3`.
 - Its six frozen input hashes match the input identities bound by the goal-weighted full-path computation.
-- Goal-weighted computation: `PASS_RECONSTRUCTION_GOAL_WEIGHTED_PRIMAL_TUBE_ONLY`; interior primal-tube allowance `3368.516639829895`, terminal boundary product `277957977.931533676582`.
+- Goal-weighted computation: `PASS_RECONSTRUCTION_GOAL_WEIGHTED_PRIMAL_TUBE_ONLY`; interior M14 predictor-tube allowance `3368.516639829895`, terminal boundary product `277957977.931533676582`.
 - The wider previously recorded endpoint/Taylor plus interior allowance is `282300477.131407882477`.
 
-The raw scale comparison is useful as a diagnostic only: the signed integral is about 20.4 times the wider recorded allowance. The values cannot be treated as a contradiction or combined into a theorem until the state-error quantity in the identity is enclosed in the same M15 space.
+The raw scale comparison is diagnostic only: the signed integral is about 20.4 times the wider recorded allowance. Those quantities cannot be combined because the earlier uncertainty bound did not cover the M15 difference path.
 
-## Identity and uncovered term
+## Identity and M15 forced radius
 
-Let (U(t)) be the embedded M14 reconstruction, (Y(t)) the M15 solution from the same initial datum, (e=Y-U), (F_{15}) the M15 vector field, and (R=F_{15}(U)-U_t). Let (lambda) be the saved adjoint and (d=lambda_t+DF_{15}(U)^*lambda) its adjoint defect. With the quadratic Taylor remainder (Q(e)),
+Let U(t) be the embedded M14 reconstruction, Y(t) the M15 solution from the same initial datum, e=Y-U, F15 the M15 vector field, and R=F15(U)-U_t. For the Navier-Stokes difference equation, transport by U and self-transport by e cancel in the L2 energy pairing; viscosity is dissipative. Therefore, with M(t) bounding the pointwise gradient of U:
 
-[
-e_t=DF_{15}(U)e+R+Q(e),
-]
+`d ||e||_2 / dt <= M(t) ||e||_2 + ||R||_2`.
 
-and therefore
+The replay uses the frozen M14 whole-segment `gradient_Fourier_l1_upper_decimal` bound for M on each pair of half-steps and the frozen full-M15 `primal_defect_L2_upper` bound for R on each half-step. It starts with E0=0 and applies:
 
-[
-int_0^T langlelambda,Rangle,dt
-=langlelambda(T),e(T)angle-langlelambda(0),e(0)angle
--int_0^Tlangle d,eangle,dt
--int_0^Tlanglelambda,Q(e)angle,dt.
-]
+`E[n+1] = exp(M[n] h) E[n] + R[n] (exp(M[n] h)-1) / M[n]`, with `h=1/80000`.
 
-The goal-weighted source computes its `delta` from `old_radius_and_identity`, which replays the lower-cutoff M14 recurrence from M14 segment residuals. That quantity can cover the M14 predictor's error under the M14 dynamics; it does not cover the M15 error (Y-U), including the newly opened M15 shell forced by (R).
+All input decimal strings are outward upper bounds. The exponential is bounded with an exact rational degree-20 Taylor sum plus a geometric upper bound on its positive tail. The replay verifies all 12 shards, identical frozen input hashes, and exact step coverage 0–239. It obtains terminal radius `10.559636070809868141657764813075`; maximum segment gradient bound is `2486.991992`.
 
-The dual-integral pilot explicitly forms (R) in the high M15 system from the embedded M14 reconstruction. Thus the path-error bound needed by the identity must include this cutoff-defect forcing. The existing M14 tube radius cannot be substituted for it.
+The result is `PASS_M15_FORCED_L2_RADIUS_ONLY`. It bounds Y-U in M15 L2 under the frozen segment majorants. It is intentionally not treated as an objective-transfer bound.
 
-## Next gate
+## Remaining gate
 
-Keep the quadrature freeze unchanged. Before any transfer claim:
+1. Recompute the adjoint-defect integral using this full M15 radius at each half-step.
+2. Recompute the quadratic objective remainder with a convolution bound valid on the full M15 error support.
+3. Recompute the terminal boundary term using the M15 radius.
+4. Combine outward intervals and then pass the independent normalizer-transfer gate.
 
-1. Construct an outward M15 radius for (e=Y-U) over all half-steps, initialized at zero and driven by the full M15 residual (R).
-2. Bound the M15 variational growth and nonlinear remainder on that same tube.
-3. Recompute the adjoint-defect and quadratic terms with that radius.
-4. Reconcile the resulting endpoint identity using outward intervals, then separately pass the normalizer-transfer gate.
+No large convolution rerun is required for the radius replay. If the remaining weighted bounds do not close, retain a fail-closed/unevaluable transfer status.
 
-No multi-hour rerun is warranted for this diagnosis. The next computation is only the missing M15 forced-radius enclosure; if its majorant cannot close, record the transfer gate as unevaluable/fail-closed.
+## Reproduction
 
-## Reproduction sources
+Run the new standard-library replay against the extracted frozen lower-path artifact and the 12 dual shard JSONs:
+
+`python src/wp19_v0_28_m15_forced_radius_replay.py --lower-dir LOWER_DIR --dual-dir DUAL_DIR --output m15_forced_radius.json`
+
+The replay accepts the exact legacy trailing `\\n` only on shard files; all other content is parsed as strict JSON. The result is stored at [m15_forced_radius.json](m15_forced_radius.json).
+
+## Source audit
 
 - `src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py` and `src/wp19_v0_28_reconstructed_dual_integral_pilot.py`: residual is built in the M15 system from the embedded M14 cubic reconstruction.
-- `src/wp19_v0_28_goal_weighted_primal_uncertainty_fullpath.py`: `delta` is the lower-path radius plus reconstruction distance.
+- `src/wp19_v0_28_goal_weighted_primal_uncertainty_fullpath.py`: the previous `delta` is the lower-path M14 radius plus reconstruction distance.
 - `src/wp19_v0_28_adjoint_segment_arb.py`: `old_radius_and_identity` validates and replays the M14 predictor recurrence.
+- `src/wp19_v0_28_m15_forced_radius_replay.py`: exact rational replay of the full M15 L2 forced-radius recurrence.
 
-This note is a static source-and-frozen-artifact audit. It does not revise the frozen aggregates or certify the missing M15 radius.
+The dual quadrature freeze remains unchanged. This addendum does not certify the adjoint-weighted remainder, terminal objective transfer, normalizer, cutoff-wide conclusion, or continuum regularity.
