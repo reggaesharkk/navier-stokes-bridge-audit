@@ -36,14 +36,26 @@ All input decimal strings are outward upper bounds. The exponential is bounded w
 
 The result is `PASS_M15_FORCED_L2_RADIUS_ONLY`. It bounds Y-U in M15 L2 under the frozen segment majorants. It is intentionally not treated as an objective-transfer bound.
 
-## Remaining gate
+## M15 weighted-remainder outcome
 
-1. Recompute the adjoint-defect integral using this full M15 radius at each half-step.
-2. Recompute the quadratic objective remainder with a convolution bound valid on the full M15 error support.
-3. Recompute the terminal boundary term using the M15 radius.
-4. Combine outward intervals and then pass the independent normalizer-transfer gate.
+The frozen 12 goal-weighted shards were replayed against the M15 radius. The replay recovered each original Young coefficient from its outward quadratic bound using a strict lower bound on the serialized M14 radius, then enlarged the support factor to cover all 14,147 M15 modes. The enlargement factor is `1.108505684201276629860741121330`.
 
-No large convolution rerun is required for the radius replay. If the remaining weighted bounds do not close, retain a fail-closed/unevaluable transfer status.
+| Term | Outward upper bound |
+|---|---:|
+| Adjoint-defect integral | `240063.832492240296` |
+| Quadratic remainder with M15 support | `114517700895378.757870383616` |
+| Terminal saved-adjoint boundary product | `49545386543507.498269542068` |
+| Sum of these three terms | `164063087678950.088632165980` |
+| Frozen signed-integral lower bound | `5758574435.605829673039071` |
+| Signed lower bound minus remainder sum | `-164057329104514.482802492940` |
+
+Status: `NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS`. The current conservative bounds do not preserve the sign. The quadratic term dominates; it is also the coarsest part because the replay recovers a coefficient from already rounded per-step outputs. This is a failure to close the current certificate budget, not evidence that the underlying finite-observable transfer is false.
+
+The frozen signed integral and all source artifacts remain unchanged. The weighted result is stored at [m15_weighted_remainder.json](m15_weighted_remainder.json), with its exact-rational replay in `src/wp19_v0_28_m15_weighted_remainder_replay.py`.
+
+## Next gate
+
+The useful next computation is a sharper goal-oriented enclosure for the quadratic remainder and terminal pairing. The present global M15 L2 tube is too coarse to carry the sign, even though it safely includes the cutoff defect. Keep the outcome fail-closed until a sharper bound is derived and replayed; then re-evaluate the independent normalizer gate.
 
 ## Reproduction
 
