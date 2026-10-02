@@ -1,0 +1,82 @@
+name: WP19 v0.28 full-path reconstructed signed dual quadrature
+on:
+  push:
+    branches: [wp19-v0-28-m14-fullpath-cert]
+    paths:
+      - '.github/workflows/wp19_v0_28_dual_quadrature_fullpath.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  dual-shard:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        start: [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen arithmetic dependencies
+        run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Download and verify frozen lower and adjoint paths
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower work/adjoint output
+          gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/11059294923/zip > work/lower.zip
+          gh api repos/${GITHUB_REPOSITORY}/actions/artifacts/11121015458/zip > work/adjoint.zip
+          echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
+          echo '330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058  work/adjoint.zip' | sha256sum -c -
+          unzip -q work/lower.zip -d work/lower
+          unzip -q work/adjoint.zip -d work/adjoint
+      - name: Enclose 20 exact-dyadic signed integrals
+        env:
+          START: ${{ matrix.start }}
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_reconstructed_dual_integral_pilot.py --self-check
+          python src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py \
+            --start "$START" --count 20 --lower-dir work/lower --adjoint-dir work/adjoint \
+            --output "output/dual_shard_$START.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-reconstructed-dual-integral-shard-${{ matrix.start }}
+          path: output/dual_shard_${{ matrix.start }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: dual-shard
+    if: success()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download all 12 dual-quadrature shards
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wp19-v0-28-reconstructed-dual-integral-shard-*
+          path: work/shards
+          merge-multiple: true
+      - name: Validate full coverage and aggregate outward intervals
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_aggregate_reconstructed_dual_integral_fullpath.py \
+            --shards-dir work/shards --output output/fullpath_reconstructed_dual_integral.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-reconstructed-dual-integral-fullpath
+          path: output/fullpath_reconstructed_dual_integral.json
+          if-no-files-found: error
+          retention-days: 90
