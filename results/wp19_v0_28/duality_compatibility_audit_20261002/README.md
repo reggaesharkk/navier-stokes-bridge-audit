@@ -49,7 +49,7 @@ The frozen 12 goal-weighted shards were replayed against the M15 radius. The rep
 | Frozen signed-integral lower bound | `5758574435.605829673039071` |
 | Signed lower bound minus remainder sum | `-164057329104514.482802492940` |
 
-Status: `NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS`. The current conservative bounds do not preserve the sign. The quadratic term dominates; it is also the coarsest part because the replay recovers a coefficient from already rounded per-step outputs. This is a failure to close the current certificate budget, not evidence that the underlying finite-observable transfer is false.
+Status: `NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS`. The current conservative bounds do not preserve the sign. The quadratic term dominates; it is also the coarsest part because the replay recovers a coefficient from already rounded per-step outputs. The final 20 half-steps (220–239) contribute about 69.6% of that quadratic upper bound, so they are the highest-value place to sharpen first while preserving full-path coverage. This is a failure to close the current certificate budget, not evidence that the underlying finite-observable transfer is false.
 
 The frozen signed integral and all source artifacts remain unchanged. The weighted result is stored at [m15_weighted_remainder.json](m15_weighted_remainder.json), with its exact-rational replay in `src/wp19_v0_28_m15_weighted_remainder_replay.py`.
 
