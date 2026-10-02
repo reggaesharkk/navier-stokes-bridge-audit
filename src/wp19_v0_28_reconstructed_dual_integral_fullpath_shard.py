@@ -81,7 +81,7 @@ def main():
     }
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\\n")
-    print(json.dumps({"start": a.start, "count": a.count, "status": PASS}, flush=True))
+    print(json.dumps({"start": a.start, "count": a.count, "status": PASS}), flush=True)
 
 
 if __name__ == "__main__":
