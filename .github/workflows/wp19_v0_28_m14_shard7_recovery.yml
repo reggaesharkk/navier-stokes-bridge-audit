@@ -1,0 +1,166 @@
+name: WP19 v0.28 M14 full-path shard-7 recovery
+on:
+  push:
+    branches: [wp19-v0-28-m14-fullpath-cert]
+    paths:
+      - '.github/workflows/wp19_v0_28_m14_shard7_recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  segment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        step: [70, 71, 72, 73, 74, 75, 76, 77, 78, 79]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen arithmetic dependencies
+        run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Check producer and independent verifier
+        run: |
+          python src/wp19_v0_28_adjoint_segment_arb.py --self-check
+          python src/wp19_v0_28_verify_fullpath_segment.py --self-check
+      - name: Retrieve and verify frozen inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower work/adjoint work/c500 output/step_${{ matrix.step }}
+          gh api repos/${{ github.repository }}/actions/artifacts/11059294923/zip > work/lower.zip
+          gh api repos/${{ github.repository }}/actions/artifacts/11121015458/zip > work/adjoint.zip
+          gh api repos/${{ github.repository }}/actions/artifacts/11114258089/zip > work/c500.zip
+          echo 'b0bb454fa320887c2b17dfd8a0bae916273253bb057ecff7acee3d6218234698  work/lower.zip' | sha256sum -c -
+          echo '330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058  work/adjoint.zip' | sha256sum -c -
+          echo 'ae0c129951c25bd35215760168ce62d0586ce7fed09e3019d8ea0b5a24180dc2  work/c500.zip' | sha256sum -c -
+          unzip -q work/lower.zip -d work/lower
+          unzip -q work/adjoint.zip -d work/adjoint
+          unzip -q work/c500.zip -d work/c500
+      - name: Enclose and independently replay one half-segment
+        env:
+          STEP: ${{ matrix.step }}
+        run: |
+          set -euo pipefail
+          out=output/step_${STEP}
+          python -u src/wp19_v0_28_adjoint_segment_arb.py \
+            --M 14 --step "${STEP}" --lower-dir work/lower --adjoint-dir work/adjoint \
+            --sign-chart results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json \
+            --c500 work/c500/frozen_C500.json --output "${out}/M14_segment_${STEP}.json" \
+            2>&1 | tee "${out}/producer_${STEP}.log"
+          segment_sha=$(sha256sum "${out}/M14_segment_${STEP}.json" | awk '{print $1}')
+          python -u src/wp19_v0_28_verify_fullpath_segment.py \
+            --step "${STEP}" --segment-sha256 "${segment_sha}" \
+            --lower-dir work/lower --adjoint-dir work/adjoint \
+            --segment "${out}/M14_segment_${STEP}.json" \
+            --output "${out}/independent_residual_${STEP}.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-fullpath-step-${{ matrix.step }}
+          path: output/step_${{ matrix.step }}
+          if-no-files-found: error
+          retention-days: 90
+
+  aggregate:
+    needs: segment
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retrieve prior successful shard artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN: '36895358244'
+          SOURCE_SHA: 'bed0ed7fe6dcb976ab4fc67e7020efbe19fb3f3c'
+        run: |
+          set -euo pipefail
+          mkdir -p gathered
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_RUN}" > source_run.json
+          test "$(jq -r .head_sha source_run.json)" = "${SOURCE_SHA}"
+          test "$(jq -r .conclusion source_run.json)" = "failure"
+          gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_RUN}/artifacts?per_page=100" > source_artifacts.json
+          test "$(jq -r '.artifacts | length' source_artifacts.json)" = "23"
+          jq -r '.artifacts[] | select(.name | startswith("wp19-v0-28-M14-fullpath-shard-")) | [.id,.name,(.expired|tostring),.workflow_run.head_sha] | @tsv' source_artifacts.json |
+          while IFS=$'\t' read -r id name expired sha; do
+            test "${expired}" = "false"
+            test "${sha}" = "${SOURCE_SHA}"
+            case "${name}" in
+              wp19-v0-28-M14-fullpath-shard-7) echo 'Unexpected failed shard artifact' >&2; exit 1 ;;
+              wp19-v0-28-M14-fullpath-shard-*) ;;
+              *) echo "Unexpected artifact: ${name}" >&2; exit 1 ;;
+            esac
+            gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" > "/tmp/${name}.zip"
+            mkdir -p "gathered/${name}"
+            unzip -q "/tmp/${name}.zip" -d "gathered/${name}"
+          done
+          for shard in 0 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23; do
+            test -d "gathered/wp19-v0-28-M14-fullpath-shard-${shard}"
+          done
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wp19-v0-28-M14-fullpath-step-*
+          path: gathered/recovery_steps
+      - name: Reassemble shard 7 and verify all 240 segments
+        run: |
+          set -euo pipefail
+          out=gathered/wp19-v0-28-M14-fullpath-shard-7
+          mkdir -p "${out}"
+          for step in $(seq 70 79); do
+            src="gathered/recovery_steps/wp19-v0-28-M14-fullpath-step-${step}"
+            cp "${src}/M14_segment_${step}.json" "${src}/independent_residual_${step}.json" "${out}/"
+            cp "${src}/producer_${step}.log" "${out}/"
+          done
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root=Path('gathered/wp19-v0-28-M14-fullpath-shard-7')
+          provenance={
+              'schema':'wp19-v0.28-M14-fullpath-shard-provenance-v1',
+              'workflow_commit':__import__('os').environ['GITHUB_SHA'],
+              'source_run':'36895358244',
+              'shard':7,
+              'first_step':70,
+              'last_step':79,
+              'producer_sha256':hashlib.sha256(Path('src/wp19_v0_28_adjoint_segment_arb.py').read_bytes()).hexdigest(),
+              'independent_verifier_sha256':hashlib.sha256(Path('src/wp19_v0_28_verify_fullpath_segment.py').read_bytes()).hexdigest(),
+          }
+          (root/'PROVENANCE.json').write_text(json.dumps(provenance,indent=2,sort_keys=True)+'\n')
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          manifest=''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n' for p in files)
+          (root/'SHA256SUMS.txt').write_text(manifest)
+          for line in manifest.splitlines():
+              digest,name=line.split('  ',1)
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest
+          PY
+          python src/wp19_v0_28_aggregate_fullpath_adjoint.py --root gathered --output final/M14_fullpath_adjoint_error.json
+      - name: Package aggregate with checksums
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          root=Path('final')
+          files=sorted(p for p in root.iterdir() if p.is_file() and p.name!='SHA256SUMS.txt')
+          manifest=''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n' for p in files)
+          (root/'SHA256SUMS.txt').write_text(manifest)
+          for line in manifest.splitlines():
+              digest,name=line.split('  ',1)
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-fullpath-adjoint-certificate-recovered
+          path: final
+          if-no-files-found: error
+          retention-days: 90
