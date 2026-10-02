@@ -4,6 +4,7 @@ on:
     branches: [wp19-v0-28-m14-fullpath-cert]
     paths:
       - '.github/workflows/wp19_v0_28_dual_quadrature_fullpath.yml'
+      - 'src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py'
   workflow_dispatch:
 
 permissions:
