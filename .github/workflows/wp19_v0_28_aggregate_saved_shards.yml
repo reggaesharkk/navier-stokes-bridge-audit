@@ -1,0 +1,41 @@
+name: WP19 v0.28 aggregate saved goal-weighted shards
+on:
+  push:
+    branches: [wp19-v0-28-m14-fullpath-cert]
+    paths:
+      - '.github/workflows/wp19_v0_28_aggregate_saved_shards.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  aggregate-saved-shards:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download saved 240-step shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wp19-v0-28-goal-weighted-primal-tube-shard-*
+          path: work/shards
+          merge-multiple: true
+          repository: reggaesharkk/navier-stokes-bridge-audit
+          run-id: 36966691176
+          github-token: ${{ github.token }}
+      - name: Validate coverage and aggregate outward bounds
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_aggregate_goal_weighted_primal_tube.py \
+            --shards-dir work/shards --output output/fullpath_goal_weighted_primal_tube.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-goal-weighted-primal-tube-fullpath
+          path: output/fullpath_goal_weighted_primal_tube.json
+          if-no-files-found: error
+          retention-days: 90
