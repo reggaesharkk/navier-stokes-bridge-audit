@@ -43,7 +43,7 @@ def main():
     rec=json.loads(report.read_text())["adjoint_reconstruction"]
     values=a.adjoint_dir/rec["values_file"]
     adjrhs=a.adjoint_dir/rec["rhs_file"]
-    if sha(values)!=VALUES_SHA or sha(adjrsh if False else adjrhs)!=RHS_SHA:
+    if sha(values)!=VALUES_SHA or sha(adjrhs)!=RHS_SHA:
         raise ValueError("frozen adjoint arrays mismatch")
     if rec["values_sha256"]!=VALUES_SHA or rec["rhs_sha256"]!=RHS_SHA:
         raise ValueError("adjoint report does not bind the frozen arrays")
@@ -57,7 +57,7 @@ def main():
     nodes=np.load(a.lower_dir/"nodes.npy",mmap_mode="r")
     lower_rhs=np.load(a.lower_dir/"rhs.npy",mmap_mode="r")
     adj=np.load(values,mmap_mode="r")
-    arhs=np.load(adjrsh if False else adjrhs,mmap_mode="r")
+    arhs=np.load(adjrsh,mmap_mode="r")
     for name,path in (("nodes",a.lower_dir/"nodes.npy"),
                       ("rhs",a.lower_dir/"rhs.npy"),
                       ("metadata",a.lower_dir/"metadata.json")):
@@ -94,8 +94,9 @@ def main():
     # Bernstein maxima bound the whole continuous time interval, not a grid.
     defect_sup=base.sup_norm(defect)
     lam_left=base.norm(lam[0])
-    lam_right=base.norm([sum((lam[d][i][c] for d in range(4)),acb(0))
-                         for i in range(len(high.modes)) for c in range(3)])
+    lam_at_right=[[sum((lam[d][i][c] for d in range(4)),acb(0)) for c in range(3)]
+                  for i in range(len(high.modes))]
+    lam_right=base.norm(lam_at_right)
     delta=arb(seg["bounds"]["true_primal_radius_upper"])
 
     # Second-order remainder: |<lambda,N(e,e)>| <= C_lambda ||e||_2^2.
@@ -121,7 +122,7 @@ def main():
       "M":M,"step":STEP,"interval_rational":["237/80000","238/80000"],
       "precision_bits":ctx.prec,
       "frozen_inputs":{"adjoint_report_sha256":sha(report),
-        "adjoint_values_sha256":sha(values),"adjoint_rhs_sha256":sha(adjrsh if False else adjrhs),
+        "adjoint_values_sha256":sha(values),"adjoint_rhs_sha256":sha(adjrsh),
         "lower_nodes_sha256":sha(a.lower_dir/"nodes.npy"),
         "lower_rhs_sha256":sha(a.lower_dir/"rhs.npy"),"segment_sha256":sha(a.segment)},
       "true_primal_radius_upper":base.safe_decimal_upper(delta,15),
