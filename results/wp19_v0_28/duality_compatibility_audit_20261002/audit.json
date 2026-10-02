@@ -1,7 +1,7 @@
 {
   "schema": "wp19-v0.28-duality-compatibility-audit-v1",
   "date": "2026-10-02",
-  "status": "PARTIAL_M15_FORCED_RADIUS_COMPUTED_ADJOINT_WEIGHTED_REMAINDER_OPEN",
+  "status": "NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS",
   "preserved_freeze": {
     "dual_integral_status": "PASS_RECONSTRUCTION_DUAL_INTEGRAL_ONLY",
     "steps": 240,
@@ -15,14 +15,15 @@
     "terminal_reconstruction_boundary_product_upper": "277957977.931533676582",
     "prior_endpoint_taylor_plus_interior_upper": "282300477.131407882477"
   },
-  "disposition": "The prior endpoint/tube bound used an M14 predictor radius. An exact-rational L2 forced-radius replay now bounds the M15 solution difference from the embedded M14 path by 10.559636070809868141657764813075 at the final time. Adjoint-weighted defect and quadratic objective remainders remain open; no transfer conclusion is made.",
-  "required_next_gate": "Recompute the adjoint-defect integral with the M15 radius, recompute the quadratic objective remainder with a bound valid on full M15 support, then reconcile terminal and normalizer bounds.",
+  "disposition": "The exact-rational M15 forced L2 radius is available, but replaying the frozen goal-weighted rows with that radius and an M15 support correction yields a remainder upper far above the frozen signed-integral lower bound. The current conservative certificate budget does not preserve the sign. This is not evidence that the underlying finite-observable transfer is false.",
+  "required_next_gate": "Derive a sharper goal-oriented enclosure for the M15 quadratic remainder and terminal pairing; retain fail-closed status until the new bounds preserve the signed margin, then re-evaluate normalizer transfer.",
   "source_paths": [
     "src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py",
     "src/wp19_v0_28_reconstructed_dual_integral_pilot.py",
     "src/wp19_v0_28_goal_weighted_primal_uncertainty_fullpath.py",
     "src/wp19_v0_28_adjoint_segment_arb.py",
-    "src/wp19_v0_28_m15_forced_radius_replay.py"
+    "src/wp19_v0_28_m15_forced_radius_replay.py",
+    "src/wp19_v0_28_m15_weighted_remainder_replay.py"
   ],
   "m15_forced_radius": {
     "status": "PASS_M15_FORCED_L2_RADIUS_ONLY",
@@ -40,5 +41,21 @@
     "previous_M14_terminal_radius_upper": "0.000059241340007",
     "scale_ratio_vs_previous_M14_radius_approx": "178247.758568",
     "scale_ratio_claim_boundary": "Diagnostic comparison only; these bounds refer to different error equations."
+  },
+  "m15_weighted_remainder": {
+    "status": "NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS",
+    "result_path": "results/wp19_v0_28/duality_compatibility_audit_20261002/m15_weighted_remainder.json",
+    "mode_counts": {
+      "M14": 11513,
+      "M15": 14147
+    },
+    "M15_support_factor_upper": "1.108505684201276629860741121330",
+    "adjoint_defect_integral_upper": "240063.832492240296",
+    "M15_support_corrected_quadratic_integral_upper": "114517700895378.757870383616",
+    "terminal_saved_adjoint_boundary_product_upper": "49545386543507.498269542068",
+    "sum_of_three_remainder_terms_upper": "164063087678950.088632165980",
+    "frozen_signed_dual_integral_lower": "5758574435.605829673039071",
+    "signed_integral_minus_remainder_bound_lower": "-164057329104514.482802492940",
+    "claim_boundary": "Current conservative bounds do not preserve the sign. This is a failure to close the current certificate budget, not evidence that the underlying finite-observable transfer is false."
   }
 }
