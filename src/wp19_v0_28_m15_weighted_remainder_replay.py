@@ -180,6 +180,17 @@ def main() -> None:
     endpoint = dec_fraction(terminal_row["right_endpoint_adjoint_L2_upper"]) * dec_fraction(radius["final_forced_error_L2_upper"])
     total = linear_total + quadratic_total + endpoint
     signed_lower = dec_fraction(dual["signed_integral_lower"])
+    shard_quadratic = {
+        start: sum((dec_fraction(r["M15_support_corrected_quadratic_upper"])
+                    for r in rows_out if start <= r["step"] < start + 20), Fraction(0))
+        for start in range(0, 240, 20)
+    }
+    dominant_start = max(shard_quadratic, key=shard_quadratic.get)
+    top_steps = sorted(
+        rows_out,
+        key=lambda row: dec_fraction(row["M15_support_corrected_quadratic_upper"]),
+        reverse=True,
+    )[:10]
 
     result = {
         "schema": SCHEMA,
@@ -194,6 +205,16 @@ def main() -> None:
         "sum_of_three_remainder_terms_upper": ceil_decimal(total),
         "frozen_signed_dual_integral_lower": dual["signed_integral_lower"],
         "signed_integral_minus_remainder_bound_lower": ceil_decimal(signed_lower - total),
+        "dominant_quadratic_shard": {
+            "start": dominant_start,
+            "count": 20,
+            "sum_of_per_step_upper_bounds": ceil_decimal(shard_quadratic[dominant_start]),
+            "share_of_quadratic_total_approx": ceil_decimal(shard_quadratic[dominant_start] / quadratic_total, 6),
+        },
+        "top_quadratic_steps": [
+            {"step": row["step"], "upper": row["M15_support_corrected_quadratic_upper"]}
+            for row in top_steps
+        ],
         "frozen_inputs": input_hashes,
         "method": (
             "Exact rational replay. Recover an upper on each original Young "
@@ -221,6 +242,7 @@ def main() -> None:
         "signed_integral_lower": result["frozen_signed_dual_integral_lower"],
         "remainder_sum_upper": result["sum_of_three_remainder_terms_upper"],
         "signed_margin_lower": result["signed_integral_minus_remainder_bound_lower"],
+        "dominant_quadratic_shard": result["dominant_quadratic_shard"],
     }, indent=2))
 
 
