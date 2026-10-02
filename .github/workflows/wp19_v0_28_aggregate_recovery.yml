@@ -1,0 +1,39 @@
+name: WP19 v0.28 aggregate recovery
+on:
+  push:
+    branches: [wp19-v0-28-m14-fullpath-cert]
+    paths:
+      - '.github/workflows/wp19_v0_28_aggregate_recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reuse completed shard artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: wp19-v0-28-reconstructed-dual-integral-shard-*
+          path: work/shards
+          merge-multiple: true
+          run-id: 37002060801
+          github-token: ${{ github.token }}
+      - name: Validate coverage and aggregate intervals
+        run: |
+          set -euo pipefail
+          python src/wp19_v0_28_aggregate_reconstructed_dual_integral_fullpath.py \
+            --shards-dir work/shards --output output/fullpath_reconstructed_dual_integral.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-M14-reconstructed-dual-integral-fullpath-recovered
+          path: output/fullpath_reconstructed_dual_integral.json
+          if-no-files-found: error
+          retention-days: 90
