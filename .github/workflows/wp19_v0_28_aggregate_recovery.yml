@@ -1,5 +1,5 @@
 name: WP19 v0.28 aggregate recovery
-# Revalidate completed artifacts after parser correction
+# Revalidate completed artifacts after parser and writer corrections
 on:
   push:
     branches: [wp19-v0-28-m14-fullpath-cert]
