@@ -57,7 +57,7 @@ def main():
     nodes=np.load(a.lower_dir/"nodes.npy",mmap_mode="r")
     lower_rhs=np.load(a.lower_dir/"rhs.npy",mmap_mode="r")
     adj=np.load(values,mmap_mode="r")
-    arhs=np.load(adjrsh,mmap_mode="r")
+    arhs=np.load(adjrhs,mmap_mode="r")
     for name,path in (("nodes",a.lower_dir/"nodes.npy"),
                       ("rhs",a.lower_dir/"rhs.npy"),
                       ("metadata",a.lower_dir/"metadata.json")):
@@ -122,7 +122,7 @@ def main():
       "M":M,"step":STEP,"interval_rational":["237/80000","238/80000"],
       "precision_bits":ctx.prec,
       "frozen_inputs":{"adjoint_report_sha256":sha(report),
-        "adjoint_values_sha256":sha(values),"adjoint_rhs_sha256":sha(adjrsh),
+        "adjoint_values_sha256":sha(values),"adjoint_rhs_sha256":sha(adjrhs),
         "lower_nodes_sha256":sha(a.lower_dir/"nodes.npy"),
         "lower_rhs_sha256":sha(a.lower_dir/"rhs.npy"),"segment_sha256":sha(a.segment)},
       "true_primal_radius_upper":base.safe_decimal_upper(delta,15),
