@@ -51,7 +51,9 @@ Run the new standard-library replay against the extracted frozen lower-path arti
 
 `python src/wp19_v0_28_m15_forced_radius_replay.py --lower-dir LOWER_DIR --dual-dir DUAL_DIR --output m15_forced_radius.json`
 
-The replay accepts the exact legacy trailing `\\n` only on shard files; all other content is parsed as strict JSON. The result is stored at [m15_forced_radius.json](m15_forced_radius.json).
+The replay strips only the known legacy two-character trailer from shard files; all other content is parsed as strict JSON. The result is stored at [m15_forced_radius.json](m15_forced_radius.json).
+
+The runner and result hashes are recorded in `results/wp19_v0_28/duality_compatibility_audit_20261002/SHA256SUMS.txt`.
 
 ## Source audit
 
