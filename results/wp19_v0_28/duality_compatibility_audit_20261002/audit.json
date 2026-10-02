@@ -56,6 +56,54 @@
     "sum_of_three_remainder_terms_upper": "164063087678950.088632165980",
     "frozen_signed_dual_integral_lower": "5758574435.605829673039071",
     "signed_integral_minus_remainder_bound_lower": "-164057329104514.482802492940",
-    "claim_boundary": "Current conservative bounds do not preserve the sign. This is a failure to close the current certificate budget, not evidence that the underlying finite-observable transfer is false."
+    "claim_boundary": "Current conservative bounds do not preserve the sign. This is a failure to close the current certificate budget, not evidence that the underlying finite-observable transfer is false.",
+    "dominant_quadratic_shard": {
+      "start": 220,
+      "count": 20,
+      "sum_of_per_step_upper_bounds": "79714789407812.328251708391",
+      "share_of_quadratic_total_approx": "0.696092"
+    },
+    "top_ten_quadratic_steps": [
+      {
+        "step": 239,
+        "upper": "6727292440946.235753739059"
+      },
+      {
+        "step": 238,
+        "upper": "6321243918908.302108871525"
+      },
+      {
+        "step": 237,
+        "upper": "5939770984304.201855287333"
+      },
+      {
+        "step": 236,
+        "upper": "5582631765704.023774214179"
+      },
+      {
+        "step": 235,
+        "upper": "5247023102901.899425681399"
+      },
+      {
+        "step": 234,
+        "upper": "4932734698220.302163282779"
+      },
+      {
+        "step": 233,
+        "upper": "4637312956836.988917052586"
+      },
+      {
+        "step": 232,
+        "upper": "4360580001110.403106327127"
+      },
+      {
+        "step": 231,
+        "upper": "4100390357240.748380727832"
+      },
+      {
+        "step": 230,
+        "upper": "3856594610704.610395732855"
+      }
+    ]
   }
 }
