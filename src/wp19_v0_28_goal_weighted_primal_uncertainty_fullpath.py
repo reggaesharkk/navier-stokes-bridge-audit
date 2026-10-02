@@ -111,7 +111,7 @@ def main():
     rec=json.loads(report.read_text())["adjoint_reconstruction"]
     values=a.adjoint_dir/rec["values_file"]
     adjrhs=a.adjoint_dir/rec["rhs_file"]
-    if sha(values)!=VALUES_SHA or sha(adjrsh)!=RHS_SHA:
+    if sha(values)!=VALUES_SHA or sha(adjrhs)!=RHS_SHA:
         raise ValueError("frozen adjoint array hash mismatch")
     if rec.get("values_sha256")!=VALUES_SHA or rec.get("rhs_sha256")!=RHS_SHA:
         raise ValueError("adjoint report does not bind frozen arrays")
@@ -125,7 +125,7 @@ def main():
     nodes=np.load(a.lower_dir/"nodes.npy",mmap_mode="r")
     lower_rhs=np.load(a.lower_dir/"rhs.npy",mmap_mode="r")
     adj=np.load(values,mmap_mode="r")
-    arhs=np.load(adjrsh,mmap_mode="r")
+    arhs=np.load(adjrhs,mmap_mode="r")
     if nodes.shape!=(121,len(low.modes),3) or lower_rhs.shape!=nodes.shape:
         raise ValueError("lower path array shape mismatch")
     if adj.shape!=(241,len(high.modes),3) or arhs.shape!=adj.shape:
@@ -140,7 +140,7 @@ def main():
       "status":"PASS_RECONSTRUCTION_GOAL_WEIGHTED_PRIMAL_TUBE_ONLY",
       "M":M,"start":a.start,"count":a.count,"steps":rows,
       "frozen_inputs":{"adjoint_report_sha256":sha(report),
-        "adjoint_values_sha256":sha(values),"adjoint_rhs_sha256":sha(adjrsh),
+        "adjoint_values_sha256":sha(values),"adjoint_rhs_sha256":sha(adjrhs),
         "lower_nodes_sha256":sha(a.lower_dir/"nodes.npy"),
         "lower_rhs_sha256":sha(a.lower_dir/"rhs.npy"),
         "lower_metadata_sha256":sha(a.lower_dir/"metadata.json")},
