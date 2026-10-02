@@ -82,7 +82,7 @@ def main():
         "claim_boundary": "This encloses the signed dual integral for the saved cubic reconstructions over all 240 half-steps. It excludes true-path radii, terminal-gradient/Taylor and nonlinear remainders, independent normalizer transfer, and continuum conclusions.",
     }
     a.output.parent.mkdir(parents=True, exist_ok=True)
-    a.output.write_text(json.dumps(out, indent=2, sort_keys=True) + "\\n")
+    a.output.write_text(json.dumps(out, indent=2, sort_keys=True) + "\n")
     print(json.dumps(out, indent=2), flush=True)
 
 
