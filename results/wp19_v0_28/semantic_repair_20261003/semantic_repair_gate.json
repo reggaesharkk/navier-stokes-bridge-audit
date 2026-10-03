@@ -1,0 +1,56 @@
+{
+  "base_verified_head": "6cce65b47abe32b7e974c9e32e3099e970687095",
+  "branch": "wp19-v0-28-duality-compatibility-audit",
+  "certified_new_bounds": {
+    "B_grad_over_P_upper": 29.056214531751344,
+    "B_grad_upper": "167322374198021901563746726433775559/1000000000000000000000000",
+    "Hessian_operator_upper": "3222388254527403832581260.762399221858472707694188",
+    "R_G_over_P_upper": 3.119828973595721e+16,
+    "R_G_over_old_Q_plus_B_plus_L_upper": 1097894382361.2114,
+    "R_G_upper": "179657673708106927163559621.813769072573644320870565",
+    "arithmetic": "Exact rational and integer-isqrt outward bounds for scalar arithmetic; directional finite-difference checks are non-certifying."
+  },
+  "claim_boundary": "Finite-dimensional M15/M14 Galerkin and fixed polynomial audit only. No signed closure, all-cutoff statement, Navier-Stokes regularity, blow-up exclusion, or Millennium-problem result.",
+  "date": "2026-10-03",
+  "four_order_value_gate": "NOT_RUN",
+  "frozen_v028": {
+    "P_signed_integral_lower": "5758574435605829673039071/1000000000000000",
+    "adjoint_defect_upper": "30007979061530037/125000000000",
+    "artifact_id": 11251177469,
+    "artifact_sha256": "7186f6922efcaec2f3e612c18d68b2335319fa1c61a48a900703712f4828801f",
+    "github_run_id": 37049588602,
+    "old_total_remainder": "81819197089669990411040735960469990561/500000000000000000000000",
+    "quadratic_upper": "57046503697884325030149553960469990561/500000000000000000000000",
+    "terminal_boundary_upper": "12386346635876874567385517/250000000000"
+  },
+  "pilot_gate": {
+    "10^4_improvement_gate": "NOT_RUN_AND_NOT_AUTHORIZED",
+    "full_path_compute": "PROHIBITED_UNTIL_NEW_VECTOR_AND_LOCALIZED_HESSIAN_CERTIFICATES",
+    "reason": "No e219 vector certificate; terminal componentwise compatibility is unavailable; scalar Taylor bound R_G/P exceeds 10^16, far worse than the frozen remainder; B_grad also exceeds P."
+  },
+  "pr": 155,
+  "provenance": {
+    "analytic_gradient_source_commit": "8274cefc0332a049bcdf56646109d3021504cf14",
+    "e219_certificate_spec_sha256": "8e9c7d9b97d535068e840a7e87aa40ad8b9c31e81e4ea9a3792ccce1a83f70e8",
+    "endpoint_ball_artifact_id": 11113784188,
+    "endpoint_ball_run_id": 36750819173,
+    "objective_definition_sha256": "254d2e99ef7e87f4b42c005cbaeb7d8b0863fa87866ebffbdf9b68a14a46f042",
+    "source_blob_sha_objective": "3b87a5fabffb023ba38ce9997abc10c4a1a995e8",
+    "terminal_gradient_artifact_id": 11106234189,
+    "terminal_gradient_compatibility_sha256": "693eda25f92a1c35be78a9109bda641524063f8124c8b89368208b2c408b97d1",
+    "terminal_gradient_run_id": 36735640067,
+    "terminal_hessian_remainder_sha256": "e71d6f75874dae28bbc74712bf05e4d00818f943e3210112897a47fbd554083c"
+  },
+  "repository": "reggaesharkk/navier-stokes-bridge-audit",
+  "schema": "wp19-v0.28-semantic-repair-gate-v1",
+  "semantic_findings": {
+    "G": "PASS_EXACT_DEFINITION_RECOVERED; fixed degree-seven polynomial, 536 exact coefficient keys, mode ordering and projections frozen in objective_definition.json.",
+    "P_equals_integral_lambda_r": "PARTIAL_ONLY; equals the implemented signed quadrature pairing of saved Hermite/binary64 reconstructions with r=F(U)-U_t. It is not certified as the exact time integral along an interval-enclosed M15 trajectory.",
+    "e219": "BLOCKED; frozen artifacts certify scalar radii only, not complex modewise interval errors.",
+    "endpoint_tube": "AGGREGATE_L2_ONLY; M14 endpoint radius 0.000012825905; gradient variation L2 upper 15845467881.27747; aggregate mismatch L2 upper 15845467881.279848116682; no coordinatewise gradient tube.",
+    "identity": "The exact finite-dimensional differential identity is valid for matched state/adjoint/residual conventions, but the frozen P quadrature does not itself certify its exact integral and no interval path exists to close a numerical identity residual.",
+    "terminal_condition": "APPROXIMATE_NOT_EXACT; lambda(T) is assigned from the binary64 Torch gradient at nominal P11-projected predictor endpoint; Arb cross-check gives aggregate L2 discrepancy <=0.002378116682. No componentwise mismatch vector is serialized."
+  },
+  "status": "STOP_PILOT_NOT_AUTHORIZED",
+  "updated_next_target": "Build a rigorous endpoint modewise gradient mismatch and error vector on an adjoint-relevant low-mode block, then apply the exact sparse Hessian quadratic form there. The current global scalar Hessian bound is route-killing; do not run tail pilot until a vector certificate and a materially smaller localized R_G estimate exist."
+}
