@@ -1,0 +1,60 @@
+{
+  "adjoint_terminal_source": {
+    "assignment": "At final index, the exporter assigns the binary64 Torch terminal gradient computed from P11 physical_project(saved lower-cutoff predictor endpoint), embedded in the higher-cutoff state with zeros outside the P11 support.",
+    "producer_commit": "9b4ec5e801acd767309c887029d2540d0060fcbf",
+    "source_blob_sha1": "9b79b09082df6bc4304702fdc36906ce92bb1cb4",
+    "source_path": "src/wp19_v0_27c1_export_adjoint_path.py"
+  },
+  "claim_boundary": "Finite-dimensional endpoint compatibility only. No joint-pairing pilot, no sign closure, no all-cutoff or continuum regularity claim.",
+  "endpoint_mismatch_term_B_grad": {
+    "M15_error_L2_upper": "422385442832394725666310592523/40000000000000000000000000000",
+    "comparison_to_frozen_P": "B_grad is larger than P and cannot be dropped; no sign is inferred.",
+    "formula": "|<grad G(U_T)-lambda(T), e(T)>| <= ||grad G(U_T)-lambda(T)||_2 ||e(T)||_2",
+    "gradient_mismatch_upper": "15845467881.279848116682",
+    "upper_decimal_outward_24_places": "167322374198.021901563746726433775559",
+    "validity_conditions": "Uses the certified M14 terminal endpoint tube for U_T and the frozen M15-vs-M14 scalar endpoint error radius; valid only for the finite-dimensional endpoint identity under those identified states."
+  },
+  "endpoint_uncertainty": {
+    "artifact_id": 11113784188,
+    "artifact_sha256": "740b55a53efa854f2fbb4e140e6b20d2a9e00e81d25371c6df8590793e5a26c1",
+    "gradient_variation_L2_upper": "15845467881.27747",
+    "interval_mismatch_L2_upper": "15845467881.279848116682",
+    "m14_terminal_L2_radius": "0.000012825905",
+    "modewise_interval_mismatch": "BLOCKED: the certificate reports only aggregate L2 bounds, not per-coordinate interval gradients or endpoint centers/radii.",
+    "producer_commit": "9b4ec5e801acd767309c887029d2540d0060fcbf",
+    "run_id": 36750819173,
+    "set_description": "A coordinatewise Arb box containing the certified endpoint L2 ball; this is a valid endpoint tube for the M14/P11 terminal state."
+  },
+  "input_sha256": {
+    "M14_endpoint_gradient_ball_json": "7c2e412c2cc23be47ff7b5200abbba9ecbae274c0369470f74f048bf63e221ac",
+    "M14_terminal_gradient_arb_json": "8a07883d8a3d0bf2830d90f50ce2b3d577498f447c0682d7489422105c4caa5e",
+    "M15_forced_radius": "42d0328d57a62174d0f6f72372a46c01d8b29c7a43dd46543f5b87628d3be9a3",
+    "endpoint_gradient_artifact_zip": "740b55a53efa854f2fbb4e140e6b20d2a9e00e81d25371c6df8590793e5a26c1",
+    "objective_definition": "254d2e99ef7e87f4b42c005cbaeb7d8b0863fa87866ebffbdf9b68a14a46f042",
+    "terminal_gradient_artifact_zip": "3e611b7aab3d146bed1d2037d9ffd1eb96a3e90fb7b6076ecee23ed54652339c"
+  },
+  "nominal_compatibility": {
+    "mathematical_equality": "not exact; exported lambda(T) is the binary64 Torch gradient assignment, while the interval-Arb gradient differs by at most the certified aggregate L2 amount.",
+    "nominal_mismatch_L2_upper": "0.002378116682",
+    "nominal_representative": "The source assignment is exact as a dataflow statement for its saved binary64 inputs; the intended real-valued gradient compatibility is approximate, not exact.",
+    "per_mode_mismatch": "BLOCKED: neither the exported lambda(T) vector nor the Arb-vs-Torch difference vector is serialized componentwise in the frozen artifact. A coefficientwise comparison cannot be reconstructed from the aggregate L2 certificate."
+  },
+  "schema": "wp19-v0.28-terminal-gradient-compatibility-v1",
+  "status": "PARTIAL_PASS_AGGREGATE_ONLY_PER_MODE_BLOCKED",
+  "terminal_gradient_certificate": {
+    "arb_vs_exported_torch_L2_difference_upper": "0.002378116682",
+    "arb_vs_exported_torch_relative_difference_upper": "3E-15",
+    "artifact_id": 11106234189,
+    "artifact_sha256": "3e611b7aab3d146bed1d2037d9ffd1eb96a3e90fb7b6076ecee23ed54652339c",
+    "component_count": 16725,
+    "gradient_L2_interval_decimal": [
+      "4691959667101.255678",
+      "4691959667101.255709"
+    ],
+    "nominal_endpoint_scope": "P11 projection of saved lower-cutoff predictor endpoint converted componentwise to exact decimal Arb points.",
+    "precision_bits": 192,
+    "producer_commit": "8274cefc0332a049bcdf56646109d3021504cf14",
+    "run_id": 36735640067
+  },
+  "terminal_objective": "G is the fixed degree-7 polynomial signed C500 numerator evaluated after P11 physical projection; exact coefficient list and derivative recipe are in objective_definition.json."
+}
