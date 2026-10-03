@@ -38,6 +38,13 @@
   },
   "mode_count_ball_radius_11": 5575,
   "objective_degree": 7,
+  "outward_rounding_check": {
+    "expected_safe_lower_24_places": "-163632635604904.374992408432849939981122",
+    "frozen_negative_margin_exact": "-81816317802452187496204216424969990561/500000000000000000000000",
+    "pass": true,
+    "rule": "lower endpoints use floor; upper endpoints use ceiling",
+    "safe_lower_24_places": "-163632635604904.374992408432849939981122"
+  },
   "represented_objective_groups": 536,
   "schema": "wp19-v0.28-terminal-hessian-remainder-v1",
   "status": "PASS_COARSE_GLOBAL_HESSIAN_BOUND_ROUTE_KILLING",
