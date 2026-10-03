@@ -1,0 +1,51 @@
+{
+  "analytic_derivative": "B1[h]=B(h,a)+B(a,h), B2[h,k]=B(h,k)+B(k,h); D derivatives are the same bilinear product rule; D2G is the four-factor product rule in the source implementation.",
+  "arithmetic": "exact rational input arithmetic; sqrt upper bounds from integer isqrt; outward decimal ceiling",
+  "claim_boundary": "Finite-dimensional frozen terminal objective and M15 scalar-radius bound only; no joint-pairing pilot, no sign closure, no all-cutoff or continuum Navier-Stokes claim.",
+  "coefficient_rows": 536,
+  "comparison": {
+    "RG_over_P_upper_ratio_decimal": "31198289735957207.869875604351668977700714",
+    "RG_over_old_Q_plus_B_ratio_decimal": "1097894383971.864835616557930833013233",
+    "frozen_signed_integral_P": "5758574435605829673039071/1000000000000000",
+    "old_Q_plus_B_majorant": "81819196969638074164920587960469990561/500000000000000000000000",
+    "pilot_gate": "STOP; this scalar-only Taylor bound is many orders above P and cannot certify useful joint closure"
+  },
+  "directional_sanity_noncertifying": {
+    "G_at_test_point": -1117084009061.708,
+    "Hessian_symmetry_relative_error": 5.988331231231269e-16,
+    "epsilon": 0.0002,
+    "first_directional_relative_error": 1.271254120400216e-07,
+    "mixed_second_directional_relative_error": 1.69529976933045e-07,
+    "pass": true,
+    "pass_threshold": 2e-05,
+    "seed": 19028
+  },
+  "endpoint_radius_inputs": {
+    "M14_terminal_uncertainty": "2565181/200000000000",
+    "M15_error_radius": "422385442832394725666310592523/40000000000000000000000000000",
+    "global_segment_norm_radius_R": "121.780275085718197718099077",
+    "initial_energy_norm_upper": "111.220626189003329576441312"
+  },
+  "hessian_operator_bound": {
+    "R_power": 5,
+    "coefficient_exact": "120307613580000",
+    "upper_decimal": "3222388254527403832581260.762399221858472707694188"
+  },
+  "input_sha256": {
+    "endpoint_gradient_ball": "7c2e412c2cc23be47ff7b5200abbba9ecbae274c0369470f74f048bf63e221ac",
+    "forced_radius": "42d0328d57a62174d0f6f72372a46c01d8b29c7a43dd46543f5b87628d3be9a3",
+    "objective_definition": "254d2e99ef7e87f4b42c005cbaeb7d8b0863fa87866ebffbdf9b68a14a46f042"
+  },
+  "mode_count_ball_radius_11": 5575,
+  "objective_degree": 7,
+  "represented_objective_groups": 536,
+  "schema": "wp19-v0.28-terminal-hessian-remainder-v1",
+  "status": "PASS_COARSE_GLOBAL_HESSIAN_BOUND_ROUTE_KILLING",
+  "sum_absolute_coefficients": 4536,
+  "terminal_taylor_remainder": {
+    "formula": "0.5 * sup_{segment} ||D^2G|| * ||e(T)||^2",
+    "scope": "M15 scalar L2 error ball; global polynomial Hessian bound; no modewise endpoint vector",
+    "upper_decimal": "179657673708106927163559621.813769072573644320870565",
+    "upper_exact_fraction": "2874522779329710834616953949020305161178309133929034560434906043688176942289186648621533043526651433379939757035789880376225079316576783729799283238775563132754299670879972180283563016374689936986984544603373308297341682606069796039663334083018378506601609619255000848321174221113/16000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  }
+}
