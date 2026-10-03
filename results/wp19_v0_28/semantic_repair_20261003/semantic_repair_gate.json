@@ -34,12 +34,13 @@
     "e219_certificate_spec_sha256": "8e9c7d9b97d535068e840a7e87aa40ad8b9c31e81e4ea9a3792ccce1a83f70e8",
     "endpoint_ball_artifact_id": 11113784188,
     "endpoint_ball_run_id": 36750819173,
+    "hessian_checker_source_sha256": "e8ec153f356b39b286d60207212d2579ac49234c168c187bc25ea14870df57ca",
     "objective_definition_sha256": "254d2e99ef7e87f4b42c005cbaeb7d8b0863fa87866ebffbdf9b68a14a46f042",
     "source_blob_sha_objective": "3b87a5fabffb023ba38ce9997abc10c4a1a995e8",
     "terminal_gradient_artifact_id": 11106234189,
     "terminal_gradient_compatibility_sha256": "693eda25f92a1c35be78a9109bda641524063f8124c8b89368208b2c408b97d1",
     "terminal_gradient_run_id": 36735640067,
-    "terminal_hessian_remainder_sha256": "e71d6f75874dae28bbc74712bf05e4d00818f943e3210112897a47fbd554083c"
+    "terminal_hessian_remainder_sha256": "3ae2008db96fd9061c4edb55e3f46cc82c5ce66de8f14360fb0287d312ea1aa0"
   },
   "repository": "reggaesharkk/navier-stokes-bridge-audit",
   "schema": "wp19-v0.28-semantic-repair-gate-v1",
