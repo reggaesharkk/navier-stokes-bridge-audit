@@ -1,0 +1,1520 @@
+{
+  "M15_forced_error_L2_final_upper": "10.559636070809868141657764813075",
+  "M15_support_corrected_quadratic_integral_upper": "114517700895378.757870383616",
+  "M15_support_factor_upper": "1.108505684201276629860741121330",
+  "adjoint_defect_integral_upper": "240063.832492240296",
+  "claim_boundary": "The conservative remainder upper exceeds the frozen signed-integral lower bound, so this bound set does not preserve the sign. This is a failure to close the current certificate budget, not a claim that the underlying finite-observable transfer is false. Tighter goal-oriented bounds would be needed.",
+  "coverage": [
+    0,
+    239
+  ],
+  "dominant_quadratic_shard": {
+    "count": 20,
+    "share_of_quadratic_total_approx": "0.696092",
+    "start": 220,
+    "sum_of_per_step_upper_bounds": "79714789407812.328251708391"
+  },
+  "frozen_inputs": {
+    "adjoint_report_sha256": "981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8",
+    "adjoint_rhs_sha256": "8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
+    "adjoint_values_sha256": "00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab",
+    "lower_metadata_sha256": "0ce684a72ba61de86b6d4293c28e14c6cff260585b86c3bd6ebea447b041c43e",
+    "lower_nodes_sha256": "e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0",
+    "lower_rhs_sha256": "f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253"
+  },
+  "frozen_signed_dual_integral_lower": "5758574435.605829673039071",
+  "method": "Exact rational replay. Recover an upper on each original Young coefficient by dividing its outward quadratic term by a lower bound on the source delta; enlarge the cutoff and sqrt(mode-count) factors from M14 to M15; apply the exact-rational M15 forced radius to the adjoint-defect and quadratic terms; bound the terminal pairing.",
+  "mode_counts": {
+    "M14": 11513,
+    "M15": 14147
+  },
+  "schema": "wp19-v0.28-m15-weighted-remainder-v1",
+  "signed_integral_minus_remainder_bound_lower": "-164057329104514.482802492940",
+  "status": "NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS",
+  "steps_detail": [
+    {
+      "M15_error_L2_sup_upper": "0.000449443165488146501342037515",
+      "M15_support_corrected_quadratic_upper": "16067.261239397217",
+      "adjoint_defect_L2_sup_upper": "57003543.593326865853",
+      "step": 0
+    },
+    {
+      "M15_error_L2_sup_upper": "0.000904702539642981164173150662",
+      "M15_support_corrected_quadratic_upper": "65002.560912549096",
+      "adjoint_defect_L2_sup_upper": "56973858.501389842508",
+      "step": 1
+    },
+    {
+      "M15_error_L2_sup_upper": "0.001366146157872118163015550831",
+      "M15_support_corrected_quadratic_upper": "147992.432758689770",
+      "adjoint_defect_L2_sup_upper": "56943724.064952195275",
+      "step": 2
+    },
+    {
+      "M15_error_L2_sup_upper": "0.001834075249331133934087012515",
+      "M15_support_corrected_quadratic_upper": "266321.317121657107",
+      "adjoint_defect_L2_sup_upper": "56914203.258855084204",
+      "step": 3
+    },
+    {
+      "M15_error_L2_sup_upper": "0.002308919743964508230565178075",
+      "M15_support_corrected_quadratic_upper": "421420.447194975870",
+      "adjoint_defect_L2_sup_upper": "56884240.434059092064",
+      "step": 4
+    },
+    {
+      "M15_error_L2_sup_upper": "0.002790963317438322762549924109",
+      "M15_support_corrected_quadratic_upper": "614797.998574602065",
+      "adjoint_defect_L2_sup_upper": "56854885.376904233508",
+      "step": 5
+    },
+    {
+      "M15_error_L2_sup_upper": "0.003280699476558747149131972546",
+      "M15_support_corrected_quadratic_upper": "848170.665574456445",
+      "adjoint_defect_L2_sup_upper": "56825094.236742644889",
+      "step": 6
+    },
+    {
+      "M15_error_L2_sup_upper": "0.003778393555801080547609586363",
+      "M15_support_corrected_quadratic_upper": "1123287.123256007469",
+      "adjoint_defect_L2_sup_upper": "56795909.948291544930",
+      "step": 7
+    },
+    {
+      "M15_error_L2_sup_upper": "0.004284604357501815880581965123",
+      "M15_support_corrected_quadratic_upper": "1442194.342801500031",
+      "adjoint_defect_L2_sup_upper": "56766296.526014149095",
+      "step": 8
+    },
+    {
+      "M15_error_L2_sup_upper": "0.004799577820148148120568944020",
+      "M15_support_corrected_quadratic_upper": "1806900.705005457164",
+      "adjoint_defect_L2_sup_upper": "56737282.712793051930",
+      "step": 9
+    },
+    {
+      "M15_error_L2_sup_upper": "0.005323939803738395182650351245",
+      "M15_support_corrected_quadratic_upper": "2219832.847730224050",
+      "adjoint_defect_L2_sup_upper": "56707851.255602881661",
+      "step": 10
+    },
+    {
+      "M15_error_L2_sup_upper": "0.005857915525589548202450844318",
+      "M15_support_corrected_quadratic_upper": "2683279.567619663589",
+      "adjoint_defect_L2_sup_upper": "56679009.900320433080",
+      "step": 11
+    },
+    {
+      "M15_error_L2_sup_upper": "0.006402199727322142345009409837",
+      "M15_support_corrected_quadratic_upper": "3200101.906421770326",
+      "adjoint_defect_L2_sup_upper": "56649757.367315713343",
+      "step": 12
+    },
+    {
+      "M15_error_L2_sup_upper": "0.006956995311132121655429588234",
+      "M15_support_corrected_quadratic_upper": "3772892.011885251172",
+      "adjoint_defect_L2_sup_upper": "56621097.506541013265",
+      "step": 13
+    },
+    {
+      "M15_error_L2_sup_upper": "0.007523067815086506457007607855",
+      "M15_support_corrected_quadratic_upper": "4405005.289090429107",
+      "adjoint_defect_L2_sup_upper": "56592028.430666188573",
+      "step": 14
+    },
+    {
+      "M15_error_L2_sup_upper": "0.008100595971144084662790610132",
+      "M15_support_corrected_quadratic_upper": "5099362.748315399270",
+      "adjoint_defect_L2_sup_upper": "56563550.534242544108",
+      "step": 15
+    },
+    {
+      "M15_error_L2_sup_upper": "0.008690418156969336427217644279",
+      "M15_support_corrected_quadratic_upper": "5859880.505478004091",
+      "adjoint_defect_L2_sup_upper": "56534671.659753885479",
+      "step": 16
+    },
+    {
+      "M15_error_L2_sup_upper": "0.009292686833108334959802962789",
+      "M15_support_corrected_quadratic_upper": "6689835.474716801375",
+      "adjoint_defect_L2_sup_upper": "56506374.985698816830",
+      "step": 17
+    },
+    {
+      "M15_error_L2_sup_upper": "0.009908315433495627790914816303",
+      "M15_support_corrected_quadratic_upper": "7593777.995462643728",
+      "adjoint_defect_L2_sup_upper": "56477687.332870512556",
+      "step": 18
+    },
+    {
+      "M15_error_L2_sup_upper": "0.010537427821284992007258857318",
+      "M15_support_corrected_quadratic_upper": "8575370.299248640136",
+      "adjoint_defect_L2_sup_upper": "56449572.555498676092",
+      "step": 19
+    },
+    {
+      "M15_error_L2_sup_upper": "0.011181014924605758353967425654",
+      "M15_support_corrected_quadratic_upper": "9639877.833949409866",
+      "adjoint_defect_L2_sup_upper": "56421082.117980647861",
+      "step": 20
+    },
+    {
+      "M15_error_L2_sup_upper": "0.011839169487128182028876275295",
+      "M15_support_corrected_quadratic_upper": "10791380.278836477224",
+      "adjoint_defect_L2_sup_upper": "56393156.911545546286",
+      "step": 21
+    },
+    {
+      "M15_error_L2_sup_upper": "0.012512962639386012719458496415",
+      "M15_support_corrected_quadratic_upper": "12035947.829186864398",
+      "adjoint_defect_L2_sup_upper": "56364860.612733103677",
+      "step": 22
+    },
+    {
+      "M15_error_L2_sup_upper": "0.013202453320117740202992157033",
+      "M15_support_corrected_quadratic_upper": "13378111.782161936043",
+      "adjoint_defect_L2_sup_upper": "56337128.122958157409",
+      "step": 23
+    },
+    {
+      "M15_error_L2_sup_upper": "0.013908908212799164895446675448",
+      "M15_support_corrected_quadratic_upper": "14825086.196736626288",
+      "adjoint_defect_L2_sup_upper": "56309030.230830524374",
+      "step": 24
+    },
+    {
+      "M15_error_L2_sup_upper": "0.014632422093815308073457021743",
+      "M15_support_corrected_quadratic_upper": "16382088.963468948768",
+      "adjoint_defect_L2_sup_upper": "56281488.853439781295",
+      "step": 25
+    },
+    {
+      "M15_error_L2_sup_upper": "0.015374236666980208620700402064",
+      "M15_support_corrected_quadratic_upper": "18057173.353812914763",
+      "adjoint_defect_L2_sup_upper": "56253596.346495389044",
+      "step": 26
+    },
+    {
+      "M15_error_L2_sup_upper": "0.016134335143878117503283524191",
+      "M15_support_corrected_quadratic_upper": "19855951.800339557468",
+      "adjoint_defect_L2_sup_upper": "56226251.129682580944",
+      "step": 27
+    },
+    {
+      "M15_error_L2_sup_upper": "0.016914049401683861616345289334",
+      "M15_support_corrected_quadratic_upper": "21787620.698857066084",
+      "adjoint_defect_L2_sup_upper": "56198560.364768602501",
+      "step": 28
+    },
+    {
+      "M15_error_L2_sup_upper": "0.017713319648244088666114277752",
+      "M15_support_corrected_quadratic_upper": "23858369.216887750226",
+      "adjoint_defect_L2_sup_upper": "56171414.307205702091",
+      "step": 29
+    },
+    {
+      "M15_error_L2_sup_upper": "0.018533572408708765623672312804",
+      "M15_support_corrected_quadratic_upper": "26078674.459593585220",
+      "adjoint_defect_L2_sup_upper": "56143931.419831624759",
+      "step": 30
+    },
+    {
+      "M15_error_L2_sup_upper": "0.019374701756472012605138181749",
+      "M15_support_corrected_quadratic_upper": "28455347.056767512381",
+      "adjoint_defect_L2_sup_upper": "56116987.335749512666",
+      "step": 31
+    },
+    {
+      "M15_error_L2_sup_upper": "0.020238233923358631170495967537",
+      "M15_support_corrected_quadratic_upper": "31000298.962569816419",
+      "adjoint_defect_L2_sup_upper": "56089709.505005228791",
+      "step": 32
+    },
+    {
+      "M15_error_L2_sup_upper": "0.021124013579453063229205961665",
+      "M15_support_corrected_quadratic_upper": "33721012.472424996529",
+      "adjoint_defect_L2_sup_upper": "56062972.318489868680",
+      "step": 33
+    },
+    {
+      "M15_error_L2_sup_upper": "0.022033672338245589477163193666",
+      "M15_support_corrected_quadratic_upper": "36631005.760898437692",
+      "adjoint_defect_L2_sup_upper": "56035906.684093424356",
+      "step": 34
+    },
+    {
+      "M15_error_L2_sup_upper": "0.022967002047068333586361485129",
+      "M15_support_corrected_quadratic_upper": "39738486.794415395780",
+      "adjoint_defect_L2_sup_upper": "56009373.240387747755",
+      "step": 35
+    },
+    {
+      "M15_error_L2_sup_upper": "0.023925745948117604506708510712",
+      "M15_support_corrected_quadratic_upper": "43058772.277922917901",
+      "adjoint_defect_L2_sup_upper": "55982524.502276663619",
+      "step": 36
+    },
+    {
+      "M15_error_L2_sup_upper": "0.024909639543111040942117253225",
+      "M15_support_corrected_quadratic_upper": "46600853.241134379187",
+      "adjoint_defect_L2_sup_upper": "55956196.703769033177",
+      "step": 37
+    },
+    {
+      "M15_error_L2_sup_upper": "0.025920544432524654641130808340",
+      "M15_support_corrected_quadratic_upper": "50382059.909957422979",
+      "adjoint_defect_L2_sup_upper": "55929563.125705049257",
+      "step": 38
+    },
+    {
+      "M15_error_L2_sup_upper": "0.026958136226260789130338804703",
+      "M15_support_corrected_quadratic_upper": "54412229.509726958836",
+      "adjoint_defect_L2_sup_upper": "55903445.820491711692",
+      "step": 39
+    },
+    {
+      "M15_error_L2_sup_upper": "0.028024402235387208589660234180",
+      "M15_support_corrected_quadratic_upper": "58710944.967618689716",
+      "adjoint_defect_L2_sup_upper": "55877032.447040009539",
+      "step": 40
+    },
+    {
+      "M15_error_L2_sup_upper": "0.029118954466514047278397600936",
+      "M15_support_corrected_quadratic_upper": "63288958.526754402215",
+      "adjoint_defect_L2_sup_upper": "55851128.892701612376",
+      "step": 41
+    },
+    {
+      "M15_error_L2_sup_upper": "0.030243913965674780443240679877",
+      "M15_support_corrected_quadratic_upper": "68168372.963705964351",
+      "adjoint_defect_L2_sup_upper": "55824934.810125984356",
+      "step": 42
+    },
+    {
+      "M15_error_L2_sup_upper": "0.031398825198640218733589291050",
+      "M15_support_corrected_quadratic_upper": "73360927.239864720314",
+      "adjoint_defect_L2_sup_upper": "55799247.970097457472",
+      "step": 43
+    },
+    {
+      "M15_error_L2_sup_upper": "0.032585951259442622840547061901",
+      "M15_support_corrected_quadratic_upper": "78891542.169760306800",
+      "adjoint_defect_L2_sup_upper": "55773275.167555372150",
+      "step": 44
+    },
+    {
+      "M15_error_L2_sup_upper": "0.033804765253119913777407363269",
+      "M15_support_corrected_quadratic_upper": "84773026.382679562167",
+      "adjoint_defect_L2_sup_upper": "55747806.813736318576",
+      "step": 45
+    },
+    {
+      "M15_error_L2_sup_upper": "0.035057681356694495821582572160",
+      "M15_support_corrected_quadratic_upper": "91033453.340937804480",
+      "adjoint_defect_L2_sup_upper": "55722058.489853441254",
+      "step": 46
+    },
+    {
+      "M15_error_L2_sup_upper": "0.036344097189096057158659819379",
+      "M15_support_corrected_quadratic_upper": "97686789.560257328266",
+      "adjoint_defect_L2_sup_upper": "55696809.865765824115",
+      "step": 47
+    },
+    {
+      "M15_error_L2_sup_upper": "0.037666587788778194642772294890",
+      "M15_support_corrected_quadratic_upper": "104764635.732579518025",
+      "adjoint_defect_L2_sup_upper": "55671289.878350332698",
+      "step": 48
+    },
+    {
+      "M15_error_L2_sup_upper": "0.039024470824120753144910244322",
+      "M15_support_corrected_quadratic_upper": "112282211.817141644486",
+      "adjoint_defect_L2_sup_upper": "55646258.591287165891",
+      "step": 49
+    },
+    {
+      "M15_error_L2_sup_upper": "0.040420492681086110198500583761",
+      "M15_support_corrected_quadratic_upper": "120275063.829815502805",
+      "adjoint_defect_L2_sup_upper": "55620969.340192533999",
+      "step": 50
+    },
+    {
+      "M15_error_L2_sup_upper": "0.041853886297611040275075931237",
+      "M15_support_corrected_quadratic_upper": "128759770.941246635434",
+      "adjoint_defect_L2_sup_upper": "55596164.184029625428",
+      "step": 51
+    },
+    {
+      "M15_error_L2_sup_upper": "0.043327580627166284885952514590",
+      "M15_support_corrected_quadratic_upper": "137776294.012719569172",
+      "adjoint_defect_L2_sup_upper": "55571105.721642595182",
+      "step": 52
+    },
+    {
+      "M15_error_L2_sup_upper": "0.044840718750980101998656531724",
+      "M15_support_corrected_quadratic_upper": "147342683.184876102607",
+      "adjoint_defect_L2_sup_upper": "55546523.581932675874",
+      "step": 53
+    },
+    {
+      "M15_error_L2_sup_upper": "0.046396424178031120633530545287",
+      "M15_support_corrected_quadratic_upper": "157503840.156107969719",
+      "adjoint_defect_L2_sup_upper": "55521699.020183774727",
+      "step": 54
+    },
+    {
+      "M15_error_L2_sup_upper": "0.047993744626263362023733881213",
+      "M15_support_corrected_quadratic_upper": "168279412.146102749501",
+      "adjoint_defect_L2_sup_upper": "55497344.861110902633",
+      "step": 55
+    },
+    {
+      "M15_error_L2_sup_upper": "0.049636010962561293839695222340",
+      "M15_support_corrected_quadratic_upper": "179719830.635754240557",
+      "adjoint_defect_L2_sup_upper": "55472757.227814388359",
+      "step": 56
+    },
+    {
+      "M15_error_L2_sup_upper": "0.051322169613576903860280711365",
+      "M15_support_corrected_quadratic_upper": "191846476.233916272601",
+      "adjoint_defect_L2_sup_upper": "55448630.032278438451",
+      "step": 57
+    },
+    {
+      "M15_error_L2_sup_upper": "0.053055772470442676446574923561",
+      "M15_support_corrected_quadratic_upper": "204715969.915422452267",
+      "adjoint_defect_L2_sup_upper": "55424277.334308590987",
+      "step": 58
+    },
+    {
+      "M15_error_L2_sup_upper": "0.054835658279344227104644259403",
+      "M15_support_corrected_quadratic_upper": "218351574.740710071682",
+      "adjoint_defect_L2_sup_upper": "55400387.470209823299",
+      "step": 59
+    },
+    {
+      "M15_error_L2_sup_upper": "0.056665614540952916309892385600",
+      "M15_support_corrected_quadratic_upper": "232816836.979585739433",
+      "adjoint_defect_L2_sup_upper": "55376272.284600815491",
+      "step": 60
+    },
+    {
+      "M15_error_L2_sup_upper": "0.058544365429928099537160995674",
+      "M15_support_corrected_quadratic_upper": "248137058.739392001338",
+      "adjoint_defect_L2_sup_upper": "55352613.186833522364",
+      "step": 61
+    },
+    {
+      "M15_error_L2_sup_upper": "0.060475949625615987030902078558",
+      "M15_support_corrected_quadratic_upper": "264383530.058698324971",
+      "adjoint_defect_L2_sup_upper": "55328742.803153681084",
+      "step": 62
+    },
+    {
+      "M15_error_L2_sup_upper": "0.062458969292078826402651690524",
+      "M15_support_corrected_quadratic_upper": "281583758.302671673378",
+      "adjoint_defect_L2_sup_upper": "55305320.268945071729",
+      "step": 63
+    },
+    {
+      "M15_error_L2_sup_upper": "0.064497730910375076140545310001",
+      "M15_support_corrected_quadratic_upper": "299817693.951181824834",
+      "adjoint_defect_L2_sup_upper": "55281692.296349654675",
+      "step": 64
+    },
+    {
+      "M15_error_L2_sup_upper": "0.066590706599574322265809492188",
+      "M15_support_corrected_quadratic_upper": "319115230.132760852836",
+      "adjoint_defect_L2_sup_upper": "55258507.260959939776",
+      "step": 65
+    },
+    {
+      "M15_error_L2_sup_upper": "0.068742488394916112387221166536",
+      "M15_support_corrected_quadratic_upper": "339566004.555477842992",
+      "adjoint_defect_L2_sup_upper": "55235123.696314219485",
+      "step": 66
+    },
+    {
+      "M15_error_L2_sup_upper": "0.070951409691720125281734281865",
+      "M15_support_corrected_quadratic_upper": "361202488.194066908076",
+      "adjoint_defect_L2_sup_upper": "55212178.417227834877",
+      "step": 67
+    },
+    {
+      "M15_error_L2_sup_upper": "0.073222367047459152648500129908",
+      "M15_support_corrected_quadratic_upper": "384125142.147048901232",
+      "adjoint_defect_L2_sup_upper": "55189043.584261064781",
+      "step": 68
+    },
+    {
+      "M15_error_L2_sup_upper": "0.075553545754762728063844299776",
+      "M15_support_corrected_quadratic_upper": "408369211.196679957154",
+      "adjoint_defect_L2_sup_upper": "55166341.899951218459",
+      "step": 69
+    },
+    {
+      "M15_error_L2_sup_upper": "0.077950167174519576002777512305",
+      "M15_support_corrected_quadratic_upper": "434047248.501460408625",
+      "adjoint_defect_L2_sup_upper": "55143454.034724381420",
+      "step": 70
+    },
+    {
+      "M15_error_L2_sup_upper": "0.080410258354065223303696799001",
+      "M15_support_corrected_quadratic_upper": "461197494.765059033053",
+      "adjoint_defect_L2_sup_upper": "55120994.586637774841",
+      "step": 71
+    },
+    {
+      "M15_error_L2_sup_upper": "0.082939387155430456381517036419",
+      "M15_support_corrected_quadratic_upper": "489946040.865406594346",
+      "adjoint_defect_L2_sup_upper": "55098361.340899031996",
+      "step": 72
+    },
+    {
+      "M15_error_L2_sup_upper": "0.085535411408375992247338391329",
+      "M15_support_corrected_quadratic_upper": "520334375.231147958606",
+      "adjoint_defect_L2_sup_upper": "55076146.802971121076",
+      "step": 73
+    },
+    {
+      "M15_error_L2_sup_upper": "0.088204268704350912473110956446",
+      "M15_support_corrected_quadratic_upper": "552503759.186214499789",
+      "adjoint_defect_L2_sup_upper": "55053767.369492361110",
+      "step": 74
+    },
+    {
+      "M15_error_L2_sup_upper": "0.090943635780515710932036521670",
+      "M15_support_corrected_quadratic_upper": "586499216.988130297151",
+      "adjoint_defect_L2_sup_upper": "55031804.973259177514",
+      "step": 75
+    },
+    {
+      "M15_error_L2_sup_upper": "0.093759844845800206749865429216",
+      "M15_support_corrected_quadratic_upper": "622479004.000105869223",
+      "adjoint_defect_L2_sup_upper": "55009679.334232235787",
+      "step": 76
+    },
+    {
+      "M15_error_L2_sup_upper": "0.096650378682499930718561363934",
+      "M15_support_corrected_quadratic_upper": "660491978.610842807437",
+      "adjoint_defect_L2_sup_upper": "54987965.735769298493",
+      "step": 77
+    },
+    {
+      "M15_error_L2_sup_upper": "0.099621990803276243627091362252",
+      "M15_support_corrected_quadratic_upper": "700715431.161476193394",
+      "adjoint_defect_L2_sup_upper": "54966097.703834334742",
+      "step": 78
+    },
+    {
+      "M15_error_L2_sup_upper": "0.102671956095926181377980349954",
+      "M15_support_corrected_quadratic_upper": "743202368.104717691607",
+      "adjoint_defect_L2_sup_upper": "54944638.138815717816",
+      "step": 79
+    },
+    {
+      "M15_error_L2_sup_upper": "0.105807478024492175559460342633",
+      "M15_support_corrected_quadratic_upper": "788151398.540500156464",
+      "adjoint_defect_L2_sup_upper": "54923030.580575048872",
+      "step": 80
+    },
+    {
+      "M15_error_L2_sup_upper": "0.109025608454823625984172093256",
+      "M15_support_corrected_quadratic_upper": "835620017.923896454639",
+      "adjoint_defect_L2_sup_upper": "54901826.942328635721",
+      "step": 81
+    },
+    {
+      "M15_error_L2_sup_upper": "0.112334031607802162554838591177",
+      "M15_support_corrected_quadratic_upper": "885830716.726281058507",
+      "adjoint_defect_L2_sup_upper": "54880484.580351198754",
+      "step": 82
+    },
+    {
+      "M15_error_L2_sup_upper": "0.115729559873559904556004972850",
+      "M15_support_corrected_quadratic_upper": "938845840.058174202827",
+      "adjoint_defect_L2_sup_upper": "54859537.205976259963",
+      "step": 83
+    },
+    {
+      "M15_error_L2_sup_upper": "0.119220391387202444900671514805",
+      "M15_support_corrected_quadratic_upper": "994914639.920763858829",
+      "adjoint_defect_L2_sup_upper": "54838459.585546240025",
+      "step": 84
+    },
+    {
+      "M15_error_L2_sup_upper": "0.122803081150282585750587735587",
+      "M15_support_corrected_quadratic_upper": "1054104698.257559749379",
+      "adjoint_defect_L2_sup_upper": "54817774.594520331276",
+      "step": 85
+    },
+    {
+      "M15_error_L2_sup_upper": "0.126486376956802744933341395007",
+      "M15_support_corrected_quadratic_upper": "1116695267.652828856274",
+      "adjoint_defect_L2_sup_upper": "54796962.624426345435",
+      "step": 86
+    },
+    {
+      "M15_error_L2_sup_upper": "0.130266556879782059610600495309",
+      "M15_support_corrected_quadratic_upper": "1182759574.564088094886",
+      "adjoint_defect_L2_sup_upper": "54776542.045907596383",
+      "step": 87
+    },
+    {
+      "M15_error_L2_sup_upper": "0.134152956917053221093955373871",
+      "M15_support_corrected_quadratic_upper": "1252610510.555601730925",
+      "adjoint_defect_L2_sup_upper": "54755999.415725796940",
+      "step": 88
+    },
+    {
+      "M15_error_L2_sup_upper": "0.138141556903322894523984160168",
+      "M15_support_corrected_quadratic_upper": "1326327388.601326007553",
+      "adjoint_defect_L2_sup_upper": "54735840.807826747029",
+      "step": 89
+    },
+    {
+      "M15_error_L2_sup_upper": "0.142242322610622667532419067283",
+      "M15_support_corrected_quadratic_upper": "1404260828.971941335412",
+      "adjoint_defect_L2_sup_upper": "54715573.790752579670",
+      "step": 90
+    },
+    {
+      "M15_error_L2_sup_upper": "0.146450912405755104975097982673",
+      "M15_support_corrected_quadratic_upper": "1486496686.483660588449",
+      "adjoint_defect_L2_sup_upper": "54695688.694619286346",
+      "step": 91
+    },
+    {
+      "M15_error_L2_sup_upper": "0.150777966592635655443253084701",
+      "M15_support_corrected_quadratic_upper": "1573427910.979150173244",
+      "adjoint_defect_L2_sup_upper": "54675695.866668597521",
+      "step": 92
+    },
+    {
+      "M15_error_L2_sup_upper": "0.155218796835183842185041113410",
+      "M15_support_corrected_quadratic_upper": "1665147370.078122309716",
+      "adjoint_defect_L2_sup_upper": "54656080.853786004232",
+      "step": 93
+    },
+    {
+      "M15_error_L2_sup_upper": "0.159784766046957279372961636109",
+      "M15_support_corrected_quadratic_upper": "1762095511.527977652718",
+      "adjoint_defect_L2_sup_upper": "54636367.259738564233",
+      "step": 94
+    },
+    {
+      "M15_error_L2_sup_upper": "0.164470811895216494230133738033",
+      "M15_support_corrected_quadratic_upper": "1864372718.857300848257",
+      "adjoint_defect_L2_sup_upper": "54617026.224059357758",
+      "step": 95
+    },
+    {
+      "M15_error_L2_sup_upper": "0.169289071404262637807904360686",
+      "M15_support_corrected_quadratic_upper": "1972472750.028307108873",
+      "adjoint_defect_L2_sup_upper": "54597596.247277447123",
+      "step": 96
+    },
+    {
+      "M15_error_L2_sup_upper": "0.174234078871400621959830762452",
+      "M15_support_corrected_quadratic_upper": "2086504051.234127548512",
+      "adjoint_defect_L2_sup_upper": "54578530.023906843625",
+      "step": 97
+    },
+    {
+      "M15_error_L2_sup_upper": "0.179318800532609114115653137104",
+      "M15_support_corrected_quadratic_upper": "2207020231.465643183912",
+      "adjoint_defect_L2_sup_upper": "54559384.969382853385",
+      "step": 98
+    },
+    {
+      "M15_error_L2_sup_upper": "0.184537335777476145379784831576",
+      "M15_support_corrected_quadratic_upper": "2334138375.802183557196",
+      "adjoint_defect_L2_sup_upper": "54540604.566012741972",
+      "step": 99
+    },
+    {
+      "M15_error_L2_sup_upper": "0.189903539087818277953415666301",
+      "M15_support_corrected_quadratic_upper": "2468479307.165290609282",
+      "adjoint_defect_L2_sup_upper": "54521746.023359061928",
+      "step": 100
+    },
+    {
+      "M15_error_L2_sup_upper": "0.195411041015619379041619469171",
+      "M15_support_corrected_quadratic_upper": "2610169350.341048984946",
+      "adjoint_defect_L2_sup_upper": "54503245.471874539351",
+      "step": 101
+    },
+    {
+      "M15_error_L2_sup_upper": "0.201074647627647671237591409896",
+      "M15_support_corrected_quadratic_upper": "2759904827.124382060175",
+      "adjoint_defect_L2_sup_upper": "54484680.593569871009",
+      "step": 102
+    },
+    {
+      "M15_error_L2_sup_upper": "0.206887484059014177599301274668",
+      "M15_support_corrected_quadratic_upper": "2917821939.944677946785",
+      "adjoint_defect_L2_sup_upper": "54466469.293919494857",
+      "step": 103
+    },
+    {
+      "M15_error_L2_sup_upper": "0.212865376019489897857321064679",
+      "M15_support_corrected_quadratic_upper": "3084701828.843219937462",
+      "adjoint_defect_L2_sup_upper": "54448198.006051700281",
+      "step": 104
+    },
+    {
+      "M15_error_L2_sup_upper": "0.219000903708729816113046071231",
+      "M15_support_corrected_quadratic_upper": "3260691245.349650156821",
+      "adjoint_defect_L2_sup_upper": "54430275.852791869667",
+      "step": 105
+    },
+    {
+      "M15_error_L2_sup_upper": "0.225310985601711203391221510157",
+      "M15_support_corrected_quadratic_upper": "3446666642.453888756304",
+      "adjoint_defect_L2_sup_upper": "54412306.226769952360",
+      "step": 106
+    },
+    {
+      "M15_error_L2_sup_upper": "0.231787614287788902108838129381",
+      "M15_support_corrected_quadratic_upper": "3642786009.256725557065",
+      "adjoint_defect_L2_sup_upper": "54394675.765578734080",
+      "step": 107
+    },
+    {
+      "M15_error_L2_sup_upper": "0.238448879523237585011838508456",
+      "M15_support_corrected_quadratic_upper": "3850032939.524376486019",
+      "adjoint_defect_L2_sup_upper": "54377009.763657892468",
+      "step": 108
+    },
+    {
+      "M15_error_L2_sup_upper": "0.245286140261931163490394388948",
+      "M15_support_corrected_quadratic_upper": "4068577367.011347875169",
+      "adjoint_defect_L2_sup_upper": "54359683.385250203933",
+      "step": 109
+    },
+    {
+      "M15_error_L2_sup_upper": "0.252318741747182068365550844821",
+      "M15_support_corrected_quadratic_upper": "4299523348.880582567205",
+      "adjoint_defect_L2_sup_upper": "54342317.957428807857",
+      "step": 110
+    },
+    {
+      "M15_error_L2_sup_upper": "0.259537359768649437017824122403",
+      "M15_support_corrected_quadratic_upper": "4543053507.233125188768",
+      "adjoint_defect_L2_sup_upper": "54325293.050213500292",
+      "step": 111
+    },
+    {
+      "M15_error_L2_sup_upper": "0.266962685233500470481586722032",
+      "M15_support_corrected_quadratic_upper": "4800407364.475868240007",
+      "adjoint_defect_L2_sup_upper": "54308235.350909730730",
+      "step": 112
+    },
+    {
+      "M15_error_L2_sup_upper": "0.274584657604416884822231065882",
+      "M15_support_corrected_quadratic_upper": "5071781009.586446190678",
+      "adjoint_defect_L2_sup_upper": "54291521.578523874211",
+      "step": 113
+    },
+    {
+      "M15_error_L2_sup_upper": "0.282425409845652574787396806881",
+      "M15_support_corrected_quadratic_upper": "5358566328.868441089584",
+      "adjoint_defect_L2_sup_upper": "54274781.362142799266",
+      "step": 114
+    },
+    {
+      "M15_error_L2_sup_upper": "0.290474088209512878847380023422",
+      "M15_support_corrected_quadratic_upper": "5660973684.690643133444",
+      "adjoint_defect_L2_sup_upper": "54258373.165618465523",
+      "step": 115
+    },
+    {
+      "M15_error_L2_sup_upper": "0.298754370585588678112621800343",
+      "M15_support_corrected_quadratic_upper": "5980566357.606793270657",
+      "adjoint_defect_L2_sup_upper": "54241948.851617522758",
+      "step": 116
+    },
+    {
+      "M15_error_L2_sup_upper": "0.307254549322864296111803821595",
+      "M15_support_corrected_quadratic_upper": "6317569836.283964124788",
+      "adjoint_defect_L2_sup_upper": "54225858.761445158235",
+      "step": 117
+    },
+    {
+      "M15_error_L2_sup_upper": "0.315999956750275616546819190669",
+      "M15_support_corrected_quadratic_upper": "6673740213.271352408071",
+      "adjoint_defect_L2_sup_upper": "54209754.882659004196",
+      "step": 118
+    },
+    {
+      "M15_error_L2_sup_upper": "0.324977966816135745168220732505",
+      "M15_support_corrected_quadratic_upper": "7049319013.614308731345",
+      "adjoint_defect_L2_sup_upper": "54193983.813911818492",
+      "step": 119
+    },
+    {
+      "M15_error_L2_sup_upper": "0.334215682613628043034687496826",
+      "M15_support_corrected_quadratic_upper": "7446279243.821100327296",
+      "adjoint_defect_L2_sup_upper": "54178207.568768495294",
+      "step": 120
+    },
+    {
+      "M15_error_L2_sup_upper": "0.343699491410379061803592903880",
+      "M15_support_corrected_quadratic_upper": "7864879439.237264107416",
+      "adjoint_defect_L2_sup_upper": "54162761.868567759131",
+      "step": 121
+    },
+    {
+      "M15_error_L2_sup_upper": "0.353458390428312243146985722189",
+      "M15_support_corrected_quadratic_upper": "8307336632.908587972468",
+      "adjoint_defect_L2_sup_upper": "54147315.995243120634",
+      "step": 122
+    },
+    {
+      "M15_error_L2_sup_upper": "0.363477708165348232514581689228",
+      "M15_support_corrected_quadratic_upper": "8773927437.273298898534",
+      "adjoint_defect_L2_sup_upper": "54132197.676764819891",
+      "step": 123
+    },
+    {
+      "M15_error_L2_sup_upper": "0.373788466812237747309859635676",
+      "M15_support_corrected_quadratic_upper": "9267143388.777799341296",
+      "adjoint_defect_L2_sup_upper": "54117087.908488867542",
+      "step": 124
+    },
+    {
+      "M15_error_L2_sup_upper": "0.384374859989935104480480414199",
+      "M15_support_corrected_quadratic_upper": "9787280374.109146850741",
+      "adjoint_defect_L2_sup_upper": "54102305.058824040102",
+      "step": 125
+    },
+    {
+      "M15_error_L2_sup_upper": "0.395270073910266755943009581278",
+      "M15_support_corrected_quadratic_upper": "10337138720.328868473108",
+      "adjoint_defect_L2_sup_upper": "54087535.771710598423",
+      "step": 126
+    },
+    {
+      "M15_error_L2_sup_upper": "0.406457086713270041601293084396",
+      "M15_support_corrected_quadratic_upper": "10917034866.110518100394",
+      "adjoint_defect_L2_sup_upper": "54073090.242818954844",
+      "step": 127
+    },
+    {
+      "M15_error_L2_sup_upper": "0.417971396882630663377493407162",
+      "M15_support_corrected_quadratic_upper": "11530116557.344699709996",
+      "adjoint_defect_L2_sup_upper": "54058664.766641580179",
+      "step": 128
+    },
+    {
+      "M15_error_L2_sup_upper": "0.429794681279592534766313224124",
+      "M15_support_corrected_quadratic_upper": "12176722176.448052602373",
+      "adjoint_defect_L2_sup_upper": "54044561.308085187594",
+      "step": 129
+    },
+    {
+      "M15_error_L2_sup_upper": "0.441964909314898217177390360862",
+      "M15_support_corrected_quadratic_upper": "12860390436.879966126111",
+      "adjoint_defect_L2_sup_upper": "54030492.269749959948",
+      "step": 130
+    },
+    {
+      "M15_error_L2_sup_upper": "0.454462364694240796240780843235",
+      "M15_support_corrected_quadratic_upper": "13581483193.235275309269",
+      "adjoint_defect_L2_sup_upper": "54016732.059157643374",
+      "step": 131
+    },
+    {
+      "M15_error_L2_sup_upper": "0.467327658090423621877732001668",
+      "M15_support_corrected_quadratic_upper": "14343979266.302908301931",
+      "adjoint_defect_L2_sup_upper": "54003016.473444628376",
+      "step": 132
+    },
+    {
+      "M15_error_L2_sup_upper": "0.480539581169526164647537946515",
+      "M15_support_corrected_quadratic_upper": "15148265566.080585053363",
+      "adjoint_defect_L2_sup_upper": "53989614.910502128019",
+      "step": 133
+    },
+    {
+      "M15_error_L2_sup_upper": "0.494141569289018201594099632766",
+      "M15_support_corrected_quadratic_upper": "15998816514.258304788923",
+      "adjoint_defect_L2_sup_upper": "53976257.329931124839",
+      "step": 134
+    },
+    {
+      "M15_error_L2_sup_upper": "0.508110815154629089623911438442",
+      "M15_support_corrected_quadratic_upper": "16896045691.811825289882",
+      "adjoint_defect_L2_sup_upper": "53963214.870716753803",
+      "step": 135
+    },
+    {
+      "M15_error_L2_sup_upper": "0.522493776589571559177669092163",
+      "M15_support_corrected_quadratic_upper": "17844985793.866042206648",
+      "adjoint_defect_L2_sup_upper": "53950222.890375773073",
+      "step": 136
+    },
+    {
+      "M15_error_L2_sup_upper": "0.537265931508429603976129806770",
+      "M15_support_corrected_quadratic_upper": "18846078721.736461928673",
+      "adjoint_defect_L2_sup_upper": "53937544.593150076213",
+      "step": 137
+    },
+    {
+      "M15_error_L2_sup_upper": "0.552476973354566314197792045993",
+      "M15_support_corrected_quadratic_upper": "19904986265.799295380739",
+      "adjoint_defect_L2_sup_upper": "53924925.024809117071",
+      "step": 138
+    },
+    {
+      "M15_error_L2_sup_upper": "0.568100539906933797258979793350",
+      "M15_support_corrected_quadratic_upper": "21022180225.699416370327",
+      "adjoint_defect_L2_sup_upper": "53912611.352913545539",
+      "step": 139
+    },
+    {
+      "M15_error_L2_sup_upper": "0.584189789335298724420220564727",
+      "M15_support_corrected_quadratic_upper": "22204031514.000156224984",
+      "adjoint_defect_L2_sup_upper": "53900369.488781991000",
+      "step": 140
+    },
+    {
+      "M15_error_L2_sup_upper": "0.600716384262001386223855963712",
+      "M15_support_corrected_quadratic_upper": "23451043395.818836433412",
+      "adjoint_defect_L2_sup_upper": "53888432.356647492046",
+      "step": 141
+    },
+    {
+      "M15_error_L2_sup_upper": "0.617737193170397710375530157210",
+      "M15_support_corrected_quadratic_upper": "24770386321.258743798184",
+      "adjoint_defect_L2_sup_upper": "53876575.333156369664",
+      "step": 142
+    },
+    {
+      "M15_error_L2_sup_upper": "0.635221758741001396984116900658",
+      "M15_support_corrected_quadratic_upper": "26162596605.395771304744",
+      "adjoint_defect_L2_sup_upper": "53865015.746110083298",
+      "step": 143
+    },
+    {
+      "M15_error_L2_sup_upper": "0.653230922495494730033823331232",
+      "M15_support_corrected_quadratic_upper": "27635746398.098990899915",
+      "adjoint_defect_L2_sup_upper": "53853547.065647655245",
+      "step": 144
+    },
+    {
+      "M15_error_L2_sup_upper": "0.671731952444926476058484206533",
+      "M15_support_corrected_quadratic_upper": "29190406820.127716093796",
+      "adjoint_defect_L2_sup_upper": "53842378.783502443090",
+      "step": 145
+    },
+    {
+      "M15_error_L2_sup_upper": "0.690789943478060364625879208328",
+      "M15_support_corrected_quadratic_upper": "30835667167.638959684057",
+      "adjoint_defect_L2_sup_upper": "53831297.355164786946",
+      "step": 146
+    },
+    {
+      "M15_error_L2_sup_upper": "0.710369724300518305464569123288",
+      "M15_support_corrected_quadratic_upper": "32572135299.463095620136",
+      "adjoint_defect_L2_sup_upper": "53820520.823880199920",
+      "step": 147
+    },
+    {
+      "M15_error_L2_sup_upper": "0.730540941112985123539059252110",
+      "M15_support_corrected_quadratic_upper": "34410047998.056515459724",
+      "adjoint_defect_L2_sup_upper": "53809840.290846808714",
+      "step": 148
+    },
+    {
+      "M15_error_L2_sup_upper": "0.751265809268510722026345640563",
+      "M15_support_corrected_quadratic_upper": "36350052208.343631899566",
+      "adjoint_defect_L2_sup_upper": "53799460.403093600066",
+      "step": 149
+    },
+    {
+      "M15_error_L2_sup_upper": "0.772618841329792036281644343000",
+      "M15_support_corrected_quadratic_upper": "38403679188.786290733073",
+      "adjoint_defect_L2_sup_upper": "53789183.723708120115",
+      "step": 150
+    },
+    {
+      "M15_error_L2_sup_upper": "0.794559456863651169478827663506",
+      "M15_support_corrected_quadratic_upper": "40571617800.179095174723",
+      "adjoint_defect_L2_sup_upper": "53779212.727997913846",
+      "step": 151
+    },
+    {
+      "M15_error_L2_sup_upper": "0.817167366656975317799716051572",
+      "M15_support_corrected_quadratic_upper": "42866859416.578935335230",
+      "adjoint_defect_L2_sup_upper": "53769343.587421982569",
+      "step": 152
+    },
+    {
+      "M15_error_L2_sup_upper": "0.840399004522458162949640715362",
+      "M15_support_corrected_quadratic_upper": "45290138463.505515593010",
+      "adjoint_defect_L2_sup_upper": "53759783.798365088166",
+      "step": 153
+    },
+    {
+      "M15_error_L2_sup_upper": "0.864339628258434272637072954032",
+      "M15_support_corrected_quadratic_upper": "47856092943.853963522562",
+      "adjoint_defect_L2_sup_upper": "53750332.363703150103",
+      "step": 154
+    },
+    {
+      "M15_error_L2_sup_upper": "0.888942488926389785868265592753",
+      "M15_support_corrected_quadratic_upper": "50565507625.159591619459",
+      "adjoint_defect_L2_sup_upper": "53741179.856768081524",
+      "step": 155
+    },
+    {
+      "M15_error_L2_sup_upper": "0.914298757582097058027161937847",
+      "M15_support_corrected_quadratic_upper": "53434877110.955840860472",
+      "adjoint_defect_L2_sup_upper": "53732157.333091326310",
+      "step": 156
+    },
+    {
+      "M15_error_L2_sup_upper": "0.940358298658179997090799114959",
+      "M15_support_corrected_quadratic_upper": "56465042802.578522040775",
+      "adjoint_defect_L2_sup_upper": "53723426.785593731416",
+      "step": 157
+    },
+    {
+      "M15_error_L2_sup_upper": "0.967218581089661517299268765202",
+      "M15_support_corrected_quadratic_upper": "59674592431.592566851240",
+      "adjoint_defect_L2_sup_upper": "53714832.971660372412",
+      "step": 158
+    },
+    {
+      "M15_error_L2_sup_upper": "0.994825871754229393197478994375",
+      "M15_support_corrected_quadratic_upper": "63064432171.510062891016",
+      "adjoint_defect_L2_sup_upper": "53706528.924151379175",
+      "step": 159
+    },
+    {
+      "M15_error_L2_sup_upper": "1.023284342562537072649646766110",
+      "M15_support_corrected_quadratic_upper": "66655509249.327832097295",
+      "adjoint_defect_L2_sup_upper": "53698366.847126393553",
+      "step": 160
+    },
+    {
+      "M15_error_L2_sup_upper": "1.052536443630335607470123289749",
+      "M15_support_corrected_quadratic_upper": "70448805031.127889522748",
+      "adjoint_defect_L2_sup_upper": "53690499.201147820341",
+      "step": 161
+    },
+    {
+      "M15_error_L2_sup_upper": "1.082693478982298616072745017205",
+      "M15_support_corrected_quadratic_upper": "74467927015.049445321734",
+      "adjoint_defect_L2_sup_upper": "53682779.565302370184",
+      "step": 162
+    },
+    {
+      "M15_error_L2_sup_upper": "1.113693851926277998464127712548",
+      "M15_support_corrected_quadratic_upper": "78713944858.727810619362",
+      "adjoint_defect_L2_sup_upper": "53675347.116476948686",
+      "step": 163
+    },
+    {
+      "M15_error_L2_sup_upper": "1.145656456241161868410671367888",
+      "M15_support_corrected_quadratic_upper": "83213465999.643358019123",
+      "adjoint_defect_L2_sup_upper": "53668076.832980254296",
+      "step": 164
+    },
+    {
+      "M15_error_L2_sup_upper": "1.178515404214712761963359215508",
+      "M15_support_corrected_quadratic_upper": "87967664059.590038901649",
+      "adjoint_defect_L2_sup_upper": "53661091.074450346809",
+      "step": 165
+    },
+    {
+      "M15_error_L2_sup_upper": "1.212397669666384454635277046430",
+      "M15_support_corrected_quadratic_upper": "93006530793.705487460405",
+      "adjoint_defect_L2_sup_upper": "53654402.200369689762",
+      "step": 166
+    },
+    {
+      "M15_error_L2_sup_upper": "1.247232812538688788099071807906",
+      "M15_support_corrected_quadratic_upper": "98331362693.564256447726",
+      "adjoint_defect_L2_sup_upper": "53648107.337420732778",
+      "step": 167
+    },
+    {
+      "M15_error_L2_sup_upper": "1.283156413389077837729312140190",
+      "M15_support_corrected_quadratic_upper": "103975971612.740536315533",
+      "adjoint_defect_L2_sup_upper": "53641979.940843584464",
+      "step": 168
+    },
+    {
+      "M15_error_L2_sup_upper": "1.320093198875180929287518528653",
+      "M15_support_corrected_quadratic_upper": "109941800329.444795462106",
+      "adjoint_defect_L2_sup_upper": "53636145.318923623262",
+      "step": 169
+    },
+    {
+      "M15_error_L2_sup_upper": "1.358187923149519524649919442283",
+      "M15_support_corrected_quadratic_upper": "116266976570.934613636453",
+      "adjoint_defect_L2_sup_upper": "53630483.337876145202",
+      "step": 170
+    },
+    {
+      "M15_error_L2_sup_upper": "1.397360176636349945745015162645",
+      "M15_support_corrected_quadratic_upper": "122953118290.546511166192",
+      "adjoint_defect_L2_sup_upper": "53625114.509741584526",
+      "step": 171
+    },
+    {
+      "M15_error_L2_sup_upper": "1.437764497637725244900930955039",
+      "M15_support_corrected_quadratic_upper": "130043233304.113477407304",
+      "adjoint_defect_L2_sup_upper": "53619923.517339047653",
+      "step": 172
+    },
+    {
+      "M15_error_L2_sup_upper": "1.479315013289827167469114202951",
+      "M15_support_corrected_quadratic_upper": "137539157553.411700498574",
+      "adjoint_defect_L2_sup_upper": "53615028.347456133151",
+      "step": 173
+    },
+    {
+      "M15_error_L2_sup_upper": "1.522176702262890663492898722664",
+      "M15_support_corrected_quadratic_upper": "145489441069.050825406814",
+      "adjoint_defect_L2_sup_upper": "53610314.830288115171",
+      "step": 174
+    },
+    {
+      "M15_error_L2_sup_upper": "1.566257876731968416640961122959",
+      "M15_support_corrected_quadratic_upper": "153896216296.688301334440",
+      "adjoint_defect_L2_sup_upper": "53605898.376514240367",
+      "step": 175
+    },
+    {
+      "M15_error_L2_sup_upper": "1.611734659363128005409209255156",
+      "M15_support_corrected_quadratic_upper": "162814338761.314460393968",
+      "adjoint_defect_L2_sup_upper": "53601673.525222940053",
+      "step": 176
+    },
+    {
+      "M15_error_L2_sup_upper": "1.658509170878630644192436411632",
+      "M15_support_corrected_quadratic_upper": "172246262933.121027493843",
+      "adjoint_defect_L2_sup_upper": "53597736.264201005037",
+      "step": 177
+    },
+    {
+      "M15_error_L2_sup_upper": "1.706769434197599459920380063479",
+      "M15_support_corrected_quadratic_upper": "182253814811.080246850304",
+      "adjoint_defect_L2_sup_upper": "53594003.324905709707",
+      "step": 178
+    },
+    {
+      "M15_error_L2_sup_upper": "1.756410973911808692829471425289",
+      "M15_support_corrected_quadratic_upper": "192839596984.921435982009",
+      "adjoint_defect_L2_sup_upper": "53590554.103499405284",
+      "step": 179
+    },
+    {
+      "M15_error_L2_sup_upper": "1.807634528216681625969755970338",
+      "M15_support_corrected_quadratic_upper": "204073258871.667018536226",
+      "adjoint_defect_L2_sup_upper": "53587316.221402775316",
+      "step": 180
+    },
+    {
+      "M15_error_L2_sup_upper": "1.860328588615756578522997442872",
+      "M15_support_corrected_quadratic_upper": "215957741147.245741494788",
+      "adjoint_defect_L2_sup_upper": "53584364.747131808032",
+      "step": 181
+    },
+    {
+      "M15_error_L2_sup_upper": "1.914707487723678498574736826843",
+      "M15_support_corrected_quadratic_upper": "228571737768.245996517834",
+      "adjoint_defect_L2_sup_upper": "53581626.714959292750",
+      "step": 182
+    },
+    {
+      "M15_error_L2_sup_upper": "1.970652211513319645967267349513",
+      "M15_support_corrected_quadratic_upper": "241918660897.164732064389",
+      "adjoint_defect_L2_sup_upper": "53579174.176688636953",
+      "step": 183
+    },
+    {
+      "M15_error_L2_sup_upper": "2.028391635213771903654655213987",
+      "M15_support_corrected_quadratic_upper": "256087444162.671476380006",
+      "adjoint_defect_L2_sup_upper": "53576949.841321049578",
+      "step": 184
+    },
+    {
+      "M15_error_L2_sup_upper": "2.087798728690693054898842502681",
+      "M15_support_corrected_quadratic_upper": "271082021875.028442561932",
+      "adjoint_defect_L2_sup_upper": "53575005.499636409669",
+      "step": 185
+    },
+    {
+      "M15_error_L2_sup_upper": "2.149117931795319010003643803102",
+      "M15_support_corrected_quadratic_upper": "287002909693.131558787653",
+      "adjoint_defect_L2_sup_upper": "53573295.218181063429",
+      "step": 186
+    },
+    {
+      "M15_error_L2_sup_upper": "2.212213647256194673600220299033",
+      "M15_support_corrected_quadratic_upper": "303854632210.103844073067",
+      "adjoint_defect_L2_sup_upper": "53571858.630128937130",
+      "step": 187
+    },
+    {
+      "M15_error_L2_sup_upper": "2.277346979875338759434424880827",
+      "M15_support_corrected_quadratic_upper": "321750823862.386855506363",
+      "adjoint_defect_L2_sup_upper": "53570668.219757052356",
+      "step": 188
+    },
+    {
+      "M15_error_L2_sup_upper": "2.344373171857749163644786373468",
+      "M15_support_corrected_quadratic_upper": "340696684283.340958318124",
+      "adjoint_defect_L2_sup_upper": "53569751.675248537483",
+      "step": 189
+    },
+    {
+      "M15_error_L2_sup_upper": "2.413571175628598975800250760700",
+      "M15_support_corrected_quadratic_upper": "360820719311.436392794785",
+      "adjoint_defect_L2_sup_upper": "53569084.897345696815",
+      "step": 190
+    },
+    {
+      "M15_error_L2_sup_upper": "2.484786435871007821309191643603",
+      "M15_support_corrected_quadratic_upper": "382128907644.307183734351",
+      "adjoint_defect_L2_sup_upper": "53568692.550849777244",
+      "step": 191
+    },
+    {
+      "M15_error_L2_sup_upper": "2.558317022037661428292581068420",
+      "M15_support_corrected_quadratic_upper": "404766626856.256012777400",
+      "adjoint_defect_L2_sup_upper": "53568556.699876673838",
+      "step": 192
+    },
+    {
+      "M15_error_L2_sup_upper": "2.633997899281657131713455021774",
+      "M15_support_corrected_quadratic_upper": "428740761765.702436860450",
+      "adjoint_defect_L2_sup_upper": "53568694.600793347054",
+      "step": 193
+    },
+    {
+      "M15_error_L2_sup_upper": "2.712147615995426486337291631783",
+      "M15_support_corrected_quadratic_upper": "454215842850.369098522026",
+      "adjoint_defect_L2_sup_upper": "53569094.359765672688",
+      "step": 194
+    },
+    {
+      "M15_error_L2_sup_upper": "2.792589928298488237906589322517",
+      "M15_support_corrected_quadratic_upper": "481199812501.393402801691",
+      "adjoint_defect_L2_sup_upper": "53569764.195934750412",
+      "step": 195
+    },
+    {
+      "M15_error_L2_sup_upper": "2.875665325645798559924057804263",
+      "M15_support_corrected_quadratic_upper": "509878952981.270886502470",
+      "adjoint_defect_L2_sup_upper": "53570710.541805866364",
+      "step": 196
+    },
+    {
+      "M15_error_L2_sup_upper": "2.961185574068391709358556348553",
+      "M15_support_corrected_quadratic_upper": "540262440968.617519679922",
+      "adjoint_defect_L2_sup_upper": "53571919.356464160560",
+      "step": 197
+    },
+    {
+      "M15_error_L2_sup_upper": "3.049514675426926913047234031721",
+      "M15_support_corrected_quadratic_upper": "572561271572.404923364750",
+      "adjoint_defect_L2_sup_upper": "53573408.253057247815",
+      "step": 198
+    },
+    {
+      "M15_error_L2_sup_upper": "3.140451568044493898306947322344",
+      "M15_support_corrected_quadratic_upper": "606786063418.873391964531",
+      "adjoint_defect_L2_sup_upper": "53575162.891650062554",
+      "step": 199
+    },
+    {
+      "M15_error_L2_sup_upper": "3.234385456301745478136000389007",
+      "M15_support_corrected_quadratic_upper": "643175902729.567974909922",
+      "adjoint_defect_L2_sup_upper": "53577206.602525166211",
+      "step": 200
+    },
+    {
+      "M15_error_L2_sup_upper": "3.331101551408887450111033654908",
+      "M15_support_corrected_quadratic_upper": "681743093503.318039449335",
+      "adjoint_defect_L2_sup_upper": "53579513.663420113606",
+      "step": 201
+    },
+    {
+      "M15_error_L2_sup_upper": "3.431016078553511311714662795378",
+      "M15_support_corrected_quadratic_upper": "722758666452.290554149691",
+      "adjoint_defect_L2_sup_upper": "53582114.274795852339",
+      "step": 202
+    },
+    {
+      "M15_error_L2_sup_upper": "3.533899555888908944682668077210",
+      "M15_support_corrected_quadratic_upper": "766236894019.798764580561",
+      "adjoint_defect_L2_sup_upper": "53584974.904449704135",
+      "step": 203
+    },
+    {
+      "M15_error_L2_sup_upper": "3.640197185769950954257695567052",
+      "M15_support_corrected_quadratic_upper": "812485148168.375933864517",
+      "adjoint_defect_L2_sup_upper": "53588136.178476549822",
+      "step": 204
+    },
+    {
+      "M15_error_L2_sup_upper": "3.749663755937641239260877076875",
+      "M15_support_corrected_quadratic_upper": "861519998984.063463145345",
+      "adjoint_defect_L2_sup_upper": "53591556.660820024958",
+      "step": 205
+    },
+    {
+      "M15_error_L2_sup_upper": "3.862775550760569994697629255154",
+      "M15_support_corrected_quadratic_upper": "913690175070.905388576429",
+      "adjoint_defect_L2_sup_upper": "53595285.371394135018",
+      "step": 206
+    },
+    {
+      "M15_error_L2_sup_upper": "3.979270513827481190468633085444",
+      "M15_support_corrected_quadratic_upper": "969014920041.708080751729",
+      "adjoint_defect_L2_sup_upper": "53599277.028584921599",
+      "step": 207
+    },
+    {
+      "M15_error_L2_sup_upper": "4.099658276204143918882833606286",
+      "M15_support_corrected_quadratic_upper": "1027890042169.575926120659",
+      "adjoint_defect_L2_sup_upper": "53603576.340717742429",
+      "step": 208
+    },
+    {
+      "M15_error_L2_sup_upper": "4.223658741759633869139464692284",
+      "M15_support_corrected_quadratic_upper": "1090337903953.525214005152",
+      "adjoint_defect_L2_sup_upper": "53608135.510579048285",
+      "step": 209
+    },
+    {
+      "M15_error_L2_sup_upper": "4.351817324696787894976168224362",
+      "M15_support_corrected_quadratic_upper": "1156807950833.316674162579",
+      "adjoint_defect_L2_sup_upper": "53613014.259869864342",
+      "step": 210
+    },
+    {
+      "M15_error_L2_sup_upper": "4.483834606242496872694102453441",
+      "M15_support_corrected_quadratic_upper": "1227326208792.048593548480",
+      "adjoint_defect_L2_sup_upper": "53618147.567189956839",
+      "step": 211
+    },
+    {
+      "M15_error_L2_sup_upper": "4.620294405416189166031017383192",
+      "M15_support_corrected_quadratic_upper": "1302403270527.220707350059",
+      "adjoint_defect_L2_sup_upper": "53623610.286638473372",
+      "step": 212
+    },
+    {
+      "M15_error_L2_sup_upper": "4.760876604015233791772824851654",
+      "M15_support_corrected_quadratic_upper": "1382069461698.195708689982",
+      "adjoint_defect_L2_sup_upper": "53629321.778944697483",
+      "step": 213
+    },
+    {
+      "M15_error_L2_sup_upper": "4.906206246511038765915569348697",
+      "M15_support_corrected_quadratic_upper": "1466905108949.798958817344",
+      "adjoint_defect_L2_sup_upper": "53635368.239620218583",
+      "step": 214
+    },
+    {
+      "M15_error_L2_sup_upper": "5.055941038424975630010346723977",
+      "M15_support_corrected_quadratic_upper": "1556945586065.492695823388",
+      "adjoint_defect_L2_sup_upper": "53641666.346972299857",
+      "step": 215
+    },
+    {
+      "M15_error_L2_sup_upper": "5.210750284682654296904033799325",
+      "M15_support_corrected_quadratic_upper": "1652850786440.151481033910",
+      "adjoint_defect_L2_sup_upper": "53648304.744146041519",
+      "step": 216
+    },
+    {
+      "M15_error_L2_sup_upper": "5.370267930414568873695861731238",
+      "M15_support_corrected_quadratic_upper": "1754662022008.160046153253",
+      "adjoint_defect_L2_sup_upper": "53655189.308666587115",
+      "step": 217
+    },
+    {
+      "M15_error_L2_sup_upper": "5.535210806154344897917533969441",
+      "M15_support_corrected_quadratic_upper": "1863130025446.452491140521",
+      "adjoint_defect_L2_sup_upper": "53662424.200395653364",
+      "step": 218
+    },
+    {
+      "M15_error_L2_sup_upper": "5.705187398329836987131320017001",
+      "M15_support_corrected_quadratic_upper": "1978303108555.983057871668",
+      "adjoint_defect_L2_sup_upper": "53669904.498115715839",
+      "step": 219
+    },
+    {
+      "M15_error_L2_sup_upper": "5.880965575723132908148379607908",
+      "M15_support_corrected_quadratic_upper": "2101035767942.921792982617",
+      "adjoint_defect_L2_sup_upper": "53677738.509650618719",
+      "step": 220
+    },
+    {
+      "M15_error_L2_sup_upper": "6.062126545849716015260449418199",
+      "M15_support_corrected_quadratic_upper": "2231384576876.989005205393",
+      "adjoint_defect_L2_sup_upper": "53685814.446411221021",
+      "step": 221
+    },
+    {
+      "M15_error_L2_sup_upper": "6.249492994761555326294742795223",
+      "M15_support_corrected_quadratic_upper": "2370322623208.160824210904",
+      "adjoint_defect_L2_sup_upper": "53694255.498639011511",
+      "step": 222
+    },
+    {
+      "M15_error_L2_sup_upper": "6.442616900534962349246895442354",
+      "M15_support_corrected_quadratic_upper": "2517916249473.842363214911",
+      "adjoint_defect_L2_sup_upper": "53702934.890150893842",
+      "step": 223
+    },
+    {
+      "M15_error_L2_sup_upper": "6.642379832463601163785821799724",
+      "M15_support_corrected_quadratic_upper": "2675274163918.914983512706",
+      "adjoint_defect_L2_sup_upper": "53711979.445531038641",
+      "step": 224
+    },
+    {
+      "M15_error_L2_sup_upper": "6.848302449163209561163301010063",
+      "M15_support_corrected_quadratic_upper": "2842474279509.449178984147",
+      "adjoint_defect_L2_sup_upper": "53721265.874391501645",
+      "step": 225
+    },
+    {
+      "M15_error_L2_sup_upper": "7.061329579064054411306100737601",
+      "M15_support_corrected_quadratic_upper": "3020780453983.131533192173",
+      "adjoint_defect_L2_sup_upper": "53730924.272078696474",
+      "step": 226
+    },
+    {
+      "M15_error_L2_sup_upper": "7.280948321260814500333598513663",
+      "M15_support_corrected_quadratic_upper": "3210284202237.401788902966",
+      "adjoint_defect_L2_sup_upper": "53740821.436894174422",
+      "step": 227
+    },
+    {
+      "M15_error_L2_sup_upper": "7.508171474569654685642779242418",
+      "M15_support_corrected_quadratic_upper": "3412426761944.714750643236",
+      "adjoint_defect_L2_sup_upper": "53751096.211239819549",
+      "step": 228
+    },
+    {
+      "M15_error_L2_sup_upper": "7.742450176587113935720163301679",
+      "M15_support_corrected_quadratic_upper": "3627315491839.086149942664",
+      "adjoint_defect_L2_sup_upper": "53761605.743168322552",
+      "step": 229
+    },
+    {
+      "M15_error_L2_sup_upper": "7.984870271676609778135067674113",
+      "M15_support_corrected_quadratic_upper": "3856594610704.610395732855",
+      "adjoint_defect_L2_sup_upper": "53772503.879503527347",
+      "step": 230
+    },
+    {
+      "M15_error_L2_sup_upper": "8.234844358299507176327270753155",
+      "M15_support_corrected_quadratic_upper": "4100390357240.748380727832",
+      "adjoint_defect_L2_sup_upper": "53783630.412896112083",
+      "step": 231
+    },
+    {
+      "M15_error_L2_sup_upper": "8.493536796183695489722098913115",
+      "M15_support_corrected_quadratic_upper": "4360580001110.403106327127",
+      "adjoint_defect_L2_sup_upper": "53795147.992374661322",
+      "step": 232
+    },
+    {
+      "M15_error_L2_sup_upper": "8.760318876736384826114598208412",
+      "M15_support_corrected_quadratic_upper": "4637312956836.988917052586",
+      "adjoint_defect_L2_sup_upper": "53806898.835847044760",
+      "step": 233
+    },
+    {
+      "M15_error_L2_sup_upper": "9.036439372637080746291056430976",
+      "M15_support_corrected_quadratic_upper": "4932734698220.302163282779",
+      "adjoint_defect_L2_sup_upper": "53819047.646379471663",
+      "step": 234
+    },
+    {
+      "M15_error_L2_sup_upper": "9.321225294472545897323319248539",
+      "M15_support_corrected_quadratic_upper": "5247023102901.899425681399",
+      "adjoint_defect_L2_sup_upper": "53831422.811257667130",
+      "step": 235
+    },
+    {
+      "M15_error_L2_sup_upper": "9.616016188329332076500963938647",
+      "M15_support_corrected_quadratic_upper": "5582631765704.023774214179",
+      "adjoint_defect_L2_sup_upper": "53844204.194763365340",
+      "step": 236
+    },
+    {
+      "M15_error_L2_sup_upper": "9.920091588331018297646806740448",
+      "M15_support_corrected_quadratic_upper": "5939770984304.201855287333",
+      "adjoint_defect_L2_sup_upper": "53857205.702017860930",
+      "step": 237
+    },
+    {
+      "M15_error_L2_sup_upper": "10.234888674652745048425339747224",
+      "M15_support_corrected_quadratic_upper": "6321243918908.302108871525",
+      "adjoint_defect_L2_sup_upper": "53870621.492739214215",
+      "step": 238
+    },
+    {
+      "M15_error_L2_sup_upper": "10.559636070809868141657764813075",
+      "M15_support_corrected_quadratic_upper": "6727292440946.235753739059",
+      "adjoint_defect_L2_sup_upper": "53884259.691873436463",
+      "step": 239
+    }
+  ],
+  "sum_of_three_remainder_terms_upper": "164063087678950.088632165980",
+  "terminal_saved_adjoint_boundary_product_upper": "49545386543507.498269542068",
+  "top_quadratic_steps": [
+    {
+      "step": 239,
+      "upper": "6727292440946.235753739059"
+    },
+    {
+      "step": 238,
+      "upper": "6321243918908.302108871525"
+    },
+    {
+      "step": 237,
+      "upper": "5939770984304.201855287333"
+    },
+    {
+      "step": 236,
+      "upper": "5582631765704.023774214179"
+    },
+    {
+      "step": 235,
+      "upper": "5247023102901.899425681399"
+    },
+    {
+      "step": 234,
+      "upper": "4932734698220.302163282779"
+    },
+    {
+      "step": 233,
+      "upper": "4637312956836.988917052586"
+    },
+    {
+      "step": 232,
+      "upper": "4360580001110.403106327127"
+    },
+    {
+      "step": 231,
+      "upper": "4100390357240.748380727832"
+    },
+    {
+      "step": 230,
+      "upper": "3856594610704.610395732855"
+    }
+  ]
+}

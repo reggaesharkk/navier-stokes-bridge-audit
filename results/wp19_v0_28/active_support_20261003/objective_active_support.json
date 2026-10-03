@@ -1,0 +1,64 @@
+{
+  "schema": "wp19-v0.28-objective-active-support-v1",
+  "status": "PARTIAL_EXACT_FORMULA_FOOTPRINT; POST_CANCELLATION_COORDINATE_MAP_NOT_REPLAYED",
+  "provenance": {
+    "repository": "reggaesharkk/navier-stokes-bridge-audit",
+    "pr": 155,
+    "branch": "wp19-v0-28-duality-compatibility-audit",
+    "source_commit": "02df009de32e669355a7b915edff5608b9b8f863",
+    "objective_path": "results/wp19_v0_28/semantic_repair_20261003/objective_definition.json",
+    "objective_git_blob_sha": "14c25768c9878b30e49b36dd32f386013ac3a258",
+    "terminal_hessian_path": "results/wp19_v0_28/semantic_repair_20261003/terminal_hessian_remainder.json",
+    "terminal_hessian_git_blob_sha": "ce53afeda7f5ae9e6f695d9be4d77415889f18d4",
+    "user_supplied_screenshot_sha256": "feb73df8c547e64ac14533806ead03c8ff27f08589917524916bd8ca52b8d6b5"
+  },
+  "dimensions": {
+    "M15_fourier_modes": 14147,
+    "P11_fourier_modes": 5575,
+    "M15_independent_real_solenoidal_coordinates": 28292,
+    "P11_independent_real_solenoidal_coordinates": 11148,
+    "zero_mode_convention": "physical_project sets the zero mode to zero; dimensions above exclude it"
+  },
+  "exact_formula_footprint": {
+    "coefficient_rows": 536,
+    "unique_formula_touched_fourier_mode_entries": 1159,
+    "conjugate_mode_pairs": 937,
+    "independent_real_solenoidal_coordinates_before_symbolic_coordinate_cancellation": 3748,
+    "maximum_wave_number": 11,
+    "maximum_wave_number_squared": 121,
+    "shell_distribution_by_wave_number": {
+      "low": {
+        "max_norm": 5,
+        "mode_entries": 372,
+        "conjugate_pairs": 213
+      },
+      "intermediate": {
+        "min_norm_exclusive": 5,
+        "max_norm": 8,
+        "mode_entries": 443,
+        "conjugate_pairs": 380
+      },
+      "high": {
+        "min_norm_exclusive": 8,
+        "max_norm": 11,
+        "mode_entries": 344,
+        "conjugate_pairs": 344
+      }
+    }
+  },
+  "post_expansion_result_reported_in_screenshot": {
+    "exact_active_real_coordinates": 3740,
+    "active_hessian_connected_components": 1,
+    "interpretation": "reported by interrupted prior workspace; coordinate-level cancellation list, expansion code, and Hessian graph edge list are not present in this workspace, so these two values are not independently replayed here"
+  },
+  "objective_dependency": {
+    "high_M15_modes_directly_enter_G": false,
+    "reason": "G evaluates only after P11 truncation and physical projection",
+    "high_modes_can_feed_objective_modes_dynamically": true,
+    "reason2": "Fourier convolution allows inactive/high modes to sum into active outputs; exact feeder-slot counts are in active_support_feasibility_gate.json"
+  },
+  "limitations": [
+    "Machine-readable active_modes file below is the exact union of mode entries referenced by the frozen formula before the reported 8-coordinate cancellation; it is not mislabeled as the post-expansion coordinate support.",
+    "No exact Hessian nonzero coordinate-pair count is reported because the expanded real-coordinate Hessian and graph edge list are unavailable."
+  ]
+}

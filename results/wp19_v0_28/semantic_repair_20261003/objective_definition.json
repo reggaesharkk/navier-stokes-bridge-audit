@@ -1,0 +1,8108 @@
+{
+  "coefficient_rows": [
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        1,
+        1
+      ],
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        0,
+        0,
+        1
+      ],
+      "right_orbit": [
+        0,
+        3,
+        5
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        1,
+        1
+      ],
+      "right_orbit": [
+        1,
+        4,
+        7
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        2,
+        2,
+        2
+      ],
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        0,
+        0,
+        1
+      ],
+      "right_orbit": [
+        0,
+        3,
+        7
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        0,
+        2
+      ],
+      "right_orbit": [
+        0,
+        3,
+        4
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "right_orbit": [
+        1,
+        1,
+        1
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "right_orbit": [
+        2,
+        2,
+        2
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        0,
+        1,
+        1
+      ],
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        1,
+        1
+      ],
+      "right_orbit": [
+        1,
+        4,
+        6
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "right_orbit": [
+        2,
+        2,
+        4
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        2,
+        2,
+        2
+      ],
+      "right_orbit": [
+        2,
+        5,
+        8
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        0,
+        3,
+        7
+      ],
+      "right_orbit": [
+        0,
+        0,
+        1
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "right_orbit": [
+        1,
+        4,
+        8
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "right_orbit": [
+        3,
+        3,
+        4
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        0,
+        2
+      ],
+      "right_orbit": [
+        0,
+        3,
+        8
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "right_orbit": [
+        3,
+        3,
+        5
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        1,
+        1
+      ],
+      "right_orbit": [
+        1,
+        4,
+        5
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        0,
+        3,
+        4
+      ],
+      "right_orbit": [
+        0,
+        0,
+        2
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        3,
+        5
+      ],
+      "right_orbit": [
+        0,
+        0,
+        1
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": 1,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "right_orbit": [
+        2,
+        5,
+        6
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "right_orbit": [
+        0,
+        1,
+        1
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        4,
+        6
+      ],
+      "right_orbit": [
+        0,
+        1,
+        1
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        3,
+        3,
+        5
+      ],
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "right_orbit": [
+        4,
+        4,
+        5
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -1,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "K36"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 1,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        1
+      ],
+      "rank_from_N11_endpoint": 2,
+      "right_orbit": [
+        1,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 3,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 4,
+      "right_orbit": [
+        1,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 5,
+      "right_orbit": [
+        2,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 6,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 7,
+      "right_orbit": [
+        1,
+        1,
+        1
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 8,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 9,
+      "right_orbit": [
+        3,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 10,
+      "right_orbit": [
+        2,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 11,
+      "right_orbit": [
+        0,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 12,
+      "right_orbit": [
+        2,
+        3,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 13,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 14,
+      "right_orbit": [
+        3,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 15,
+      "right_orbit": [
+        3,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 16,
+      "right_orbit": [
+        1,
+        1,
+        1
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 17,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 18,
+      "right_orbit": [
+        0,
+        0,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 19,
+      "right_orbit": [
+        2,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 20,
+      "right_orbit": [
+        1,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 21,
+      "right_orbit": [
+        1,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 22,
+      "right_orbit": [
+        4,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 23,
+      "right_orbit": [
+        1,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 24,
+      "right_orbit": [
+        4,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 25,
+      "right_orbit": [
+        1,
+        1,
+        1
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 26,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 27,
+      "right_orbit": [
+        2,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        0,
+        3
+      ],
+      "rank_from_N11_endpoint": 28,
+      "right_orbit": [
+        3,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 29,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 30,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 31,
+      "right_orbit": [
+        2,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 32,
+      "right_orbit": [
+        0,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 33,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        0,
+        3
+      ],
+      "rank_from_N11_endpoint": 34,
+      "right_orbit": [
+        0,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 35,
+      "right_orbit": [
+        2,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 36,
+      "right_orbit": [
+        0,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 37,
+      "right_orbit": [
+        0,
+        0,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 38,
+      "right_orbit": [
+        3,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 39,
+      "right_orbit": [
+        3,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 40,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 41,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        8
+      ],
+      "rank_from_N11_endpoint": 42,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 43,
+      "right_orbit": [
+        2,
+        5,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 44,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 45,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 46,
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 47,
+      "right_orbit": [
+        2,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 48,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 49,
+      "right_orbit": [
+        1,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 50,
+      "right_orbit": [
+        2,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 51,
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 52,
+      "right_orbit": [
+        2,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 53,
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 54,
+      "right_orbit": [
+        2,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 55,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 56,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 57,
+      "right_orbit": [
+        4,
+        6,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 58,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 59,
+      "right_orbit": [
+        0,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 60,
+      "right_orbit": [
+        3,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 61,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 62,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 63,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 64,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 65,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 66,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 67,
+      "right_orbit": [
+        3,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        9
+      ],
+      "rank_from_N11_endpoint": 68,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 69,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 70,
+      "right_orbit": [
+        2,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 71,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 72,
+      "right_orbit": [
+        2,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        0,
+        5
+      ],
+      "rank_from_N11_endpoint": 73,
+      "right_orbit": [
+        3,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 74,
+      "right_orbit": [
+        1,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 75,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 76,
+      "right_orbit": [
+        2,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 77,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        8
+      ],
+      "rank_from_N11_endpoint": 78,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 79,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 80,
+      "right_orbit": [
+        3,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 81,
+      "right_orbit": [
+        1,
+        5,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        5,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 82,
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 83,
+      "right_orbit": [
+        2,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 84,
+      "right_orbit": [
+        0,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 85,
+      "right_orbit": [
+        3,
+        6,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        0,
+        2
+      ],
+      "rank_from_N11_endpoint": 86,
+      "right_orbit": [
+        0,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        9
+      ],
+      "rank_from_N11_endpoint": 87,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 88,
+      "right_orbit": [
+        2,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 89,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 90,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 91,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 92,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        0,
+        3
+      ],
+      "rank_from_N11_endpoint": 93,
+      "right_orbit": [
+        0,
+        3,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 94,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 95,
+      "right_orbit": [
+        0,
+        1,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 96,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        9
+      ],
+      "rank_from_N11_endpoint": 97,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 98,
+      "right_orbit": [
+        2,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 99,
+      "right_orbit": [
+        1,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        5,
+        9
+      ],
+      "rank_from_N11_endpoint": 100,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 101,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 102,
+      "right_orbit": [
+        3,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        0,
+        4
+      ],
+      "rank_from_N11_endpoint": 103,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 104,
+      "right_orbit": [
+        0,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 105,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        10
+      ],
+      "rank_from_N11_endpoint": 106,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 107,
+      "right_orbit": [
+        2,
+        4,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 108,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 109,
+      "right_orbit": [
+        2,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        9
+      ],
+      "rank_from_N11_endpoint": 110,
+      "right_orbit": [
+        0,
+        0,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 111,
+      "right_orbit": [
+        2,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        7
+      ],
+      "rank_from_N11_endpoint": 112,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 113,
+      "right_orbit": [
+        4,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 114,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        9
+      ],
+      "rank_from_N11_endpoint": 115,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 116,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 117,
+      "right_orbit": [
+        0,
+        1,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 118,
+      "right_orbit": [
+        1,
+        2,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 119,
+      "right_orbit": [
+        0,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 120,
+      "right_orbit": [
+        0,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 121,
+      "right_orbit": [
+        2,
+        2,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 122,
+      "right_orbit": [
+        3,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 123,
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 124,
+      "right_orbit": [
+        0,
+        0,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 125,
+      "right_orbit": [
+        0,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 126,
+      "right_orbit": [
+        4,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 127,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 128,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 129,
+      "right_orbit": [
+        5,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 130,
+      "right_orbit": [
+        1,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 131,
+      "right_orbit": [
+        0,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 132,
+      "right_orbit": [
+        0,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 133,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 134,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 135,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        9
+      ],
+      "rank_from_N11_endpoint": 136,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 137,
+      "right_orbit": [
+        2,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 138,
+      "right_orbit": [
+        4,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 139,
+      "right_orbit": [
+        0,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        6,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 140,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 141,
+      "right_orbit": [
+        0,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        5,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 142,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 143,
+      "right_orbit": [
+        1,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        0,
+        2
+      ],
+      "rank_from_N11_endpoint": 144,
+      "right_orbit": [
+        2,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 145,
+      "right_orbit": [
+        1,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 146,
+      "right_orbit": [
+        2,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 147,
+      "right_orbit": [
+        0,
+        1,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 148,
+      "right_orbit": [
+        2,
+        3,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 149,
+      "right_orbit": [
+        2,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 150,
+      "right_orbit": [
+        1,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 151,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 152,
+      "right_orbit": [
+        0,
+        1,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 153,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 154,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 155,
+      "right_orbit": [
+        3,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 156,
+      "right_orbit": [
+        0,
+        6,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 157,
+      "right_orbit": [
+        3,
+        3,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 158,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 159,
+      "right_orbit": [
+        0,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 160,
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 161,
+      "right_orbit": [
+        0,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 162,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 163,
+      "right_orbit": [
+        5,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 164,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        8
+      ],
+      "rank_from_N11_endpoint": 165,
+      "right_orbit": [
+        3,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 166,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 167,
+      "right_orbit": [
+        1,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 168,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 169,
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 170,
+      "right_orbit": [
+        4,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 171,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 172,
+      "right_orbit": [
+        0,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 173,
+      "right_orbit": [
+        6,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 174,
+      "right_orbit": [
+        0,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 175,
+      "right_orbit": [
+        0,
+        6,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 176,
+      "right_orbit": [
+        1,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 177,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 178,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 179,
+      "right_orbit": [
+        0,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 180,
+      "right_orbit": [
+        3,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 181,
+      "right_orbit": [
+        1,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 182,
+      "right_orbit": [
+        1,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        9
+      ],
+      "rank_from_N11_endpoint": 183,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 184,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 185,
+      "right_orbit": [
+        1,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 186,
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 187,
+      "right_orbit": [
+        2,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 188,
+      "right_orbit": [
+        3,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        8
+      ],
+      "rank_from_N11_endpoint": 189,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 190,
+      "right_orbit": [
+        0,
+        1,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        9
+      ],
+      "rank_from_N11_endpoint": 191,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 192,
+      "right_orbit": [
+        1,
+        2,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 193,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 194,
+      "right_orbit": [
+        0,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 195,
+      "right_orbit": [
+        2,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 196,
+      "right_orbit": [
+        2,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        9
+      ],
+      "rank_from_N11_endpoint": 197,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 198,
+      "right_orbit": [
+        2,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 199,
+      "right_orbit": [
+        1,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 200,
+      "right_orbit": [
+        1,
+        4,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        9
+      ],
+      "rank_from_N11_endpoint": 201,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 202,
+      "right_orbit": [
+        0,
+        0,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 203,
+      "right_orbit": [
+        4,
+        7,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 204,
+      "right_orbit": [
+        0,
+        0,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 205,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 206,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 207,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 208,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 209,
+      "right_orbit": [
+        6,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 210,
+      "right_orbit": [
+        2,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 211,
+      "right_orbit": [
+        1,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 212,
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 213,
+      "right_orbit": [
+        0,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 214,
+      "right_orbit": [
+        0,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 215,
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 216,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 217,
+      "right_orbit": [
+        2,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 218,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 219,
+      "right_orbit": [
+        1,
+        3,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 220,
+      "right_orbit": [
+        2,
+        2,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 221,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 222,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 223,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 224,
+      "right_orbit": [
+        1,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 225,
+      "right_orbit": [
+        2,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        0,
+        2
+      ],
+      "rank_from_N11_endpoint": 226,
+      "right_orbit": [
+        0,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 227,
+      "right_orbit": [
+        0,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 228,
+      "right_orbit": [
+        4,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        6,
+        9
+      ],
+      "rank_from_N11_endpoint": 229,
+      "right_orbit": [
+        0,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 230,
+      "right_orbit": [
+        2,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 231,
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 232,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        10
+      ],
+      "rank_from_N11_endpoint": 233,
+      "right_orbit": [
+        0,
+        0,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 234,
+      "right_orbit": [
+        3,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 235,
+      "right_orbit": [
+        0,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        6,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 236,
+      "right_orbit": [
+        0,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 237,
+      "right_orbit": [
+        1,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 238,
+      "right_orbit": [
+        5,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 239,
+      "right_orbit": [
+        5,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 240,
+      "right_orbit": [
+        0,
+        0,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 241,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 242,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        10
+      ],
+      "rank_from_N11_endpoint": 243,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 244,
+      "right_orbit": [
+        3,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 245,
+      "right_orbit": [
+        2,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 246,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        10
+      ],
+      "rank_from_N11_endpoint": 247,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        10
+      ],
+      "rank_from_N11_endpoint": 248,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 249,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 250,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 251,
+      "right_orbit": [
+        2,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 252,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 253,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 254,
+      "right_orbit": [
+        2,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 255,
+      "right_orbit": [
+        0,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 256,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 257,
+      "right_orbit": [
+        2,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 258,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 259,
+      "right_orbit": [
+        5,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 260,
+      "right_orbit": [
+        0,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        0,
+        5
+      ],
+      "rank_from_N11_endpoint": 261,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 262,
+      "right_orbit": [
+        0,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 263,
+      "right_orbit": [
+        0,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 264,
+      "right_orbit": [
+        1,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 265,
+      "right_orbit": [
+        0,
+        1,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        3,
+        9
+      ],
+      "rank_from_N11_endpoint": 266,
+      "right_orbit": [
+        0,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 267,
+      "right_orbit": [
+        2,
+        6,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 268,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 269,
+      "right_orbit": [
+        2,
+        4,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 270,
+      "right_orbit": [
+        2,
+        3,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 271,
+      "right_orbit": [
+        2,
+        6,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 272,
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 273,
+      "right_orbit": [
+        1,
+        2,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 274,
+      "right_orbit": [
+        2,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        0,
+        4
+      ],
+      "rank_from_N11_endpoint": 275,
+      "right_orbit": [
+        0,
+        3,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 276,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 277,
+      "right_orbit": [
+        1,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 278,
+      "right_orbit": [
+        1,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 279,
+      "right_orbit": [
+        1,
+        2,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 280,
+      "right_orbit": [
+        2,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 281,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 282,
+      "right_orbit": [
+        1,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 283,
+      "right_orbit": [
+        2,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 284,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 285,
+      "right_orbit": [
+        1,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 286,
+      "right_orbit": [
+        1,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 287,
+      "right_orbit": [
+        0,
+        0,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 288,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 289,
+      "right_orbit": [
+        1,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 290,
+      "right_orbit": [
+        1,
+        3,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 291,
+      "right_orbit": [
+        3,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 292,
+      "right_orbit": [
+        1,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 293,
+      "right_orbit": [
+        0,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 294,
+      "right_orbit": [
+        1,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 295,
+      "right_orbit": [
+        2,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 296,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 297,
+      "right_orbit": [
+        1,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 298,
+      "right_orbit": [
+        0,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 299,
+      "right_orbit": [
+        3,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        10
+      ],
+      "rank_from_N11_endpoint": 300,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 301,
+      "right_orbit": [
+        1,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        7,
+        7
+      ],
+      "rank_from_N11_endpoint": 302,
+      "right_orbit": [
+        1,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 303,
+      "right_orbit": [
+        1,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        5,
+        9
+      ],
+      "rank_from_N11_endpoint": 304,
+      "right_orbit": [
+        0,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 305,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 306,
+      "right_orbit": [
+        4,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 307,
+      "right_orbit": [
+        1,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 308,
+      "right_orbit": [
+        1,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        5,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 309,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 310,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 311,
+      "right_orbit": [
+        0,
+        0,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        5,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 312,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 313,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        9
+      ],
+      "rank_from_N11_endpoint": 314,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 315,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 316,
+      "right_orbit": [
+        1,
+        7,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 317,
+      "right_orbit": [
+        1,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 318,
+      "right_orbit": [
+        3,
+        3,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 319,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 320,
+      "right_orbit": [
+        1,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 321,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 322,
+      "right_orbit": [
+        4,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        9
+      ],
+      "rank_from_N11_endpoint": 323,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 324,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 325,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 326,
+      "right_orbit": [
+        1,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 327,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        10
+      ],
+      "rank_from_N11_endpoint": 328,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 329,
+      "right_orbit": [
+        1,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 330,
+      "right_orbit": [
+        1,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 331,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 332,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 333,
+      "right_orbit": [
+        2,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 334,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 335,
+      "right_orbit": [
+        2,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 336,
+      "right_orbit": [
+        2,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 337,
+      "right_orbit": [
+        1,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 338,
+      "right_orbit": [
+        0,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        2
+      ],
+      "rank_from_N11_endpoint": 339,
+      "right_orbit": [
+        2,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 340,
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 341,
+      "right_orbit": [
+        1,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        10
+      ],
+      "rank_from_N11_endpoint": 342,
+      "right_orbit": [
+        2,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 343,
+      "right_orbit": [
+        4,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        8
+      ],
+      "rank_from_N11_endpoint": 344,
+      "right_orbit": [
+        2,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 345,
+      "right_orbit": [
+        3,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        10
+      ],
+      "rank_from_N11_endpoint": 346,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        9
+      ],
+      "rank_from_N11_endpoint": 347,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 348,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 349,
+      "right_orbit": [
+        1,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 350,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 351,
+      "right_orbit": [
+        2,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 352,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 353,
+      "right_orbit": [
+        0,
+        1,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 354,
+      "right_orbit": [
+        0,
+        4,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        7,
+        8
+      ],
+      "rank_from_N11_endpoint": 355,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        7
+      ],
+      "rank_from_N11_endpoint": 356,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 357,
+      "right_orbit": [
+        4,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 358,
+      "right_orbit": [
+        1,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 359,
+      "right_orbit": [
+        0,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 360,
+      "right_orbit": [
+        4,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        7
+      ],
+      "rank_from_N11_endpoint": 361,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 362,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 363,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 364,
+      "right_orbit": [
+        4,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 365,
+      "right_orbit": [
+        3,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 366,
+      "right_orbit": [
+        3,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 367,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 368,
+      "right_orbit": [
+        0,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 369,
+      "right_orbit": [
+        2,
+        3,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 370,
+      "right_orbit": [
+        0,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 371,
+      "right_orbit": [
+        1,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        8
+      ],
+      "rank_from_N11_endpoint": 372,
+      "right_orbit": [
+        0,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 373,
+      "right_orbit": [
+        0,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 374,
+      "right_orbit": [
+        1,
+        3,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 375,
+      "right_orbit": [
+        4,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 376,
+      "right_orbit": [
+        4,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 377,
+      "right_orbit": [
+        3,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        5,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 378,
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 379,
+      "right_orbit": [
+        2,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 380,
+      "right_orbit": [
+        2,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 381,
+      "right_orbit": [
+        1,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 382,
+      "right_orbit": [
+        1,
+        7,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 383,
+      "right_orbit": [
+        2,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 384,
+      "right_orbit": [
+        0,
+        1,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 385,
+      "right_orbit": [
+        2,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        9
+      ],
+      "rank_from_N11_endpoint": 386,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        8
+      ],
+      "rank_from_N11_endpoint": 387,
+      "right_orbit": [
+        5,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 388,
+      "right_orbit": [
+        3,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 389,
+      "right_orbit": [
+        2,
+        6,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 390,
+      "right_orbit": [
+        3,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 391,
+      "right_orbit": [
+        0,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 392,
+      "right_orbit": [
+        1,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 393,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 394,
+      "right_orbit": [
+        3,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        9
+      ],
+      "rank_from_N11_endpoint": 395,
+      "right_orbit": [
+        4,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 396,
+      "right_orbit": [
+        2,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        4,
+        9
+      ],
+      "rank_from_N11_endpoint": 397,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 398,
+      "right_orbit": [
+        2,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 399,
+      "right_orbit": [
+        0,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 400,
+      "right_orbit": [
+        1,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        1,
+        7
+      ],
+      "rank_from_N11_endpoint": 401,
+      "right_orbit": [
+        4,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 402,
+      "right_orbit": [
+        1,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 403,
+      "right_orbit": [
+        0,
+        6,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        10
+      ],
+      "rank_from_N11_endpoint": 404,
+      "right_orbit": [
+        0,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 405,
+      "right_orbit": [
+        0,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        9
+      ],
+      "rank_from_N11_endpoint": 406,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        8
+      ],
+      "rank_from_N11_endpoint": 407,
+      "right_orbit": [
+        2,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 408,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 409,
+      "right_orbit": [
+        3,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 410,
+      "right_orbit": [
+        3,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 411,
+      "right_orbit": [
+        3,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        4
+      ],
+      "rank_from_N11_endpoint": 412,
+      "right_orbit": [
+        1,
+        3,
+        10
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 413,
+      "right_orbit": [
+        0,
+        0,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 414,
+      "right_orbit": [
+        1,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 415,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        8
+      ],
+      "rank_from_N11_endpoint": 416,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        0,
+        4
+      ],
+      "rank_from_N11_endpoint": 417,
+      "right_orbit": [
+        0,
+        1,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 418,
+      "right_orbit": [
+        1,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 419,
+      "right_orbit": [
+        5,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 420,
+      "right_orbit": [
+        0,
+        1,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 421,
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        6,
+        8
+      ],
+      "rank_from_N11_endpoint": 422,
+      "right_orbit": [
+        2,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 423,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 424,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 425,
+      "right_orbit": [
+        0,
+        1,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        8
+      ],
+      "rank_from_N11_endpoint": 426,
+      "right_orbit": [
+        3,
+        5,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 427,
+      "right_orbit": [
+        1,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 428,
+      "right_orbit": [
+        1,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 429,
+      "right_orbit": [
+        3,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 430,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        9
+      ],
+      "rank_from_N11_endpoint": 431,
+      "right_orbit": [
+        2,
+        6,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 432,
+      "right_orbit": [
+        0,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 433,
+      "right_orbit": [
+        2,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 434,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        5,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 435,
+      "right_orbit": [
+        1,
+        2,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 436,
+      "right_orbit": [
+        3,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 437,
+      "right_orbit": [
+        0,
+        2,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        4,
+        9
+      ],
+      "rank_from_N11_endpoint": 438,
+      "right_orbit": [
+        3,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 439,
+      "right_orbit": [
+        1,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 440,
+      "right_orbit": [
+        2,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        5,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 441,
+      "right_orbit": [
+        0,
+        2,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 442,
+      "right_orbit": [
+        0,
+        0,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 443,
+      "right_orbit": [
+        2,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 444,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 445,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 446,
+      "right_orbit": [
+        2,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        5,
+        9
+      ],
+      "rank_from_N11_endpoint": 447,
+      "right_orbit": [
+        3,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 448,
+      "right_orbit": [
+        2,
+        2,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 449,
+      "right_orbit": [
+        0,
+        0,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        9
+      ],
+      "rank_from_N11_endpoint": 450,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 451,
+      "right_orbit": [
+        0,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 452,
+      "right_orbit": [
+        4,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 453,
+      "right_orbit": [
+        0,
+        4,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 454,
+      "right_orbit": [
+        2,
+        6,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        9
+      ],
+      "rank_from_N11_endpoint": 455,
+      "right_orbit": [
+        1,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        2,
+        2
+      ],
+      "rank_from_N11_endpoint": 456,
+      "right_orbit": [
+        0,
+        1,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        5
+      ],
+      "rank_from_N11_endpoint": 457,
+      "right_orbit": [
+        0,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 458,
+      "right_orbit": [
+        2,
+        4,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 459,
+      "right_orbit": [
+        1,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 460,
+      "right_orbit": [
+        0,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        4,
+        6
+      ],
+      "rank_from_N11_endpoint": 461,
+      "right_orbit": [
+        2,
+        5,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        5,
+        6
+      ],
+      "rank_from_N11_endpoint": 462,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 463,
+      "right_orbit": [
+        2,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 464,
+      "right_orbit": [
+        1,
+        1,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 465,
+      "right_orbit": [
+        1,
+        1,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 466,
+      "right_orbit": [
+        0,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 467,
+      "right_orbit": [
+        1,
+        5,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 468,
+      "right_orbit": [
+        1,
+        5,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        7
+      ],
+      "rank_from_N11_endpoint": 469,
+      "right_orbit": [
+        1,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        4,
+        5,
+        8
+      ],
+      "rank_from_N11_endpoint": 470,
+      "right_orbit": [
+        2,
+        2,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        2,
+        6
+      ],
+      "rank_from_N11_endpoint": 471,
+      "right_orbit": [
+        0,
+        1,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 472,
+      "right_orbit": [
+        0,
+        1,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        4,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 473,
+      "right_orbit": [
+        0,
+        1,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        1,
+        6
+      ],
+      "rank_from_N11_endpoint": 474,
+      "right_orbit": [
+        0,
+        0,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        1,
+        3
+      ],
+      "rank_from_N11_endpoint": 475,
+      "right_orbit": [
+        1,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        6,
+        9
+      ],
+      "rank_from_N11_endpoint": 476,
+      "right_orbit": [
+        2,
+        3,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 477,
+      "right_orbit": [
+        2,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 478,
+      "right_orbit": [
+        5,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        4,
+        10
+      ],
+      "rank_from_N11_endpoint": 479,
+      "right_orbit": [
+        3,
+        4,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 480,
+      "right_orbit": [
+        1,
+        2,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        5
+      ],
+      "rank_from_N11_endpoint": 481,
+      "right_orbit": [
+        1,
+        2,
+        3
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 482,
+      "right_orbit": [
+        1,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        0,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 483,
+      "right_orbit": [
+        2,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        3
+      ],
+      "rank_from_N11_endpoint": 484,
+      "right_orbit": [
+        2,
+        3,
+        8
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 485,
+      "right_orbit": [
+        3,
+        6,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        2,
+        2,
+        7
+      ],
+      "rank_from_N11_endpoint": 486,
+      "right_orbit": [
+        1,
+        1,
+        2
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        3
+      ],
+      "rank_from_N11_endpoint": 487,
+      "right_orbit": [
+        1,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        3,
+        6
+      ],
+      "rank_from_N11_endpoint": 488,
+      "right_orbit": [
+        0,
+        3,
+        4
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        4,
+        5
+      ],
+      "rank_from_N11_endpoint": 489,
+      "right_orbit": [
+        4,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        4,
+        4
+      ],
+      "rank_from_N11_endpoint": 490,
+      "right_orbit": [
+        4,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 491,
+      "right_orbit": [
+        0,
+        4,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        0,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 492,
+      "right_orbit": [
+        3,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        3,
+        4
+      ],
+      "rank_from_N11_endpoint": 493,
+      "right_orbit": [
+        0,
+        4,
+        9
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        6,
+        7
+      ],
+      "rank_from_N11_endpoint": 494,
+      "right_orbit": [
+        3,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        3,
+        5,
+        7
+      ],
+      "rank_from_N11_endpoint": 495,
+      "right_orbit": [
+        1,
+        6,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        4
+      ],
+      "rank_from_N11_endpoint": 496,
+      "right_orbit": [
+        2,
+        5,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        1,
+        3,
+        5
+      ],
+      "rank_from_N11_endpoint": 497,
+      "right_orbit": [
+        2,
+        3,
+        7
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": -9,
+      "left_orbit": [
+        2,
+        3,
+        7
+      ],
+      "rank_from_N11_endpoint": 498,
+      "right_orbit": [
+        1,
+        3,
+        5
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        3,
+        6,
+        6
+      ],
+      "rank_from_N11_endpoint": 499,
+      "right_orbit": [
+        3,
+        3,
+        6
+      ],
+      "source": "C500"
+    },
+    {
+      "coefficient": 9,
+      "left_orbit": [
+        1,
+        2,
+        5
+      ],
+      "rank_from_N11_endpoint": 500,
+      "right_orbit": [
+        2,
+        2,
+        5
+      ],
+      "source": "C500"
+    }
+  ],
+  "degree": 7,
+  "exact_derivative_recipe": {
+    "W_derivatives": "W1_g[h]=-2025(<D1_g[h],B>+<D_g,B1[h]>); W2_g[h,k]=-2025(<D2_g[h,k],B>+<D1_g[h],B1[k]>+<D1_g[k],B1[h]>+<D_g,B2[h,k]>).",
+    "Z_derivatives": "Z1[h]=-2025(<h_K,B>+<a_K,B1[h]>); Z2[h,k]=-2025(<h_K,B1[k]>+<k_K,B1[h]>+<a_K,B2[h,k]>).",
+    "bilinear_maps": "Define B(x,y)=P_K(i(Q dot x_P)y_Q), D_g(x,y)=-sum_(l,r in g)P_K(i(r dot x_l)y_r). Then B(a)=B(a,a), D_g(a)=D_g(a,a).",
+    "first_second_derivatives": "B1[h]=B(h,a)+B(a,h); B2[h,k]=B(h,k)+B(k,h). D1_g[h]=D_g(h,a)+D_g(a,h); D2_g[h,k]=D_g(h,k)+D_g(k,h).",
+    "gradient_directional": "DG[a][h]=Im sum_g c_g (W1_g[h] conjugate(Z)+W_g conjugate(Z1[h])).",
+    "hessian_bilinear": "D2G[a][h,k]=Im sum_g c_g (W2_g[h,k] conjugate(Z)+W1_g[h] conjugate(Z1[k])+W1_g[k] conjugate(Z1[h])+W_g conjugate(Z2[h,k])).",
+    "symmetry": "The displayed D2 formula is symmetric in h,k because B2 and D2 are symmetric and the two cross terms swap; Hessian bilinear form is real-valued on the real Fourier tangent space."
+  },
+  "formula": {
+    "P11_endpoint": "Given any larger-cutoff endpoint X, first select its P11 modes and apply physical_project; G is evaluated after this P11 physical projection.",
+    "coordinate_field": "complex Fourier coefficients a_k in C^3 subject to a[-k]=conjugate(a[k]) and k dot a[k]=0; all derivatives are over the underlying real coordinate space",
+    "definitions": [
+      "B(a)=P_K(i (Q dot a_P) a_Q).",
+      "Z(a)=-2025 conjugate(a_K) dot B(a).",
+      "For ordered pair p=(l,r) with l+r=K and both modes in P11, let orbit(k)=sort(abs(k_1),abs(k_2),abs(k_3)); retain p iff (orbit(l),orbit(r)) is a frozen coefficient key.",
+      "D_g(a)=-sum_{p=(l,r) in g} P_K(i (r dot a_l) a_r).",
+      "W_g(a)=-2025 conjugate(D_g(a)) dot B(a).",
+      "n_g(a)=Im(W_g(a) conjugate(Z(a))).",
+      "G(a)=sum_g c_g n_g(a), with exact integer c_g stored in coefficient_rows."
+    ],
+    "fixed_modes": {
+      "K": [
+        6,
+        0,
+        3
+      ],
+      "P": [
+        3,
+        2,
+        2
+      ],
+      "Q": [
+        3,
+        -2,
+        1
+      ]
+    },
+    "modes": "all integer wavevectors (i,j,k) with i^2+j^2+k^2<=121, ordered lexicographically by i then j then k over -11..11; mode count 5575",
+    "normalization": "No ratio/normalizer in G. W=|K|^4=2025. Fourier convention u(x)=sum a_k exp(i k.x) on [0,2pi)^3; volume-normalized L2 squared is sum_k |a_k|^2.",
+    "projection_Pk": "for k!=0, P_k=I-k k^T/(k dot k); for k=0, identity as in galerkin.leray, while the endpoint physical_project convention sets the zero mode to zero and enforces reality by choosing the lexicographically canonical representative and conjugating its partner",
+    "projection_rationality": "P_K=I-K K^T/45; all fixed polynomial coefficients are exact rationals with powers of i and integer c_g; no floating normalizer enters G."
+  },
+  "frozen_inputs": {
+    "C500": {
+      "artifact_file": "frozen_C500.json",
+      "artifact_id": 11120265510,
+      "artifact_sha256": "6be84be99bc489b995e496155fd7415922bc0417ed2ce0f4b078d27baa0b6cf0",
+      "key_count": 500,
+      "producer_commit": "e62ea808f468df3dd3249abc9a6c46801fc17a22",
+      "reconstruction_report_sha256": "d49350a057e465f9be9d7ec5007e84afc633f0b27d331cb6082a7755d7f83b53",
+      "run_id": 36763902966,
+      "semantic_sha256": "1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f",
+      "sha256": "0cd8298d9cc61f753a8f37cff0de411e72d83852eb38841d569c9dcad6267ae8"
+    },
+    "K36_ordered_source_orbits": {
+      "github_blob_sha": "635fd5b43d53a94cd00e8fe63ff56e0e69703a37",
+      "key_count": 36,
+      "path": "results/wp16_n12_holdout/frozen_K36_ordered_source_orbits.json",
+      "sha256": "7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47"
+    },
+    "K36_sign_chart": {
+      "K36_semantic_sha256": "7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47",
+      "github_blob_sha": "f06df05437fd717337b5bf11939e997f2a7d165e",
+      "key_count": 36,
+      "path": "results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json",
+      "sha256": "de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1"
+    },
+    "analytic_gradient_source": {
+      "artifact_id": 11106234189,
+      "artifact_sha256": "3e611b7aab3d146bed1d2037d9ffd1eb96a3e90fb7b6076ecee23ed54652339c",
+      "github_blob_sha": "8ff9ad659b3d7e5dc84694900dc1845938df3f80",
+      "path": "src/wp19_v0_27a_terminal_gradient_arb.py",
+      "producer_commit": "8274cefc0332a049bcdf56646109d3021504cf14",
+      "run_id": 36735640067
+    },
+    "galerkin_modes_source": {
+      "github_blob_sha": "bc31df07683ef5c81613216239752ebc298acf70",
+      "path": "src/wp16_036_dealiased_trajectory_gate.py"
+    },
+    "mode_and_projection_source": {
+      "github_blob_sha": "cf528816ae2984aab1ffffa2a5fa365c75019fb3",
+      "path": "src/galerkin.py"
+    },
+    "objective_source": {
+      "commit": "6cce65b47abe32b7e974c9e32e3099e970687095",
+      "github_blob_sha": "3b87a5fabffb023ba38ce9997abc10c4a1a995e8",
+      "path": "src/wp19_v0_26_signed_goal_adjoint.py"
+    }
+  },
+  "objective_name": "signed C500 numerator on P11 using the frozen prospective N13 K36 sign chart",
+  "producer_history": {
+    "N14_predictor_commit": "1a6dedb6b75d0badf7baa4f68d89938c915cb987",
+    "c500_reconstruction_commit": "e62ea808f468df3dd3249abc9a6c46801fc17a22",
+    "terminal_gradient_commit": "8274cefc0332a049bcdf56646109d3021504cf14",
+    "v026_source_commit": "6cce65b47abe32b7e974c9e32e3099e970687095"
+  },
+  "schema": "wp19-v0.28-exact-terminal-objective-spec-v1",
+  "status": "PASS_EXACT_FACTORISED_POLYNOMIAL_AND_FROZEN_COEFFICIENTS_RECOVERED"
+}
