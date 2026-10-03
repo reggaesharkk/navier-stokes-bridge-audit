@@ -138,7 +138,7 @@
   "status": "STOP_SEMANTIC_GATE_FAILED_BEFORE_CODE_OR_HEAVY_COMPUTE",
   "structural_decomposition": {
     "defect_formula": "L_n=h E_n D_n, where D_n is a Bernstein supremum of a global L2 adjoint defect; global Cauchy-Schwarz removes correlation. Total retained defect is only 240063.832492240296.",
-    "exact_time_shell_and_primal_adjoint_split": "NOT RECOVERABLE FROM THE FROZEN AGGREGATE; pilot intentionally not run.",
+    "exact_time_shell_and_primal_adjoint_split": "Time split recovered from the v0.3 exact-rational replay table (listed above); mode/shell and primal-versus-adjoint finer split are NOT RECOVERABLE from frozen aggregate files.",
     "failed_relaxations_identified": [
       "global scalar-radius propagation erases shellwise damping and phase",
       "global Young coefficient collapses Fourier structure",
@@ -146,10 +146,98 @@
       "terminal endpoint uses an independent norm product",
       "absolute/global bounds lose joint quadratic-endpoint correlation"
     ],
+    "mode_shell_primal_adjoint_split": "NOT RECOVERABLE FROM THE FROZEN AGGREGATE; no shell totals inferred and pilot intentionally not run.",
     "quadratic_formula": "Q_n=h E_n^2 W_n; h=1/80000, E_n is a scalar global L2 M15 radius, W_n is a global adjoint coefficient. The target Young coefficient is W_n=15 sum_k |lambda_k|+sqrt(14147)*sqrt(sum_k |k|^2 |lambda_k|^2), maximized over global Bernstein controls.",
     "quadratic_provenance_limits": "Aggregate stores global per-step bounds, not subterms by time/mode/shell/primal-vs-adjoint source or per-mode pairing. The requested detailed numerical decomposition is unavailable from frozen aggregate files; do not infer shell totals.",
     "terminal_formula": "B_T=||lambda(T)||_2 E_240; reported ||lambda(T)||_2=4691959667101.2573649... and E_240=10.559636070809868141657764813075.",
-    "terminal_provenance_limits": "Independent global L2 product; no signed endpoint vector pairing. Frozen input does not serialize endpoint compatibility over the error tube or R_G."
+    "terminal_provenance_limits": "Independent global L2 product; no signed endpoint vector pairing. Frozen input does not serialize endpoint compatibility over the error tube or R_G.",
+    "time_profile_note": "The final 20 steps contribute about 69.5% of Q; step 239 is largest at about 6.691946535049e12. Terminal B_T is a single endpoint term, not naturally time-segmented.",
+    "time_segment_quadratic_sums": [
+      {
+        "quadratic_upper_sum": "56851493.5004",
+        "steps": [
+          0,
+          19
+        ]
+      },
+      {
+        "quadratic_upper_sum": "550690348.3996",
+        "steps": [
+          20,
+          39
+        ]
+      },
+      {
+        "quadratic_upper_sum": "2487531778.4980",
+        "steps": [
+          40,
+          59
+        ]
+      },
+      {
+        "quadratic_upper_sum": "8910533871.6721",
+        "steps": [
+          60,
+          79
+        ]
+      },
+      {
+        "quadratic_upper_sum": "28731796488.2294",
+        "steps": [
+          80,
+          99
+        ]
+      },
+      {
+        "quadratic_upper_sum": "87865332121.5261",
+        "steps": [
+          100,
+          119
+        ]
+      },
+      {
+        "quadratic_upper_sum": "262855070512.0294",
+        "steps": [
+          120,
+          139
+        ]
+      },
+      {
+        "quadratic_upper_sum": "785774953682.9028",
+        "steps": [
+          140,
+          159
+        ]
+      },
+      {
+        "quadratic_upper_sum": "2383065138218.1041",
+        "steps": [
+          160,
+          179
+        ]
+      },
+      {
+        "quadratic_upper_sum": "7412357314641.6179",
+        "steps": [
+          180,
+          199
+        ]
+      },
+      {
+        "quadratic_upper_sum": "23830256274409.9498",
+        "steps": [
+          200,
+          219
+        ]
+      },
+      {
+        "quadratic_upper_sum": "79290095908202.2205",
+        "steps": [
+          220,
+          239
+        ]
+      }
+    ]
   },
   "vector_error_path": {
     "available": "Frozen M15 machinery propagates scalar global L2 radii by E[n+1]=exp(M[n]h)E[n]+R[n](exp(M[n]h)-1)/M[n]. The same-datum N15 bundle is a large saved trajectory/state artifact, and adjoint files are binary64 values/RHS reconstruction; neither is a modewise interval tube for e_n.",
