@@ -46,10 +46,17 @@ def sqrt_upper(q: Fraction, places: int = 40) -> Fraction:
 
 
 def dec(q: Fraction, places: int = 24) -> str:
-    """Outward ceiling on a fixed decimal grid, including negative values."""
+    """Outward upper endpoint: ceiling on a fixed decimal grid."""
     scale = 10**places
     n = q.numerator * scale
     k = -((-n) // q.denominator)  # ceil(n/d), valid for either sign
+    return f"{k // scale}.{abs(k) % scale:0{places}d}" if k >= 0 else f"-{(-k) // scale}.{(-k) % scale:0{places}d}"
+
+
+def dec_lower(q: Fraction, places: int = 24) -> str:
+    """Outward lower endpoint: floor, including for negative certificates."""
+    scale = 10**places
+    k = (q.numerator * scale) // q.denominator  # Python // is mathematical floor
     return f"{k // scale}.{abs(k) % scale:0{places}d}" if k >= 0 else f"-{(-k) // scale}.{(-k) % scale:0{places}d}"
 
 
@@ -169,6 +176,8 @@ def run(args):
     fd1_rel = abs(fd1-d1)/max(1.0,abs(fd1),abs(d1))
     fd2_rel = abs(mixed-d2)/max(1.0,abs(mixed),abs(d2))
     sym_rel = abs(d2-d2kh)/max(1.0,abs(d2),abs(d2kh))
+    frozen_margin = Fraction("-163632635604904.374992408432849939981122")
+    safe_margin = dec_lower(frozen_margin)
 
     forced = json.loads(forced_path.read_text())
     endpoint = json.loads(endpoint_path.read_text())
@@ -213,6 +222,7 @@ def run(args):
             "pass_threshold": 2e-5,
             "pass": max(fd1_rel,fd2_rel,sym_rel) < 2e-5,
         },
+        "outward_rounding_check": {"rule":"lower endpoints use floor; upper endpoints use ceiling", "frozen_negative_margin_exact":str(frozen_margin), "safe_lower_24_places":safe_margin, "expected_safe_lower_24_places":"-163632635604904.374992408432849939981122", "pass":safe_margin == "-163632635604904.374992408432849939981122"},
         "analytic_derivative": "B1[h]=B(h,a)+B(a,h), B2[h,k]=B(h,k)+B(k,h); D derivatives are the same bilinear product rule; D2G is the four-factor product rule in the source implementation.",
         "endpoint_radius_inputs": {"initial_energy_norm_upper": dec(u0), "M14_terminal_uncertainty": str(delta14), "M15_error_radius": str(E), "global_segment_norm_radius_R": dec(R)},
         "hessian_operator_bound": {"coefficient_exact": str(hess_coeff), "R_power": 5, "upper_decimal": dec(H)},
