@@ -214,9 +214,9 @@ This exposes the strongest candidate: preserve the signed defect/nonlinear/termi
 
 ### Best next proof/computation
 
-Build a one-tail joint-pairing pilot on steps 220–239, but only after the run produces a validated M15 error vector `e_n` (the frozen files contain scalar radii, not this vector). Replay, for each half-step and frequency shell, the signed interval pairings `<d,e>` and `<lambda,C(e,e)>`, carry the accumulated error enclosure from step 219, compare their sum plus the signed residual integral against the terminal endpoint pairing, and enclose `R_G`. If the tail pilot cannot beat the independent `Q+B_T` budget by at least four orders, stop before full-path heavy compute. If it passes, extend backward/forward coverage to all 240 half-steps and produce a hash-bound certificate.
+This was the v0.3 proposal. The v0.4 semantic audit stopped before pilot code or compute because terminal-gradient compatibility over the endpoint tube and `R_G` are not certified. Reconsider the steps 220–239 pilot only after those semantic gates pass and a validated vector error enclosure at step 219 exists; then apply the predeclared 10^4 improvement gate before any full-path work.
 
-Required new source/results:
+Conditional files if the semantic and vector-state gates reopen:
 
 - `src/wp19_v0_28_m15_joint_pairing_pilot.py` — interval M15 difference-vector propagation and signed per-shell pairings, retaining viscous block damping.
 - `results/wp19_v0_28/joint_pairing_20261003/tail_220_239.json` — pilot certificate bound to the frozen lower path, adjoint, residual, and artifact hashes.
@@ -252,6 +252,8 @@ The finite-dimensional identity under the repository sign convention remains con
 For `e(0)=0`, integrate to obtain `<lambda(T),e(T)> = integral<lambda,r> + integral<d,e> + integral<lambda,C(e,e)>`. The objective difference additionally requires `<grad G(U(T))-lambda(T),e(T)> + R_G`; neither term is certified away.
 
 ### Bottleneck decomposition and structural limits
+
+The prior exact-rational replay already gives a time-band split: steps 0–19 `56,851,493.5004`; 20–39 `550,690,348.3996`; 40–59 `2,487,531,778.4980`; 60–79 `8,910,533,871.6721`; 80–99 `28,731,796,488.2294`; 100–119 `87,865,332,121.5261`; 120–139 `262,855,070,512.0294`; 140–159 `785,774,953,682.9028`; 160–179 `2,383,065,138,218.1041`; 180–199 `7,412,357,314,641.6179`; 200–219 `23,830,256,274,409.9498`; 220–239 `79,290,095,908,202.2205`. The final 20 steps account for about 69.5% of Q, with step 239 largest at about `6.691946535049e12`. The terminal endpoint term is not apportioned across time. Frozen aggregate files do not expose a mode/shell or primal/adjoint subterm split.
 
 - Whole-path quadratic: `Q_n=h E_n^2 W_n`, `h=1/80000`; `E_n` is a scalar global L2 M15 error radius. `W_n` uses global Fourier sums and a global Bernstein control, including `15 sum|lambda_k| + sqrt(14147)*sqrt(sum |k|^2 |lambda_k|^2)`. Frozen aggregates do not expose per-shell, mode, source, or primal/adjoint subterm values, so the requested granular numerical decomposition is not recoverable without new data.
 - Terminal boundary: `B_T=||lambda(T)||_2 E_240`, with reported `||lambda(T)||_2=4,691,959,667,101.2573649...` and `E_240=10.559636070809868141657764813075`. It is an independent global norm product, not a signed endpoint pairing.
