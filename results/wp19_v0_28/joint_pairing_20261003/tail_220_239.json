@@ -1,0 +1,168 @@
+{
+  "candidate_sharpenings_ranked": [
+    {
+      "gate": "First certify objective semantics, terminal mismatch, endpoint error tube, and Hessian remainder. Current gate fails.",
+      "maximum_budget_impact_ceiling": "At most the current Q+B_T block = 163638394179276.148329841175920939981122 before the small retained defect; this is a ceiling, not achieved impact.",
+      "rank": 1,
+      "route": "Joint signed duality identity including endpoint compatibility and R_G"
+    },
+    {
+      "gate": "Need validated vector propagation with shellwise residual and strain controls.",
+      "maximum_budget_impact_ceiling": "Could in principle act on Q+B_T if it proves the necessary radius/adjoint-relevant reduction; no current vector tube or quantitative bound. Uniform radius scale for old shape is about 1/8606 for budget closure, as previously replayed.",
+      "rank": 2,
+      "route": "Validated mode-block dissipative/logarithmic-norm propagation of error and adjoint-relevant modes"
+    },
+    {
+      "gate": "Requires complex-phase vector enclosure for e and mode-resolved lambda.",
+      "maximum_budget_impact_ceiling": "At most Q=114093007395768.650060299107920939981122 if considered alone; endpoint B_T remains.",
+      "rank": 3,
+      "route": "Exact signed quadratic form and frequency-localized pairing"
+    },
+    {
+      "gate": "Requires exact endpoint definition, certified lambda(T)-grad G mismatch and e(T), plus R_G.",
+      "maximum_budget_impact_ceiling": "At most B_T=49545386543507.498269542068 if considered alone; Q remains 114093007395768.650060299107920939981122.",
+      "rank": 4,
+      "route": "Terminal endpoint compatibility/signed endpoint pairing"
+    },
+    {
+      "gate": "Rejected absent a new structural theorem.",
+      "maximum_budget_impact_ceiling": "Prior full remainder improvement was only 0.259%; not an order-scale route.",
+      "rank": 5,
+      "route": "Further local support coefficient sharpening"
+    }
+  ],
+  "claim_boundary": "STOP record, not a pilot certificate. Finite M15/Galerkin audit only. No all-cutoff uniform estimate, continuum conclusion, regularity or blow-up claim, or Millennium-problem closure.",
+  "coverage_requested": [
+    220,
+    239
+  ],
+  "created_utc": "2026-10-03",
+  "files_required_if_gate_reopens": [
+    "src/wp19_v0_28_m15_joint_pairing_pilot.py",
+    "results/wp19_v0_28/joint_pairing_20261003/tail_220_239.json",
+    ".github/workflows/wp19-v0-28-joint-pairing-pilot.yml"
+  ],
+  "frozen_artifacts": [
+    {
+      "artifact_id": 11251177469,
+      "name": "wp19-v0-28-m15-targeted-220-239",
+      "run_id": 37049588602,
+      "sha256": "7186f6922efcaec2f3e612c18d68b2335319fa1c61a48a900703712f4828801f"
+    },
+    {
+      "artifact_id": 11237961041,
+      "name": "frozen reconstructed dual-integral aggregate",
+      "run_id": 37031754310,
+      "sha256": "886a5f23e4ac6424944cc5207aa874bd51f435d818b6677b90940ede356ae826"
+    },
+    {
+      "artifact_id": 11082656428,
+      "name": "wp19-same-datum-N15-arb",
+      "producer_commit": "e62ea808f468df3dd3249abc9a6c46801fc17a22",
+      "run_id": 36669057015,
+      "sha256": "824634cc562b7a958f2ce8ba94d2561a71aa1b8fcbdf2551f3b204f84b3d80c0"
+    },
+    {
+      "artifact_id": 11121015458,
+      "name": "M14_arb_vjp_point adjoint export",
+      "run_id": 36763902966,
+      "sha256": "330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058"
+    }
+  ],
+  "frozen_budget": {
+    "adjoint_defect_upper": "240063.832492240296",
+    "conservative_remainder_upper": "163638394179339.980822081471920939981122",
+    "remainder_over_positive_signed_lower_approx": "28416",
+    "safe_outward_signed_margin_lower": "-163632635604904.374992408432849939981122",
+    "signed_integral_lower": "5758574435.605829673039071",
+    "terminal_boundary_upper": "49545386543507.498269542068",
+    "whole_path_quadratic_upper": "114093007395768.650060299107920939981122"
+  },
+  "frozen_input_sha256": {
+    "M14_arb_adjoint_export_artifact_zip_sha256": "330bb3e931fa8d45d1837c090b13a4a638fb54577cb26b8d8eaa2fe009303058",
+    "M15_support_artifact_zip_sha256": "7186f6922efcaec2f3e612c18d68b2335319fa1c61a48a900703712f4828801f",
+    "N15_same_datum_artifact_zip_sha256": "824634cc562b7a958f2ce8ba94d2561a71aa1b8fcbdf2551f3b204f84b3d80c0",
+    "aggregate_adjoint_report": "981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8",
+    "aggregate_adjoint_rhs": "8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
+    "aggregate_adjoint_values": "00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab",
+    "aggregate_lower_metadata": "0ce684a72ba61de86b6d4293c28e14c6cff260585b86c3bd6ebea447b041c43e",
+    "aggregate_lower_nodes": "e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0",
+    "aggregate_lower_rhs": "f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253",
+    "aggregate_pilot_source": "c6ec8c08ff4d6d1c0ebcf2aa13fcc054348a06b7c230e348a67010cd88f963a5",
+    "aggregate_shard_runner": "14478f31aaa3f46ef9544bb692ff801824ead02cf766b4dabad0c70bfc4b6d6b",
+    "frozen_dual_integral_aggregate_artifact_zip_sha256": "886a5f23e4ac6424944cc5207aa874bd51f435d818b6677b90940ede356ae826"
+  },
+  "next_best_attempt": "A small, non-heavy semantic repair package: produce a validated terminal gradient enclosure on the full endpoint error tube and an Arb Hessian supremum for the exact fixed degree-7 G; reconcile the discrete adjoint terminal seed and endpoint convention. In parallel at proof-design level specify what data a vector e_219 interval certificate needs. Resume the tail pilot only after terminal compatibility and R_G are certified and a vector tube can be initialized rigorously.",
+  "objective_semantics": {
+    "P_definition": "The frozen P is the signed integral of the saved reconstructed fields: coefficientwise integral of conjugate(lambda reconstruction) times residual reconstruction, with r=F_15(U)-U_t and F_15(U)=-P_15(U\u00b7grad U)-nu A U. The frozen aggregate lower endpoint is 5758574435.605829673039071.",
+    "P_equals_integral_lambda_r": "YES for those saved Hermite/binary64 reconstructions and their implemented quadrature enclosure.",
+    "P_equals_true_or_certified_M15_pairing": "NO. The adjoint export explicitly limits itself to saved binary64 centers/RHS and does not certify the adjoint trajectory, the primal trajectory, or this pairing for a certified true M15 error path.",
+    "finite_dimensional_sign_convention": "F(U)=-P_15(U\u00b7grad U)-nu A U; r=F(U)-U_t; e=V-U; A_U=DF(U); C(e,e)=F(U+e)-F(U)-A_U e; d=lambda_t+A_U^*lambda, equivalently code defect lambda_t-(DN(U)^*lambda+nu A lambda). Then e_t=A_U e+C(e,e)+r and d/dt<lambda,e>=<d,e>+<lambda,r>+<lambda,C(e,e)>. If e(0)=0, <lambda(T),e(T)>=integral<lambda,r>+integral<d,e>+integral<lambda,C(e,e)>. For G(V(T))-G(U(T)), add <grad G(U(T))-lambda(T),e(T)> and R_G; omitting these requires certified exact terminal compatibility and a bound on R_G.",
+    "lambda_terminal_condition": "Intended terminal seed is the floating gradient of G at a nominal projected binary64 endpoint. It is approximate at that nominal point; exact equality to grad G(U(T)) over the certified endpoint set is not established. The frozen full-path aggregate excludes terminal-gradient/input-gradient uncertainty.",
+    "terminal_objective_G": "Fixed degree-7 polynomial signed C500 numerator on P11 modes using the frozen K36 sign chart and C500 coefficients (the source describes the fixed polynomial signed numerator with prospective N13 K36 sign chart).",
+    "terminal_taylor_remainder_R_G": "Identified as integral_0^1 (1-s) D^2G(U(T)+s e(T))[e(T),e(T)] ds. No rigorous enclosure is present in frozen artifacts; the observed floating endpoint Taylor check is not a validated bound."
+  },
+  "pilot_launched": false,
+  "pilot_results": {
+    "explanation": "No joint-pairing calculations are represented. User required stopping on semantic mismatch before code/heavy compute.",
+    "four_order_gate": "NOT_RUN_SEMANTIC_STOP",
+    "identity_residual_interval": null,
+    "improvement_factor_vs_tail_Q_plus_B": null,
+    "signed_pairings_by_shell": null,
+    "terminal_R_G_bound": null
+  },
+  "record_type": "semantic_stop_record_not_pilot_certificate",
+  "schema": "wp19-v0.28-joint-pairing-tail-gate-v1",
+  "source_blob_sha1_or_github_blob_ids": {
+    ".github/workflows/wp19_v0_28_reconstructed_dual_integral_pilot.yml": "9b1e4717e7eaf98ca504e259b09783951db62b96",
+    "results/wp19_v0_28/dual_integral_fullpath_m14_20261002/aggregate.json": "966f4b368e3ecc01b30dc970cf2621b7ebc91691",
+    "results/wp19_v0_28/dual_integral_fullpath_m14_20261002/freeze_note.md": "ce0f725289b93c330cd603689630a900eb5b4289",
+    "src/wp19_v0_26_signed_goal_adjoint.py": "3b87a5fabffb023ba38ce9997abc10c4a1a995e8",
+    "src/wp19_v0_27a_terminal_gradient_arb.py": "8ff9ad659b3d7e5dc84694900dc1845938df3f80",
+    "src/wp19_v0_27c1_export_adjoint_path.py": "9b79b09082df6bc4304702fdc36906ce92bb1cb4",
+    "src/wp19_v0_28_adjoint_segment_arb.py": "a3ac8029d9bd2c5bc956837a9bedc5b484c37e1c",
+    "src/wp19_v0_28_aggregate_reconstructed_dual_integral_fullpath.py": "d486563fb7fc83a4275a94b06663cb6a75152959",
+    "src/wp19_v0_28_goal_weighted_primal_uncertainty_fullpath.py": "a401a041b9de639edd66d91ce8a2aab943e3840d",
+    "src/wp19_v0_28_m15_forced_radius_replay.py": "1f02d5432a19d4d184097c2a5606b553f1000d83",
+    "src/wp19_v0_28_m15_weighted_remainder_replay.py": "9c796eed93ca523ac7bcabff27b6fe30fa1022e3",
+    "src/wp19_v0_28_reconstructed_dual_integral_fullpath_shard.py": "a66e0e9f705478830beffce08460347c9071f0b7",
+    "src/wp19_v0_28_reconstructed_dual_integral_pilot.py": "6c3222c6690cca73bbc21150ec35f5a539680765"
+  },
+  "source_commit_relation": {
+    "branch": "wp19-v0-28-duality-compatibility-audit",
+    "note": "Current PR head recorded from the verified frozen state; historical producers also include the commits noted in their respective artifact metadata.",
+    "pr": 155,
+    "source_commit_sha": "d6639f86359a8d2c205bfd0cf67ab433a13ae94f"
+  },
+  "source_commit_sha": "d6639f86359a8d2c205bfd0cf67ab433a13ae94f",
+  "status": "STOP_SEMANTIC_GATE_FAILED_BEFORE_CODE_OR_HEAVY_COMPUTE",
+  "structural_decomposition": {
+    "defect_formula": "L_n=h E_n D_n, where D_n is a Bernstein supremum of a global L2 adjoint defect; global Cauchy-Schwarz removes correlation. Total retained defect is only 240063.832492240296.",
+    "exact_time_shell_and_primal_adjoint_split": "NOT RECOVERABLE FROM THE FROZEN AGGREGATE; pilot intentionally not run.",
+    "failed_relaxations_identified": [
+      "global scalar-radius propagation erases shellwise damping and phase",
+      "global Young coefficient collapses Fourier structure",
+      "Cauchy-Schwarz separates adjoint defect and error",
+      "terminal endpoint uses an independent norm product",
+      "absolute/global bounds lose joint quadratic-endpoint correlation"
+    ],
+    "quadratic_formula": "Q_n=h E_n^2 W_n; h=1/80000, E_n is a scalar global L2 M15 radius, W_n is a global adjoint coefficient. The target Young coefficient is W_n=15 sum_k |lambda_k|+sqrt(14147)*sqrt(sum_k |k|^2 |lambda_k|^2), maximized over global Bernstein controls.",
+    "quadratic_provenance_limits": "Aggregate stores global per-step bounds, not subterms by time/mode/shell/primal-vs-adjoint source or per-mode pairing. The requested detailed numerical decomposition is unavailable from frozen aggregate files; do not infer shell totals.",
+    "terminal_formula": "B_T=||lambda(T)||_2 E_240; reported ||lambda(T)||_2=4691959667101.2573649... and E_240=10.559636070809868141657764813075.",
+    "terminal_provenance_limits": "Independent global L2 product; no signed endpoint vector pairing. Frozen input does not serialize endpoint compatibility over the error tube or R_G."
+  },
+  "vector_error_path": {
+    "available": "Frozen M15 machinery propagates scalar global L2 radii by E[n+1]=exp(M[n]h)E[n]+R[n](exp(M[n]h)-1)/M[n]. The same-datum N15 bundle is a large saved trajectory/state artifact, and adjoint files are binary64 values/RHS reconstruction; neither is a modewise interval tube for e_n.",
+    "certified": "NO",
+    "heavy_compute_authorized_by_user_but_blocked_by_explicit_semantic_gate": "The task explicitly says stop before heavy compute if any semantic identification fails; terminal compatibility and R_G fail that gate.",
+    "requirements_missing": [
+      "validated interval vector initial-to-tail state or independently certified e_219 enclosure",
+      "per-mode residual/state enclosures preserving complex phase and conjugate symmetry",
+      "rigorous discrete-step propagation with divergence-free projection and viscosity",
+      "terminal gradient compatibility enclosure over endpoint tube",
+      "Hessian bound for G on endpoint tube"
+    ]
+  },
+  "workflow_disposition": "No workflow created or launched; semantic/objective gate failed and inputs do not supply a certified vector error path.",
+  "workflow_launched": false
+}
