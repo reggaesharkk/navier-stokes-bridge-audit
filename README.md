@@ -4,7 +4,7 @@
 
 ## 24 September 2026 scope note
 
-This project is maintained as an independent exploratory mathematical audit within the wider Reggae Shark Universe. Its finite-mode checks, counterexamples, and small-data estimate do not constitute an arbitrary-data global-regularity proof for the three-dimensional incompressible Navier–Stokes equations.
+I maintain this project as an exploratory mathematical audit within the wider Reggae Shark Universe. I do not treat its finite-mode checks, counterexamples, or small-data estimate as an arbitrary-data global-regularity proof for the three-dimensional incompressible Navier–Stokes equations.
 
 ---
 
