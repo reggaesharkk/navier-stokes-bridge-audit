@@ -24,7 +24,7 @@ The Python replay job passed the archive checksum, package manifest, finite arit
 
 ## GitHub Actions run 12 diagnostic
 
-The Python job and Lean library build passed again. The axiom-audit action then reported that it could not load module prefix `NavierStokesWP19Bridge`, because the Lake library had no root module with that name. I added a root module that imports `NavierStokesWP19BridgeCert` and set the audit root explicitly. The current GitHub run checks that correction.
+The Python job and explicit Lean library build passed. The axiom-audit action reported zero declarations because it filters by the compiled module path; the theorem declarations were in `NavierStokesWP19BridgeCert`, outside the audited `NavierStokesWP19Bridge` root. Adding a forwarding root alone did not fix that mismatch. I moved the certificate source to `NavierStokesWP19Bridge.Cert`, made the root import it, and retained both prior module names as compatibility shims. The next GitHub run checks that module-path correction.
 
 Input archive SHA-256: `aaf53b6f64fee6d0cf40ef70a7782bd6ad9b1e24d6662e08070c651cb56ef3fe`.
 
@@ -43,3 +43,7 @@ I also checked the public head of draft PR [#155](https://github.com/reggaeshark
 Attack board v0.6 later reports a targeted steps-220–239 recomputation that reduces the full remainder by about 0.259%, but the signed margin remains negative at `-163632635604904.374992408432849939981122`. I treat this improvement as reported, not independently verified: the claimed output JSON is absent from the PR's changed-file list and the PR says no long Actions run was started. The two M14 records are also distinct: this package replays three scalar recurrence steps, while the PR's 240-step quadrature covers saved reconstructions only.
 
 This is a review of the public draft records, not a fresh execution of that branch's calculations. Its values are kept separate from the v0.29.1 package replay and do not constitute signed transfer closure. The detailed source paths and the next proof obligations are in `M14_M15_DRAFT_PR155_CONTEXT.md`.
+
+## GitHub Actions run 41323635095 diagnostic
+
+The Python job and Lean library build passed. The axiom-audit tool then reported `audited 0 declarations under NavierStokesWP19Bridge`: its root filter applies to compiled module names, not the Lean declaration namespace. The certificate module was named `NavierStokesWP19BridgeCert`, so a forwarding import at the root still left the audited module outside that prefix. I moved the certificate file to `lean/NavierStokesWP19Bridge/Cert.lean`; the new root imports that module, and compatibility import modules preserve the earlier paths. The next Actions run checks this correction.
