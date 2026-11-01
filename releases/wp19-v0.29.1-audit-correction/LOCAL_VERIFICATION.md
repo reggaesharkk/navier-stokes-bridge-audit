@@ -16,7 +16,15 @@ The Ubuntu `lean_check.log` was produced by the Python source scanner; it is not
 
 ## Lean build
 
-A local `lake update` and `lake build` were attempted with the pinned Lean 4.35.0 toolchain and Mathlib v4.35.0 tag. Both stopped while fetching Mathlib because this environment could not resolve `github.com`; therefore I have no local Lean compiler result. The GitHub Actions workflow is configured to build the Lake project, audit axioms, and run an independent `nanoda` check.
+A local `lake update` and `lake build` were attempted with the pinned Lean 4.35.0 toolchain and Mathlib v4.35.0 tag. Both stopped while fetching Mathlib because this environment could not resolve `github.com`; therefore I have no local Lean compiler result.
+
+## GitHub Actions run 10 diagnostic
+
+The Python replay job passed the archive checksum, package manifest, finite arithmetic replay, and all seven tests under normal mode, `-O`, and `-OO`. The Lean job completed `lake build NavierStokesWP19Bridge` successfully. The optional Nanoda step then failed with `invalid digit found in string` while parsing its exported environment, so the axiom audit was skipped. The workflow now omits Nanoda while retaining the explicit Lean library build and axiom audit. This recorded failure is a checker error; it is not a failed Lean compilation or a mathematical result.
+
+## GitHub Actions run 12 diagnostic
+
+The Python job and Lean library build passed again. The axiom-audit action then reported that it could not load module prefix `NavierStokesWP19Bridge`, because the Lake library had no root module with that name. I added a root module that imports `NavierStokesWP19BridgeCert` and set the audit root explicitly. The current GitHub run checks that correction.
 
 Input archive SHA-256: `aaf53b6f64fee6d0cf40ef70a7782bd6ad9b1e24d6662e08070c651cb56ef3fe`.
 
