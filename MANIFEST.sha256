@@ -52,4 +52,4 @@ e54ca4ac0f30d978c29b88ac53fc4e763ea0b6fd0e21897edddee91f1628c468  releases/wp19-
 d1f9b5a3d55d6d9e3f6e9e164595b8d812d4c2094bdddacd9b3fc8ac3e835b8d  releases/wp19-v0.29.1-audit-correction/SHA256SUMS.txt
 1b52222a9eaee8652a5bddbb8777106faf18c5b60d7e4bb5a24b2426174813db  releases/WP19_v0.29.1_Audit_Correction.zip
 9454f62e70121961f1d7acd8efb5d51cd8eee9a49e42fe4f66859b9a6a153bac  releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt
-6230854db7c21799414599030132529468a7f879dad3e15d57a6c0184b8d0d0c  .github/workflows/wp19-v0291-verify.yml
+3c54e1a93deb496ba57bde7b2afd903d56a9b3b3ef4c4403849e3affb7adbbf9  .github/workflows/wp19-v0291-verify.yml
