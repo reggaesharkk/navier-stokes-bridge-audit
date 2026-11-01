@@ -33,7 +33,7 @@ Attack board v0.6 reports a targeted M15-support improvement on steps 220–239:
 - It does not prove an N-to-infinity limit or any statement covering every cutoff.
 - It does not solve the Clay Millennium Problem.
 - The Lean file contains elementary conditional arithmetic lemmas. Their hypotheses are assumptions; the theorems do not derive the research estimates or verify numerical certificates.
-- The Python Lean scanner checks source text and declaration names only. It is not a Lean compiler. The GitHub workflow separately builds the Lake package and runs configured proof checks.
+- The Python Lean scanner checks source text and declaration names only. It is not a Lean compiler. The Lake package now declares `NavierStokesWP19Bridge` as its default target and includes both the certificate module and a package-root import module, so a bare `lake build` compiles the actual Lean source and the independent checker can resolve the package root. The GitHub workflow also builds that library target explicitly before its configured proof checks.
 - SHA-256 files provide byte-integrity checks only when compared with a trusted copy. They do not authenticate authorship or prevent someone from replacing both a file and its checksum.
 
 ## Run locally

@@ -67,6 +67,9 @@ jobs:
           export PATH="$HOME/.elan/bin:$PATH"
           elan toolchain install "$(cat lean-toolchain)"
           lake update
+      - name: Build the declared Lean library
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: lake build NavierStokesWP19Bridge
       - uses: leanprover/lean-action@v1
         with:
           lake-package-directory: releases/wp19-v0.29.1-audit-correction
