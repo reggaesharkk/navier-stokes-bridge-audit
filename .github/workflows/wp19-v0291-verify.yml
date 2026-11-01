@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Verify release archive checksum
-        run: sha256sum -c releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt
+        run: (cd releases && sha256sum -c WP19_v0.29.1_Audit_Correction.zip.sha256.txt)
       - name: Extract release package
         run: unzip -oq releases/WP19_v0.29.1_Audit_Correction.zip -d releases/wp19-v0.29.1-audit-correction
       - name: Verify package checksums
@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Verify release archive checksum
-        run: sha256sum -c releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt
+        run: (cd releases && sha256sum -c WP19_v0.29.1_Audit_Correction.zip.sha256.txt)
       - name: Extract release package
         run: unzip -oq releases/WP19_v0.29.1_Audit_Correction.zip -d releases/wp19-v0.29.1-audit-correction
       - uses: leanprover/lean-action@v1
