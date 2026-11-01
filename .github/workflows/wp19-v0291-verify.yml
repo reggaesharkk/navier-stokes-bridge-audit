@@ -1,0 +1,72 @@
+name: WP19 v0.29.1 verification
+
+on:
+  push:
+    paths:
+      - '.github/workflows/wp19-v0291-verify.yml'
+      - 'releases/WP19_v0.29.1_Audit_Correction.zip'
+      - 'releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt'
+      - 'releases/wp19-v0.29.1-audit-correction/**'
+  pull_request:
+    paths:
+      - '.github/workflows/wp19-v0291-verify.yml'
+      - 'releases/WP19_v0.29.1_Audit_Correction.zip'
+      - 'releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt'
+      - 'releases/wp19-v0.29.1-audit-correction/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-replay:
+    name: Python replay and regression suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify release archive checksum
+        run: sha256sum -c releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt
+      - name: Extract release package
+        run: unzip -oq releases/WP19_v0.29.1_Audit_Correction.zip -d releases/wp19-v0.29.1-audit-correction
+      - name: Verify package checksums
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Run source-only Lean scan
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: python -B tools/check_ns_lean_axioms.py
+      - name: Replay finite arithmetic
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: python -B src/navier_stokes_v029_closure_suite.py
+      - name: Run tests in normal mode
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: python -B -m unittest discover -s tests -v
+      - name: Run tests with -O
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: python -B -O -m unittest discover -s tests -v
+      - name: Run tests with -OO
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: python -B -OO -m unittest discover -s tests -v
+      - name: Confirm release files remain unchanged
+        working-directory: releases/wp19-v0.29.1-audit-correction
+        run: sha256sum -c SHA256SUMS.txt
+
+  lean-build:
+    name: Lean build and proof checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify release archive checksum
+        run: sha256sum -c releases/WP19_v0.29.1_Audit_Correction.zip.sha256.txt
+      - name: Extract release package
+        run: unzip -oq releases/WP19_v0.29.1_Audit_Correction.zip -d releases/wp19-v0.29.1-audit-correction
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: releases/wp19-v0.29.1-audit-correction
+          build: true
+          use-mathlib-cache: true
+          axiom-audit: true
+          nanoda: true
+          nanoda-allow-sorry: false

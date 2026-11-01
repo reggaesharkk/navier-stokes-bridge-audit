@@ -10,6 +10,23 @@
 
 > **Rights boundary — effective 1 October 2026:** New author-owned original material first published here from this date is **All Rights Reserved** by default. Earlier express licenses remain in force for the material they cover. Read [the rights policy](RIGHTS_POLICY_2026_10_01.md) and the [shared portfolio evidence standard](https://github.com/reggaesharkk/Reggae-shark-universe-/blob/main/PORTFOLIO_EVIDENCE_AND_RIGHTS_STANDARD_2026_10_01.md).
 
+## 1 November 2026 — WP19 v0.29.1 audit update
+
+I assembled a reproducible review bundle with the selected finite-cutoff records, arithmetic replay, Lean source, seven tests, Windows and Ubuntu run logs, checksums, and an audit report.
+
+- [Download the review ZIP](releases/WP19_v0.29.1_Audit_Correction.zip)
+- [Read the package overview](releases/wp19-v0.29.1-audit-correction/README.md)
+- [Read the audit report](releases/wp19-v0.29.1-audit-correction/WP19_v0.29.1_Audit_Report.pdf)
+- [Read the M14/M15 evidence and open gates](releases/wp19-v0.29.1-audit-correction/M14_M15_DRAFT_PR155_CONTEXT.md)
+
+The Python replay and seven tests pass locally in normal, `-O`, and `-OO` modes on Windows and Ubuntu. The bundled Ubuntu ZIP has a complete 33-file manifest and captured run logs. The earlier PowerShell ZIP has six unlisted `.pyc` files and no run logs, so I do not use it as the Windows evidence bundle; the Windows logs in this package record the successful local run.
+
+The M14 three-step scalar recurrence is conditional on imported strain and residual bounds; it does not certify the full adjoint path. The M15 record remains open: the current conservative remainder is about `1.64e14`, far above the signed lower bound of about `5.76e9`. The reported targeted reduction on steps 220–239 is not independently reproduced here and does not change that negative margin. A separate older M14 VJP archive passes its ZIP and manifest checks but contains only a binary64 path reconstruction and pointwise cross-checks, not trajectory or quadrature enclosures.
+
+I could not compile Lean locally because the Mathlib fetch failed at DNS. The Python source scan is not a Lean compilation. The GitHub workflow now runs the actual Lean build alongside the Python checks. These results do not establish a continuum Navier–Stokes theorem, global regularity, or blowup.
+
+---
+
 ## 24 September 2026 scope note
 
 I maintain this project as an exploratory mathematical audit within the wider Reggae Shark Universe. I do not treat its finite-mode checks, counterexamples, or small-data estimate as an arbitrary-data global-regularity proof for the three-dimensional incompressible Navier–Stokes equations.
