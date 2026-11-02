@@ -1,0 +1,70 @@
+{
+  "schema": "wp19-v0.28-active-support-feasibility-gate-v1",
+  "status": "FAIL_ACTIVE_SUPPORT_ROUTE_BLOCKED; NO_VECTOR_PROPAGATION",
+  "provenance": {
+    "repository": "reggaesharkk/navier-stokes-bridge-audit",
+    "pr": 155,
+    "branch": "wp19-v0-28-duality-compatibility-audit",
+    "source_commit": "02df009de32e669355a7b915edff5608b9b8f863",
+    "objective_path": "results/wp19_v0_28/semantic_repair_20261003/objective_definition.json",
+    "objective_git_blob_sha": "14c25768c9878b30e49b36dd32f386013ac3a258",
+    "terminal_hessian_path": "results/wp19_v0_28/semantic_repair_20261003/terminal_hessian_remainder.json",
+    "terminal_hessian_git_blob_sha": "ce53afeda7f5ae9e6f695d9be4d77415889f18d4",
+    "user_supplied_screenshot_sha256": "feb73df8c547e64ac14533806ead03c8ff27f08589917524916bd8ca52b8d6b5"
+  },
+  "values": {
+    "P": "5758574435.605829673039071",
+    "global_hessian_upper": "3222388254527403832581260.762399221858472707694188",
+    "reported_sparse_improvement_factor_approx": 826,
+    "reported_sparse_hessian_upper_approx": "3901196434052547012810.243053752084574422",
+    "M15_scalar_endpoint_error_upper": "10.559636070809868141657764813075",
+    "certified_objective_active_endpoint_error_upper_from_scalar_ball": "10.559636070809868141657764813075",
+    "global_B_grad_upper": "167322374198.021901563746726433775559",
+    "aggregate_mismatch_coefficient_for_conditional_radius_threshold": "15845467881.279848116682"
+  },
+  "threshold_method": "R_G <= H*r^2/2. Combined threshold solves D*r + H*r^2/2 <= alpha*P with D the aggregate gradient mismatch tube. Fixed certified B_grad already exceeds P, so no nonnegative threshold exists if it is held fixed. Combined roots below treat D as scaling linearly with the candidate active radius and are conditional, not an active-support certificate.",
+  "outward_safe_24_place_thresholds": {
+    "global_H": {
+      "RG_le_P": "0.000000059783805641154709",
+      "RG_le_0_1P": "0.000000018905299301887187",
+      "conditional_Bgrad_plus_RG_le_P": "0.000000059783800723849289",
+      "conditional_Bgrad_plus_RG_le_0_1P": "0.000000018905294384582204"
+    },
+    "active_H_approx_global_div_826": {
+      "RG_le_P": "0.000001718199471071945329",
+      "RG_le_0_1P": "0.000000543342380308393824",
+      "conditional_Bgrad_plus_RG_le_P": "0.000001718195409382302065",
+      "conditional_Bgrad_plus_RG_le_0_1P": "0.000000543338318629131158"
+    }
+  },
+  "value_gate": {
+    "best_certifiable_active_error_upper": "10.559636070809868141657764813075",
+    "distance_factor_vs_active_RG_le_P_threshold_approx": "6145756.79",
+    "fixed_B_grad_exceeds_P": true
+  },
+  "reported_counterexample_from_screenshot": {
+    "active_only_perturbation_norm_upper": "5.6",
+    "reported_actual_abs_R_G_lower": "7553000000",
+    "P": "5758574435.605829673039071",
+    "conclusion_if_replayable": "The scalar uncertainty ball admits active-support perturbations with |R_G|>P; this would falsify sign certification from the current uncertainty set even with exact objective sparsity.",
+    "replay_status": "NOT_REPRODUCED: screenshot does not expose the perturbation vector, nominal endpoint, or exact-rational evaluation"
+  },
+  "transfer_geometry": {
+    "active_formula_mode_entries": 1159,
+    "ordered_M15_convolution_slots_to_active_outputs": 11250240,
+    "ordered_slots_with_both_inputs_outside_formula_support": 9001373,
+    "ordered_slots_with_at_least_one_input_outside_formula_support": 10836849,
+    "maximum_ordered_pairs_per_active_output": 13438,
+    "interpretation": "Counts are exact lattice selection-rule counts before divergence-free coefficient cancellations, not nonzero-amplitude or certified forcing bounds.",
+    "coarse_projected_bilinear_bound": "||P_S B(x,y)||_2 <= 15*sqrt(1159)*||x||_2*||y||_2 under unitary Fourier normalization and |q|<=15",
+    "coarse_linearized_two_order_bound": "||P_S(B(U,e)+B(e,U))||_2 <= 30*sqrt(1159)*||U||_2*||e||_2",
+    "viscous_high_mode_decay": "For M15 modes outside P11, |k|^2>=122, so decay rate is at least 122*nu; viscosity value is not frozen in the inspected semantic artifacts."
+  },
+  "verdicts": {
+    "smallest_dynamically_closed_enlargement": "Not available from the finite objective support alone; convolution closure expands support and the explicit inactive-inactive feeder count is nonzero.",
+    "low_high_coupling": "Nonzero and combinatorially dense; scalar bounds give no phase/block cancellation. Coarse constants above are too loose to establish contraction.",
+    "projected_vector_propagation_worth_launching": false,
+    "route_recommendation": "Freeze this WP19 active-endpoint/joint-pairing route under current scalar-radius information. Do not launch e0-to-e219 or tail pairing compute."
+  },
+  "claim_boundary": "Finite M15/P11 audit only. This does not establish an actual trajectory counterexample, sign failure, continuum regularity, blow-up exclusion, or a Millennium-problem conclusion."
+}

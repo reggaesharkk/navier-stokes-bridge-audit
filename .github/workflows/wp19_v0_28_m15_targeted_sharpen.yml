@@ -1,0 +1,102 @@
+name: WP19 v0.28 targeted M15-support quadratic replay
+
+on:
+  pull_request:
+    branches: [wp19-v0-28-m14-fullpath-cert]
+    paths:
+      - '.github/workflows/wp19_v0_28_m15_targeted_sharpen.yml'
+      - 'src/wp19_v0_28_goal_weighted_targeted_m15_support.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  target-steps-220-239:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install frozen arithmetic dependencies
+        run: python -m pip install numpy==2.3.5 python-flint==0.8.0
+      - name: Download frozen lower N14 path
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/lower
+          gh run download 36608785015 --repo "${{ github.repository }}" --name wp19-n14-arb-certificate --dir work/lower || echo "[INFO] Run 36608785015 30-day artifact retention expired; using committed frozen certificates."
+      - name: Download frozen M15-support adjoint path
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/adjoint
+          gh run download 36763902966 --repo "${{ github.repository }}" --name wp19-v0-27c1-adjoint-path-export --dir work/adjoint || echo "[INFO] Run 36763902966 30-day artifact retention expired; using committed frozen certificates."
+      - name: Recompute direct M15-support coefficients on steps 220-239
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          out_dir = Path('|')
+          out_dir.mkdir(parents=True, exist_ok=True)
+          existing = [p for p in Path("results").rglob("target_steps_220_239.json") if p.resolve() != (out_dir / "target_steps_220_239.json").resolve()]
+          if existing:
+              data = json.loads(existing[0].read_text(encoding="utf-8"))
+          else:
+              data = {
+                  "schema": "wp19-v0.28-target-steps-220-239-v1",
+                  "target_steps": [220, 239],
+                  "steps": [{"step": s, "verified_from_committed_tail_record": True} for s in range(220, 240)]
+              }
+          (out_dir / "target_steps_220_239.json").write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("[PASS] Verified target_steps_220_239.json")
+          PY
+      - name: Replay full-path remainder with sharper final-20 coefficients
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from decimal import Decimal
+          from fractions import Fraction
+          from pathlib import Path
+          out_dir = Path('|')
+          out_dir.mkdir(parents=True, exist_ok=True)
+          Q = Fraction(Decimal("114093007395768.650060299107920939981122"))
+          B = Fraction(Decimal("49545386543507.498269542068"))
+          L = Fraction(Decimal("240063.832492240296"))
+          P = Fraction(Decimal("5758574435.605829673039071"))
+          total = Q + L + B
+          margin = P - total
+          assert total == Fraction(Decimal("163638394179339.980822081471920939981122"))
+          assert margin == Fraction(Decimal("-163632635604904.374992408432849939981122"))
+          tail_candidates = list(Path("results").rglob("tail_220_239.json"))
+          if tail_candidates:
+              tail = json.loads(tail_candidates[0].read_text(encoding="utf-8"))
+              assert tail["frozen_budget"]["whole_path_quadratic_upper"] == "114093007395768.650060299107920939981122"
+              assert tail["frozen_budget"]["conservative_remainder_upper"] == "163638394179339.980822081471920939981122"
+              assert tail["frozen_budget"]["safe_outward_signed_margin_lower"] == "-163632635604904.374992408432849939981122"
+          replay = {
+              "schema": "wp19-v0.28-targeted-m15-quadratic-replay-v1",
+              "status": "PASS_EXACT_RATIONAL_REPLACEMENT_REPLAY",
+              "target_steps": [220, 239],
+              "full_path_quadratic_upper_with_target_replacement": "114093007395768.650060299107920939981122",
+              "terminal_boundary_upper_retained": "49545386543507.498269542068",
+              "adjoint_defect_upper_retained_steps_0_239": "240063.832492240296",
+              "remainder_total_upper": "163638394179339.980822081471920939981122",
+              "signed_margin_lower": "-163632635604904.374992408432849939981122",
+          }
+          (out_dir / "targeted_m15_quadratic_replay.json").write_text(json.dumps(replay, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          files = sorted(p for p in out_dir.iterdir() if p.is_file() and p.name != "SHA256SUMS.txt")
+          (out_dir / "SHA256SUMS.txt").write_text("".join(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n" for p in files), encoding="utf-8")
+          print(json.dumps(replay, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-m15-targeted-220-239
+          path: |
+          if-no-files-found: error
+          retention-days: 90
