@@ -10,6 +10,10 @@
 
 > **Rights boundary — effective 1 October 2026:** New author-owned original material first published here from this date is **All Rights Reserved** by default. Earlier express licenses remain in force for the material they cover. Read [the rights policy](RIGHTS_POLICY_2026_10_01.md) and the [shared portfolio evidence standard](https://github.com/reggaesharkk/Reggae-shark-universe-/blob/main/PORTFOLIO_EVIDENCE_AND_RIGHTS_STANDARD_2026_10_01.md).
 
+## 4 November 2026 — evidence timeline and current status
+
+The dated [evidence timeline](notes/NAVIER_STOKES_EVIDENCE_TIMELINE_2026_11_04.md) reconciles the September–November records, the local extracted snapshot, the v0.29 closure bundle, and the current audit. It distinguishes archived claims, checked package records, CI execution, and missing raw Arb inputs. Earlier dated sections remain historical records; use the timeline for the current M14/M15 and continuum status.
+
 ## 1 November 2026 — WP19 v0.29.1 audit update
 
 I assembled a reproducible review bundle with the selected finite-cutoff records, arithmetic replay, Lean source, seven tests, Windows and Ubuntu run logs, checksums, and an audit report.
