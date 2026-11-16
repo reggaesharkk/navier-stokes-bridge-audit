@@ -1,11 +1,14 @@
-name: WP19 v0.28 targeted M15-support quadratic replay
+name: WP19 v0.28 M15 frozen-value reconciliation
 
 on:
   pull_request:
     branches: [wp19-v0-28-m14-fullpath-cert]
     paths:
       - '.github/workflows/wp19_v0_28_m15_targeted_sharpen.yml'
-      - 'src/wp19_v0_28_goal_weighted_targeted_m15_support.py'
+      - 'results/wp19_v0_28/duality_compatibility_audit_20261002/**'
+      - 'results/wp19_v0_28/joint_pairing_20261003/**'
+      - 'src/wp19_v0_28_m15_forced_radius_replay.py'
+      - 'src/wp19_v0_28_m15_weighted_remainder_replay.py'
   workflow_dispatch:
 
 permissions:
@@ -13,90 +16,155 @@ permissions:
   actions: read
 
 jobs:
-  target-steps-220-239:
+  reconcile-frozen-records:
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install frozen arithmetic dependencies
-        run: python -m pip install numpy==2.3.5 python-flint==0.8.0
-      - name: Download frozen lower N14 path
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          mkdir -p work/lower
-          gh run download 36608785015 --repo "${{ github.repository }}" --name wp19-n14-arb-certificate --dir work/lower || echo "[INFO] Run 36608785015 30-day artifact retention expired; using committed frozen certificates."
-      - name: Download frozen M15-support adjoint path
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          mkdir -p work/adjoint
-          gh run download 36763902966 --repo "${{ github.repository }}" --name wp19-v0-27c1-adjoint-path-export --dir work/adjoint || echo "[INFO] Run 36763902966 30-day artifact retention expired; using committed frozen certificates."
-      - name: Recompute direct M15-support coefficients on steps 220-239
+      - name: Reconcile source-bound frozen M14/M15 records
         run: |
           python - <<'PY'
+          import hashlib
           import json
-          from pathlib import Path
-          out_dir = Path('|')
-          out_dir.mkdir(parents=True, exist_ok=True)
-          existing = [p for p in Path("results").rglob("target_steps_220_239.json") if p.resolve() != (out_dir / "target_steps_220_239.json").resolve()]
-          if existing:
-              data = json.loads(existing[0].read_text(encoding="utf-8"))
-          else:
-              data = {
-                  "schema": "wp19-v0.28-target-steps-220-239-v1",
-                  "target_steps": [220, 239],
-                  "steps": [{"step": s, "verified_from_committed_tail_record": True} for s in range(220, 240)]
-              }
-          (out_dir / "target_steps_220_239.json").write_text(json.dumps(data, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-          print("[PASS] Verified target_steps_220_239.json")
-          PY
-      - name: Replay full-path remainder with sharper final-20 coefficients
-        run: |
-          python - <<'PY'
-          import hashlib, json
-          from decimal import Decimal
+          from decimal import Decimal, localcontext
           from fractions import Fraction
           from pathlib import Path
-          out_dir = Path('|')
-          out_dir.mkdir(parents=True, exist_ok=True)
-          Q = Fraction(Decimal("114093007395768.650060299107920939981122"))
-          B = Fraction(Decimal("49545386543507.498269542068"))
-          L = Fraction(Decimal("240063.832492240296"))
-          P = Fraction(Decimal("5758574435.605829673039071"))
-          total = Q + L + B
-          margin = P - total
-          assert total == Fraction(Decimal("163638394179339.980822081471920939981122"))
-          assert margin == Fraction(Decimal("-163632635604904.374992408432849939981122"))
-          tail_candidates = list(Path("results").rglob("tail_220_239.json"))
-          if tail_candidates:
-              tail = json.loads(tail_candidates[0].read_text(encoding="utf-8"))
-              assert tail["frozen_budget"]["whole_path_quadratic_upper"] == "114093007395768.650060299107920939981122"
-              assert tail["frozen_budget"]["conservative_remainder_upper"] == "163638394179339.980822081471920939981122"
-              assert tail["frozen_budget"]["safe_outward_signed_margin_lower"] == "-163632635604904.374992408432849939981122"
-          replay = {
-              "schema": "wp19-v0.28-targeted-m15-quadratic-replay-v1",
-              "status": "PASS_EXACT_RATIONAL_REPLACEMENT_REPLAY",
-              "target_steps": [220, 239],
-              "full_path_quadratic_upper_with_target_replacement": "114093007395768.650060299107920939981122",
-              "terminal_boundary_upper_retained": "49545386543507.498269542068",
-              "adjoint_defect_upper_retained_steps_0_239": "240063.832492240296",
-              "remainder_total_upper": "163638394179339.980822081471920939981122",
-              "signed_margin_lower": "-163632635604904.374992408432849939981122",
+
+          root = Path(".")
+          result_dir = root / "work" / "m15-reconciliation"
+          result_dir.mkdir(parents=True, exist_ok=True)
+
+          paths = {
+              "m15_forced_radius": Path("results/wp19_v0_28/duality_compatibility_audit_20261002/m15_forced_radius.json"),
+              "m15_weighted_remainder": Path("results/wp19_v0_28/duality_compatibility_audit_20261002/m15_weighted_remainder.json"),
+              "tail_220_239": Path("results/wp19_v0_28/joint_pairing_20261003/tail_220_239.json"),
+              "duality_manifest": Path("results/wp19_v0_28/duality_compatibility_audit_20261002/SHA256SUMS.txt"),
+              "joint_manifest": Path("results/wp19_v0_28/joint_pairing_20261003/SHA256SUMS.txt"),
+              "radius_source": Path("src/wp19_v0_28_m15_forced_radius_replay.py"),
+              "weighted_source": Path("src/wp19_v0_28_m15_weighted_remainder_replay.py"),
           }
-          (out_dir / "targeted_m15_quadratic_replay.json").write_text(json.dumps(replay, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-          files = sorted(p for p in out_dir.iterdir() if p.is_file() and p.name != "SHA256SUMS.txt")
-          (out_dir / "SHA256SUMS.txt").write_text("".join(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n" for p in files), encoding="utf-8")
-          print(json.dumps(replay, indent=2))
+
+          def sha256(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          def read_json(path):
+              return json.loads(path.read_text(encoding="utf-8"))
+
+          def manifest_map(path):
+              entries = {}
+              for line in path.read_text(encoding="utf-8").splitlines():
+                  if not line.strip():
+                      continue
+                  digest, name = line.split(None, 1)
+                  entries[name.strip()] = digest
+              return entries
+
+          forced = read_json(paths["m15_forced_radius"])
+          weighted = read_json(paths["m15_weighted_remainder"])
+          tail = read_json(paths["tail_220_239"])
+
+          assert forced["schema"] == "wp19-v0.28-m15-forced-radius-v1"
+          assert forced["status"] == "PASS_M15_FORCED_L2_RADIUS_ONLY"
+          assert weighted["schema"] == "wp19-v0.28-m15-weighted-remainder-v1"
+          assert weighted["status"] == "NO_CLOSURE_CURRENT_CONSERVATIVE_MAJORANTS"
+          assert forced["frozen_inputs"] == weighted["frozen_inputs"]
+          assert forced["steps"] == 240
+          assert len(forced["steps_detail"]) == 240
+          assert weighted["coverage"] == [0, 239]
+          assert len(weighted["steps_detail"]) == 240
+          assert "STOP record" in tail["claim_boundary"]
+
+          dual_manifest = manifest_map(paths["duality_manifest"])
+          joint_manifest = manifest_map(paths["joint_manifest"])
+          for label in ("m15_forced_radius", "m15_weighted_remainder"):
+              path = paths[label]
+              expected = dual_manifest.get(path.as_posix())
+              assert expected is not None, f"no manifest entry for {path}"
+              assert sha256(path) == expected, f"checksum mismatch: {path}"
+          tail_expected = joint_manifest.get(paths["tail_220_239"].as_posix())
+          assert tail_expected is not None, "no joint manifest entry for tail record"
+          assert sha256(paths["tail_220_239"]) == tail_expected, "tail record checksum mismatch"
+
+          for label in ("radius_source", "weighted_source"):
+              path = paths[label]
+              expected = dual_manifest.get(path.as_posix())
+              assert expected is not None, f"no manifest entry for {path}"
+              assert sha256(path) == expected, f"source checksum mismatch: {path}"
+
+          def q(value):
+              return Fraction(Decimal(value))
+
+          def ceil_decimal(value, places=12):
+              scale = 10 ** places
+              units = (value.numerator * scale + value.denominator - 1) // value.denominator
+              digits = str(units).zfill(places + 1)
+              return digits[:-places] + "." + digits[-places:]
+
+          def exact_decimal(value):
+              with localcontext() as ctx:
+                  ctx.prec = 100
+                  return format(Decimal(value.numerator) / Decimal(value.denominator), "f")
+
+          m15_q = q(weighted["M15_support_corrected_quadratic_integral_upper"])
+          adjoint = q(weighted["adjoint_defect_integral_upper"])
+          endpoint = q(weighted["terminal_saved_adjoint_boundary_product_upper"])
+          m15_total = m15_q + adjoint + endpoint
+          signed_lower = q(weighted["frozen_signed_dual_integral_lower"])
+          m15_margin = signed_lower - m15_total
+          assert ceil_decimal(m15_total) == weighted["sum_of_three_remainder_terms_upper"]
+          assert ceil_decimal(m15_margin) == weighted["signed_integral_minus_remainder_bound_lower"]
+
+          legacy_q = q(tail["frozen_budget"]["whole_path_quadratic_upper"])
+          legacy_total = q(tail["frozen_budget"]["conservative_remainder_upper"])
+          legacy_margin = q(tail["frozen_budget"]["safe_outward_signed_margin_lower"])
+          assert legacy_margin == signed_lower - legacy_total
+
+          delta_q = m15_q - legacy_q
+          reconciliation = "MATCH" if delta_q == 0 else "OPEN_VALUE_MISMATCH"
+          receipt = {
+              "schema": "wp19-v0.28-m15-frozen-reconciliation-v1",
+              "verification": {
+                  "record_and_manifest_identity": "PASS",
+                  "exact_rational_m15_total_and_margin": "PASS",
+                  "legacy_tail_vs_m15_support_quadratic": reconciliation,
+                  "new_m15_computation_performed": False
+              },
+              "interpretation": "This CI job verifies committed records and exact-rational arithmetic only. It does not recompute the M15 trajectory or per-step coefficients.",
+              "statuses": {
+                  "m15_forced_radius": forced["status"],
+                  "m15_weighted_remainder": weighted["status"],
+                  "m14_m15_research_gate": "STOP",
+                  "continuum_regularity": "OPEN"
+              },
+              "frozen_inputs": weighted["frozen_inputs"],
+              "records": {
+                  "m15_quadratic_upper": weighted["M15_support_corrected_quadratic_integral_upper"],
+                  "legacy_tail_quadratic_upper": tail["frozen_budget"]["whole_path_quadratic_upper"],
+                  "m15_minus_legacy_quadratic_upper": exact_decimal(delta_q),
+                  "m15_remainder_total_upper": weighted["sum_of_three_remainder_terms_upper"],
+                  "m15_signed_margin_lower": weighted["signed_integral_minus_remainder_bound_lower"],
+                  "legacy_remainder_total_upper": tail["frozen_budget"]["conservative_remainder_upper"],
+                  "legacy_signed_margin_lower": tail["frozen_budget"]["safe_outward_signed_margin_lower"]
+              },
+              "source_and_record_sha256": {
+                  label: sha256(path) for label, path in paths.items()
+              }
+          }
+          receipt_path = result_dir / "m15_reconciliation.json"
+          receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          receipt_hash = sha256(receipt_path)
+          (result_dir / "SHA256SUMS.txt").write_text(
+              f"{receipt_hash}  m15_reconciliation.json\n", encoding="utf-8"
+          )
+          print(json.dumps(receipt, indent=2))
+          print(f"[PASS] Wrote source-bound reconciliation receipt; OPEN finding: {reconciliation}")
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: wp19-v0-28-m15-targeted-220-239
-          path: |
+          name: wp19-v0-28-m15-reconciliation
+          path: work/m15-reconciliation/
           if-no-files-found: error
           retention-days: 90
