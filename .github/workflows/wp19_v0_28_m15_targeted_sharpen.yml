@@ -168,3 +168,283 @@ jobs:
           path: work/m15-reconciliation/
           if-no-files-found: error
           retention-days: 90
+
+  reconstruct-n14-frozen-inputs:
+    name: Rebuild N14 frozen inputs from source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.14'
+      - name: Install pinned N14 arithmetic environment
+        run: python -m pip install numpy==2.3.5 python-flint==0.9.0
+      - name: Rebuild the N14 predictor and all 120 certified segments
+        run: |
+          python next-work/n14_same_datum/tools/run_n14_certificate.py \
+            --output-dir work/lower --workers 2
+      - name: Require the exact archived N14 array and metadata identities
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root=Path("work/lower")
+          expected={
+            "nodes.npy":"e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0",
+            "rhs.npy":"f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253",
+            "metadata.json":"0ce684a72ba61de86b6d4293c28e14c6cff260585b86c3bd6ebea447b041c43e",
+          }
+          for name,want in expected.items():
+              got=hashlib.sha256((root/name).read_bytes()).hexdigest()
+              assert got==want,(name,got,want)
+          meta=json.loads((root/"metadata.json").read_text())
+          assert meta["N"]==14 and meta["steps"]==120 and meta["modes"]==11513
+          assert meta["witness_sha256"]=="4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624"
+          assert meta["K36_keys_sha256"]=="7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47"
+          print("PASS: source-rebuilt frozen N14 arrays, metadata, witness and K36 hashes")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-n14-source-reconstruction
+          path: work/lower/
+          if-no-files-found: error
+          retention-days: 90
+
+  reconstruct-m14-adjoint:
+    name: Rebuild M14 adjoint from frozen sources
+    needs: reconstruct-n14-frozen-inputs
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.14'
+      - name: Install pinned Arb, NumPy and PyTorch environment
+        run: |
+          python -m pip install numpy==2.3.5 python-flint==0.9.0
+          python -m pip install torch==2.14.1+cpu --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          name: wp19-n14-source-reconstruction
+          path: work/lower
+      - name: Reconstruct the portable frozen C500 from the exact witness
+        run: |
+          set -euxo pipefail
+          mkdir -p work/c500
+          python - <<'PY'
+          import hashlib,sys
+          from pathlib import Path
+          import numpy as np
+          root=Path(".").resolve()
+          sys.path.insert(0,str(root/"src"))
+          import wp16_036_sparse_turnover_exact_anchor as exact
+          import wp16_036_sparse_turnover_witness as witness_mod
+          from wp16_036_dealiased_trajectory_gate import DealiasedSystem
+          witness=root/"results/wp16_n17_holdout/wp16_036_sparse_turnover_112_pairs.json"
+          field,_,witness_sha=exact.input_state(witness)
+          assert witness_sha=="4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624"
+          system=DealiasedSystem(witness_mod.N)
+          state=np.asarray([
+              [complex(float(v[0]),float(v[1])) for v in field.get(k,(exact.ZERO,)*3)]
+              for k in system.modes
+          ],dtype=np.complex128)
+          path=Path("work/c500/n11_nodes.npy")
+          nodes=np.lib.format.open_memmap(path,mode="w+",dtype=np.complex128,shape=(121,len(system.modes),3))
+          for step in range(121):
+              nodes[step]=state
+              if step<120:
+                  state=system.rk4(state,0.000025)
+          nodes.flush()
+          got=hashlib.sha256(path.read_bytes()).hexdigest()
+          expected="b70bf7f7fe85a8c073c02c80e54e1f10d0642f5d030dfe569470c5970ebdda29"
+          assert got==expected,(got,expected)
+          print("PASS: independently regenerated N11 predictor identity",got)
+          PY
+          python src/wp19_v0_25_rebuild_c500_portable.py \
+            --repo . \
+            --n11-nodes work/c500/n11_nodes.npy \
+            --k36 results/wp16_n12_holdout/frozen_K36_ordered_source_orbits.json \
+            --output work/c500/frozen_C500.json \
+            --report work/c500/C500_RECONSTRUCTION_REPORT.json
+      - name: Recompute the M14 Arb adjoint path and cross-check
+        run: |
+          mkdir -p work/adjoint
+          python src/wp19_v0_27c1_export_adjoint_path.py \
+            --repo . \
+            --M 14 \
+            --lower-dir work/lower \
+            --sign-chart results/wp19_bridge/frozen_K36_numerator_sign_chart_N13.json \
+            --c500 work/c500/frozen_C500.json \
+            --output work/adjoint/M14_arb_vjp_point.json \
+            --adjoint-values-output work/adjoint/M14_adjoint_values.npy \
+            --adjoint-rhs-output work/adjoint/M14_adjoint_rhs.npy
+      - name: Require the frozen M14 adjoint identities
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          root=Path("work/adjoint")
+          expected={
+            "M14_arb_vjp_point.json":"981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8",
+            "M14_adjoint_values.npy":"00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab",
+            "M14_adjoint_rhs.npy":"8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
+          }
+          for name,want in expected.items():
+              got=hashlib.sha256((root/name).read_bytes()).hexdigest()
+              assert got==want,(name,got,want)
+          report=json.loads((root/"M14_arb_vjp_point.json").read_text())
+          assert report["status"]=="PASS ARB VJP CROSSCHECK AND ADJOINT PATH EXPORT"
+          print("PASS: source-rebuilt frozen M14 adjoint report and arrays")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-m14-adjoint-source-reconstruction
+          path: work/adjoint/
+          if-no-files-found: error
+          retention-days: 90
+
+  recompute-m15-schur-final20:
+    name: Recompute final 20 M15 coefficients with Schur bound
+    needs: [reconstruct-n14-frozen-inputs, reconstruct-m14-adjoint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      SOURCE_HEAD_SHA: \${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.14'
+      - name: Install pinned numerical environment
+        run: |
+          python -m pip install numpy==2.3.5 python-flint==0.9.0
+          python -m pip install torch==2.14.1+cpu --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          name: wp19-n14-source-reconstruction
+          path: work/lower
+      - uses: actions/download-artifact@v4
+        with:
+          name: wp19-m14-adjoint-source-reconstruction
+          path: work/adjoint
+      - name: Recompute all final-20 per-step M15 coefficients from frozen arrays
+        run: |
+          python src/wp19_v0_28_goal_weighted_targeted_m15_support.py \
+            --start 220 --count 20 \
+            --lower-dir work/lower \
+            --adjoint-dir work/adjoint \
+            --output work/m15-schur/direct_final20.json
+      - name: Reconcile the tighter enclosure against the full-path record
+        run: |
+          python - <<'PY'
+          import hashlib,json,platform,sys
+          from decimal import Decimal
+          from fractions import Fraction
+          from pathlib import Path
+          import numpy,flint,torch
+          from wp19_v0_28_m15_weighted_remainder_replay import dec_fraction,ceil_decimal
+          root=Path("work/m15-schur")
+          direct=json.loads((root/"direct_final20.json").read_text())
+          previous=json.loads(Path("results/wp19_v0_28/duality_compatibility_audit_20261002/m15_weighted_remainder.json").read_text())
+          rows=direct["steps"]
+          assert [r["step"] for r in rows]==list(range(220,240))
+          baseline_rows=previous["steps_detail"]
+          assert [r["step"] for r in baseline_rows]==list(range(240))
+          def qsum(values):
+              return sum((dec_fraction(v) for v in values),Fraction(0))
+          old_direct=qsum(r["quadratic_goal_integral_M15_support_upper"] for r in rows)
+          expected_old_direct=dec_fraction("79290095908202.220441623882920939981122")
+          old_direct_delta=old_direct-expected_old_direct
+          assert 0 <= old_direct_delta < Fraction(1,10**15),(old_direct_delta,old_direct)
+          old_final20=qsum(r["M15_support_corrected_quadratic_upper"] for r in baseline_rows if r["step"]>=220)
+          new_final20=qsum(r["quadratic_goal_integral_M15_schur_upper"] for r in rows)
+          earlier=qsum(r["M15_support_corrected_quadratic_upper"] for r in baseline_rows if r["step"]<220)
+          full_quadratic=earlier+new_final20
+          linear=dec_fraction(previous["adjoint_defect_integral_upper"])
+          endpoint=dec_fraction(previous["terminal_saved_adjoint_boundary_product_upper"])
+          signed=dec_fraction(previous["frozen_signed_dual_integral_lower"])
+          total=linear+full_quadratic+endpoint
+          margin=signed-total
+          scale=10**24
+          def outward_upper(v):
+              units=(v.numerator*scale+v.denominator-1)//v.denominator
+              digits=str(units).zfill(25)
+              return digits[:-24]+"."+digits[-24:]
+          def outward_lower(v):
+              units=(v.numerator*scale)//v.denominator
+              sign="-" if units<0 else ""
+              digits=str(abs(units)).zfill(25)
+              return sign+digits[:-24]+"."+digits[-24:]
+          def sha(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+          env={
+              "python":sys.version.split()[0],
+              "numpy":numpy.__version__,
+              "python_flint":flint.__version__,
+              "torch":torch.__version__,
+              "platform":platform.platform(),
+          }
+          receipt={
+              "schema":"wp19-v0.28-m15-modewise-schur-final20-v1",
+              "status":"NO_CLOSURE_CURRENT_FINITE_M15_BOUND",
+              "verification":{
+                  "source_rebuilt_N14_frozen_arrays":"PASS",
+                  "source_rebuilt_M14_adjoint_path":"PASS",
+                  "old_direct_M15_final20_replay":"PASS",
+                  "new_weighted_fourier_L1_Schur_coefficients":"PASS",
+                  "direct_final20_coverage":"PASS",
+                  "full_path_outward_reconciliation":"PASS",
+                  "M14_M15_gate":"STOP",
+                  "continuum_regularity":"OPEN"
+              },
+              "method":{
+                  "identity":"For divergence-free e, <lambda,(e.grad)e>=-<e,(e.grad)lambda>.",
+                  "mode_matrix":"C[p,q]=|p+q|*||lambda[-p-q]|| is symmetric and nonnegative; every row sum is bounded by sum_k |k|*||lambda[k]||.",
+                  "coefficient":"max over the four Bernstein controls of sum_k |k|*||lambda[k]||",
+                  "enclosure":"Arb upper bounds at 192 bits; strict outward decimal serialization; exact rational summation."
+              },
+              "frozen_sources":{
+                  "witness_sha256":"4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624",
+                  "K36_sha256":"7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47",
+                  "C500_portable_semantic_sha256":"1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f",
+                  "lower_metadata_sha256":sha(Path("work/lower/metadata.json")),
+                  "lower_nodes_sha256":sha(Path("work/lower/nodes.npy")),
+                  "lower_rhs_sha256":sha(Path("work/lower/rhs.npy")),
+                  "adjoint_report_sha256":sha(Path("work/adjoint/M14_arb_vjp_point.json")),
+                  "adjoint_values_sha256":sha(Path("work/adjoint/M14_adjoint_values.npy")),
+                  "adjoint_rhs_sha256":sha(Path("work/adjoint/M14_adjoint_rhs.npy")),
+                  "source_script_sha256":direct["source_sha256"],
+                  "source_head_sha":__import__("os").environ["SOURCE_HEAD_SHA"],
+                  "checked_out_sha":__import__("subprocess").check_output(["git","rev-parse","HEAD"],text=True).strip(),
+              },
+              "comparison":{
+                  "old_direct_M15_final20_upper":"79290095908202.220441623882920939981122",
+                  "recomputed_old_direct_M15_final20_upper":outward_upper(old_direct),
+                  "old_direct_replay_delta_upper":outward_upper(old_direct_delta),
+                  "previous_final20_support_corrected_upper":outward_upper(old_final20),
+                  "new_final20_schur_upper":outward_upper(new_final20),
+                  "final20_reduction_lower":outward_lower(old_final20-new_final20),
+                  "previous_full_path_quadratic_upper":previous["M15_support_corrected_quadratic_integral_upper"],
+                  "new_full_path_quadratic_upper":outward_upper(full_quadratic),
+                  "new_full_path_remainder_upper":outward_upper(total),
+                  "frozen_signed_integral_lower":previous["frozen_signed_dual_integral_lower"],
+                  "new_signed_margin_lower":outward_lower(margin)
+              },
+              "environment":env,
+              "claim_boundary":"Finite frozen M15 final-20 quadratic remainder enclosure only; the full remainder still does not preserve the signed margin. No cutoff transfer or continuum regularity claim."
+          }
+          out=root/"m15_schur_reconciliation.json"
+          out.write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\\n")
+          files=sorted(p for p in root.iterdir() if p.is_file())
+          (root/"SHA256SUMS.txt").write_text("".join(f"{sha(p)}  {p.name}\\n" for p in files))
+          print(json.dumps(receipt,indent=2))
+          print("PASS: source-bound, independently replayable M15 Schur receipt; result remains NO_CLOSURE")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wp19-v0-28-m15-schur-final20
+          path: work/m15-schur/
+          if-no-files-found: error
+          retention-days: 90
