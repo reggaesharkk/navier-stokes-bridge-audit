@@ -364,6 +364,8 @@ jobs:
           from fractions import Fraction
           from pathlib import Path
           import numpy,torch
+          def sha256_file(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
           sys.path.insert(0,str(Path("src").resolve()))
           from wp19_v0_28_m15_weighted_remainder_replay import dec_fraction,ceil_decimal
           root=Path("work/m15-schur")
