@@ -3,7 +3,7 @@
 
 Each half-step uses exact-dyadic Arb polynomial convolution. The linear
 primal-path uncertainty is bounded by the adjoint ODE interpolation defect
-after integration by parts; the quadratic term uses a Fourier Young bound.
+after integration by parts; the quadratic term uses a direct weighted Fourier L1 Schur bound.
 Internal endpoint terms are not summed in absolute value: they telescope for
 one continuous primal error across adjacent half-steps.
 """
@@ -28,6 +28,24 @@ def sha(path):
         for block in iter(lambda:f.read(1<<20),b""):
             h.update(block)
     return h.hexdigest()
+
+def quadratic_schur_coefficient(high, control):
+    """Outward bound for sum_k |k| ||lambda_k|| on one Bernstein control.
+
+    For divergence-free e, integration by parts writes the quadratic term
+    <lambda, (e.grad)e> as -<e, (e.grad)lambda>. In Fourier variables its
+    absolute value is bounded by x^T C x, x_p=||e_p||, with the symmetric
+    nonnegative matrix C[p,q]=|p+q| ||lambda_{-(p+q)}||. Each row sums over
+    a subset of the adjoint modes, so its sum is at most this weighted L1
+    coefficient. The symmetric-matrix row-sum bound then gives
+    |Q(e)| <= (sum_k |k| ||lambda_k||) ||e||_2^2.
+    """
+    total=arb(0)
+    for k,ksq,mode_row in zip(high.modes,high.square,control):
+        if int(ksq):
+            total += arb(int(ksq)).sqrt()*base.norm([mode_row])
+    return total.upper()
+
 
 def goal_bound_for_step(low,high,nodes,lower_rhs,adj,arhs,radii,n):
     j=n//2
@@ -58,6 +76,7 @@ def goal_bound_for_step(low,high,nodes,lower_rhs,adj,arhs,radii,n):
     delta=(radii[j]+predictor_distance).upper()
     young=arb(0)
     young_m15=arb(0)
+    young_m15_schur=arb(0)
     controls=base.bernstein(lam)
     for control in controls:
         l1=arb(0); grad2=arb(0)
@@ -69,11 +88,14 @@ def goal_bound_for_step(low,high,nodes,lower_rhs,adj,arhs,radii,n):
         # rather than inflating the rounded M14 output by a global mode ratio.
         factor=(M*l1+arb(len(low.modes)).sqrt()*grad2.sqrt()).upper()
         factor_m15=((M+1)*l1+arb(len(high.modes)).sqrt()*grad2.sqrt()).upper()
+        factor_schur=quadratic_schur_coefficient(high,control)
         young=young.max(factor).upper()
         young_m15=young_m15.max(factor_m15).upper()
+        young_m15_schur=young_m15_schur.max(factor_schur).upper()
     linear=(H*delta*defect_sup).upper()
     quadratic=(H*delta**2*young).upper()
     quadratic_m15=(H*delta**2*young_m15).upper()
+    quadratic_m15_schur=(H*delta**2*young_m15_schur).upper()
 
     if n==0:
         lam_left=base.norm(lam[0])
@@ -96,6 +118,8 @@ def goal_bound_for_step(low,high,nodes,lower_rhs,adj,arhs,radii,n):
       "quadratic_goal_integral_upper":base.safe_decimal_upper(quadratic,12),
       "young_M15_support_upper":base.safe_decimal_upper(young_m15,24),
       "quadratic_goal_integral_M15_support_upper":base.safe_decimal_upper(quadratic_m15,24),
+      "young_M15_schur_upper":base.safe_decimal_upper(young_m15_schur,24),
+      "quadratic_goal_integral_M15_schur_upper":base.safe_decimal_upper(quadratic_m15_schur,24),
       "left_endpoint_adjoint_L2_upper":base.safe_decimal_upper(lam_left,12) if lam_left is not None else None,
       "right_endpoint_adjoint_L2_upper":base.safe_decimal_upper(lam_right,12) if lam_right is not None else None,
       "terminal_primal_radius_upper":base.safe_decimal_upper(terminal_primal_radius,15) if terminal_primal_radius is not None else None,
