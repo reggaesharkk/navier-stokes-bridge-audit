@@ -432,7 +432,16 @@ jobs:
               assert record["schema"]=="wp19-v0.28-independent-residual-bernstein-check-v1"
               assert record["step"]==step and record["precision_bits"]==192
               assert record["status"]==f"INDEPENDENT_STEP_{step}_RECOMPUTATION_COMPLETE_ARCHIVE_COMPARISON_RECORDED"
-              assert all(record["component_checks"].values()),(step,record["component_checks"])
+              # These false flags are the known archived-vs-independent upper-bound
+              # discrepancies. Preserve them explicitly; reconciliation uses max().
+              expected_checks={
+                  "independent_nominal_residual_le_archived":False,
+                  "independent_uncertainty_penalty_le_archived":False,
+                  "independent_total_residual_le_archived":False,
+                  "independent_adjoint_polynomial_norm_le_archived":False,
+                  "independent_strain_le_archived_primal_strain":True,
+              }
+              assert record["component_checks"]==expected_checks,(step,record["component_checks"])
               assert record["lower_nodes_sha256"]=="e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0"
               assert record["lower_rhs_sha256"]=="f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253"
               assert record["adjoint_report_sha256"]=="981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8"
@@ -451,6 +460,9 @@ jobs:
               total_archived=dec_fraction(segment["bounds"]["residual_L2_upper"])
               nominal_delta=nominal-nominal_archived
               total_delta=total_independent-total_archived
+              differences=record["archive_comparison_differences"]
+              assert nominal_delta==dec_fraction(differences["nominal_residual_upper_minus_archived"]),(step,nominal_delta,differences)
+              assert total_delta==dec_fraction(differences["total_residual_upper_minus_archived"]),(step,total_delta,differences)
               assert nominal>=nominal_archived and total_independent>total_archived,(step,nominal_delta,total_delta)
               independent[step]={
                   "record":record,"nominal":nominal,"total":total_independent,
@@ -594,7 +606,10 @@ jobs:
                           "workflow_run_id":36871966756,
                           "workflow_head_sha":"d67bae8c2102667d7ef375685ff7c8758bbee2cc",
                           "workflow_job_id":artifact_specs[step]["job_id"],
-                          "all_independent_component_checks":"PASS",
+                          "independent_replay":"PASS",
+                          "archive_comparison_status":"ARCHIVED_NOMINAL_TOTAL_ADJOINT_NORM_UPPERS_ARE_LOWER_THAN_INDEPENDENT_REPLAY",
+                          "component_comparison_flags":independent[step]["record"]["component_checks"],
+                          "all_archive_comparison_differences":independent[step]["record"]["archive_comparison_differences"],
                       } for step in (237,238,239)
                   },
                   "reconciled_linear_steps":linear_rows,
