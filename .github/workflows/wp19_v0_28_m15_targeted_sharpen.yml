@@ -283,20 +283,99 @@ jobs:
       - name: Require the frozen M14 adjoint identities
         run: |
           python - <<'PY'
-          import hashlib,json
+          import hashlib,json,os,subprocess
+          from decimal import Decimal
           from pathlib import Path
           root=Path("work/adjoint")
-          expected={
-            "M14_arb_vjp_point.json":"981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8",
+          report_path=root/"M14_arb_vjp_point.json"
+          historical_report_sha256="981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8"
+          expected_files={
             "M14_adjoint_values.npy":"00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab",
             "M14_adjoint_rhs.npy":"8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
           }
-          for name,want in expected.items():
-              got=hashlib.sha256((root/name).read_bytes()).hexdigest()
+          def sha(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+          for name,want in expected_files.items():
+              got=sha(root/name)
               assert got==want,(name,got,want)
-          report=json.loads((root/"M14_arb_vjp_point.json").read_text())
+          report=json.loads(report_path.read_text(encoding="utf-8"))
+          assert report["schema"]=="wp19-v0.27c1-adjoint-path-export-v1"
           assert report["status"]=="PASS ARB VJP CROSSCHECK AND ADJOINT PATH EXPORT"
-          print("PASS: source-rebuilt frozen M14 adjoint report and arrays")
+          assert (report["M"],report["transition"],report["test_node"],report["test_time_decimal"])==(14,"14->15",60,"0.0015")
+          assert report["arb_precision_bits"]==192
+          frozen={
+              "witness_sha256":"4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624",
+              "K36_sha256":"7da5fc6d39ee03140d42ba40c5158cc20b043de33e4cc7f3ea52b71b79143f47",
+              "K36_sign_chart_sha256":"de2e7cf42373285f16a4d357422d7784afa98c997f90e6594c0102952bf6d3d1",
+              "C500_portable_semantic_sha256":"1e9509cef054bf605d4a28af6580e383d021914f600a01b21cb1ebdf1086f71f",
+          }
+          assert report["frozen"]==frozen
+          path=report["adjoint_reconstruction"]
+          identity={
+              "time_node_count":241,
+              "time_step_decimal":"0.0000125",
+              "time_interval_decimal":["0","0.003"],
+              "values_shape":[241,14147,3],
+              "rhs_shape":[241,14147,3],
+              "values_file":"M14_adjoint_values.npy",
+              "rhs_file":"M14_adjoint_rhs.npy",
+              "values_sha256":expected_files["M14_adjoint_values.npy"],
+              "rhs_sha256":expected_files["M14_adjoint_rhs.npy"],
+              "lower_nodes_sha256":"e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0",
+              "lower_rhs_sha256":"f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253",
+              "lower_metadata_sha256":"0ce684a72ba61de86b6d4293c28e14c6cff260585b86c3bd6ebea447b041c43e",
+              "sign_chart_sha256":frozen["K36_sign_chart_sha256"],
+              "c500_rebuilt_file_sha256":"0cd8298d9cc61f753a8f37cff0de411e72d83852eb38841d569c9dcad6267ae8",
+              "C500_portable_semantic_sha256":frozen["C500_portable_semantic_sha256"],
+          }
+          for key,want in identity.items():
+              assert path[key]==want,(key,path.get(key),want)
+          cross=report["selected_mode_direct_crosscheck"]
+          expected_modes={
+              (6,0,3),(-6,0,-3),(-7,4,-2),(7,-4,2),(-8,3,-3),(8,-3,3),
+              (10,-1,5),(-10,1,-5),(-8,-1,-4),(8,1,4),(8,2,5),(-8,-2,-5),
+          }
+          actual_modes={tuple(int(v) for v in row["mode"]) for row in cross["rows"]}
+          assert cross["mode_count"]==12 and len(cross["rows"])==12
+          assert actual_modes==expected_modes,(actual_modes,expected_modes)
+          relative=Decimal(cross["arb_vs_explicit_direct_relative_difference_upper_decimal"])
+          assert relative<=Decimal("1e-12"),relative
+          assert "not an adjoint trajectory certificate" in report["claim_boundary"]
+          assert "no all-N/continuum claim" in report["claim_boundary"]
+          current_report_sha256=sha(report_path)
+          source_paths=[
+              Path("src/wp19_v0_27c1_export_adjoint_path.py"),
+              Path("src/wp19_v0_27c1_common.py"),
+          ]
+          source_hashes={str(p):sha(p) for p in source_paths}
+          provenance={
+              "schema":"wp19-v0.28-m14-adjoint-rebuild-provenance-v1",
+              "status":"PASS: exact frozen arrays and stable report identities",
+              "historical_report_sha256":historical_report_sha256,
+              "current_report_sha256":current_report_sha256,
+              "report_hash_note":"The historical byte hash is retained as a reference. Byte-level differences are confined to selected-mode floating diagnostics and their row ordering; exact frozen input identities and both full adjoint-array hashes match.",
+              "selected_mode_arb_explicit_relative_upper_decimal":str(relative),
+              "selected_mode_acceptance_limit":"1e-12",
+              "adjoint_array_sha256":expected_files,
+              "frozen_identities":frozen,
+              "adjoint_input_identities":{key:path[key] for key in identity},
+              "source_sha256":source_hashes,
+              "claim_boundary":report["claim_boundary"],
+              "github_run_id":os.getenv("GITHUB_RUN_ID"),
+              "github_sha":os.getenv("GITHUB_SHA"),
+              "checked_out_sha":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
+          }
+          provenance_path=root/"M14_REBUILD_PROVENANCE.json"
+          provenance_path.write_text(json.dumps(provenance,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+          files=[report_path,root/"M14_adjoint_values.npy",root/"M14_adjoint_rhs.npy",provenance_path]
+          manifest=root/"SHA256SUMS.txt"
+          manifest.write_text("".join(f"{sha(p)}  {p.name}\n" for p in sorted(files,key=lambda p:p.name)),encoding="utf-8")
+          for line in manifest.read_text(encoding="utf-8").splitlines():
+              digest,name=line.split(None,1)
+              assert sha(root/name.strip())==digest,(name,digest)
+          print("Historical M14 report SHA-256:",historical_report_sha256)
+          print("Current M14 report SHA-256:",current_report_sha256)
+          print("PASS: source-rebuilt M14 semantic identities and exact adjoint arrays")
           PY
       - uses: actions/upload-artifact@v4
         with:
