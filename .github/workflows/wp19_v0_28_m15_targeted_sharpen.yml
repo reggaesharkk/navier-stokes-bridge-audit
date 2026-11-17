@@ -336,6 +336,25 @@ jobs:
             --lower-dir work/lower \
             --adjoint-dir work/adjoint \
             --output work/m15-schur/direct_final20.json
+      - name: Retrieve pinned independent PR #154 residual receipts (steps 237-239)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p work/m15-schur/independent-residuals
+          fetch_residual() {
+            local step="$1" artifact_id="$2" digest="$3"
+            local zip="work/m15-schur/independent-residuals/residual_${step}.zip"
+            local out="work/m15-schur/independent-residuals/${step}"
+            gh api "repos/${{ github.repository }}/actions/artifacts/${artifact_id}/zip" > "$zip"
+            echo "${digest}  ${zip}" | sha256sum -c -
+            mkdir -p "$out"
+            unzip -q "$zip" -d "$out"
+            test -n "$(find "$out" -name "independent_residual_${step}.json" -print -quit)"
+          }
+          fetch_residual 239 11168945435 8581b89f119929bc8b6be138c1e4ce13c528c3e1301803575afab64e3afdcdec
+          fetch_residual 238 11168283409 8ced59c778157dab6775984acaa439ab8f586c542bbcbc96555d9b789c89ee97
+          fetch_residual 237 11167574198 b23e462ea69ac9ab968fb60d046a4c27cd464f921f8135461be9b0097eecedc6
       - name: Reconcile the tighter enclosure against the full-path record
         run: |
           python - <<'PY'
@@ -366,7 +385,116 @@ jobs:
           assert new_final20 <= old_final20,(new_final20,old_final20)
           earlier=qsum(r["M15_support_corrected_quadratic_upper"] for r in baseline_rows if r["step"]<220)
           full_quadratic=earlier+new_final20
-          linear=dec_fraction(previous["adjoint_defect_integral_upper"])
+
+          # Verify and read the immutable PR #154 independent residual receipts.
+          artifact_specs={
+              239:{"id":11168945435,"zip_sha256":"8581b89f119929bc8b6be138c1e4ce13c528c3e1301803575afab64e3afdcdec","segment_sha256":"d1b41363c88173594ec6c9e90453513cd3c8ed3e32c7037d2e73304d057a8c08","job_id":110401726157},
+              238:{"id":11168283409,"zip_sha256":"8ced59c778157dab6775984acaa439ab8f586c542bbcbc96555d9b789c89ee97","segment_sha256":"c0bbf407df850b95e1a4b0daa3e1175962ce128e7e5f080d39127bd22b431fa6","job_id":110401725762},
+              237:{"id":11167574198,"zip_sha256":"b23e462ea69ac9ab968fb60d046a4c27cd464f921f8135461be9b0097eecedc6","segment_sha256":"c2110c2f7a245a36534a24f7ab6983b74bf4a51ba8fb209a0ec92a8727eecfdc","job_id":110401726219},
+          }
+          archived_segments={
+              239:Path("results/wp19_v0_28/pilot_v2_36818369196/M14_segment_239.json"),
+              238:Path("results/wp19_v0_28/pilot_chained_238_36819581437/M14_segment_238.json"),
+              237:Path("results/wp19_v0_28/pilot_chained_237_36820757066/M14_segment_237.json"),
+          }
+          independent={}
+          for step,spec in artifact_specs.items():
+              artifact_dir=root/"independent-residuals"/str(step)
+              manifests=list(artifact_dir.rglob("SHA256SUMS.txt"))
+              assert len(manifests)==1,(step,manifests)
+              manifest=manifests[0]
+              entries={}
+              for line in manifest.read_text(encoding="utf-8").splitlines():
+                  if not line.strip(): continue
+                  digest,name=line.split(None,1)
+                  name=name.strip().lstrip("*")
+                  target=(manifest.parent/name).resolve()
+                  target.relative_to(manifest.parent.resolve())
+                  assert target.is_file() and sha256_file(target)==digest,(step,name)
+                  entries[name]=digest
+              receipt_paths=list(artifact_dir.rglob(f"independent_residual_{step}.json"))
+              assert len(receipt_paths)==1,(step,receipt_paths)
+              receipt_path=receipt_paths[0]
+              assert receipt_path.name in entries
+              record=json.loads(receipt_path.read_text(encoding="utf-8"))
+              assert record["schema"]=="wp19-v0.28-independent-residual-bernstein-check-v1"
+              assert record["step"]==step and record["precision_bits"]==192
+              assert record["status"]==f"INDEPENDENT_STEP_{step}_RECOMPUTATION_COMPLETE_ARCHIVE_COMPARISON_RECORDED"
+              assert all(record["component_checks"].values()),(step,record["component_checks"])
+              assert record["lower_nodes_sha256"]=="e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0"
+              assert record["lower_rhs_sha256"]=="f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253"
+              assert record["adjoint_report_sha256"]=="981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8"
+              assert record["adjoint_values_sha256"]=="00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab"
+              assert record["adjoint_rhs_sha256"]=="8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c"
+              segment_path=archived_segments[step]
+              segment=json.loads(segment_path.read_text(encoding="utf-8"))
+              assert sha256_file(segment_path)==spec["segment_sha256"]==record["segment_sha256"]
+              assert segment["M"]==14 and segment["step"]==step
+              assert segment["frozen"]["witness_sha256"]=="4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624"
+              assert segment["inputs"]["lower_nodes_sha256"]==record["lower_nodes_sha256"]
+              assert segment["inputs"]["lower_rhs_sha256"]==record["lower_rhs_sha256"]
+              nominal=dec_fraction(record["bounds"]["independent_nominal_residual_L2_upper"])
+              total_independent=dec_fraction(record["bounds"]["independent_total_residual_L2_upper"])
+              nominal_archived=dec_fraction(segment["bounds"]["nominal_residual_L2_upper"])
+              total_archived=dec_fraction(segment["bounds"]["residual_L2_upper"])
+              nominal_delta=nominal-nominal_archived
+              total_delta=total_independent-total_archived
+              assert nominal>=nominal_archived and total_independent>total_archived,(step,nominal_delta,total_delta)
+              independent[step]={
+                  "record":record,"nominal":nominal,"total":total_independent,
+                  "archived_nominal":nominal_archived,"archived_total":total_archived,
+                  "nominal_delta":nominal_delta,"total_delta":total_delta,"segment":segment,
+              }
+
+          # The older frozen aggregate is exactly the sum of its 240 decimal row products.
+          archived_linear=qsum(
+              Fraction(1,80000)*dec_fraction(r["M15_error_L2_sup_upper"])*dec_fraction(r["adjoint_defect_L2_sup_upper"])
+              for r in baseline_rows
+          )
+          recorded_linear=dec_fraction(previous["adjoint_defect_integral_upper"])
+          assert archived_linear==recorded_linear,(archived_linear,recorded_linear)
+
+          # Rebuild each linear product from outward upper inputs. On steps 237-239
+          # include the independent nominal residual as another valid upper; retain
+          # PR #154 total residuals separately because they also include primal-
+          # uncertainty penalties and are not the adjoint-defect factor.
+          direct_by_step={r["step"]:r for r in rows}
+          linear_rows=[]
+          linear_terms=[]
+          for old in baseline_rows:
+              step=old["step"]
+              radius=dec_fraction(old["M15_error_L2_sup_upper"])
+              defect=dec_fraction(old["adjoint_defect_L2_sup_upper"])
+              sources={"archived_radius":radius,"archived_adjoint_defect":defect}
+              if step>=220:
+                  fresh=direct_by_step[step]
+                  direct_radius=dec_fraction(fresh["true_primal_radius_upper"])
+                  direct_defect=dec_fraction(fresh["adjoint_ode_defect_L2_sup_upper"])
+                  radius=max(radius,direct_radius)
+                  defect=max(defect,direct_defect)
+                  sources["source_recomputed_radius"]=direct_radius
+                  sources["source_recomputed_adjoint_defect"]=direct_defect
+                  if step in independent:
+                      defect=max(defect,independent[step]["nominal"])
+                      sources["PR154_independent_nominal_residual"]=independent[step]["nominal"]
+              product=Fraction(1,80000)*radius*defect
+              if step>=220:
+                  product=max(product,dec_fraction(direct_by_step[step]["linear_goal_integral_upper"]))
+              linear_terms.append(product)
+              linear_rows.append({
+                  "step":step,
+                  "reconciled_radius_upper":outward_upper(radius),
+                  "reconciled_adjoint_defect_upper":outward_upper(defect),
+                  "reconciled_linear_integral_upper":outward_upper(product),
+                  "source_upper_bounds":{k:outward_upper(v) for k,v in sources.items()},
+                  "PR154_total_residual_recorded_separately":outward_upper(independent[step]["total"]) if step in independent else None,
+              })
+          linear=sum(linear_terms,Fraction(0))
+          final20_linear=sum(linear_terms[220:],Fraction(0))
+          old_final20_linear=sum(
+              Fraction(1,80000)*dec_fraction(r["M15_error_L2_sup_upper"])*dec_fraction(r["adjoint_defect_L2_sup_upper"])
+              for r in baseline_rows if r["step"]>=220
+          )
           endpoint=dec_fraction(previous["terminal_saved_adjoint_boundary_product_upper"])
           signed=dec_fraction(previous["frozen_signed_dual_integral_lower"])
           total=linear+full_quadratic+endpoint
@@ -381,8 +509,10 @@ jobs:
               sign="-" if units<0 else ""
               digits=str(abs(units)).zfill(25)
               return sign+digits[:-24]+"."+digits[-24:]
-          def sha(path):
+          def sha256_file(path):
               return hashlib.sha256(path.read_bytes()).hexdigest()
+          def sha(path):
+              return sha256_file(path)
           source_path=Path("src/wp19_v0_28_goal_weighted_targeted_m15_support.py")
           direct_path=root/"direct_final20.json"
           manifest_path=Path("results/wp19_v0_28/duality_compatibility_audit_20261002/SHA256SUMS.txt")
@@ -413,7 +543,8 @@ jobs:
                   "identity":"For divergence-free e, <lambda,(e.grad)e>=-<e,(e.grad)lambda>.",
                   "mode_matrix":"C[p,q]=|p+q|*||lambda[-p-q]|| is symmetric and nonnegative; every row sum is bounded by sum_k |k|*||lambda[k]||.",
                   "coefficient":"max over the four Bernstein controls of sum_k |k|*||lambda[k]||",
-                  "enclosure":"Arb upper bounds at 192 bits; strict outward decimal serialization; exact rational summation."
+                  "enclosure":"Arb upper bounds at 192 bits; strict outward decimal serialization; exact rational summation.",
+                  "linear_residual_policy":"For every half-step, use the maximum of archived and source-recomputed radius/adjoint-defect uppers; on steps 237-239 also use PR #154 independent nominal residual upper. Keep PR #154 total residual upper separately because it includes a primal-uncertainty penalty."
               },
               "frozen_sources":{
                   "witness_sha256":"4789e27170f28279b3c6878f8874547b303d5cbd4a20848f3d5d8088bd10a624",
@@ -441,6 +572,30 @@ jobs:
                   "new_final20_schur_upper":outward_upper(new_final20),
                   "final20_reduction_lower":outward_lower(old_final20-new_final20),
                   "previous_full_path_quadratic_upper":previous["M15_support_corrected_quadratic_integral_upper"],
+                  "previous_full_path_linear_upper":previous["adjoint_defect_integral_upper"],
+                  "recomputed_archived_240_row_linear_upper":outward_upper(archived_linear),
+                  "reconciled_full_path_linear_upper":outward_upper(linear),
+                  "previous_final20_linear_upper":outward_upper(old_final20_linear),
+                  "reconciled_final20_linear_upper":outward_upper(final20_linear),
+                  "final20_linear_increase_upper":outward_upper(final20_linear-old_final20_linear),
+                  "independent_residual_reconciliation_237_239":{
+                      str(step):{
+                          "archived_nominal_residual_upper":outward_upper(independent[step]["archived_nominal"]),
+                          "PR154_independent_nominal_residual_upper":outward_upper(independent[step]["nominal"]),
+                          "nominal_increase_upper":outward_upper(independent[step]["nominal_delta"]),
+                          "archived_total_residual_upper":outward_upper(independent[step]["archived_total"]),
+                          "PR154_independent_total_residual_upper":outward_upper(independent[step]["total"]),
+                          "total_increase_upper":outward_upper(independent[step]["total_delta"]),
+                          "pr154_receipt_sha256":sha256_file(next(root.joinpath("independent-residuals",str(step)).rglob(f"independent_residual_{step}.json"))),
+                          "artifact_id":artifact_specs[step]["id"],
+                          "artifact_zip_sha256":artifact_specs[step]["zip_sha256"],
+                          "workflow_run_id":36871966756,
+                          "workflow_head_sha":"d67bae8c2102667d7ef375685ff7c8758bbee2cc",
+                          "workflow_job_id":artifact_specs[step]["job_id"],
+                          "all_independent_component_checks":"PASS",
+                      } for step in (237,238,239)
+                  },
+                  "reconciled_linear_steps":linear_rows,
                   "new_full_path_quadratic_upper":outward_upper(full_quadratic),
                   "new_full_path_remainder_upper":outward_upper(total),
                   "frozen_signed_integral_lower":previous["frozen_signed_dual_integral_lower"],
