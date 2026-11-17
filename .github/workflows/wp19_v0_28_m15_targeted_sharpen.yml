@@ -345,6 +345,7 @@ jobs:
           from fractions import Fraction
           from pathlib import Path
           import numpy,torch
+          sys.path.insert(0,str(Path("src").resolve()))
           from wp19_v0_28_m15_weighted_remainder_replay import dec_fraction,ceil_decimal
           root=Path("work/m15-schur")
           direct=json.loads((root/"direct_final20.json").read_text())
