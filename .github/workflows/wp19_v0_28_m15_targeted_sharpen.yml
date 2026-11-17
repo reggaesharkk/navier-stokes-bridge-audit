@@ -311,7 +311,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
-      SOURCE_HEAD_SHA: \${{ github.event.pull_request.head.sha || github.sha }}
+      SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -340,14 +340,16 @@ jobs:
         run: |
           python - <<'PY'
           import hashlib,json,platform,sys
+          from importlib.metadata import version
           from decimal import Decimal
           from fractions import Fraction
           from pathlib import Path
-          import numpy,flint,torch
+          import numpy,torch
           from wp19_v0_28_m15_weighted_remainder_replay import dec_fraction,ceil_decimal
           root=Path("work/m15-schur")
           direct=json.loads((root/"direct_final20.json").read_text())
-          previous=json.loads(Path("results/wp19_v0_28/duality_compatibility_audit_20261002/m15_weighted_remainder.json").read_text())
+          previous_path=Path("results/wp19_v0_28/duality_compatibility_audit_20261002/m15_weighted_remainder.json")
+          previous=json.loads(previous_path.read_text())
           rows=direct["steps"]
           assert [r["step"] for r in rows]==list(range(220,240))
           baseline_rows=previous["steps_detail"]
@@ -360,6 +362,7 @@ jobs:
           assert 0 <= old_direct_delta < Fraction(1,10**15),(old_direct_delta,old_direct)
           old_final20=qsum(r["M15_support_corrected_quadratic_upper"] for r in baseline_rows if r["step"]>=220)
           new_final20=qsum(r["quadratic_goal_integral_M15_schur_upper"] for r in rows)
+          assert new_final20 <= old_final20,(new_final20,old_final20)
           earlier=qsum(r["M15_support_corrected_quadratic_upper"] for r in baseline_rows if r["step"]<220)
           full_quadratic=earlier+new_final20
           linear=dec_fraction(previous["adjoint_defect_integral_upper"])
@@ -379,10 +382,16 @@ jobs:
               return sign+digits[:-24]+"."+digits[-24:]
           def sha(path):
               return hashlib.sha256(path.read_bytes()).hexdigest()
+          source_path=Path("src/wp19_v0_28_goal_weighted_targeted_m15_support.py")
+          direct_path=root/"direct_final20.json"
+          manifest_path=Path("results/wp19_v0_28/duality_compatibility_audit_20261002/SHA256SUMS.txt")
+          manifest_entries={line.split(None,1)[1].strip():line.split(None,1)[0] for line in manifest_path.read_text().splitlines() if line.strip()}
+          assert manifest_entries[previous_path.as_posix()]==sha(previous_path)
+          assert direct["source_sha256"]==sha(source_path)
           env={
               "python":sys.version.split()[0],
               "numpy":numpy.__version__,
-              "python_flint":flint.__version__,
+              "python_flint":version("python-flint"),
               "torch":torch.__version__,
               "platform":platform.platform(),
           }
@@ -416,7 +425,11 @@ jobs:
                   "adjoint_values_sha256":sha(Path("work/adjoint/M14_adjoint_values.npy")),
                   "adjoint_rhs_sha256":sha(Path("work/adjoint/M14_adjoint_rhs.npy")),
                   "source_script_sha256":direct["source_sha256"],
+                  "direct_final20_sha256":sha(direct_path),
+                  "previous_weighted_record_sha256":sha(previous_path),
+                  "previous_weighted_manifest_sha256":sha(manifest_path),
                   "source_head_sha":__import__("os").environ["SOURCE_HEAD_SHA"],
+                  "workflow_run_id":__import__("os").environ["GITHUB_RUN_ID"],
                   "checked_out_sha":__import__("subprocess").check_output(["git","rev-parse","HEAD"],text=True).strip(),
               },
               "comparison":{
@@ -436,9 +449,9 @@ jobs:
               "claim_boundary":"Finite frozen M15 final-20 quadratic remainder enclosure only; the full remainder still does not preserve the signed margin. No cutoff transfer or continuum regularity claim."
           }
           out=root/"m15_schur_reconciliation.json"
-          out.write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\\n")
+          out.write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
           files=sorted(p for p in root.iterdir() if p.is_file())
-          (root/"SHA256SUMS.txt").write_text("".join(f"{sha(p)}  {p.name}\\n" for p in files))
+          (root/"SHA256SUMS.txt").write_text("".join(f"{sha(p)}  {p.name}\n" for p in files))
           print(json.dumps(receipt,indent=2))
           print("PASS: source-bound, independently replayable M15 Schur receipt; result remains NO_CLOSURE")
           PY
