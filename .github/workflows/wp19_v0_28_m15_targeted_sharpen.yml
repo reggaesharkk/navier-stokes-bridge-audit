@@ -448,6 +448,26 @@ jobs:
           sys.path.insert(0,str(Path("src").resolve()))
           from wp19_v0_28_m15_weighted_remainder_replay import dec_fraction,ceil_decimal
           root=Path("work/m15-schur")
+          adjoint_dir=Path("work/adjoint")
+          adjoint_report_path=adjoint_dir/"M14_arb_vjp_point.json"
+          adjoint_provenance=json.loads((adjoint_dir/"M14_REBUILD_PROVENANCE.json").read_text(encoding="utf-8"))
+          historical_adjoint_report_sha256="981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8"
+          current_adjoint_report_sha256=sha256_file(adjoint_report_path)
+          assert adjoint_provenance["historical_report_sha256"]==historical_adjoint_report_sha256
+          assert adjoint_provenance["current_report_sha256"]==current_adjoint_report_sha256
+          adjoint_manifest_entries={}
+          for line in (adjoint_dir/"SHA256SUMS.txt").read_text(encoding="utf-8").splitlines():
+              digest,name=line.split(None,1)
+              name=name.strip()
+              assert sha256_file(adjoint_dir/name)==digest,(name,digest)
+              adjoint_manifest_entries[name]=digest
+          expected_adjoint_manifest={
+              "M14_arb_vjp_point.json":current_adjoint_report_sha256,
+              "M14_adjoint_values.npy":"00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab",
+              "M14_adjoint_rhs.npy":"8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c",
+              "M14_REBUILD_PROVENANCE.json":sha256_file(adjoint_dir/"M14_REBUILD_PROVENANCE.json"),
+          }
+          assert adjoint_manifest_entries==expected_adjoint_manifest,(adjoint_manifest_entries,expected_adjoint_manifest)
           direct=json.loads((root/"direct_final20.json").read_text())
           previous_path=Path("results/wp19_v0_28/duality_compatibility_audit_20261002/m15_weighted_remainder.json")
           previous=json.loads(previous_path.read_text())
@@ -523,7 +543,7 @@ jobs:
               assert record["component_checks"]==expected_checks,(step,record["component_checks"])
               assert record["lower_nodes_sha256"]=="e0b0a36d8b308cccb5befb3abe45777ec0775cbc7e5a76fef0011eed0fd1f7f0"
               assert record["lower_rhs_sha256"]=="f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253"
-              assert record["adjoint_report_sha256"]=="981dc8d6286f5d989e73dec050ad406776c1320ead36596ac173de95d6a7edc8"
+              assert record["adjoint_report_sha256"]==historical_adjoint_report_sha256,(step,record["adjoint_report_sha256"],historical_adjoint_report_sha256)
               assert record["adjoint_values_sha256"]=="00a230b47c66d3417b1fc259ead4e58ff46542753ddb7710c83a64dd4cd882ab"
               assert record["adjoint_rhs_sha256"]=="8c838ac0e93d70c5d170925e0d27799b745f0adc3c7296a0335219b7359c783c"
               segment_path=archived_segments[step]
@@ -647,6 +667,7 @@ jobs:
                   "lower_nodes_sha256":sha(Path("work/lower/nodes.npy")),
                   "lower_rhs_sha256":sha(Path("work/lower/rhs.npy")),
                   "adjoint_report_sha256":sha(Path("work/adjoint/M14_arb_vjp_point.json")),
+                  "independent_residual_reference_report_sha256":historical_adjoint_report_sha256,
                   "adjoint_values_sha256":sha(Path("work/adjoint/M14_adjoint_values.npy")),
                   "adjoint_rhs_sha256":sha(Path("work/adjoint/M14_adjoint_rhs.npy")),
                   "source_script_sha256":direct["source_sha256"],
