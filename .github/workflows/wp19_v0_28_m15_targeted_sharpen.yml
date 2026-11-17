@@ -387,6 +387,16 @@ jobs:
           assert new_final20 <= old_final20,(new_final20,old_final20)
           earlier=qsum(r["M15_support_corrected_quadratic_upper"] for r in baseline_rows if r["step"]<220)
           full_quadratic=earlier+new_final20
+          scale=10**24
+          def outward_upper(v):
+              units=(v.numerator*scale+v.denominator-1)//v.denominator
+              digits=str(units).zfill(25)
+              return digits[:-24]+"."+digits[-24:]
+          def outward_lower(v):
+              units=(v.numerator*scale)//v.denominator
+              sign="-" if units<0 else ""
+              digits=str(abs(units)).zfill(25)
+              return sign+digits[:-24]+"."+digits[-24:]
 
           # Verify and read the immutable PR #154 independent residual receipts.
           artifact_specs={
@@ -501,16 +511,6 @@ jobs:
           signed=dec_fraction(previous["frozen_signed_dual_integral_lower"])
           total=linear+full_quadratic+endpoint
           margin=signed-total
-          scale=10**24
-          def outward_upper(v):
-              units=(v.numerator*scale+v.denominator-1)//v.denominator
-              digits=str(units).zfill(25)
-              return digits[:-24]+"."+digits[-24:]
-          def outward_lower(v):
-              units=(v.numerator*scale)//v.denominator
-              sign="-" if units<0 else ""
-              digits=str(abs(units)).zfill(25)
-              return sign+digits[:-24]+"."+digits[-24:]
           def sha256_file(path):
               return hashlib.sha256(path.read_bytes()).hexdigest()
           def sha(path):
