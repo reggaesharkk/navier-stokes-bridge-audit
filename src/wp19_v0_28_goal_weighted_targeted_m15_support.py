@@ -139,8 +139,23 @@ def main():
     if a.count<=0 or a.start<0 or a.start+a.count>240:
         raise ValueError("shard must be a nonempty range inside 0..239")
     report=a.adjoint_dir/"M14_arb_vjp_point.json"
-    if sha(report)!=REPORT_SHA: raise ValueError("frozen M14 adjoint report mismatch")
-    rec=json.loads(report.read_text())["adjoint_reconstruction"]
+    provenance_path=a.adjoint_dir/"M14_REBUILD_PROVENANCE.json"
+    if not provenance_path.is_file():
+        raise ValueError("M14 rebuild provenance is required")
+    provenance=json.loads(provenance_path.read_text(encoding="utf-8"))
+    if provenance.get("schema")!="wp19-v0.28-m14-adjoint-rebuild-provenance-v1":
+        raise ValueError("M14 rebuild provenance schema mismatch")
+    if provenance.get("historical_report_sha256")!=REPORT_SHA:
+        raise ValueError("historical M14 report reference mismatch")
+    if provenance.get("current_report_sha256")!=sha(report):
+        raise ValueError("rebuilt M14 report does not match provenance")
+    expected_adjoint_hashes={
+        "M14_adjoint_values.npy":VALUES_SHA,
+        "M14_adjoint_rhs.npy":RHS_SHA,
+    }
+    if provenance.get("adjoint_array_sha256")!=expected_adjoint_hashes:
+        raise ValueError("M14 provenance does not bind the frozen adjoint arrays")
+    rec=json.loads(report.read_text(encoding="utf-8"))["adjoint_reconstruction"]
     values=a.adjoint_dir/rec["values_file"]
     adjrhs=a.adjoint_dir/rec["rhs_file"]
     if sha(values)!=VALUES_SHA or sha(adjrhs)!=RHS_SHA:
