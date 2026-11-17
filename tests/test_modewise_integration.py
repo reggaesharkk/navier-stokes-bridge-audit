@@ -30,6 +30,8 @@ from modewise_remainder_control import (
     estimate_modewise_remainder_bound,
     evaluate_frozen_segment_237_structured_bound,
 )
+from flint import acb, arb
+from wp19_v0_28_goal_weighted_targeted_m15_support import quadratic_schur_coefficient
 from interval_modewise_verifier import (
     compute_certified_remainder_interval,
     verify_frozen_m14_segment_chain,
@@ -80,3 +82,57 @@ def run_integration_audit() -> dict:
 
 if __name__ == "__main__":
     run_integration_audit()
+
+
+
+def test_m15_quadratic_schur_coefficient_uses_weighted_fourier_l1():
+    system = DealiasedSystem(1, nu=0.1)
+    control = []
+    for raw_mode in system.modes:
+        mode = tuple(int(v) for v in raw_mode)
+        if mode in ((1, 0, 0), (-1, 0, 0)):
+            control.append([acb(0), acb(2), acb(0)])
+        elif mode == (0, 0, 0):
+            control.append([acb(100), acb(0), acb(0)])
+        else:
+            control.append([acb(0), acb(0), acb(0)])
+    upper = quadratic_schur_coefficient(system, control)
+    assert upper.overlaps(arb(4)), upper
+
+
+def test_finite_mode_quadratic_schur_inequality_exactly():
+    # Exact finite control: lambda is supported on the six unit axial modes,
+    # each with coefficient norm one. Thus its weighted Fourier L1 sum is 6.
+    from fractions import Fraction
+
+    errors = [
+        (x, y, z)
+        for x in range(-1, 2)
+        for y in range(-1, 2)
+        for z in range(-1, 2)
+        if x*x + y*y + z*z <= 1
+    ]
+    adjoint = {
+        mode: Fraction(1)
+        for mode in ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1))
+    }
+    weighted_l1 = sum(adjoint.values())
+    row_sums = []
+    matrix = []
+    for p in errors:
+        row = []
+        for q in errors:
+            k = tuple(-p[d] - q[d] for d in range(3))
+            row.append(adjoint.get(k, Fraction(0)))
+        row_sums.append(sum(row))
+        matrix.append(row)
+    assert max(row_sums) <= weighted_l1
+
+    amplitudes = [Fraction(i + 1, len(errors) + 1) for i in range(len(errors))]
+    quadratic = sum(
+        matrix[i][j] * amplitudes[i] * amplitudes[j]
+        for i in range(len(errors))
+        for j in range(len(errors))
+    )
+    norm_squared = sum(value * value for value in amplitudes)
+    assert quadratic <= weighted_l1 * norm_squared
