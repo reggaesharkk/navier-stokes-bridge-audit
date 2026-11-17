@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from modewise_remainder_control import (
+    DealiasedSystem,
     build_witness_galerkin_state,
     compute_modewise_projection,
     compute_solenoidal_divergence_defect,
