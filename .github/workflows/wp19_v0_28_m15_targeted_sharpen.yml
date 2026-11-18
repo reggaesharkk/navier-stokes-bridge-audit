@@ -350,9 +350,11 @@ jobs:
           assert "no all-N/continuum claim" in report["claim_boundary"]
           current_report_sha256=sha(report_path)
           source_paths=[
+              Path(".github/workflows/wp19_v0_28_m15_targeted_sharpen.yml"),
               Path("src/wp19_v0_27c1_export_adjoint_path.py"),
-              Path("src/wp19_v0_27c1_common.py"),
           ]
+          missing_sources=[str(p) for p in source_paths if not p.is_file()]
+          assert not missing_sources, f"missing provenance source file(s): {missing_sources}"
           source_hashes={str(p):sha(p) for p in source_paths}
           provenance={
               "schema":"wp19-v0.28-m14-adjoint-rebuild-provenance-v1",
