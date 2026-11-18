@@ -403,7 +403,7 @@ jobs:
     name: Recompute final 20 M15 coefficients with Schur bound
     needs: [reconstruct-n14-frozen-inputs, reconstruct-m14-adjoint]
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 240
     env:
       SOURCE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
