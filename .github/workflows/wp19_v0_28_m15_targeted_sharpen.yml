@@ -311,6 +311,12 @@ jobs:
           }
           assert report["frozen"]==frozen
           path=report["adjoint_reconstruction"]
+          rebuilt_c500=Path("work/c500/frozen_C500.json")
+          rebuilt_c500_sha256=sha(rebuilt_c500)
+          assert path["c500_rebuilt_file_sha256"]==rebuilt_c500_sha256,(
+              path.get("c500_rebuilt_file_sha256"),rebuilt_c500_sha256
+          )
+          assert path["C500_portable_semantic_sha256"]==frozen["C500_portable_semantic_sha256"]
           identity={
               "time_node_count":241,
               "time_step_decimal":"0.0000125",
@@ -325,7 +331,7 @@ jobs:
               "lower_rhs_sha256":"f3a55190e9cba625b7285e5ba3e09e68fa4027e7a8909d1ad80671c1ee1ef253",
               "lower_metadata_sha256":"0ce684a72ba61de86b6d4293c28e14c6cff260585b86c3bd6ebea447b041c43e",
               "sign_chart_sha256":frozen["K36_sign_chart_sha256"],
-              "c500_rebuilt_file_sha256":"0cd8298d9cc61f753a8f37cff0de411e72d83852eb38841d569c9dcad6267ae8",
+
               "C500_portable_semantic_sha256":frozen["C500_portable_semantic_sha256"],
           }
           for key,want in identity.items():
@@ -353,12 +359,19 @@ jobs:
               "status":"PASS: exact frozen arrays and stable report identities",
               "historical_report_sha256":historical_report_sha256,
               "current_report_sha256":current_report_sha256,
-              "report_hash_note":"The historical byte hash is retained as a reference. Byte-level differences are confined to selected-mode floating diagnostics and their row ordering; exact frozen input identities and both full adjoint-array hashes match.",
+              "report_hash_note":"The rebuilt C500 JSON has a different byte hash from the previously pinned value; its canonical semantic hash over coalition size, ranked orbit pairs, and fixed signs is identical. The regenerated file hash is self-checked and recorded separately. The M14 report byte hash can differ in selected-mode floating diagnostics and row ordering; exact frozen input identities and both full adjoint-array hashes match.",
               "selected_mode_arb_explicit_relative_upper_decimal":str(relative),
               "selected_mode_acceptance_limit":"1e-12",
               "adjoint_array_sha256":expected_files,
               "frozen_identities":frozen,
               "adjoint_input_identities":{key:path[key] for key in identity},
+              "c500_file_identity":{
+                  "previously_pinned_byte_sha256":"0cd8298d9cc61f753a8f37cff0de411e72d83852eb38841d569c9dcad6267ae8",
+                  "reconstructed_byte_sha256":path["c500_rebuilt_file_sha256"],
+                  "portable_semantic_sha256":path["C500_portable_semantic_sha256"],
+                  "byte_hash_match":False,
+                  "semantic_hash_match":True,
+              },
               "source_sha256":source_hashes,
               "claim_boundary":report["claim_boundary"],
               "github_run_id":os.getenv("GITHUB_RUN_ID"),
