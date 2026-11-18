@@ -1,0 +1,62 @@
+{
+  "certificate_schema": {
+    "cutoffs": {
+      "M15": 15,
+      "lower_comparison": 14,
+      "mode_set": "all integer k with |k|<=15 with exact repo ordering; explicitly state any dealiased active subset."
+    },
+    "global_invariants": [
+      "L2 upper from mode balls and exact multiplicity accounting",
+      "M15 support and zero-mode convention",
+      "divergence-free/reality checks",
+      "enclosure includes propagated truncation/roundoff/residual errors"
+    ],
+    "operator_and_step_data": {
+      "projection": "repo Leray projector P_k=I-kk^T/|k|^2 with exact rational matrix entries; zero mode follows declared convention",
+      "residual": "per-mode interval residual r_k per stage/half-step, derived from hashed M15 RHS and embedded M14 Hermite reconstruction",
+      "time_step": "exact rational step and splitting/substep schedule from frozen M15 sources",
+      "update": "exact RK4/discrete stage map or interval Taylor model for e_t=A_U e+C(e,e)+r, preserving stage times",
+      "viscosity": "exact nu=1/10"
+    },
+    "per_mode_entry": {
+      "conjugate_partner": "certify e[-k]=conjugate(e[k]) by shared ball identity or a checked pair enclosure",
+      "divergence_free": "interval enclosure of k dot e_k contains 0, together with projection provenance",
+      "e_center_real_imag": "rational decimal centers or exact IEEE-754 bit patterns",
+      "k": "integer triple",
+      "radius_real_imag": "nonnegative rational outward radii, or Arb balls for all three complex components",
+      "zero_mode": "state repo convention explicitly; current physical projection sets zero mean to 0"
+    },
+    "provenance": [
+      "source commit and clean-tree identity",
+      "input SHA-256 for M14/M15 nodes and RHS, adjoint values/RHS, lower metadata, residual shards, coefficient/sign inputs",
+      "source blob SHAs",
+      "artifact IDs, Actions run ID, published artifact digest",
+      "arithmetic backend/version/precision and proof of directed rounding",
+      "checker version and output SHA-256"
+    ],
+    "schema_id": "wp19-v0.28-complex-fourier-error-vector-v1",
+    "time_convention": "Declare node vs half-step and exact rational time; for the requested tail pilot, use the left endpoint state of the first half-step in steps 220-239.",
+    "time_index": 219
+  },
+  "claim_boundary": "Specification only. No e_219 vector is certified and no tail pilot is authorized.",
+  "decision": {
+    "A_can_reconstruct_certify_from_existing_frozen_artifacts": false,
+    "C_earliest_state_that_must_be_recomputed": "t=0, with exact e_0=0, unless a separately validated interval checkpoint at an earlier node is supplied. No existing frozen modewise checkpoint was found.",
+    "D_cheapest_rigorous_propagation": "Run a mode-local interval or Taylor-model propagation from t=0 to the beginning of half-step 219, using the exact discrete M15 and M14/Hermite update maps and interval residuals; retain block/shell dependencies and project at each stage. Start with a short pilot to measure wrapping and prove enclosure validity before extending.",
+    "reason": "The frozen M15 bundle stores predictor centers/RHS and scalar L2 recurrence certificates; it does not provide a rigorous per-mode interval error vector at t=219. Floating predictor subtraction is not an interval enclosure of the true M15-vs-M14 error."
+  },
+  "existing_bundle": {
+    "artifact_id": 11082656428,
+    "inspection": "Provenance metadata identifies predictor centers/RHS and scalar certificates; complete binary payload was not materialized in this workspace. No vector error certificate is present in the frozen certificate schemas reviewed.",
+    "run_id": 36669057015,
+    "sha256": "824634cc562b7a958f2ce8ba94d2561a71aa1b8fcbdf2551f3b204f84b3d80c0",
+    "size_bytes": 164395467
+  },
+  "required_inputs_missing": [
+    "validated M15 modewise endpoint/state balls or a rerunnable exact input bundle",
+    "modewise interval RHS/residual enclosure for M15 versus the M14 Hermite path at every propagation stage",
+    "a proof-producing interval propagator with wrap control and divergence/reality-preserving projection"
+  ],
+  "schema": "wp19-v0.28-e219-vector-certificate-spec-v1",
+  "status": "NOT_AVAILABLE_FROM_FROZEN_ARTIFACTS"
+}

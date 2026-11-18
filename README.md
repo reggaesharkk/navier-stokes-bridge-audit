@@ -179,15 +179,15 @@ The [WP18 isolated triad limit gate](notes/WP18_ISOLATED_TRIAD_LIMIT_GATE_2026_0
 
 
 
-The [WP16 phase-only cutoff continuation audit](notes/WP16_N10_N11_VERIFIED_CONTINUATION_2026_09_25.md) extends the refined evolved-spectrum phase-only adversary through (N=10,11) by deterministic continuation of the optimized lower-cutoff phase map. The [verified summary](src/wp16_n10_n11_verified_summary.json) records the refined sequence
+The [WP16 phase-only cutoff continuation audit](notes/WP16_N10_N11_VERIFIED_CONTINUATION_2026_09_25.md) extends the refined evolved-spectrum phase-only adversary through (N=10,11) by deterministic continuation of the optimized lower-cutoff phase map. The [verified summary](src/wp16_n10_n11_verified_summary.json) records this refined finite sequence:
 
-[
-C_7approx3.74413,quad
-C_8approx4.65605,quad
-C_9approx6.26104,quad
-C_{10}approx7.15966,quad
-C_{11}approx8.03489.
-]
+| Cutoff | Optimized quotient |
+| --- | ---: |
+| N=7 | 3.74413 |
+| N=8 | 4.65605 |
+| N=9 | 6.26104 |
+| N=10 | 7.15966 |
+| N=11 | 8.03489 |
 
 The raw N=10/N=11 result and N=11 checkpoint were checked for hash identity/provenance and exact agreement of the N=11 optimized phases, best search-grid observables, and 212 accepted-improvement records. The finite sequence now rises across five consecutively tested cutoffs, but this remains optimizer-dependent finite Galerkin evidence: it does not prove asymptotic divergence, failure of every cutoff-independent closure, singularity formation, or global regularity.
 

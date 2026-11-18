@@ -1,0 +1,43 @@
+{
+  "schema": "wp19-v0.28-sparse-hessian-blocks-v1",
+  "status": "SCREENSHOT_RESULT_NOT_REPLAYED; BLOCK_SPARSITY_DOES_NOT_RESCUE_CURRENT_ERROR_BALL",
+  "provenance": {
+    "repository": "reggaesharkk/navier-stokes-bridge-audit",
+    "pr": 155,
+    "branch": "wp19-v0-28-duality-compatibility-audit",
+    "source_commit": "02df009de32e669355a7b915edff5608b9b8f863",
+    "objective_path": "results/wp19_v0_28/semantic_repair_20261003/objective_definition.json",
+    "objective_git_blob_sha": "14c25768c9878b30e49b36dd32f386013ac3a258",
+    "terminal_hessian_path": "results/wp19_v0_28/semantic_repair_20261003/terminal_hessian_remainder.json",
+    "terminal_hessian_git_blob_sha": "ce53afeda7f5ae9e6f695d9be4d77415889f18d4",
+    "user_supplied_screenshot_sha256": "feb73df8c547e64ac14533806ead03c8ff27f08589917524916bd8ca52b8d6b5"
+  },
+  "structure": {
+    "active_real_coordinates_reported": 3740,
+    "connected_components_reported": 1,
+    "active_hessian_nonzero_coordinate_pairs": "NOT_AVAILABLE",
+    "diagonal_within_shell_cross_shell_counts": "NOT_AVAILABLE",
+    "no_independent_blocks": true
+  },
+  "bounds": {
+    "global_hessian_upper": "3222388254527403832581260.762399221858472707694188",
+    "reported_sparse_improvement_factor_approx": 826,
+    "implied_sparse_upper_approx": "3901196434052547012810.243053752084574422",
+    "improvement_factor_status": "reported in supplied screenshot; no code/edge matrix was available to replay"
+  },
+  "threshold_check": {
+    "P": "5758574435.605829673039071",
+    "required_active_radius_for_RG_le_P_approx": "1.718199471071945329e-6",
+    "required_active_radius_for_RG_le_0_1P_approx": "5.43342380308393824e-7",
+    "certified_active_radius_upper": "10.559636070809868141657764813075",
+    "gap_factor_approx": "6.15e6"
+  },
+  "uncertainty_check": {
+    "active_only_perturbation_norm_upper": "5.6",
+    "reported_actual_abs_R_G_lower": "7553000000",
+    "P": "5758574435.605829673039071",
+    "conclusion_if_replayable": "The scalar uncertainty ball admits active-support perturbations with |R_G|>P; this would falsify sign certification from the current uncertainty set even with exact objective sparsity.",
+    "replay_status": "NOT_REPRODUCED: screenshot does not expose the perturbation vector, nominal endpoint, or exact-rational evaluation"
+  },
+  "conclusion": "One connected Hessian component means the requested mode-block separation does not yield multiple decoupled components. The reported sparse rebound still leaves the active-radius requirement millions of times below the available scalar-ball radius. Stop the projected propagation until a source-backed vector/endpoint enclosure changes that comparison."
+}
